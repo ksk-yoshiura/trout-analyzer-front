@@ -1,20 +1,27 @@
 {
-  "name": "trout-analyzer-front",
-  "version": "1.0.0",
-  "description": "Under construction",
-  "main": "index.js",
+  "private": true,
+  "main": "firebaseFunctions.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next src/",
+    "build": "next build src/",
+    "start": "next start src/",
+    "serve": "npm run build && firebase emulators:start --only functions,hosting",
+    "shell": "npm run build && firebase functions:shell",
+    "deploy": "firebase deploy --only functions,hosting",
+    "logs": "firebase functions:log"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ksk-yoshiura/trout-analyzer-front.git"
+  "dependencies": {
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.13.1",
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ksk-yoshiura/trout-analyzer-front/issues"
-  },
-  "homepage": "https://github.com/ksk-yoshiura/trout-analyzer-front#readme"
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@types/react": "^17.0.34",
+    "firebase-functions-test": "^0.2.3",
+    "firebase-tools": "^9.3.0",
+    "typescript": "^4.4.4"
+  }
 }
