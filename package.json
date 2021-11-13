@@ -1,0 +1,20 @@
+{
+  "name": "trout-analyzer-front",
+  "version": "1.0.0",
+  "description": "Under construction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ksk-yoshiura/trout-analyzer-front.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ksk-yoshiura/trout-analyzer-front/issues"
+  },
+  "homepage": "https://github.com/ksk-yoshiura/trout-analyzer-front#readme"
+}
