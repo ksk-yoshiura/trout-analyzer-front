@@ -2,7 +2,6 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 
-
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
 const breakpoints = createBreakpoints({
