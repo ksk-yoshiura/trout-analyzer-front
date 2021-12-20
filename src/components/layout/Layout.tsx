@@ -2,7 +2,9 @@ import { ReactNode } from "react";
 import { 
   Flex
 } from "@chakra-ui/react";
-
+import Header from "./Header";
+import MainContent from "./MainContent";
+import SideMenu from "./SideMenu";
 
 type Props = {
   children?: ReactNode;
