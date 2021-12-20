@@ -1,10 +1,10 @@
 import { 
   Flex, Box
 } from "@chakra-ui/react";
-import SideMenuMobileBox from "./SideMenuMobileBox";
-import SideMenuPCBox from "./SideMenuPCBox";
+import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
+import SideMenuPCBox from "./side_menu/SideMenuPCBox";
 
-export default function SideMenuMain() {
+export default function SideMenu() {
   return (
     <Flex
     >
