@@ -3,6 +3,7 @@ import {
   Flex
 } from "@chakra-ui/react";
 
+
 type Props = {
   children?: ReactNode;
 };
@@ -10,7 +11,7 @@ type Props = {
 export default function Layout({ children }: Props) {
   // TODO：ここでレスポンシブ調整
 
-  
+
   return (
     <></>
   );
