@@ -20,7 +20,7 @@ export default function SnipeMenuLinkList() {
         <Text 
           onClick={onClose}
         >
-          Snipe
+          Register
         </Text>
         <Stack>
           <List spacing={3}>
