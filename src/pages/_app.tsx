@@ -1,6 +1,7 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
+import Layout from "../components/layout/Layout";
 
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
@@ -31,9 +32,18 @@ const theme = extendTheme({
 
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  /** 
+   * このページでは全ページ共通項目を設定
+   * 1. Chakra UIの読み込み
+   * 2. レポンシブヘッダー、サイドメニュー
+   * TODO：アカウント情報を持たせる
+  */
+  
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   );
 }
