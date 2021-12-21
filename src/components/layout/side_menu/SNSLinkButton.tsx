@@ -9,10 +9,14 @@ export default function SNSLinkButton() {
   return (
     <>
       <Link href="https://telegram.org/" isExternal>
-        <Button colorScheme='blue'><FaIcons.FaTelegram /></Button>
+        <Button colorScheme='facebook' leftIcon={<FaIcons.FaFacebook />}>
+          Facebook
+        </Button>
       </Link>
       <Link href="https://twitter.com/home" isExternal>
-        <Button colorScheme='blue'><FaIcons.FaTwitter /></Button>
+        <Button colorScheme='twitter' leftIcon={<FaIcons.FaTwitter />}>
+          Twitter
+        </Button>
       </Link>
     </>
   )

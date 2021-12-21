@@ -28,7 +28,7 @@ export default function SideMenuContentsPC() {
       <Box 
         mb={5}
         display="flex" 
-        justifyContent="space-around"
+        justifyContent="space-between"
       >
         <SNSLinkButton />
       </Box>

@@ -58,7 +58,7 @@ export default function SideMenuContents() {
             </Stack>
           </DrawerBody>
 
-          <DrawerFooter justifyContent="space-around">
+          <DrawerFooter justifyContent="space-between">
             <SNSLinkButton />
           </DrawerFooter>
         </DrawerContent>
