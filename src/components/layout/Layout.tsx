@@ -12,9 +12,13 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   // TODO：ここでレスポンシブ調整
-
-
   return (
-    <></>
+    <Flex>
+      <Header />
+      <SideMenu />
+      <MainContent>
+        { children }
+      </MainContent>
+    </Flex>
   );
 }
