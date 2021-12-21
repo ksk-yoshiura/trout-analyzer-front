@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { 
-  Flex
+  Flex, Box
 } from "@chakra-ui/react";
 import Header from "./Header";
 import MainContent from "./MainContent";
@@ -13,7 +13,7 @@ type Props = {
 export default function Layout({ children }: Props) {
   // TODO：ここでレスポンシブ調整
   return (
-    <>
+    <Box>
       <Header />
       <Flex>
         <SideMenu />
@@ -21,6 +21,6 @@ export default function Layout({ children }: Props) {
           { children }
         </MainContent>
       </Flex>
-    </>
+    </Box>
   );
 }

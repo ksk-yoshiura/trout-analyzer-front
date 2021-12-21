@@ -12,7 +12,7 @@ export default function SideMenuContentsPC() {
   return (
     <Flex
       flexDirection="column"
-      minH="100vh"
+      h="100%"
       justifyContent="space-between"
     >
       <Box>
