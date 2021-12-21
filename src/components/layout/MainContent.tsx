@@ -12,8 +12,8 @@ export default function MainContent({ children }: Props) {
     <Flex
       flexDirection="column"
       alignItems="center"
-      justifyContent="center"
-      h="100%"
+      w="100%"
+      h="100vh"
       bg="gray.800"
       pb={10}
       pt={10}
