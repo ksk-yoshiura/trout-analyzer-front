@@ -1,5 +1,5 @@
 import {
-  Text,
+  Button,
   Link,
   List,
   ListItem,
@@ -17,11 +17,13 @@ export default function SnipeMenuLinkList() {
       {
         isOpen ? 
         <>
-        <Text 
+        <Button 
+          colorScheme='teal' 
+          variant='ghost'
           onClick={onClose}
         >
           Check Records
-        </Text>
+        </Button>
         <Stack>
           <List spacing={3}>
             {
@@ -30,7 +32,9 @@ export default function SnipeMenuLinkList() {
                   <ListItem key={index}>
                     <Link href={item.path}>
                       <ListIcon as={ArrowForwardIcon} color='green.500' />
-                      {item.title}
+                      <Button colorScheme='teal' variant='ghost'>
+                        {item.title}
+                      </Button>
                     </Link>
                   </ListItem>
                 )
@@ -40,11 +44,13 @@ export default function SnipeMenuLinkList() {
         </Stack>
         </>
         :
-        <Text 
+        <Button 
+          colorScheme='teal' 
+          variant='ghost'
           onClick={onOpen}
         >
           Check Records
-        </Text>
+        </Button>
       }
     </>
   )

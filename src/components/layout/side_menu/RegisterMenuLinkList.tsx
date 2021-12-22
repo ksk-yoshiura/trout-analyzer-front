@@ -1,9 +1,9 @@
 import {
-  Text,
   Link,
   List,
   ListItem,
   ListIcon,
+  Button,
   Stack,
   useDisclosure
 } from '@chakra-ui/react'
@@ -15,36 +15,42 @@ export default function SnipeMenuLinkList() {
   return (
     <>
       {
-        isOpen ? 
-        <>
-        <Text 
-          onClick={onClose}
-        >
-          Register
-        </Text>
-        <Stack>
-          <List spacing={3}>
-            {
-              RegisterMenuData.map((item, index) => {
-                return (
-                  <ListItem key={index}>
-                    <Link href={item.path}>
-                      <ListIcon as={ArrowForwardIcon} color='green.500' />
-                      {item.title}
-                    </Link>
-                  </ListItem>
-                )
-              })
-            }
-          </List>
-        </Stack>
-        </>
-        :
-        <Text 
-          onClick={onOpen}
-        >
-          Register
-        </Text>
+        isOpen ?
+          <>
+            <Button
+              colorScheme='teal'
+              variant='ghost'
+              onClick={onClose}
+            >
+              Register
+            </Button>
+            <Stack>
+              <List spacing={3}>
+                {
+                  RegisterMenuData.map((item, index) => {
+                    return (
+                      <ListItem key={index}>
+                        <Link href={item.path}>
+                          <ListIcon as={ArrowForwardIcon} color='green.500' />
+                          <Button colorScheme='teal' variant='ghost'>
+                            {item.title}
+                          </Button>
+                        </Link>
+                      </ListItem>
+                    )
+                  })
+                }
+              </List>
+            </Stack>
+          </>
+          :
+          <Button
+            colorScheme='teal'
+            variant='ghost'
+            onClick={onOpen}
+          >
+            Register
+          </Button>
       }
     </>
   )
