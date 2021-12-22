@@ -8,7 +8,7 @@ import * as FaIcons from "react-icons/fa";
 export default function SNSLinkButton() {
   return (
     <>
-      <Link href="https://telegram.org/" isExternal>
+      <Link href="https://www.facebook.com/" isExternal>
         <Button colorScheme='facebook' leftIcon={<FaIcons.FaFacebook />}>
           Facebook
         </Button>
