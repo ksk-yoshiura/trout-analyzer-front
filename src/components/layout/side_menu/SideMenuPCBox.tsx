@@ -36,6 +36,7 @@ export default function SideMenuContentsPC() {
         mb={5}
         display="flex"
         justifyContent="space-between"
+        flexDirection="column"
       >
         <SNSLinkButton />
       </Box>

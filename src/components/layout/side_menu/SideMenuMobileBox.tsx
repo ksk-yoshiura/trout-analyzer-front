@@ -68,7 +68,10 @@ export default function SideMenuContents() {
             </Stack>
           </DrawerBody>
 
-          <DrawerFooter justifyContent="space-between">
+          <DrawerFooter 
+            justifyContent="space-between"
+            flexDirection="column"
+          >
             <SNSLinkButton />
           </DrawerFooter>
         </DrawerContent>
