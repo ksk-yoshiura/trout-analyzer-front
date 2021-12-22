@@ -12,7 +12,7 @@ export default function SideMenu() {
         bg="white" 
         display={{ base: "none", md: "block" }} 
         h="100%" 
-        w={300} 
+        w={250} 
         px={6}
       >
         <SideMenuPCBox />

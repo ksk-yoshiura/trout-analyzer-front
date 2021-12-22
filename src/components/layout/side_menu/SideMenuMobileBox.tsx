@@ -45,12 +45,20 @@ export default function SideMenuContents() {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent style={{ width: "50%" }}>
+        <DrawerContent style={{ width: "250px" }}>
           <DrawerCloseButton />
           <DrawerHeader>
-            <Link href="/">
-              Trout Analyzer
+            <Link href="/" >
+              <Button
+                colorScheme='teal'
+                variant='ghost'
+                fontWeight='bold' 
+                fontSize='20px'
+              >
+                Trout Analyzer
+              </Button>
             </Link>
+
           </DrawerHeader>
 
           <DrawerBody>

@@ -1,6 +1,6 @@
 import {
   Box,
-  Text,
+  Button,
   Stack,
   Link,
   Flex
@@ -17,19 +17,24 @@ export default function SideMenuContentsPC() {
       justifyContent="space-between"
     >
       <Box>
-      <Stack spacing='23px' pt={4} display="flex">
-        <Text fontWeight='bold' fontSize='20px'>
+        <Stack spacing='23px' pt={4} display="flex">
           <Link href="/">
-            Trout Analyzer
+            <Button
+              colorScheme='teal'
+              variant='ghost'
+              fontWeight='bold'
+              fontSize='20px'
+            >
+              Trout Analyzer
+            </Button>
           </Link>
-        </Text>
-        <RegisterMenuLinkList />
-        <CheckRecordsLinkList />
-      </Stack>
+          <RegisterMenuLinkList />
+          <CheckRecordsLinkList />
+        </Stack>
       </Box>
-      <Box 
+      <Box
         mb={5}
-        display="flex" 
+        display="flex"
         justifyContent="space-between"
       >
         <SNSLinkButton />
