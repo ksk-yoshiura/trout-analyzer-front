@@ -19,4 +19,8 @@ export const RegisterMenuData = [
     title: 'Tackles',
     path: '/'
   },
+  {
+    title: 'Fields',
+    path: '/'
+  },
 ];
