@@ -1,25 +1,7 @@
-// pages/index.tsx
-import {
-  Stack,
-  Heading,
-  Box
-} from '@chakra-ui/react';
+import TopaPage from '../components/page/TopPage';
 
 export default function Index(): JSX.Element {
   return (
-    <>
-    <Heading color="white">Title</Heading>
-    <Stack spacing={10}>
-      <Box color="red">
-        Hello, Next.js with Chakra UI
-      </Box>
-      <Box color="red">
-        Hello, Next.js with Chakra UI
-      </Box>
-      <Box color="red">
-        Hello, Next.js with Chakra UI
-      </Box>
-    </Stack>
-    </>
+    <TopaPage />
   );
 }
