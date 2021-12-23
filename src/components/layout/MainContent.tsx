@@ -14,7 +14,7 @@ export default function MainContent({ children }: Props) {
       alignItems="center"
       w="100%"
       h="100vh"
-      bg="gray.800"
+      // bg="gray.800"
       pb={10}
       pt={10}
     >
