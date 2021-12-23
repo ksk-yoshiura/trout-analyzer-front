@@ -1,10 +1,10 @@
 export const CheckRecordsMenuData = [
   {
     title: 'All',
-    path: '/'
+    path: '/check_records/all'
   },
   {
     title: 'Latest',
-    path: '/'
+    path: '/check_records/latest'
   },
 ];
