@@ -1,26 +1,26 @@
 export const RegisterMenuData = [
   {
     title: 'Lures',
-    path: '/'
+    path: '/register/lures'
   },
   {
     title: 'Rods',
-    path: '/'
+    path: '/register/rods'
   },
   {
     title: 'Reels',
-    path: '/'
+    path: '/register/reels'
   },
   {
     title: 'Lines',
-    path: '/'
+    path: '/register/lines'
   },
   {
     title: 'Tackles',
-    path: '/'
+    path: '/register/tackles'
   },
   {
     title: 'Fields',
-    path: '/'
+    path: '/register/fields'
   },
 ];
