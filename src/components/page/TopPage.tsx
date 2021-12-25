@@ -34,7 +34,7 @@ export default function TopPage(): JSX.Element {
           Get Started
         </Button>
         <Button color="white" bg='tomato' w={300} p={4}>
-          Preparation
+          Prepare
         </Button>
       </Stack>
     </>
