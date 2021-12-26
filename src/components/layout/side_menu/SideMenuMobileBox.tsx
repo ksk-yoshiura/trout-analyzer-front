@@ -16,7 +16,7 @@ import {
 import {
   HamburgerIcon
 } from "@chakra-ui/icons";
-import RegisterMenuLinkList from './RegisterMenuLinkList'
+import EquipmentMenuLinkList from './EquipmentMenuLinkList'
 import RecordsMenuLinkList from './RecordsMenuLinkList'
 import SNSLinkButton from './SNSLinkButton'
 
@@ -63,7 +63,7 @@ export default function SideMenuContents() {
 
           <DrawerBody>
             <Stack spacing='24px'>
-              <RegisterMenuLinkList />
+              <EquipmentMenuLinkList />
               <RecordsMenuLinkList />
             </Stack>
           </DrawerBody>

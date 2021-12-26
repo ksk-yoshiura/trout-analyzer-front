@@ -5,7 +5,7 @@ import {
   Link,
   Flex
 } from "@chakra-ui/react";
-import RegisterMenuLinkList from './RegisterMenuLinkList'
+import EquipmentMenuLinkList from './EquipmentMenuLinkList'
 import RecordsMenuLinkList from './RecordsMenuLinkList'
 import SNSLinkButton from './SNSLinkButton'
 
@@ -28,7 +28,7 @@ export default function SideMenuContentsPC() {
               Trout Analyzer
             </Button>
           </Link>
-          <RegisterMenuLinkList />
+          <EquipmentMenuLinkList />
           <RecordsMenuLinkList />
         </Stack>
       </Box>
