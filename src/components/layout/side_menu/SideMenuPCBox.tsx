@@ -6,7 +6,7 @@ import {
   Flex
 } from "@chakra-ui/react";
 import RegisterMenuLinkList from './RegisterMenuLinkList'
-import CheckRecordsLinkList from './CheckRecordsLinkList'
+import RecordsMenuLinkList from './RecordsMenuLinkList'
 import SNSLinkButton from './SNSLinkButton'
 
 export default function SideMenuContentsPC() {
@@ -29,7 +29,7 @@ export default function SideMenuContentsPC() {
             </Button>
           </Link>
           <RegisterMenuLinkList />
-          <CheckRecordsLinkList />
+          <RecordsMenuLinkList />
         </Stack>
       </Box>
       <Box

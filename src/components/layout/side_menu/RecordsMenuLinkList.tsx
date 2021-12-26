@@ -8,7 +8,7 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
-import { CheckRecordsMenuData } from './check_records_menu_data'
+import { RecordsMenuData } from './records_menu_data'
 
 export default function SnipeMenuLinkList() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -22,12 +22,12 @@ export default function SnipeMenuLinkList() {
           variant='ghost'
           onClick={onClose}
         >
-          Check Records
+          Records
         </Button>
         <Stack>
           <List spacing={3}>
             {
-              CheckRecordsMenuData.map((item, index) => {
+              RecordsMenuData.map((item, index) => {
                 return (
                   <ListItem key={index}>
                     <Link href={item.path}>
@@ -49,7 +49,7 @@ export default function SnipeMenuLinkList() {
           variant='ghost'
           onClick={onOpen}
         >
-          Check Records
+          Records
         </Button>
       }
     </>
