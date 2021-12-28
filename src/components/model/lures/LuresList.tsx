@@ -2,7 +2,6 @@ import {
   Box,
   Image,
   Badge,
-  Flex,
   Wrap,
   WrapItem
 } from '@chakra-ui/react'
