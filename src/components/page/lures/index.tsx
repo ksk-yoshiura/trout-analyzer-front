@@ -10,7 +10,7 @@ import { LureTypeSelectMock } from './lure_type_select_mock'
 export default function Index(): JSX.Element {
   return (
     <>
-    <Flex justifyContent="space-between" w="90%">
+    <Flex pb={5} justifyContent="space-between" w="90%">
       <Select w={150} placeholder='Lure Type'>
         {
           LureTypeSelectMock.map((item, index) => {
