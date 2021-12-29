@@ -1,7 +1,6 @@
 import {
   Flex,
-  Button,
-  Link
+  Button
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import LuresList from '../../model/lures/LuresList'
