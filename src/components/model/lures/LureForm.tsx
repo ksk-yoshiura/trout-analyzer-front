@@ -26,6 +26,7 @@ type LureData = {
 
 export default function LureForm() {
   function handleSendLureData(values: LureData) {
+    alert(JSON.stringify(values))
 
   }
 
