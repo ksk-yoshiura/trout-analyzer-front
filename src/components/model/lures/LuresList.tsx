@@ -1,17 +1,25 @@
 import { useState } from 'react'
+import type { VFC } from 'react'
 import {
   Box,
   Image,
   Badge,
   Wrap,
   WrapItem,
-  useDisclosure
+  useDisclosure,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react'
 import { LureListtMock } from './lure_list_mock'
-import LureDetailModal from './LureDetailModal'
 
 export default function LuresList(): JSX.Element {
-  const { isOpen, onOpen } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
 
   function clickHandler(value: string) {
@@ -22,6 +30,26 @@ export default function LuresList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  const LureDetailModal = () => {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+
+          </ModalBody>
+
+          <ModalFooter>
+            <Button variant='ghost'>Delete</Button>
+            <Button variant='ghost'>Edit</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    )
+  }
+
 
   return (
     <>
@@ -29,7 +57,7 @@ export default function LuresList(): JSX.Element {
         {
           LureListtMock.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => {onOpen(),clickHandler(item.id)}} as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 
@@ -68,7 +96,7 @@ export default function LuresList(): JSX.Element {
             )
           })
         }
-        <LureDetailModal isOpen={isOpen} lureId={chosenId} />
+        <LureDetailModal />
 
       </Wrap>
     </>
