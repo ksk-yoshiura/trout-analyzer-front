@@ -1,4 +1,9 @@
-import { Box, Image, Badge } from '@chakra-ui/react'
+import { 
+  Box, 
+  Image, 
+  Badge,
+  Stack 
+} from '@chakra-ui/react'
 import { LureDetailMock } from './lure_detail_mock'
 
 type DetailProps = {
@@ -16,37 +21,52 @@ export default function LuresList(props: DetailProps): JSX.Element {
 
       <Box p='6'>
         <Box display='flex' alignItems='baseline'>
-          <Badge borderRadius='full' px='2' colorScheme='teal'>
+          <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
             New
           </Badge>
-          <Box
-            color='gray.500'
-            fontWeight='semibold'
-            letterSpacing='wide'
-            fontSize='xs'
-            textTransform='uppercase'
-            ml='2'
-          >
-            {property.beds} beds &bull; {property.baths} baths
-          </Box>
+          <Badge borderRadius='full' px='2' color='gray.500'>
+            {property.lureType}
+          </Badge>
         </Box>
 
         <Box
-          mt='1'
+          my='2'
           fontWeight='semibold'
-          as='h4'
+          fontSize={18}
+          as='h3'
           lineHeight='tight'
           isTruncated
         >
-          {property.title}
+          {property.name}
         </Box>
 
-        <Box>
-          {property.formattedPrice}
-          <Box as='span' color='gray.600' fontSize='sm'>
-            / wk
+        <Stack
+          color='gray.500'
+          fontWeight='semibold'
+          letterSpacing='wide'
+          fontSize='xs'
+          ml='2'
+          spacing={1}
+        >
+          <Box>
+            WEIGHT {property.weight} g
           </Box>
-        </Box>
+          <Box textTransform='uppercase'>
+            COLOR {property.color}
+          </Box>
+          <Box textTransform='uppercase'>
+            COMPANY {property.company}
+          </Box>
+          <Box textTransform='uppercase'>
+            FREQUENCY {property.frequency} times
+          </Box>
+          <Box>
+            ADDED {property.createdAt}
+          </Box>
+          <Box>
+            LAST USED {property.lastUsedAt}
+          </Box>
+        </Stack>
 
       </Box>
     </Box>
