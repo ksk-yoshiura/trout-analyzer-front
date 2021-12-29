@@ -1,6 +1,5 @@
 import { 
   Select,
-  Stack,
   Flex,
   Button
 } from '@chakra-ui/react'
@@ -15,7 +14,7 @@ export default function Index(): JSX.Element {
         {
           LureTypeSelectMock.map((item, index) => {
             return (
-              <option value={item.id}>
+              <option key={index} value={item.id}>
                 {item.type}
               </option>
             )
