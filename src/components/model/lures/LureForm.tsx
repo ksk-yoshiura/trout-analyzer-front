@@ -110,12 +110,13 @@ export default function LureForm() {
                 <FormControl
                   isInvalid={Boolean(form.errors.weight)
                     && Boolean(form.touched.weight)}
+                  textAlign='left'
                 >
                   <FormLabel
                     fontSize="11px"
                     htmlFor='weight'
                   >WEIGHT</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='weight' placeholder='Enter' />
+                  <Input {...field} width="30%" fontSize="1xl" id='weight' /> g
                   <FormErrorMessage>{form.errors.weight}</FormErrorMessage>
                 </FormControl>
               )}
