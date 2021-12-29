@@ -1,26 +1,15 @@
-import { 
-  Select,
+import {
   Flex,
   Button
 } from '@chakra-ui/react'
 import LuresList from '../../model/lures/LuresList'
-import { LureTypeSelectMock } from './lure_type_select_mock'
+import LureTypeSelect from '../../model/lures/LureTypeSelect'
 
 export default function Index(): JSX.Element {
   return (
     <>
     <Flex pb={5} justifyContent="space-between" w="90%">
-      <Select w={150} placeholder='Lure Type'>
-        {
-          LureTypeSelectMock.map((item, index) => {
-            return (
-              <option key={index} value={item.id}>
-                {item.type}
-              </option>
-            )
-          })
-        }
-      </Select>
+      <LureTypeSelect />
       <Button pl={10} pr={10} colorScheme='teal'>New Lures</Button>
     </Flex>
     <LuresList />
