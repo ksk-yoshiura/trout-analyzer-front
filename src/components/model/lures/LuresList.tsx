@@ -43,7 +43,6 @@ export default function LuresList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Delete</Button>
             <Button variant='ghost'>Edit</Button>
           </ModalFooter>
         </ModalContent>
