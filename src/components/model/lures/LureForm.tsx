@@ -67,7 +67,7 @@ export default function LureForm() {
                     && Boolean(form.touched.name)}
                 >
                   <FormLabel
-                    fontSize="11px"
+                    fontSize="12px"
                     htmlFor='name'
                   >NAME</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='name' placeholder='Enter' />
@@ -82,7 +82,7 @@ export default function LureForm() {
                     && Boolean(form.touched.type)}
                 >
                   <FormLabel
-                    fontSize="11px"
+                    fontSize="12px"
                     htmlFor='type'
                   >LURE TYPE</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='type' placeholder='Enter' />
@@ -97,7 +97,7 @@ export default function LureForm() {
                     && Boolean(form.touched.color)}
                 >
                   <FormLabel
-                    fontSize="11px"
+                    fontSize="12px"
                     htmlFor='color'
                   >COLOR</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='color' placeholder='Enter' />
@@ -113,7 +113,7 @@ export default function LureForm() {
                   textAlign='left'
                 >
                   <FormLabel
-                    fontSize="11px"
+                    fontSize="12px"
                     htmlFor='weight'
                   >WEIGHT</FormLabel>
                   <Input {...field} width="30%" fontSize="1xl" id='weight' /> g
@@ -128,7 +128,7 @@ export default function LureForm() {
                     && Boolean(form.touched.company)}
                 >
                   <FormLabel
-                    fontSize="11px"
+                    fontSize="12px"
                     htmlFor='company'
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company' placeholder='Enter' />
