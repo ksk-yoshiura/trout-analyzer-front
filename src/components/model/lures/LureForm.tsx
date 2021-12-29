@@ -10,10 +10,10 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Flex,
-  Textarea,
+  Select,
   Stack
 } from "@chakra-ui/react";
+import { LureTypeSelectMock } from './lure_type_select_mock'
 
 type LureData = {
   name: string;
@@ -85,7 +85,17 @@ export default function LureForm() {
                     fontSize="12px"
                     htmlFor='type'
                   >LURE TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type' placeholder='Enter' />
+                  <Select {...field} width="100%" fontSize="1xl" id='type' placeholder='Lure Type'>
+                    {
+                      LureTypeSelectMock.map((item, index) => {
+                        return (
+                          <option key={index} value={item.id}>
+                            {item.type}
+                          </option>
+                        )
+                      })
+                    }
+                  </Select>
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
