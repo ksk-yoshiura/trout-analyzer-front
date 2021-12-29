@@ -1,8 +1,14 @@
 import { Box, Image, Badge } from '@chakra-ui/react'
 import { LureDetailMock } from './lure_detail_mock'
 
-export default function LuresList(): JSX.Element {
+type DetailProps = {
+  chosenId: number
+}
+
+export default function LuresList(props: DetailProps): JSX.Element {
   const property = LureDetailMock
+  // TODO：IDを取り出して詳細を取得
+  console.log(props)
 
   return (
     <Box maxW='sm' overflow='hidden'>

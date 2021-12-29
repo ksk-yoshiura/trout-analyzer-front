@@ -39,7 +39,7 @@ export default function LuresList(): JSX.Element {
           <ModalHeader>Lure Detail</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <LureDetail />
+            <LureDetail chosenId={chosenId} />
           </ModalBody>
 
           <ModalFooter>
