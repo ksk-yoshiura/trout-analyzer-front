@@ -12,7 +12,7 @@ export default function LureIndex(): JSX.Element {
     <>
       <Flex pb={5} justifyContent="space-between" w="90%">
         <LureTypeSelect />
-        <NextLink href="lures/create" passHref>
+        <NextLink href="/lures/create" passHref>
           <Button  pl={10} pr={10} colorScheme='teal'>New Lures</Button>
         </NextLink>
       </Flex>
