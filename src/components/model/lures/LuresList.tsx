@@ -14,6 +14,14 @@ export default function LuresList(): JSX.Element {
   const { isOpen, onOpen } = useDisclosure()
   const [chosenId, idState] = useState(0)
 
+  function clickHandler(value: string) {
+    // 型変換
+    const lureIdNumber = Number(value)
+
+    // 
+    idState(lureIdNumber)
+  }
+
 
   return (
     <>
@@ -21,7 +29,7 @@ export default function LuresList(): JSX.Element {
         {
           LureListtMock.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={onOpen} as={"button"}>
+              <WrapItem key={index} onClick={() => {onOpen(),clickHandler(item.id)}} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 
