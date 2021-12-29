@@ -26,7 +26,7 @@ export default function LuresList(): JSX.Element {
     // 型変換
     const lureIdNumber = Number(value)
 
-    // 
+    // クリックされたカードから得たIDを更新
     idState(lureIdNumber)
   }
 
