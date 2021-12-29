@@ -17,6 +17,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import { LureListtMock } from './lure_list_mock'
+import LureDetail from './LureDetail'
 
 export default function LuresList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -35,10 +36,10 @@ export default function LuresList(): JSX.Element {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Lure Detail</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-
+            <LureDetail />
           </ModalBody>
 
           <ModalFooter>
