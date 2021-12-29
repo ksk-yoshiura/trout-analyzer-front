@@ -69,7 +69,6 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="11px"
                     htmlFor='name'
-                    w={130}
                   >NAME</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='name' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -85,7 +84,6 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="11px"
                     htmlFor='type'
-                    w={130}
                   >LURE TYPE</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='type' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
@@ -101,7 +99,6 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="11px"
                     htmlFor='color'
-                    w={130}
                   >COLOR</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='color' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.color}</FormErrorMessage>
@@ -117,7 +114,6 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="11px"
                     htmlFor='weight'
-                    w={130}
                   >WEIGHT</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='weight' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.weight}</FormErrorMessage>
@@ -133,7 +129,6 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="11px"
                     htmlFor='company'
-                    w={130}
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
