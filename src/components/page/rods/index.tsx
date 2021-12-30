@@ -1,0 +1,19 @@
+import {
+  Flex,
+  Button
+} from '@chakra-ui/react'
+import NextLink from "next/link"
+import RodList from '../../model/rods/RodsList'
+
+export default function LureIndex(): JSX.Element {
+  return (
+    <>
+      <Flex pb={5} w="90%">
+        <NextLink href="/rods/create" passHref>
+          <Button  pl={10} pr={10} colorScheme='teal'>New Rod</Button>
+        </NextLink>
+      </Flex>
+      <RodList />
+    </>
+  );
+}
