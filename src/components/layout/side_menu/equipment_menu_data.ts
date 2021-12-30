@@ -1,26 +1,26 @@
 export const EquipmentMenuData = [
   {
     title: 'Lures',
-    path: 'lures'
+    path: '/lures'
   },
   {
     title: 'Rods',
-    path: 'rods'
+    path: '/rods'
   },
   {
     title: 'Reels',
-    path: 'reels'
+    path: '/reels'
   },
   {
     title: 'Lines',
-    path: 'lines'
+    path: '/lines'
   },
   {
     title: 'Tackles',
-    path: 'tackles'
+    path: '/tackles'
   },
   {
     title: 'Fields',
-    path: 'fields'
+    path: '/fields'
   },
 ];
