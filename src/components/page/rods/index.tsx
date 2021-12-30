@@ -5,7 +5,7 @@ import {
 import NextLink from "next/link"
 import RodList from '../../model/rods/RodsList'
 
-export default function LureIndex(): JSX.Element {
+export default function RodIndex(): JSX.Element {
   return (
     <>
       <Flex pb={5} w="90%">
