@@ -13,22 +13,22 @@ import {
   Stack
 } from "@chakra-ui/react";
 
-type RodData = {
+type ReelData = {
   name: string;
   company: string;
-  toughness: string;
-  rodLegnth?: string; // TODO：fix
+  type: string;
+  gear: string;
   image: string;
 }
 
-export default function RodForm() {
-  function handleSendRodData(values: RodData) {
+export default function ReelForm() {
+  function handleSendReelData(values: ReelData) {
     alert(JSON.stringify(values))
 
   }
 
 
-  function validateData(value: RodData) {
+  function validateData(value: ReelData) {
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -43,13 +43,13 @@ export default function RodForm() {
       initialValues={{
         name: '',
         company: '',
-        rodLength: '',
-        toughness: '',
+        gear: '',
+        type: '',
         image: ''
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          handleSendRodData(values)
+          handleSendReelData(values)
           actions.setSubmitting(false)
         }, 1000)
       }}
@@ -73,34 +73,34 @@ export default function RodForm() {
               )}
             </Field>
 
-            <Field name='rodLegnth' validate={validateData}>
+            <Field name='gear' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.rodLegnth)
-                    && Boolean(form.touched.rodLegnth)}
+                  isInvalid={Boolean(form.errors.gear)
+                    && Boolean(form.touched.gear)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='rodLegnth'
-                  >LENGTH</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='rodLegnth' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.rodLegnth}</FormErrorMessage>
+                    htmlFor='gear'
+                  >GEAR</FormLabel>
+                  <Input {...field} width="100%" fontSize="1xl" id='gear' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Field name='toughness' validate={validateData}>
+            <Field name='type' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.toughness)
-                    && Boolean(form.touched.toughness)}
+                  isInvalid={Boolean(form.errors.type)
+                    && Boolean(form.touched.type)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='toughness'
-                  >TOUGHNESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='toughness' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.toughness}</FormErrorMessage>
+                    htmlFor='type'
+                  >TYPE</FormLabel>
+                  <Input {...field} width="100%" fontSize="1xl" id='type' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
