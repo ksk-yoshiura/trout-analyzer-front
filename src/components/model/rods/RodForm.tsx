@@ -16,8 +16,8 @@ import {
 type RodData = {
   name: string;
   company: string;
-  legnth: string; 
   toughness: string;
+  rodLegnth?: string; // TODO：fix
   image: string;
 }
 
@@ -43,7 +43,7 @@ export default function RodForm() {
       initialValues={{
         name: '',
         company: '',
-        length: '',
+        rodLength: '',
         toughness: '',
         image: ''
       }}
@@ -73,18 +73,18 @@ export default function RodForm() {
               )}
             </Field>
 
-            <Field name='legnth' validate={validateData}>
+            <Field name='rodLegnth' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.legnth)
-                    && Boolean(form.touched.legnth)}
+                  isInvalid={Boolean(form.errors.rodLegnth)
+                    && Boolean(form.touched.rodLegnth)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='legnth'
+                    htmlFor='rodLegnth'
                   >LENGTH</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='legnth' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.legnth}</FormErrorMessage>
+                  <Input {...field} width="100%" fontSize="1xl" id='rodLegnth' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.rodLegnth}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
