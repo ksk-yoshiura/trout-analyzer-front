@@ -3,7 +3,7 @@ import {
   Button
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import ReelList from '../../model/reels/ReelsList'
+import ReelsList from '../../model/reels/ReelsList'
 
 export default function Reelndex(): JSX.Element {
   return (
@@ -13,7 +13,7 @@ export default function Reelndex(): JSX.Element {
           <Button  pl={10} pr={10} colorScheme='teal'>New Reel</Button>
         </NextLink>
       </Flex>
-      <ReelList />
+      <ReelsList />
     </>
   );
 }
