@@ -154,7 +154,7 @@ export default function LureForm() {
             isLoading={props.isSubmitting}
             type='submit'
           >
-            Submit
+            Register
           </Button>
         </Form>
       )}
