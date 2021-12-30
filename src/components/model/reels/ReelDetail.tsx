@@ -10,7 +10,7 @@ type DetailProps = {
   chosenId: number
 }
 
-export default function RodDetail(props: DetailProps): JSX.Element {
+export default function ReelDetail(props: DetailProps): JSX.Element {
   const property = ReelDetailMock
   // TODO：IDを取り出して詳細を取得
   console.log(props)
