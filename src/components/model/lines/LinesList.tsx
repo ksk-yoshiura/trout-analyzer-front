@@ -66,7 +66,7 @@ export default function LinesList(): JSX.Element {
                         New
                       </Badge>
                       <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.lureType}
+                        {item.lineType}
                       </Badge>
                     </Box>
                     <Box
@@ -77,6 +77,16 @@ export default function LinesList(): JSX.Element {
                       isTruncated
                     >
                       {item.name}
+                    </Box>
+                    <Box
+                      color='gray.500'
+                      fontWeight='semibold'
+                      letterSpacing='wide'
+                      fontSize='xs'
+                      textTransform='uppercase'
+                      ml='2'
+                    >
+                      thickness {item.thickness} lb
                     </Box>
                     <Box
                       color='gray.500'
