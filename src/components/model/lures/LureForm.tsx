@@ -71,7 +71,7 @@ export default function LureForm() {
                     fontSize="12px"
                     htmlFor='name'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -111,7 +111,7 @@ export default function LureForm() {
                     fontSize="12px"
                     htmlFor='color'
                   >COLOR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='color' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='color'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.color}</FormErrorMessage>
                 </FormControl>
               )}
@@ -142,7 +142,7 @@ export default function LureForm() {
                     fontSize="12px"
                     htmlFor='company'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
                 </FormControl>
               )}

@@ -65,7 +65,7 @@ export default function ReelForm() {
                     fontSize="12px"
                     htmlFor='name'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -81,7 +81,7 @@ export default function ReelForm() {
                     fontSize="12px"
                     htmlFor='place'
                   >PLACE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='place' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='place'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.place}</FormErrorMessage>
                 </FormControl>
               )}
@@ -97,7 +97,7 @@ export default function ReelForm() {
                     fontSize="12px"
                     htmlFor='address'
                   >ADDRESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='address' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='address'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.address}</FormErrorMessage>
                 </FormControl>
               )}

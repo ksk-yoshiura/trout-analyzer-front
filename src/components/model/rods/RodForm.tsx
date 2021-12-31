@@ -67,7 +67,7 @@ export default function RodForm() {
                     fontSize="12px"
                     htmlFor='name'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -83,7 +83,7 @@ export default function RodForm() {
                     fontSize="12px"
                     htmlFor='length'
                   >LENGTH</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='length' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='length'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.length}</FormErrorMessage>
                 </FormControl>
               )}
@@ -99,7 +99,7 @@ export default function RodForm() {
                     fontSize="12px"
                     htmlFor='hardness'
                   >HARDNESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='hardness' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='hardness'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.hardness}</FormErrorMessage>
                 </FormControl>
               )}
@@ -115,7 +115,7 @@ export default function RodForm() {
                     fontSize="12px"
                     htmlFor='company'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeHolder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
                 </FormControl>
               )}
