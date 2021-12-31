@@ -5,10 +5,8 @@ export const RodDetailMock =
     imageAlt: 'lure image',
     createdAt: '2021/12/28',
     lastUsedAt: '2021/12/28',
-    lureType: 'spoon',
-    name: 'super crank bait',
-    company: 'no brand',
-    color: 'red',
-    weight: '2',
-    frequency: '5'
+    hardness: 'ultra right',
+    length: '6',
+    name: 'super good fishing rod',
+    company: 'no brand'
   };

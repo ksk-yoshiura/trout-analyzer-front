@@ -25,7 +25,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {property.lureType}
+            {property.hardness}
           </Badge>
         </Box>
 
@@ -49,16 +49,10 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            WEIGHT {property.weight} g
-          </Box>
-          <Box textTransform='uppercase'>
-            COLOR {property.color}
+            LENGTH {property.length} ft
           </Box>
           <Box textTransform='uppercase'>
             COMPANY {property.company}
-          </Box>
-          <Box textTransform='uppercase'>
-            FREQUENCY {property.frequency} times
           </Box>
           <Box>
             ADDED {property.createdAt}
