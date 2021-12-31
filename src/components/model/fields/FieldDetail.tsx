@@ -1,8 +1,8 @@
-import { 
-  Box, 
-  Image, 
+import {
+  Box,
+  Image,
   Badge,
-  Stack 
+  Stack
 } from '@chakra-ui/react'
 import { FieldDetailMock } from './field_detail_mock'
 
@@ -23,9 +23,6 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
             New
-          </Badge>
-          <Badge borderRadius='full' px='2' color='gray.500'>
-            {property.lureType}
           </Badge>
         </Box>
 
@@ -48,14 +45,8 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           ml='2'
           spacing={1}
         >
-          <Box>
-            WEIGHT {property.weight} g
-          </Box>
           <Box textTransform='uppercase'>
-            COLOR {property.color}
-          </Box>
-          <Box textTransform='uppercase'>
-            COMPANY {property.company}
+            ADDRESS {property.address}
           </Box>
           <Box textTransform='uppercase'>
             FREQUENCY {property.frequency} times
@@ -64,7 +55,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
             ADDED {property.createdAt}
           </Box>
           <Box>
-            LAST USED {property.lastUsedAt}
+            LAST VISITED {property.lastVisitedAt}
           </Box>
         </Stack>
 
