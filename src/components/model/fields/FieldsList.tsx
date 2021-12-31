@@ -65,9 +65,6 @@ export default function FieldsList(): JSX.Element {
                       <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
                         New
                       </Badge>
-                      <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.lureType}
-                      </Badge>
                     </Box>
                     <Box
                       mt='1'
@@ -86,7 +83,7 @@ export default function FieldsList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.createdAt}
+                      last visited {item.lastVisited}
                     </Box>
 
                   </Box>
