@@ -16,6 +16,7 @@ import {
 type FieldData = {
   name: string;
   place: string;
+  address: string;
   image: string;
 }
 
@@ -41,6 +42,7 @@ export default function ReelForm() {
       initialValues={{
         name: '',
         place: '',
+        address: '',
         image: ''
       }}
       onSubmit={(values, actions) => {
@@ -85,6 +87,22 @@ export default function ReelForm() {
               )}
             </Field>
             
+            <Field name='address' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.address)
+                    && Boolean(form.touched.address)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='address'
+                  >ADDRESS</FormLabel>
+                  <Input {...field} width="100%" fontSize="1xl" id='address' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.address}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
           </Stack>
           <Button
             mt={4}
