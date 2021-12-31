@@ -66,7 +66,7 @@ export default function ReelsList(): JSX.Element {
                         New
                       </Badge>
                       <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.lureType}
+                        {item.gear}
                       </Badge>
                     </Box>
                     <Box
