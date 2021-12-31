@@ -5,10 +5,8 @@ export const LineDetailMock =
     imageAlt: 'lure image',
     createdAt: '2021/12/28',
     lastUsedAt: '2021/12/28',
-    lureType: 'spoon',
-    name: 'super crank bait',
-    company: 'no brand',
-    color: 'red',
-    weight: '2',
-    frequency: '5'
+    lineType: 'nylon',
+    name: 'super good nylon',
+    company: 'DAIWA',
+    thickness: '3'
   };
