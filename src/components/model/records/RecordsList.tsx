@@ -2,9 +2,9 @@ import { useState } from 'react'
 import {
   Box,
   Image,
-  Badge,
   Wrap,
   WrapItem,
+  Stack,
   useDisclosure,
   Button,
   Modal,
@@ -52,23 +52,28 @@ export default function ReelsList(): JSX.Element {
 
   return (
     <>
-      <Wrap spacing={5}>
+      <Stack spacing={5} mr={10}>
         {
           RecordListtMock.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
-                <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.imageUrl} alt={item.imageAlt} />
+                <Box 
+                  key={index}
+                  display="flex" 
+                  w='100wh' 
+                  maxW='sm' 
+                  borderWidth='1px' 
+                  borderRadius='lg' 
+                  as={"button"} 
+                  overflow='hidden'
+                  onClick={
+                    () => { onOpen(), 
+                      clickHandler(item.id)
+                    }
+                  }
+                >
+                  <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
 
-                  <Box p='6'>
-                    <Box display='flex' alignItems='baseline'>
-                      <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-                        New
-                      </Badge>
-                      <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.lureType}
-                      </Badge>
-                    </Box>
+                  <Box p='2' w='50%'>
                     <Box
                       mt='1'
                       fontWeight='semibold'
@@ -86,18 +91,27 @@ export default function ReelsList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.createdAt}
+                      sum {item.caughtSum}
+                    </Box>
+                    <Box
+                      color='gray.500'
+                      fontWeight='semibold'
+                      letterSpacing='wide'
+                      fontSize='xs'
+                      textTransform='uppercase'
+                      ml='2'
+                    >
+                      visited {item.visitedAt}
                     </Box>
 
                   </Box>
                 </Box>
-              </WrapItem>
             )
           })
         }
         <RecordDetailModal />
 
-      </Wrap>
+      </Stack>
     </>
   )
 }
