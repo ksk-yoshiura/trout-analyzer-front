@@ -2,62 +2,20 @@ import { useState } from 'react'
 import {
   Box,
   Image,
-  Wrap,
-  WrapItem,
-  Stack,
-  useDisclosure,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Stack
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import { RecordListtMock } from './record_list_mock'
-import RecordDetail from './RecordDetail'
 
 export default function RecordsAllList(): JSX.Element {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const [chosenId, idState] = useState(0)
-
-  function clickHandler(value: string) {
-    // 型変換
-    const lureIdNumber = Number(value)
-
-    // クリックされたカードから得たIDを更新
-    idState(lureIdNumber)
-  }
-
-  const RecordDetailModal = () => {
-    return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Reel Detail</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <RecordDetail chosenId={chosenId} />
-          </ModalBody>
-
-          <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    )
-  }
-
-
+  
   return (
     <>
       <Stack spacing={5} mr={10}>
         {
           RecordListtMock.map((item, index) => {
             return (
-              <NextLink key={index} href={"/records/detail/" + item.id} passHref>
+              <NextLink key={index} href={"/records/list/" + item.id} passHref>
                 <Box
                   key={index}
                   display="flex"
@@ -67,12 +25,6 @@ export default function RecordsAllList(): JSX.Element {
                   borderRadius='lg'
                   as={"button"}
                   overflow='hidden'
-                  onClick={
-                    () => {
-                      onOpen(),
-                      clickHandler(item.id)
-                    }
-                  }
                 >
                   <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
 
