@@ -1,6 +1,6 @@
-import RecordIndex from '../../components/page/records/index';
+import RecordIndex from '../../components/page/records/all';
 
-export default function Index(): JSX.Element {
+export default function All(): JSX.Element {
   return (
     <RecordIndex />
   );
