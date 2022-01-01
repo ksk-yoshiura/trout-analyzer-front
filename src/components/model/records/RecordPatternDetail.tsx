@@ -10,7 +10,7 @@ type DetailProps = {
   chosenId: number
 }
 
-export default function RecordDetail(props: DetailProps): JSX.Element {
+export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   const property = RecordDetailMock
   // TODO：IDを取り出して詳細を取得
   console.log(props)
