@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import {
   Box,
   Image,
@@ -21,6 +22,7 @@ export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
 
+
   function clickHandler(value: string) {
     // 型変換
     const lureIdNumber = Number(value)
@@ -34,7 +36,7 @@ export default function RecordsAllList(): JSX.Element {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Reel Detail</ModalHeader>
+          <ModalHeader>Pattern Detail</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <RecordPatternDetail chosenId={chosenId} />
