@@ -7,6 +7,7 @@ import { RecordDetailMock } from './record_detail_mock'
 import RecordPatternBadgeDetail from './partial/RecordPatternBadgeDetail'
 import RecordPatternLureDetail from './partial/RecordPatternLureDetail'
 import RecordPatternReelDetail from './partial/RecordPatternReelDetail'
+import RecordPatternRodDetail from './partial/RecordPatternRodDetail'
 
 type DetailProps = {
   chosenId: number
@@ -20,6 +21,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   const { result, weather, depth } = property.badge
   const { lureType, lureName, lureCompany, lureColor, lureWeight } = property.lure
   const { reelType, reelName, reelCompany, reelGear } = property.reel
+  const { rodName, rodHardness, rodLength, rodCompany } = property.rod
 
 
   return (
@@ -27,28 +29,34 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
       <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
 
       <Box p='6'>
-        <RecordPatternBadgeDetail 
-          lureType={lureType} 
-          result={result} 
+        <RecordPatternBadgeDetail
+          lureType={lureType}
+          result={result}
           weather={weather}
           depth={depth}
         />
 
-        <RecordPatternLureDetail 
-          lureType={lureType} 
-          lureName={lureName} 
+        <RecordPatternLureDetail
+          lureType={lureType}
+          lureName={lureName}
           lureCompany={lureCompany}
           lureColor={lureColor}
           lureWeight={lureWeight}
         />
 
-        <RecordPatternReelDetail 
-          reelName={reelName} 
-          reelType={reelType} 
+        <RecordPatternReelDetail
+          reelName={reelName}
+          reelType={reelType}
           reelCompany={reelCompany}
           reelGear={reelGear}
         />
 
+        <RecordPatternRodDetail
+          rodName={rodName}
+          rodHardness={rodHardness}
+          rodCompany={rodCompany}
+          rodLength={rodLength}
+        />
       </Box>
     </Box>
   )
