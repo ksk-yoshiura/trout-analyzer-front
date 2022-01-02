@@ -6,6 +6,7 @@ import {
 import { RecordDetailMock } from './record_detail_mock'
 import RecordPatternBadgeDetail from './partial/RecordPatternBadgeDetail'
 import RecordPatternLureDetail from './partial/RecordPatternLureDetail'
+import RecordPatternReelDetail from './partial/RecordPatternReelDetail'
 
 type DetailProps = {
   chosenId: number
@@ -18,6 +19,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
 
   const { result, weather, depth } = property.badge
   const { lureType, lureName, lureCompany, lureColor, lureWeight } = property.lure
+  const { reelType, reelName, reelCompany, reelGear } = property.reel
 
 
   return (
@@ -38,6 +40,13 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
           lureCompany={lureCompany}
           lureColor={lureColor}
           lureWeight={lureWeight}
+        />
+
+        <RecordPatternReelDetail 
+          reelName={reelName} 
+          reelType={reelType} 
+          reelCompany={reelCompany}
+          reelGear={reelGear}
         />
 
       </Box>
