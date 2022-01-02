@@ -5,6 +5,7 @@ import {
 } from '@chakra-ui/react'
 import { RecordDetailMock } from './record_detail_mock'
 import RecordPatternBadgeDetail from './partial/RecordPatternBadgeDetail'
+import RecordPatternLureDetail from './partial/RecordPatternLureDetail'
 
 type DetailProps = {
   chosenId: number
@@ -15,7 +16,9 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // TODO：IDを取り出して詳細を取得
   console.log(props)
 
-  const { lureType, result, weather, depth } = property.badge
+  const { result, weather, depth } = property.badge
+  const { lureType, lureName, lureCompany, lureColor, lureWeight } = property.lure
+
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -29,35 +32,13 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
           depth={depth}
         />
 
-        <Box
-          my='2'
-          fontWeight='semibold'
-          fontSize={18}
-          as='h3'
-          lineHeight='tight'
-          isTruncated
-        >
-          {property.lureName}
-        </Box>
-
-        <Stack
-          color='gray.500'
-          fontWeight='semibold'
-          letterSpacing='wide'
-          fontSize='xs'
-          ml='2'
-          spacing={1}
-        >
-          <Box>
-            WEIGHT {property.lureWeight} g
-          </Box>
-          <Box textTransform='uppercase'>
-            COLOR {property.lureColor}
-          </Box>
-          <Box textTransform='uppercase'>
-            COMPANY {property.lureCompany}
-          </Box>
-        </Stack>
+        <RecordPatternLureDetail 
+          lureType={lureType} 
+          lureName={lureName} 
+          lureCompany={lureCompany}
+          lureColor={lureColor}
+          lureWeight={lureWeight}
+        />
 
       </Box>
     </Box>

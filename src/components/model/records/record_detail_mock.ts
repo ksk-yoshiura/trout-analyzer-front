@@ -5,6 +5,7 @@ export const RecordDetailMock =
     imageAlt: 'lure image',
     createdAt: '2021/12/28',
     lastUsedAt: '2021/12/28',
+    // バッジ情報
     badge: {
       // ルアータイプ
       lureType: 'spoon',
@@ -14,19 +15,31 @@ export const RecordDetailMock =
       depth: 'shallow'
     },
     // ルアー情報
-    lureType: 'spoon',
-    lureName: 'super great bait',
-    lureCompany: 'no brand',
-    lureColor: 'red',
-    lureWeight: '2',
+    lure: {
+      lureType: 'spoon',
+      lureName: 'super great bait',
+      lureCompany: 'no brand',
+      lureColor: 'red',
+      lureWeight: '2',
+    },
+    
     // タックル
     // ロッド
-    rodName: 'caught',
-    rodHardness: 'caught',
-    rodLength: 'caught',
+    rod: {
+      rodName: 'good rod',
+      rodHardness: 'ML',
+      rodLength: '6',
+    },
     // リール
-    reel: 'sunny',
+    reel: {
+      reelName: 'good reel',
+      reelType: '2000',
+      reelGear: 'HG',
+    },
     // ライン
-    line: 'shallow',
+    line: {
+      lineThickness: '',
+      lineType: 'nylon'
+    },
 
   };
