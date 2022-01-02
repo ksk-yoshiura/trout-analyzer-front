@@ -5,7 +5,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { RecordListtMock } from './record_list_mock'
+import { RecordAllListMock } from './record_all_list_mock'
 
 export default function RecordsAllList(): JSX.Element {
   
@@ -13,7 +13,7 @@ export default function RecordsAllList(): JSX.Element {
     <>
       <Stack spacing={5} mr={5}>
         {
-          RecordListtMock.map((item, index) => {
+          RecordAllListMock.map((item, index) => {
             return (
               <NextLink key={index} href={"/records/list/" + item.id} passHref>
                 <Box
