@@ -5,6 +5,7 @@ import {
   Image,
   Wrap,
   WrapItem,
+  Stack,
   useDisclosure,
   Button,
   Modal,
@@ -50,58 +51,68 @@ export default function RecordsAllList(): JSX.Element {
     )
   }
 
-
   return (
     <>
-      <Wrap spacing={5}>
-          {
-            RecordListtMock.map((item, index) => {
-              return (
-                <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
-                  <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
+      <Stack spacing={5} mr={5}>
+        {
+          RecordListtMock.map((item, index) => {
+            return (
+              <Box
+                key={index}
+                onClick={() => {
+                  onOpen(),
+                    clickHandler(item.id)
+                }}
+                as={"button"}
+                display="flex"
+                w='100wh'
+                maxW='sm'
+                borderWidth='1px'
+                borderRadius='lg'
+                overflow='hidden'
+              >
+                <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
 
-                    <Box p='2' w='50%'>
-                      <Box
-                        mt='1'
-                        fontWeight='semibold'
-                        as='h4'
-                        lineHeight='tight'
-                        isTruncated
-                      >
-                        {item.name}
-                      </Box>
-                      <Box
-                        color='gray.500'
-                        fontWeight='semibold'
-                        letterSpacing='wide'
-                        fontSize='xs'
-                        textTransform='uppercase'
-                        ml='2'
-                      >
-                        sum {item.caughtSum}
-                      </Box>
-                      <Box
-                        color='gray.500'
-                        fontWeight='semibold'
-                        letterSpacing='wide'
-                        fontSize='xs'
-                        textTransform='uppercase'
-                        ml='2'
-                      >
-                        visited {item.visitedAt}
-                      </Box>
-
-                    </Box>
+                <Box p='2' w='50%'>
+                  <Box
+                    mt='1'
+                    fontWeight='semibold'
+                    as='h4'
+                    lineHeight='tight'
+                    isTruncated
+                  >
+                    {item.name}
                   </Box>
-                </WrapItem>
-              )
-            })
-          }
+                  <Box
+                    color='gray.500'
+                    fontWeight='semibold'
+                    letterSpacing='wide'
+                    fontSize='xs'
+                    textTransform='uppercase'
+                    ml='2'
+                  >
+                    sum {item.caughtSum}
+                  </Box>
+                  <Box
+                    color='gray.500'
+                    fontWeight='semibold'
+                    letterSpacing='wide'
+                    fontSize='xs'
+                    textTransform='uppercase'
+                    ml='2'
+                  >
+                    visited {item.visitedAt}
+                  </Box>
 
-          <RecordPatternDetailModal />
+                </Box>
+              </Box>
+            )
+          })
+        }
 
-      </Wrap>
+        <RecordPatternDetailModal />
+
+      </Stack>
     </>
   )
 }
