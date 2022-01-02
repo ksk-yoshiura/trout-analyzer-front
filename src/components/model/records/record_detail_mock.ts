@@ -29,17 +29,20 @@ export const RecordDetailMock =
       rodName: 'good rod',
       rodHardness: 'ML',
       rodLength: '6',
+      rodCompany: 'no brand'
     },
     // リール
     reel: {
       reelName: 'good reel',
       reelType: '2000',
       reelGear: 'HG',
+      reelCompany: 'no brand'
     },
     // ライン
     line: {
       lineThickness: '',
-      lineType: 'nylon'
+      lineType: 'nylon',
+      lineCompany: 'no brand'
     },
 
   };
