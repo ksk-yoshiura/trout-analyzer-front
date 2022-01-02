@@ -11,13 +11,12 @@ export default function RecordsAllList(): JSX.Element {
   
   return (
     <>
-      <Stack spacing={5} mr={10}>
+      <Stack spacing={5} mr={5}>
         {
           RecordListtMock.map((item, index) => {
             return (
               <NextLink key={index} href={"/records/list/" + item.id} passHref>
                 <Box
-                  key={index}
                   display="flex"
                   w='100wh'
                   maxW='sm'
