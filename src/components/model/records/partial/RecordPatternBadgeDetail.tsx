@@ -8,6 +8,7 @@ type BadgeProps = {
   lureType: string;
   weather: string;
   depth: string;
+  speed: string;
 }
 
 export default function RecordPatternBadgeDetail(props: BadgeProps): JSX.Element {
@@ -24,6 +25,9 @@ export default function RecordPatternBadgeDetail(props: BadgeProps): JSX.Element
       </Badge>
       <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
         {props.depth}
+      </Badge>
+      <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+        {props.speed}
       </Badge>
     </Box>
 

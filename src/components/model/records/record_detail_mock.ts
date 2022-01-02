@@ -12,7 +12,8 @@ export const RecordDetailMock =
       // 釣果と状況
       result: 'caught',
       weather: 'sunny',
-      depth: 'shallow'
+      depth: 'shallow',
+      speed: 'fast'
     },
     // ルアー情報
     lure: {

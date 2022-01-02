@@ -19,7 +19,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // TODO：IDを取り出して詳細を取得
   console.log(props)
 
-  const { result, weather, depth } = property.badge
+  const { result, weather, depth, speed } = property.badge
   const { lureType, lureName, lureCompany, lureColor, lureWeight } = property.lure
   const { reelType, reelName, reelCompany, reelGear } = property.reel
   const { rodName, rodHardness, rodLength, rodCompany } = property.rod
@@ -36,6 +36,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
           result={result}
           weather={weather}
           depth={depth}
+          speed={speed}
         />
 
         <RecordPatternLureDetail
