@@ -16,9 +16,6 @@ export default function TopPage(): JSX.Element {
             Get Started
           </Button>
         </NextLink>
-        <Button color="white" bg='tomato' w={300} p={4}>
-          Prepare
-        </Button>
       </Stack>
     </>
   );
