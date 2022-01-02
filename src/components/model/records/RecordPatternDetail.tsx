@@ -1,8 +1,8 @@
-import { 
-  Box, 
-  Image, 
+import {
+  Box,
+  Image,
   Badge,
-  Stack 
+  Stack
 } from '@chakra-ui/react'
 import { RecordDetailMock } from './record_detail_mock'
 
@@ -22,10 +22,16 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
       <Box p='6'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-            New
+            {property.result}
           </Badge>
-          <Badge borderRadius='full' px='2' color='gray.500'>
+          <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
             {property.lureType}
+          </Badge>
+          <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+            {property.weather}
+          </Badge>
+          <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+            {property.depth}
           </Badge>
         </Box>
 
@@ -37,7 +43,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {property.name}
+          {property.lureName}
         </Box>
 
         <Stack
@@ -49,22 +55,13 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            WEIGHT {property.weight} g
+            WEIGHT {property.lureWeight} g
           </Box>
           <Box textTransform='uppercase'>
-            COLOR {property.color}
+            COLOR {property.lureColor}
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {property.company}
-          </Box>
-          <Box textTransform='uppercase'>
-            FREQUENCY {property.frequency} times
-          </Box>
-          <Box>
-            ADDED {property.createdAt}
-          </Box>
-          <Box>
-            LAST USED {property.lastUsedAt}
+            COMPANY {property.lureCompany}
           </Box>
         </Stack>
 
