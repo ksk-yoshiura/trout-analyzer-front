@@ -1,33 +1,13 @@
 import {
   Stack,
-  Button,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  StatGroup,
+  Button
 } from '@chakra-ui/react';
+import TopStatistic from '../model/top_partial/statistic';
 
 export default function TopPage(): JSX.Element {
   return (
     <>
-      <StatGroup w={300} justifyContent={'space-between'}>
-        <Stat>
-          <StatLabel>Caught Fish</StatLabel>
-          <StatNumber>123</StatNumber>
-          <StatHelpText>Feb 12 - Feb 28</StatHelpText>
-        </Stat>
-
-        <Stat>
-          <StatLabel>Latest</StatLabel>
-          <StatNumber>45</StatNumber>
-          <StatHelpText>
-            <StatArrow type='decrease' />
-            9.05%
-          </StatHelpText>
-        </Stat>
-      </StatGroup>
+      <TopStatistic />
 
       <Stack spacing={10}>
         <Button color="white" bg='tomato' w={300} p={4}>
