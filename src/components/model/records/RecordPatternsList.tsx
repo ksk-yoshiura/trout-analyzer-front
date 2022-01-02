@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import {
   Box,
   Image,
+  Badge,
   Wrap,
   WrapItem,
   Stack,
@@ -73,15 +74,20 @@ export default function RecordsAllList(): JSX.Element {
               >
                 <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
 
-                <Box p='2' w='50%'>
-                  <Box
-                    mt='1'
-                    fontWeight='semibold'
-                    as='h4'
-                    lineHeight='tight'
-                    isTruncated
-                  >
-                    {item.name}
+                <Box pt='2' w='60%'>
+                  <Box display='inline-block' alignItems='baseline'>
+                    <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
+                      {item.result}
+                    </Badge>
+                    <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+                      {item.lureType}
+                    </Badge>
+                    <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+                      {item.weather}
+                    </Badge>
+                    <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+                      {item.depth}
+                    </Badge>
                   </Box>
                   <Box
                     color='gray.500'
@@ -91,19 +97,8 @@ export default function RecordsAllList(): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    sum {item.caughtSum}
+                    time {item.createdAt}
                   </Box>
-                  <Box
-                    color='gray.500'
-                    fontWeight='semibold'
-                    letterSpacing='wide'
-                    fontSize='xs'
-                    textTransform='uppercase'
-                    ml='2'
-                  >
-                    visited {item.visitedAt}
-                  </Box>
-
                 </Box>
               </Box>
             )
