@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 
-export default function IsPlaceReady(): JSX.Element {
+export default function PlaceIsReady(): JSX.Element {
   return (
     <>
       <Flex pb={5} w="100%">
