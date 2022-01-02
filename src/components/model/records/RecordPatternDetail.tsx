@@ -1,10 +1,10 @@
 import {
   Box,
   Image,
-  Badge,
   Stack
 } from '@chakra-ui/react'
 import { RecordDetailMock } from './record_detail_mock'
+import RecordPatternBadgeDetail from './partial/RecordPatternBadgeDetail'
 
 type DetailProps = {
   chosenId: number
@@ -15,25 +15,19 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // TODO：IDを取り出して詳細を取得
   console.log(props)
 
+  const { lureType, result, weather, depth } = property.badge
+
   return (
     <Box maxW='sm' overflow='hidden'>
       <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
 
       <Box p='6'>
-        <Box display='flex' alignItems='baseline'>
-          <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-            {property.result}
-          </Badge>
-          <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-            {property.lureType}
-          </Badge>
-          <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-            {property.weather}
-          </Badge>
-          <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-            {property.depth}
-          </Badge>
-        </Box>
+        <RecordPatternBadgeDetail 
+          lureType={lureType} 
+          result={result} 
+          weather={weather}
+          depth={depth}
+        />
 
         <Box
           my='2'
