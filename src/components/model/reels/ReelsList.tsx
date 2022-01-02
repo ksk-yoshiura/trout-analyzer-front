@@ -15,6 +15,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import { ReelListtMock } from './reel_list_mock'
 import ReelDetail from './ReelDetail'
 
@@ -42,7 +43,9 @@ export default function ReelsList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
+            <NextLink href={"/fields/edit/" + chosenId} passHref>
+              <Button variant='ghost'>Edit</Button>
+            </NextLink>
           </ModalFooter>
         </ModalContent>
       </Modal>

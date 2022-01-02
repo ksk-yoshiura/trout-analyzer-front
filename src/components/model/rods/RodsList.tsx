@@ -15,6 +15,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import { RodListtMock } from './rod_list_mock'
 import RodDetail from './RodDetail'
 
@@ -42,7 +43,9 @@ export default function RodsList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
+            <NextLink href={"/rods/edit/" + chosenId}  passHref>
+              <Button variant='ghost'>Edit</Button>
+            </NextLink>
           </ModalFooter>
         </ModalContent>
       </Modal>

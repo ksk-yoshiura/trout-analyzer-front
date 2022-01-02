@@ -15,6 +15,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import { FieldListtMock } from './field_list_mock'
 import FieldDetail from './FieldDetail'
 
@@ -42,7 +43,9 @@ export default function FieldsList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
+            <NextLink href={"/fields/edit/" + chosenId}  passHref>
+              <Button variant='ghost'>Edit</Button>
+            </NextLink>
           </ModalFooter>
         </ModalContent>
       </Modal>

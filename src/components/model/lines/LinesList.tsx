@@ -15,6 +15,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import { LineListtMock } from './line_list_mock'
 import LineDetail from './LineDetail'
 
@@ -42,7 +43,9 @@ export default function LinesList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
+            <NextLink href={"/lines/edit/" + chosenId}  passHref>
+              <Button variant='ghost'>Edit</Button>
+            </NextLink>
           </ModalFooter>
         </ModalContent>
       </Modal>

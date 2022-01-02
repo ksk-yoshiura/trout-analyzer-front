@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { VFC } from 'react'
 import {
   Box,
   Image,
@@ -16,6 +15,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import { LureListtMock } from './lure_list_mock'
 import LureDetail from './LureDetail'
 
@@ -43,7 +43,9 @@ export default function LuresList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
+            <NextLink href={"/lures/edit/" + chosenId}  passHref>
+              <Button variant='ghost'>Edit</Button>
+            </NextLink>
           </ModalFooter>
         </ModalContent>
       </Modal>
