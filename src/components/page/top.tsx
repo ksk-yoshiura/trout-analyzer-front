@@ -10,9 +10,9 @@ export default function TopPage(): JSX.Element {
     <>
       <TopStatistic />
 
-      <Stack spacing={10}>
+      <Stack mt={50} spacing={10}>
         <NextLink href="/preparation/tackle" passHref>
-          <Button color="white" bg='tomato' w={300} p={4}>
+          <Button color="white" bg='tomato' size='lg' w={300} p={4}>
             Get Started
           </Button>
         </NextLink>
