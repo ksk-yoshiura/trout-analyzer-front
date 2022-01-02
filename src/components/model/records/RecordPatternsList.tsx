@@ -88,6 +88,9 @@ export default function RecordsAllList(): JSX.Element {
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
                       {item.depth}
                     </Badge>
+                    <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
+                      {item.speed}
+                    </Badge>
                   </Box>
                   <Box
                     color='gray.500'

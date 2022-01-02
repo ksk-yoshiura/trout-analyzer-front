@@ -7,7 +7,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '2',
@@ -17,7 +18,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '3',
@@ -27,7 +29,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '4',
@@ -37,7 +40,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '5',
@@ -47,7 +51,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '6',
@@ -57,7 +62,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '7',
@@ -67,7 +73,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '8',
@@ -77,7 +84,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '9',
@@ -87,7 +95,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '10',
@@ -97,7 +106,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '11',
@@ -107,7 +117,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '12',
@@ -117,7 +128,8 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   },
   {
     id: '13',
@@ -127,6 +139,7 @@ export const RecordListtMock = [
     result: 'caught',
     lureType: 'spoon',
     weather: 'sunny',
-    depth: 'shallow'
+    depth: 'shallow',
+    speed: 'fast'
   }
 ];
