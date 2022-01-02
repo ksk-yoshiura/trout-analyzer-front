@@ -40,7 +40,8 @@ export const RecordDetailMock =
     },
     // ライン
     line: {
-      lineThickness: '',
+      lineName: 'great line',
+      lineThickness: '3',
       lineType: 'nylon',
       lineCompany: 'no brand'
     },

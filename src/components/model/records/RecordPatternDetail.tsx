@@ -8,6 +8,7 @@ import RecordPatternBadgeDetail from './partial/RecordPatternBadgeDetail'
 import RecordPatternLureDetail from './partial/RecordPatternLureDetail'
 import RecordPatternReelDetail from './partial/RecordPatternReelDetail'
 import RecordPatternRodDetail from './partial/RecordPatternRodDetail'
+import RecordPatternLineDetail from './partial/RecordPatternLineDetail'
 
 type DetailProps = {
   chosenId: number
@@ -22,6 +23,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   const { lureType, lureName, lureCompany, lureColor, lureWeight } = property.lure
   const { reelType, reelName, reelCompany, reelGear } = property.reel
   const { rodName, rodHardness, rodLength, rodCompany } = property.rod
+  const { lineName, lineThickness, lineType, lineCompany } = property.line
 
 
   return (
@@ -56,6 +58,13 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
           rodHardness={rodHardness}
           rodCompany={rodCompany}
           rodLength={rodLength}
+        />
+
+        <RecordPatternLineDetail
+          lineName={lineName}
+          lineThickness={lineThickness}
+          lineCompany={lineCompany}
+          lineType={lineType}
         />
       </Box>
     </Box>
