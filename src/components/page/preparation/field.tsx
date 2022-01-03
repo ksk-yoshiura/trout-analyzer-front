@@ -3,16 +3,16 @@ import {
   Link
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import PreparationPlaceModal from '../../model/preparation/PreparationPlaceModal'
+import PreparationFieldModal from '../../model/preparation/PreparationFieldModal'
 
-export default function PlaceIsReady(): JSX.Element {
+export default function FieldIsReady(): JSX.Element {
   return (
     <>
       <Flex pt={50} w="100%" justifyContent={'center'}>
         <NextLink href="/records/serial_register" passHref>
-          <Link w='100%' as={'button'} color='teal'>Place Is Ready</Link>
+          <Link w='100%' as={'button'} color='teal'>Field Is Ready</Link>
         </NextLink>
-        <PreparationPlaceModal />
+        <PreparationFieldModal />
       </Flex>
     </>
   );

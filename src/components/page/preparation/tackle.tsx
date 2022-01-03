@@ -9,7 +9,7 @@ export default function IsTackleReady(): JSX.Element {
   return (
     <>
       <Flex pt={50} w="100%" justifyContent={'center'}>
-        <NextLink href="/preparation/place" passHref>
+        <NextLink href="/preparation/field" passHref>
           <Link w='100%' as={'button'} color='teal'>Tackle Is Ready</Link>
         </NextLink>
         <NextLink href="/tackles/create" passHref>
