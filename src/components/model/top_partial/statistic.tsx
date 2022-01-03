@@ -11,9 +11,9 @@ export default function TopStatistic(): JSX.Element {
   return (
     <StatGroup w={300} justifyContent={'space-between'}>
       <Stat>
-        <StatLabel>Caught Fish</StatLabel>
+        <StatLabel>Sum Fish</StatLabel>
         <StatNumber>123</StatNumber>
-        <StatHelpText>Feb 12 - Feb 28</StatHelpText>
+        <StatHelpText> JAN 12 - Feb 28</StatHelpText>
       </Stat>
 
       <Stat>
