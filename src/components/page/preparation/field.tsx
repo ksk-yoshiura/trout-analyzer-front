@@ -7,6 +7,8 @@ import PreparationFieldModal from '../../model/preparation/PreparationFieldModal
 import PreparationFieldSelect from '../../model/preparation/PreparationFieldSelect'
 
 export default function FieldIsReady(): JSX.Element {
+  // TODO：New Fieldで登録後登録されたfieldを選択状態にしたい
+  
   return (
     <>
       <Flex py={50} w="100wh" justifyContent={'center'}>
