@@ -20,7 +20,7 @@ type FieldData = {
   image: string;
 }
 
-export default function ReelForm() {
+export default function FieldForm() {
   function handleSendFieldData(values: FieldData) {
     alert(JSON.stringify(values))
 
