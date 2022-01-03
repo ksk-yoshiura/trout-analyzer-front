@@ -1,9 +1,9 @@
 import {
   Flex,
-  Button,
   Link
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import PreparationPlaceModal from '../../model/preparation/PreparationPlaceModal'
 
 export default function PlaceIsReady(): JSX.Element {
   return (
@@ -12,7 +12,7 @@ export default function PlaceIsReady(): JSX.Element {
         <NextLink href="/records/serial_register" passHref>
           <Link w='100%' as={'button'} color='teal'>Place Is Ready</Link>
         </NextLink>
-        <Button  mr={5} pl={10} pr={10} colorScheme='teal'>New Place</Button>
+        <PreparationPlaceModal />
       </Flex>
     </>
   );
