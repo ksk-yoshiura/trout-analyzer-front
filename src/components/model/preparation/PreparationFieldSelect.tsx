@@ -5,7 +5,7 @@ import { FieldSelectMock } from './field_select_mock'
 
 export default function LureTypeSelect() {
   return (
-    <Select w={400} placeholder='Select Field'>
+    <Select w="100%" placeholder='Select Field'>
       {
         FieldSelectMock.map((item, index) => {
           return (

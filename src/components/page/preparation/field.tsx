@@ -9,7 +9,7 @@ import PreparationFieldSelect from '../../model/preparation/PreparationFieldSele
 export default function FieldIsReady(): JSX.Element {
   return (
     <>
-      <Flex py={50} w="100%" justifyContent={'center'}>
+      <Flex py={50} w="100wh" justifyContent={'center'}>
           <PreparationFieldSelect />
           <PreparationFieldModal />
       </Flex>
