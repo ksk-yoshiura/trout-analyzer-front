@@ -67,7 +67,7 @@ export default function RecordSerialRegisterForm() {
                     fontSize="12px"
                     htmlFor='name'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -83,7 +83,23 @@ export default function RecordSerialRegisterForm() {
                     fontSize="12px"
                     htmlFor='gear'
                   >GEAR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='gear'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='gear' variant='flushed' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
+            <Field name='gear' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.gear)
+                    && Boolean(form.touched.gear)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='gear'
+                  >GEAR</FormLabel>
+                  <Input {...field} width="100%" fontSize="1xl" id='gear' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
                 </FormControl>
               )}
@@ -99,7 +115,7 @@ export default function RecordSerialRegisterForm() {
                     fontSize="12px"
                     htmlFor='type'
                   >TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='type' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
@@ -115,12 +131,12 @@ export default function RecordSerialRegisterForm() {
                     fontSize="12px"
                     htmlFor='company'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            
+
           </Stack>
           <Button
             mt={4}
