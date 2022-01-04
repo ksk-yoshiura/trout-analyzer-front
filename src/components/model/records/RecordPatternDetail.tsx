@@ -4,11 +4,11 @@ import {
   Stack
 } from '@chakra-ui/react'
 import { RecordDetailMock } from './record_detail_mock'
-import RecordPatternBadgeDetail from './partial/RecordPatternBadgeDetail'
-import RecordPatternLureDetail from './partial/RecordPatternLureDetail'
-import RecordPatternReelDetail from './partial/RecordPatternReelDetail'
-import RecordPatternRodDetail from './partial/RecordPatternRodDetail'
-import RecordPatternLineDetail from './partial/RecordPatternLineDetail'
+import RecordPatternBadgeDetail from './pattern_detail_partial/RecordPatternBadgeDetail'
+import RecordPatternLureDetail from './pattern_detail_partial/RecordPatternLureDetail'
+import RecordPatternReelDetail from './pattern_detail_partial/RecordPatternReelDetail'
+import RecordPatternRodDetail from './pattern_detail_partial/RecordPatternRodDetail'
+import RecordPatternLineDetail from './pattern_detail_partial/RecordPatternLineDetail'
 
 type DetailProps = {
   chosenId: number
