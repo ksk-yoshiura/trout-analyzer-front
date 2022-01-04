@@ -1,7 +1,6 @@
 import {
   Box,
-  Image,
-  Stack
+  Image
 } from '@chakra-ui/react'
 import { RecordDetailMock } from './record_detail_mock'
 import RecordPatternBadgeDetail from './pattern_detail_partial/RecordPatternBadgeDetail'
