@@ -5,6 +5,10 @@ import {
   FieldProps
 } from 'formik';
 import {
+  useRadioGroup,
+  HStack
+} from "@chakra-ui/react";
+import {
   Input,
   Button,
   FormControl,
@@ -12,23 +16,28 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react";
+import RadioCard from '../../shared/RadioCard';
+import {
+  ResultRadiotOptionMock,
+  SpeedRadiotOptionMock,
+  DepthRadiotOptionMock
+} from './serial_register_radio_mock'
+import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
 
-type RecordData = {
-  name: string;
+type SerialRecordData = {
+  result: string;
   company: string;
   type: string;
-  gear: string;
-  image: string;
 }
 
 export default function RecordSerialRegisterForm() {
-  function handleSendRecordData(values: RecordData) {
+  function handleSendSerialRecordData(values: SerialRecordData) {
     alert(JSON.stringify(values))
 
   }
 
 
-  function validateData(value: RecordData) {
+  function validateData(value: SerialRecordData) {
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -41,15 +50,13 @@ export default function RecordSerialRegisterForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
         company: '',
-        gear: '',
-        type: '',
-        image: ''
+        result: '',
+        type: ''
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          handleSendRecordData(values)
+          handleSendSerialRecordData(values)
           actions.setSubmitting(false)
         }, 1000)
       }}
@@ -57,50 +64,20 @@ export default function RecordSerialRegisterForm() {
       {(props) => (
         <Form>
           <Stack spacing={5}>
-            <Field name='name' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.name)
-                    && Boolean(form.touched.name)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='name'
-                  >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
 
-            <Field name='gear' validate={validateData}>
+            <Field name='result' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.gear)
-                    && Boolean(form.touched.gear)}
+                  isInvalid={Boolean(form.errors.result)
+                    && Boolean(form.touched.result)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='gear'
-                  >GEAR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='gear' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-
-            <Field name='gear' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.gear)
-                    && Boolean(form.touched.gear)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='gear'
-                  >GEAR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='gear' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
+                    htmlFor='result'
+                    textTransform='uppercase'
+                  >result</FormLabel>
+                  <ResultRadio field={field} />
+                  <FormErrorMessage>{form.errors.result}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
