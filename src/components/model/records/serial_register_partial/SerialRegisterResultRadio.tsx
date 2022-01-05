@@ -1,12 +1,13 @@
 
 import {
   useRadioGroup,
-  HStack
+  Wrap,
+  WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
 import { ResultRadiotOptionMock } from '../serial_register_radio_mock'
 
-export default function ResultRadio(field:any) { //TODO：anyで一旦退避
+export default function ResultRadio(field: any) { //TODO：anyで一旦退避
 
   const { getRadioProps } = useRadioGroup({
     name: 'result',
@@ -16,15 +17,17 @@ export default function ResultRadio(field:any) { //TODO：anyで一旦退避
 
 
   return (
-    <HStack>
-      { ResultRadiotOptionMock.map((value) => {
+    <Wrap>
+      {ResultRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
-          <RadioCard key={value} {...radio}>
-            {value}
-          </RadioCard>
+          <WrapItem>
+            <RadioCard key={value} {...radio}>
+              {value}
+            </RadioCard>
+          </WrapItem>
         )
       })}
-    </HStack>
+    </Wrap>
   )
 };

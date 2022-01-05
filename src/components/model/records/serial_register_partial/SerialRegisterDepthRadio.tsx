@@ -1,11 +1,12 @@
 import {
   useRadioGroup,
-  HStack
+  Wrap,
+  WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
 import { DepthRadiotOptionMock } from '../serial_register_radio_mock'
 
-export default function DepthRadio(field:any) { //TODO：anyで一旦退避
+export default function DepthRadio(field: any) { //TODO：anyで一旦退避
 
   const { getRadioProps } = useRadioGroup({
     name: 'depth',
@@ -15,15 +16,17 @@ export default function DepthRadio(field:any) { //TODO：anyで一旦退避
 
 
   return (
-    <HStack>
-      { DepthRadiotOptionMock.map((value) => {
+    <Wrap>
+      {DepthRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
-          <RadioCard key={value} {...radio}>
-            {value}
-          </RadioCard>
+          <WrapItem>
+            <RadioCard key={value} {...radio}>
+              {value}
+            </RadioCard>
+          </WrapItem>
         )
       })}
-    </HStack>
+    </Wrap>
   )
 };

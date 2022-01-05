@@ -1,11 +1,12 @@
 import {
   useRadioGroup,
-  HStack
+  Wrap,
+  WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
 import { SpeedRadiotOptionMock } from '../serial_register_radio_mock'
 
-export default function SpeedRadio(field:any) { //TODO：anyで一旦退避
+export default function SpeedRadio(field: any) { //TODO：anyで一旦退避
 
   const { getRadioProps } = useRadioGroup({
     name: 'speed',
@@ -15,15 +16,17 @@ export default function SpeedRadio(field:any) { //TODO：anyで一旦退避
 
 
   return (
-    <HStack>
-      { SpeedRadiotOptionMock.map((value) => {
+    <Wrap>
+      {SpeedRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
-          <RadioCard key={value} {...radio}>
-            {value}
-          </RadioCard>
+          <WrapItem>
+            <RadioCard key={value} {...radio}>
+              {value}
+            </RadioCard>
+          </WrapItem>
         )
       })}
-    </HStack>
+    </Wrap>
   )
 };
