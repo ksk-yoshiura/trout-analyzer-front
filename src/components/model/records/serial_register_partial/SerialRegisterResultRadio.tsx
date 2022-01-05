@@ -9,11 +9,14 @@ import { ResultRadiotOptionMock } from '../serial_register_radio_mock'
 export default function ResultRadio(field:any) { //TODO：anyで一旦退避
 
   const { getRadioProps } = useRadioGroup({
-    defaultValue: 'caught'
+    name: 'result',
+    defaultValue: 'caught',
+    onChange: console.log // TODO：valueをセットする関数を用意
   })
 
+
   return (
-    <HStack {...field}>
+    <HStack>
       { ResultRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
