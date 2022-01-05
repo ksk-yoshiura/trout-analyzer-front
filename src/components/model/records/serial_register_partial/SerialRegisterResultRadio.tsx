@@ -21,8 +21,8 @@ export default function ResultRadio(field: any) { //TODO：anyで一旦退避
       {ResultRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
-          <WrapItem>
-            <RadioCard key={value} {...radio}>
+          <WrapItem key={value}>
+            <RadioCard {...radio}>
               {value}
             </RadioCard>
           </WrapItem>

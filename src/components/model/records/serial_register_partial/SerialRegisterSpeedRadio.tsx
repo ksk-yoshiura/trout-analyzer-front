@@ -20,8 +20,8 @@ export default function SpeedRadio(field: any) { //TODO：anyで一旦退避
       {SpeedRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
-          <WrapItem>
-            <RadioCard key={value} {...radio}>
+          <WrapItem key={value}>
+            <RadioCard {...radio}>
               {value}
             </RadioCard>
           </WrapItem>

@@ -20,8 +20,8 @@ export default function DepthRadio(field: any) { //TODO：anyで一旦退避
       {DepthRadiotOptionMock.map((value) => {
         const radio = getRadioProps({ value })
         return (
-          <WrapItem>
-            <RadioCard key={value} {...radio}>
+          <WrapItem key={value}>
+            <RadioCard {...radio}>
               {value}
             </RadioCard>
           </WrapItem>
