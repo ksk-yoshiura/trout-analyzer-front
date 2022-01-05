@@ -83,6 +83,7 @@ export default function RecordSerialRegisterForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='speed'
+                    textTransform='uppercase'
                   >speed</FormLabel>
                   <SpeedRadio field={field} />
                   <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
@@ -99,6 +100,7 @@ export default function RecordSerialRegisterForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='depth'
+                    textTransform='uppercase'
                   >depth</FormLabel>
                   <DepthRadio field={field} />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>

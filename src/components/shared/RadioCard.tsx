@@ -14,7 +14,7 @@ export default function RadioCard(props:any) { // TODO：一旦anyで退避
   console.log(props)
 
   return (
-    <Box as='label'>
+    <Box as='label' >
       <Input {...input} type='checkbox' />
       <Box
         {...checkbox}
