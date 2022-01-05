@@ -7,7 +7,7 @@ import {
 import RadioCard from '../../../shared/RadioCard';
 import { ResultRadiotOptionMock } from '../serial_register_radio_mock'
 
-export default function ResultRadio(field: any) { //TODO：anyで一旦退避
+export default function ResultRadio() {
 
   const { getRadioProps } = useRadioGroup({
     name: 'result',

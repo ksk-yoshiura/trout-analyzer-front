@@ -68,7 +68,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='result'
                     textTransform='uppercase'
                   >result</FormLabel>
-                  <ResultRadio field={field} />
+                  <ResultRadio />
                   <FormErrorMessage>{form.errors.result}</FormErrorMessage>
                 </FormControl>
               )}
@@ -85,7 +85,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='speed'
                     textTransform='uppercase'
                   >speed</FormLabel>
-                  <SpeedRadio field={field} />
+                  <SpeedRadio />
                   <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
                 </FormControl>
               )}
@@ -102,7 +102,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='depth'
                     textTransform='uppercase'
                   >depth</FormLabel>
-                  <DepthRadio field={field} />
+                  <DepthRadio />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
                 </FormControl>
               )}

@@ -6,7 +6,7 @@ import {
 import RadioCard from '../../../shared/RadioCard';
 import { SpeedRadiotOptionMock } from '../serial_register_radio_mock'
 
-export default function SpeedRadio(field: any) { //TODO：anyで一旦退避
+export default function SpeedRadio() {
 
   const { getRadioProps } = useRadioGroup({
     name: 'speed',

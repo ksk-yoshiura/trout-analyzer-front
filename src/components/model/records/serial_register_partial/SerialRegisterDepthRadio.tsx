@@ -6,7 +6,7 @@ import {
 import RadioCard from '../../../shared/RadioCard';
 import { DepthRadiotOptionMock } from '../serial_register_radio_mock'
 
-export default function DepthRadio(field: any) { //TODO：anyで一旦退避
+export default function DepthRadio() {
 
   const { getRadioProps } = useRadioGroup({
     name: 'depth',
