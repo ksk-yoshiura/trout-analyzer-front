@@ -5,29 +5,21 @@ import {
   FieldProps
 } from 'formik';
 import {
-  useRadioGroup,
-  HStack
-} from "@chakra-ui/react";
-import {
   Input,
   Button,
   FormControl,
   FormLabel,
   FormErrorMessage,
   Stack
-} from "@chakra-ui/react";
-import RadioCard from '../../shared/RadioCard';
-import {
-  ResultRadiotOptionMock,
-  SpeedRadiotOptionMock,
-  DepthRadiotOptionMock
-} from './serial_register_radio_mock'
+} from "@chakra-ui/react"
 import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
+import SpeedRadio from './serial_register_partial/SerialRegisterSpeedRadio'
+import DepthRadio from './serial_register_partial/SerialRegisterDepthRadio'
 
 type SerialRecordData = {
   result: string;
-  company: string;
-  type: string;
+  speed: string;
+  depth: string;
 }
 
 export default function RecordSerialRegisterForm() {
@@ -50,9 +42,9 @@ export default function RecordSerialRegisterForm() {
   return (
     <Formik
       initialValues={{
-        company: '',
+        speed: '',
         result: '',
-        type: ''
+        depth: ''
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
@@ -82,34 +74,34 @@ export default function RecordSerialRegisterForm() {
               )}
             </Field>
 
-            <Field name='type' validate={validateData}>
+            <Field name='speed' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.type)
-                    && Boolean(form.touched.type)}
+                  isInvalid={Boolean(form.errors.speed)
+                    && Boolean(form.touched.speed)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='type'
-                  >TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                    htmlFor='speed'
+                  >speed</FormLabel>
+                  <SpeedRadio field={field} />
+                  <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Field name='company' validate={validateData}>
+            <Field name='depth' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.company)
-                    && Boolean(form.touched.company)}
+                  isInvalid={Boolean(form.errors.depth)
+                    && Boolean(form.touched.depth)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='company'
-                  >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.company}</FormErrorMessage>
+                    htmlFor='depth'
+                  >depth</FormLabel>
+                  <DepthRadio field={field} />
+                  <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
