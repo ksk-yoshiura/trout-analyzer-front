@@ -5,7 +5,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { RecordAllListMock } from '../mock/record_all_list_mock'
+import { RecordAllListMock } from '../mock/records/record_all_list_mock'
 
 export default function RecordsAllList(): JSX.Element {
   
