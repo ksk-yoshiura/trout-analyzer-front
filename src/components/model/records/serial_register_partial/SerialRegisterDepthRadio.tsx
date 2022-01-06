@@ -4,7 +4,7 @@ import {
   WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
-import { DepthRadiotOptionMock } from '../../mock/serial_register_radio_mock'
+import { DepthRadiotOptionMock } from '../../mock/serial_register/serial_register_radio_mock'
 
 export default function DepthRadio() {
 
