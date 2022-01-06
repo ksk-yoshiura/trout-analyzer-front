@@ -5,7 +5,7 @@ import {
   WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
-import { ResultRadiotOptionMock } from '../serial_register_radio_mock'
+import { ResultRadiotOptionMock } from '../../mock/serial_register_radio_mock'
 
 export default function ResultRadio() {
 

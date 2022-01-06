@@ -4,7 +4,7 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { RodDetailMock } from './rod_detail_mock'
+import { RodDetailMock } from '../mock/rod_detail_mock'
 
 type DetailProps = {
   chosenId: number

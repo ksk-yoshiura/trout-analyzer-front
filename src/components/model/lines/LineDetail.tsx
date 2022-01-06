@@ -4,7 +4,7 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { LineDetailMock } from './line_detail_mock'
+import { LineDetailMock } from '../mock/line_detail_mock'
 
 type DetailProps = {
   chosenId: number

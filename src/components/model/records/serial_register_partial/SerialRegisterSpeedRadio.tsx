@@ -4,7 +4,7 @@ import {
   WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
-import { SpeedRadiotOptionMock } from '../serial_register_radio_mock'
+import { SpeedRadiotOptionMock } from '../../mock/serial_register_radio_mock'
 
 export default function SpeedRadio() {
 
