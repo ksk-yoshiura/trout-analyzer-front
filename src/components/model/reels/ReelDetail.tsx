@@ -4,7 +4,7 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { ReelDetailMock } from '../mock/reel_detail_mock'
+import { ReelDetailMock } from '../mock/reels/reel_detail_mock'
 
 type DetailProps = {
   chosenId: number

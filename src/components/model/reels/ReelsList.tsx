@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { ReelListtMock } from '../mock/reel_list_mock'
+import { ReelListtMock } from '../mock/reels/reel_list_mock'
 import ReelDetail from './ReelDetail'
 
 export default function ReelsList(): JSX.Element {
