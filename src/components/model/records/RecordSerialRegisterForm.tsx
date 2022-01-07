@@ -15,11 +15,13 @@ import {
 import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
 import SpeedRadio from './serial_register_partial/SerialRegisterSpeedRadio'
 import DepthRadio from './serial_register_partial/SerialRegisterDepthRadio'
+import LureSelect from './serial_register_partial/SerialRegisterLureSelect'
 
 type SerialRecordData = {
   result: string;
   speed: string;
   depth: string;
+  lure: string;
 }
 
 export default function RecordSerialRegisterForm() {
@@ -44,7 +46,8 @@ export default function RecordSerialRegisterForm() {
       initialValues={{
         speed: '',
         result: '',
-        depth: ''
+        depth: '',
+        lure: ''
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
@@ -104,6 +107,25 @@ export default function RecordSerialRegisterForm() {
                   >depth</FormLabel>
                   <DepthRadio />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
+            <Field name='lure' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.lure)
+                    && Boolean(form.touched.lure)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='lure'
+                    textTransform='uppercase'
+                  >lure</FormLabel>
+
+                  <LureSelect />
+
+                  <FormErrorMessage>{form.errors.lure}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
