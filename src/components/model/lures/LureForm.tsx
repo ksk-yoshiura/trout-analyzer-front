@@ -13,7 +13,7 @@ import {
   Select,
   Stack
 } from "@chakra-ui/react";
-import { LureTypeSelectMock } from './lure_type_select_mock'
+import { LureTypeSelectMock } from '../mock/lures/lure_type_select_mock'
 
 type LureData = {
   name: string;
