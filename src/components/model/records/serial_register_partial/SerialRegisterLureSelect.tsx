@@ -15,7 +15,7 @@ export default function LureSelect() {
 
   return (
     <Flex>
-      <Select w={150} onChange={(event) => changeHandler(event)} placeholder='Lure Type'>
+      <Select w={130} onChange={(event) => changeHandler(event)} placeholder='Lure Type'>
         {
           LureTypeSelectMock.map((item, index) => {
             return (
