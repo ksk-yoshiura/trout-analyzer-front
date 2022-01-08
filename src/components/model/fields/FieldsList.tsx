@@ -60,7 +60,7 @@ export default function FieldsList(): JSX.Element {
           FieldListMock.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
-                <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 
                   <Box p='6'>
