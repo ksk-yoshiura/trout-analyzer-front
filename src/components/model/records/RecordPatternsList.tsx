@@ -17,7 +17,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import { RecordListMock } from './record_list_mock'
+import { RecordListMock } from '../mock/records/record_list_mock'
 import RecordPatternDetail from './RecordPatternDetail'
 
 export default function RecordsAllList(): JSX.Element {

@@ -4,7 +4,7 @@ import {
   Badge,
   Stack
 } from '@chakra-ui/react'
-import { FieldDetailMock } from '../mock/fileds/field_detail_mock'
+import { FieldDetailMock } from '../mock/fields/field_detail_mock'
 
 type DetailProps = {
   chosenId: number

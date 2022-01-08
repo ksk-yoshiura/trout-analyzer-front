@@ -1,7 +1,7 @@
 import {
   Select,
 } from '@chakra-ui/react'
-import { FieldSelectMock } from '../mock/fileds/field_select_mock'
+import { FieldSelectMock } from '../mock/fields/field_select_mock'
 
 export default function LureTypeSelect() {
   return (
