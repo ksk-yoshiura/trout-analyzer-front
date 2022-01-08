@@ -1,7 +1,7 @@
-import RodIndex from '../../components/page/rods/index';
+import TackleIndex from '../../components/page/tackles/index';
 
 export default function Index(): JSX.Element {
   return (
-    <RodIndex />
+    <TackleIndex />
   );
 }
