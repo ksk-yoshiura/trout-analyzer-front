@@ -154,7 +154,7 @@ export default function RecordSerialRegisterForm() {
 
           </Stack>
           <Button
-            mt={4}
+            my={4}
             colorScheme='teal'
             isLoading={props.isSubmitting}
             type='submit'
