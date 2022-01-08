@@ -29,7 +29,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
     <Box maxW='sm' overflow='hidden'>
       <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
 
-      <Box p='6'>
+      <Box p='2'>
         <RecordPatternBadgeDetail
           lureType={lureType}
           result={result}

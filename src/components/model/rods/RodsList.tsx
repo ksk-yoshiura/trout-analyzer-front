@@ -63,7 +63,7 @@ export default function RodsList(): JSX.Element {
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 
-                  <Box p='6'>
+                  <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
                       <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
                         New

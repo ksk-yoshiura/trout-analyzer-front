@@ -19,7 +19,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
     <Box maxW='sm' overflow='hidden'>
       <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
 
-      <Box p='6'>
+      <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
             New
