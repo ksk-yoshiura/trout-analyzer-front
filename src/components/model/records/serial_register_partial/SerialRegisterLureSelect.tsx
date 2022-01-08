@@ -21,7 +21,7 @@ export default function LureSelect() {
 
   return (
     <>
-      <Select w={130} onChange={(event) => {changeHandler(event),setLureNameList(event.target.value)}} placeholder='Lure Type'>
+      <Select mb={2} w={130} onChange={(event) => {changeHandler(event),setLureNameList(event.target.value)}} placeholder='Lure Type'>
         {
           LureTypeSelectMock.map((item, index) => {
             return (
