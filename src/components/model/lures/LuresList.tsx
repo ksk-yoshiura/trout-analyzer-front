@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { LureListtMock } from '../mock/lures/lure_list_mock'
+import { LureListMock } from '../mock/lures/lure_list_mock'
 import LureDetail from './LureDetail'
 
 export default function LuresList(): JSX.Element {
@@ -57,7 +57,7 @@ export default function LuresList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          LureListtMock.map((item, index) => {
+          LureListMock.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

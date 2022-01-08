@@ -1,4 +1,4 @@
-export const LureListtMock = [
+export const LureListMock = [
   {
     id: '1',
     imageUrl: 'https://bit.ly/2Z4KKcF',
