@@ -16,12 +16,14 @@ import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
 import SpeedRadio from './serial_register_partial/SerialRegisterSpeedRadio'
 import DepthRadio from './serial_register_partial/SerialRegisterDepthRadio'
 import LureSelect from './serial_register_partial/SerialRegisterLureSelect'
+import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 
 type SerialRecordData = {
   result: string;
   speed: string;
   depth: string;
   lure: string;
+  tackle: string;
 }
 
 export default function RecordSerialRegisterForm() {
@@ -47,7 +49,8 @@ export default function RecordSerialRegisterForm() {
         speed: '',
         result: '',
         depth: '',
-        lure: ''
+        lure: '',
+        tackle: ''
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
@@ -126,6 +129,25 @@ export default function RecordSerialRegisterForm() {
                   <LureSelect />
 
                   <FormErrorMessage>{form.errors.lure}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
+            <Field name='tackle' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.tackle)
+                    && Boolean(form.touched.tackle)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='tackle'
+                    textTransform='uppercase'
+                  >tackle</FormLabel>
+
+                  <TackleSelect />
+
+                  <FormErrorMessage>{form.errors.tackle}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
