@@ -1,12 +1,16 @@
-import { 
+import {
   Flex
 } from '@chakra-ui/react'
 import ReelForm from '../../model/reels/ReelForm'
+import BackToListPageLink from '../../shared/BackToListPageLink'
 
 export default function ReelEdit(): JSX.Element {
   return (
-    <Flex textAlign="center" w="100wh">
-      <ReelForm />
-    </Flex>
+    <>
+      <BackToListPageLink name={'reels'} />
+      <Flex textAlign="center" w="100wh">
+        <ReelForm />
+      </Flex>
+    </>
   )
 }

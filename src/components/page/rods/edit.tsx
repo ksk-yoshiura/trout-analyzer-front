@@ -1,12 +1,16 @@
-import { 
+import {
   Flex
 } from '@chakra-ui/react'
 import RodForm from '../../model/rods/RodForm'
+import BackToListPageLink from '../../shared/BackToListPageLink'
 
 export default function RodEdit(): JSX.Element {
   return (
-    <Flex textAlign="center" w="100wh">
-      <RodForm />
-    </Flex>
+    <>
+      <BackToListPageLink name={'rods'} />
+      <Flex textAlign="center" w="100wh">
+        <RodForm />
+      </Flex>
+    </>
   )
 }
