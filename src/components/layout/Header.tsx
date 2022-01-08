@@ -1,4 +1,5 @@
 import { Box, Flex, Button } from '@chakra-ui/react';
+import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
 
 export default function Header(): JSX.Element {
   // TODO：左端にロゴ、右端にログアウトボタン
@@ -20,6 +21,9 @@ export default function Header(): JSX.Element {
         <Button colorScheme='teal' variant='link'>
           Logout
         </Button>
+      </Box>
+      <Box display={{ base: "block", md: "none" }}>
+        <SideMenuMobileBox />
       </Box>
     </Flex>
   );

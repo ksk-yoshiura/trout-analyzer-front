@@ -1,7 +1,6 @@
 import { 
   Flex, Box
 } from "@chakra-ui/react";
-import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
 import SideMenuPCBox from "./side_menu/SideMenuPCBox";
 
 export default function SideMenu() {
@@ -16,9 +15,6 @@ export default function SideMenu() {
         px={6}
       >
         <SideMenuPCBox />
-      </Box>
-      <Box display={{ base: "block", md: "none" }}>
-        <SideMenuMobileBox />
       </Box>
     </Flex>
   );
