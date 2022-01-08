@@ -4,7 +4,7 @@ import {
 import ReelForm from '../../model/reels/ReelForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
-export default function RodCreate(): JSX.Element {
+export default function ReelCreate(): JSX.Element {
   return (
     <>
       <BackToListPageLink name={'reels'} />
