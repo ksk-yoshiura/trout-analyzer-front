@@ -26,8 +26,8 @@ export default function SideMenuContents() {
 
   return (
     <Stack
-      pt="20px"
-      px="20px"
+      py={1}
+      px={2}
     >
       <Button
         ref={btnRef}
