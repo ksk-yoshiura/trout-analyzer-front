@@ -1,7 +1,7 @@
 import {
   Select
 } from "@chakra-ui/react";
-import { TackleListMock } from '../../mock/tackles/tackle_list_mock'
+import { TackleListMock } from '../../mock/tackles/tackle_list_serail_register_mock'
 
 export default function TackleSelect(field: any) {
 
