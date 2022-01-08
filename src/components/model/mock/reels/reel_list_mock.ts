@@ -1,4 +1,4 @@
-export const ReelListtMock = [
+export const ReelListMock = [
   {
     id: '1',
     imageUrl: 'https://bit.ly/2Z4KKcF',

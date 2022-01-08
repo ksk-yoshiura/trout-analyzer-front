@@ -1,4 +1,4 @@
-export const FieldListtMock = [
+export const FieldListMock = [
   {
     id: '1',
     imageUrl: 'https://bit.ly/2Z4KKcF',

@@ -17,7 +17,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import { RecordListtMock } from './record_list_mock'
+import { RecordListMock } from './record_list_mock'
 import RecordPatternDetail from './RecordPatternDetail'
 
 export default function RecordsAllList(): JSX.Element {
@@ -56,7 +56,7 @@ export default function RecordsAllList(): JSX.Element {
     <>
       <Stack spacing={5} mr={5}>
         {
-          RecordListtMock.map((item, index) => {
+          RecordListMock.map((item, index) => {
             return (
               <Box
                 key={index}

@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { RodListtMock } from './rod_list_mock'
+import { RodListMock } from './rod_list_mock'
 import RodDetail from './RodDetail'
 
 export default function RodsList(): JSX.Element {
@@ -57,7 +57,7 @@ export default function RodsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          RodListtMock.map((item, index) => {
+          RodListMock.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

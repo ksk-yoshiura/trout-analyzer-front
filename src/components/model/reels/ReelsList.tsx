@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { ReelListtMock } from '../mock/reels/reel_list_mock'
+import { ReelListMock } from '../mock/reels/reel_list_mock'
 import ReelDetail from './ReelDetail'
 
 export default function ReelsList(): JSX.Element {
@@ -57,7 +57,7 @@ export default function ReelsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          ReelListtMock.map((item, index) => {
+          ReelListMock.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

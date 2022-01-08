@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { FieldListtMock } from './field_list_mock'
+import { FieldListMock } from './field_list_mock'
 import FieldDetail from './FieldDetail'
 
 export default function FieldsList(): JSX.Element {
@@ -57,7 +57,7 @@ export default function FieldsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          FieldListtMock.map((item, index) => {
+          FieldListMock.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

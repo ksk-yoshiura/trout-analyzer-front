@@ -1,4 +1,4 @@
-export const LineListtMock = [
+export const LineListMock = [
   {
     id: '1',
     imageUrl: 'https://bit.ly/2Z4KKcF',

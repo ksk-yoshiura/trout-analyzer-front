@@ -1,4 +1,4 @@
-export const RodListtMock = [
+export const RodListMock = [
   {
     id: '1',
     imageUrl: 'https://bit.ly/2Z4KKcF',

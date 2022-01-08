@@ -1,4 +1,4 @@
-export const RecordListtMock = [
+export const RecordListMock = [
   {
     id: '1',
     imageUrl: 'https://bit.ly/2Z4KKcF',

@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { LineListtMock } from './line_list_mock'
+import { LineListMock } from '../mock/lines/line_list_mock'
 import LineDetail from './LineDetail'
 
 export default function LinesList(): JSX.Element {
@@ -57,7 +57,7 @@ export default function LinesList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          LineListtMock.map((item, index) => {
+          LineListMock.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={230} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
