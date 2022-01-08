@@ -6,7 +6,7 @@ import {
 import { LureTypeSelectMock } from '../../mock/lures/lure_type_select_mock'
 import { LureNameListMock } from '../../mock/lures/lure_name_list_mock'
 
-export default function LureSelect() {
+export default function LureSelect(field:any) {
 
   const [lureTypeId, setLureNameList] = useState('0')
   console.log(lureTypeId)
@@ -34,7 +34,7 @@ export default function LureSelect() {
       </Select>
       {
         lureTypeId !== '0' && lureTypeId ?
-        <Select w='100wh' onChange={(event) => changeHandler(event)} placeholder='Name'>
+        <Select w='100wh' {...field} onChange={(event) => changeHandler(event)} placeholder='Name'>
           {
             LureNameListMock.map((item, index) => {
               return (

@@ -5,7 +5,7 @@ import {
   FieldProps
 } from 'formik';
 import {
-  Input,
+  Select,
   Button,
   FormControl,
   FormLabel,
@@ -126,7 +126,7 @@ export default function RecordSerialRegisterForm() {
                     textTransform='uppercase'
                   >lure</FormLabel>
 
-                  <LureSelect />
+                  <LureSelect field={field} />
 
                   <FormErrorMessage>{form.errors.lure}</FormErrorMessage>
                 </FormControl>
@@ -145,7 +145,7 @@ export default function RecordSerialRegisterForm() {
                     textTransform='uppercase'
                   >tackle</FormLabel>
 
-                  <TackleSelect />
+                  <TackleSelect field={field} />
 
                   <FormErrorMessage>{form.errors.tackle}</FormErrorMessage>
                 </FormControl>
