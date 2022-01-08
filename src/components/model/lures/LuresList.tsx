@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { LureListtMock } from './lure_list_mock'
+import { LureListtMock } from '../mock/lures/lure_list_mock'
 import LureDetail from './LureDetail'
 
 export default function LuresList(): JSX.Element {
