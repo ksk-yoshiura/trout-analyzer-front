@@ -9,14 +9,14 @@ import {
 
 export default function TopStatistic(): JSX.Element {
   return (
-    <StatGroup w='100wh' justifyContent={'space-between'}>
-      <Stat>
+    <StatGroup w='100wh'>
+      <Stat mr={3}>
         <StatLabel>Sum Fish</StatLabel>
         <StatNumber>123</StatNumber>
         <StatHelpText> JAN 12 - Feb 28</StatHelpText>
       </Stat>
 
-      <Stat>
+      <Stat mr={3}>
         <StatLabel>Best Hit Lure</StatLabel>
         <StatHelpText>great spoon</StatHelpText>
         <StatHelpText>
@@ -24,7 +24,7 @@ export default function TopStatistic(): JSX.Element {
         </StatHelpText>
       </Stat>
 
-      <Stat>
+      <Stat mr={3}>
         <StatLabel>Latest</StatLabel>
         <StatNumber>45</StatNumber>
         <StatHelpText>
