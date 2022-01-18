@@ -70,6 +70,7 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='name'
+                    textTransform='uppercase'
                   >NAME</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -85,6 +86,7 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='type'
+                    textTransform='uppercase'
                   >LURE TYPE</FormLabel>
                   <Select {...field} width="100%" fontSize="1xl" id='type' placeholder='Lure Type'>
                     {
@@ -110,6 +112,7 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='color'
+                    textTransform='uppercase'
                   >COLOR</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='color'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.color}</FormErrorMessage>
@@ -126,6 +129,7 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='weight'
+                    textTransform='uppercase'
                   >WEIGHT</FormLabel>
                   <Input {...field} width="30%" fontSize="1xl" id='weight' /> g
                   <FormErrorMessage>{form.errors.weight}</FormErrorMessage>
@@ -141,6 +145,7 @@ export default function LureForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='company'
+                    textTransform='uppercase'
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>

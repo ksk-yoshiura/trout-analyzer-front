@@ -66,6 +66,7 @@ export default function RodForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='name'
+                    textTransform='uppercase'
                   >NAME</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -82,6 +83,7 @@ export default function RodForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='length'
+                    textTransform='uppercase'
                   >LENGTH</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='length'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.length}</FormErrorMessage>
@@ -98,6 +100,7 @@ export default function RodForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='hardness'
+                    textTransform='uppercase'
                   >HARDNESS</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='hardness'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.hardness}</FormErrorMessage>
@@ -114,6 +117,7 @@ export default function RodForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='company'
+                    textTransform='uppercase'
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>

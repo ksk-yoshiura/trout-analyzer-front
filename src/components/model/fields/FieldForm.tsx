@@ -64,6 +64,7 @@ export default function FieldForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='name'
+                    textTransform='uppercase'
                   >NAME</FormLabel>
                   <Input {...field} fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -80,6 +81,7 @@ export default function FieldForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='place'
+                    textTransform='uppercase'
                   >PLACE</FormLabel>
                   <Input {...field} fontSize="1xl" id='place'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.place}</FormErrorMessage>
@@ -96,6 +98,7 @@ export default function FieldForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='address'
+                    textTransform='uppercase'
                   >ADDRESS</FormLabel>
                   <Input {...field} fontSize="1xl" id='address'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.address}</FormErrorMessage>

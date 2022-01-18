@@ -65,6 +65,7 @@ export default function LineForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='name'
+                    textTransform='uppercase'
                   >NAME</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -81,6 +82,7 @@ export default function LineForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='thickness'
+                    textTransform='uppercase'
                   >THICKNESS</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='thickness'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.thickness}</FormErrorMessage>
@@ -97,6 +99,7 @@ export default function LineForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='type'
+                    textTransform='uppercase'
                   >TYPE</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='type'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
@@ -113,6 +116,7 @@ export default function LineForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='company'
+                    textTransform='uppercase'
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>

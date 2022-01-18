@@ -66,6 +66,7 @@ export default function ReelForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='name'
+                    textTransform='uppercase'
                   >NAME</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -82,6 +83,7 @@ export default function ReelForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='gear'
+                    textTransform='uppercase'
                   >GEAR</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='gear'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
@@ -98,6 +100,7 @@ export default function ReelForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='type'
+                    textTransform='uppercase'
                   >TYPE</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='type'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
@@ -114,6 +117,7 @@ export default function ReelForm() {
                   <FormLabel
                     fontSize="12px"
                     htmlFor='company'
+                    textTransform='uppercase'
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
