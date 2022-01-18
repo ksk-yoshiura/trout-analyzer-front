@@ -20,7 +20,7 @@ type LineData = {
   thickness: string;
 }
 
-export default function ReelForm() {
+export default function LineForm() {
   function handleSendLineData(values: LineData) {
     alert(JSON.stringify(values))
 
