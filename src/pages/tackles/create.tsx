@@ -1,7 +1,7 @@
-import RodCreate from '../../components/page/rods/create';
+import TackleCreate from '../../components/page/tackles/create';
 
 export default function Create(): JSX.Element {
   return (
-    <RodCreate />
+    <TackleCreate />
   );
 }
