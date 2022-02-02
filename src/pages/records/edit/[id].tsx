@@ -1,7 +1,7 @@
-import LureEdit from '../../../components/page/lures/edit';
+import RecordEdit from '../../../components/page/records/edit';
 
 export default function Edit(): JSX.Element {
   return (
-    <LureEdit />
+    <RecordEdit />
   );
 }
