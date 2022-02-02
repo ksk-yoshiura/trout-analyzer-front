@@ -17,6 +17,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import { RecordListMock } from '../mock/records/record_list_mock'
 import RecordPatternDetail from './RecordPatternDetail'
 
@@ -45,7 +46,10 @@ export default function RecordsAllList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='ghost'>Edit</Button>
+            <NextLink href={"/records/edit/" + chosenId} passHref>
+              <Button variant='ghost'>Edit</Button>
+            </NextLink>
+
           </ModalFooter>
         </ModalContent>
       </Modal>
