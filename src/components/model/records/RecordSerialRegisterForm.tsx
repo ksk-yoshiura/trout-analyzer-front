@@ -5,7 +5,6 @@ import {
   FieldProps
 } from 'formik';
 import {
-  Select,
   Button,
   FormControl,
   FormLabel,
