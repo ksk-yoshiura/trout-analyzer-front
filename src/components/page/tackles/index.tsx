@@ -9,7 +9,7 @@ export default function TackleIndex(): JSX.Element {
   return (
     <>
       <Flex pb={5} w="100%">
-        <NextLink href="/tackle/create" passHref>
+        <NextLink href="/tackles/create" passHref>
           <Button  pl={10} pr={10} colorScheme='teal'>New Tackle</Button>
         </NextLink>
       </Flex>
