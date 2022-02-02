@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState } from 'react'
 import {
   Box,
   Image,
   Badge,
-  Wrap,
-  WrapItem,
   Stack,
   useDisclosure,
   Button,
