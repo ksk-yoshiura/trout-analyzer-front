@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -23,11 +24,14 @@ type ReelData = {
 }
 
 export default function ReelForm() {
+  // パラメータからロッドID取得
+  const router = useRouter();
+  const { id } = router.query
+  console.log(id)
+
   function handleSendReelData(values: ReelData) {
     alert(JSON.stringify(values))
-
   }
-
 
   function validateData(value: ReelData) {
     // let error
