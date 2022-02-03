@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -26,6 +27,11 @@ type LureData = {
 }
 
 export default function LureForm() {
+  // パラメータからロッドID取得
+  const router = useRouter();
+  const { id } = router.query
+  console.log(id)
+  
   function handleSendLureData(values: LureData) {
     alert(JSON.stringify(values))
   }
