@@ -24,7 +24,7 @@ type LineData = {
 }
 
 export default function LineForm() {
-  // パラメータからロッドID取得
+  // パラメータからラインID取得
   const router = useRouter();
   const { id } = router.query
   console.log(id)

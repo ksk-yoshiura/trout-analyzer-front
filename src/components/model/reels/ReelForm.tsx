@@ -24,7 +24,7 @@ type ReelData = {
 }
 
 export default function ReelForm() {
-  // パラメータからロッドID取得
+  // パラメータからリールID取得
   const router = useRouter();
   const { id } = router.query
   console.log(id)

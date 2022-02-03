@@ -27,7 +27,7 @@ type LureData = {
 }
 
 export default function LureForm() {
-  // パラメータからロッドID取得
+  // パラメータからルアーID取得
   const router = useRouter();
   const { id } = router.query
   console.log(id)
