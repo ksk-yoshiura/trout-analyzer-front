@@ -5,11 +5,6 @@ import {
   FieldProps
 } from 'formik';
 import {
-  useState,
-  useEffect,
-  FC
-} from "react"
-import {
   Input,
   Button,
   FormControl,
@@ -17,6 +12,7 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react";
+import Thumb from "../../shared/ThumbImage"
 
 type FieldData = {
   name: string;
@@ -25,16 +21,11 @@ type FieldData = {
   image: string;
 }
 
-type ThumbProps = {
-  file: File | null;
-};
 
 export default function FieldForm() {
   function handleSendFieldData(values: FieldData) {
     alert(JSON.stringify(values))
-
   }
-
 
   function validateData(value: FieldData) {
     // let error
@@ -45,41 +36,6 @@ export default function FieldForm() {
     // }
     // return error
   }
-
-  const Thumb: FC<ThumbProps> = ({ file }) => {
-    const [loading, setLoading] = useState<Boolean>(true);
-    const [thumb, setThumb] = useState<string>();
-
-    console.log(file)
-    useEffect(() => {
-      const reader = new FileReader();
-      if (file) {
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          setThumb(reader.result as string);
-        };
-        setLoading(false);
-      }
-    }, [file]);
-
-    if (!file) {
-      return null;
-    }
-
-    if (loading) {
-      return <p>Loading....</p>;
-    }
-
-    return (
-      <img
-        src={thumb}
-        alt={file.name}
-        className="img-thumbnail mt-2"
-        height={200}
-        width={200}
-      />
-    );
-  };
 
   return (
     <Formik
