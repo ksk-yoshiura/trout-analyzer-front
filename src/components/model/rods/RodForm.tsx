@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -23,9 +24,13 @@ type RodData = {
 }
 
 export default function RodForm() {
+  // パラメータからロッドID取得
+  const router = useRouter();
+  const { id } = router.query
+  console.log(id)
+
   function handleSendRodData(values: RodData) {
     alert(JSON.stringify(values))
-
   }
 
 
