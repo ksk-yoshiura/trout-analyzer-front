@@ -12,12 +12,14 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react";
+import Thumb from "../../shared/ThumbImage"
 
 type LineData = {
   name: string;
   company: string;
   type: string;
   thickness: string;
+  image: string;
 }
 
 export default function LineForm() {
@@ -67,7 +69,7 @@ export default function LineForm() {
                     htmlFor='name'
                     textTransform='uppercase'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -84,7 +86,7 @@ export default function LineForm() {
                     htmlFor='thickness'
                     textTransform='uppercase'
                   >THICKNESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='thickness'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='thickness' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.thickness}</FormErrorMessage>
                 </FormControl>
               )}
@@ -101,7 +103,7 @@ export default function LineForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='type' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
@@ -118,12 +120,41 @@ export default function LineForm() {
                     htmlFor='company'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            
+
+            <Field name='image' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.image)
+                    && Boolean(form.touched.image)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='image'
+                    textTransform='uppercase'
+                  >IMAGE</FormLabel>
+                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                    value={undefined}
+                    onChange={(event) => {
+                      props.setFieldValue(
+                        "image",
+                        event.currentTarget.files !== null
+                          ? event.currentTarget.files[0]
+                          : null
+                      );
+                    }}
+                  />
+                  <Thumb file={field.value} />
+
+                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
           </Stack>
           <Button
             mt={4}
