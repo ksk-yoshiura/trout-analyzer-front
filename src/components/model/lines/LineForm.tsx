@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -23,11 +24,14 @@ type LineData = {
 }
 
 export default function LineForm() {
+  // パラメータからロッドID取得
+  const router = useRouter();
+  const { id } = router.query
+  console.log(id)
+
   function handleSendLineData(values: LineData) {
     alert(JSON.stringify(values))
-
   }
-
 
   function validateData(value: LineData) {
     // let error
