@@ -5,6 +5,11 @@ import {
   FieldProps
 } from 'formik';
 import {
+  useState,
+  useEffect,
+  FC
+} from "react"
+import {
   Input,
   Button,
   FormControl,
@@ -19,6 +24,10 @@ type FieldData = {
   address: string;
   image: string;
 }
+
+type ThumbProps = {
+  file: File | null;
+};
 
 export default function FieldForm() {
   function handleSendFieldData(values: FieldData) {
@@ -37,6 +46,41 @@ export default function FieldForm() {
     // return error
   }
 
+  const Thumb: FC<ThumbProps> = ({ file }) => {
+    const [loading, setLoading] = useState<Boolean>(true);
+    const [thumb, setThumb] = useState<string>();
+
+    console.log(file)
+    useEffect(() => {
+      const reader = new FileReader();
+      if (file) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          setThumb(reader.result as string);
+        };
+        setLoading(false);
+      }
+    }, [file]);
+
+    if (!file) {
+      return null;
+    }
+
+    if (loading) {
+      return <p>Loading....</p>;
+    }
+
+    return (
+      <img
+        src={thumb}
+        alt={file.name}
+        className="img-thumbnail mt-2"
+        height={200}
+        width={200}
+      />
+    );
+  };
+
   return (
     <Formik
       initialValues={{
@@ -52,7 +96,7 @@ export default function FieldForm() {
         }, 1000)
       }}
     >
-      {(props) => (
+      {(props) =>
         <Form>
           <Stack spacing={5}>
             <Field name='name' validate={validateData}>
@@ -66,7 +110,7 @@ export default function FieldForm() {
                     htmlFor='name'
                     textTransform='uppercase'
                   >NAME</FormLabel>
-                  <Input {...field} fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -83,12 +127,12 @@ export default function FieldForm() {
                     htmlFor='place'
                     textTransform='uppercase'
                   >PLACE</FormLabel>
-                  <Input {...field} fontSize="1xl" id='place'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} fontSize="1xl" id='place' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.place}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            
+
             <Field name='address' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
@@ -100,12 +144,40 @@ export default function FieldForm() {
                     htmlFor='address'
                     textTransform='uppercase'
                   >ADDRESS</FormLabel>
-                  <Input {...field} fontSize="1xl" id='address'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} fontSize="1xl" id='address' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.address}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
+            <Field name='image' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.image)
+                    && Boolean(form.touched.image)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='image'
+                    textTransform='uppercase'
+                  >IMAGE</FormLabel>
+                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                    value={undefined}
+                    onChange={(event) => {
+                      props.setFieldValue(
+                        "image",
+                        event.currentTarget.files !== null
+                          ? event.currentTarget.files[0]
+                          : null
+                      );
+                    }} 
+                  />
+                  <Thumb file={field.value} />
+
+                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
           </Stack>
           <Button
             mt={4}
@@ -116,7 +188,7 @@ export default function FieldForm() {
             Register
           </Button>
         </Form>
-      )}
+      }
     </Formik>
   )
 }
