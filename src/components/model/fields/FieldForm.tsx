@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -23,6 +24,10 @@ type FieldData = {
 
 
 export default function FieldForm() {
+  // パラメータからフィールドID取得
+  const router = useRouter();
+  const { id } = router.query
+  console.log(id)
   function handleSendFieldData(values: FieldData) {
     alert(JSON.stringify(values))
   }
