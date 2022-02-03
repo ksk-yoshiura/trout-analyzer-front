@@ -13,6 +13,7 @@ import {
   Select,
   Stack
 } from "@chakra-ui/react";
+import Thumb from "../../shared/ThumbImage"
 import { LureTypeSelectMock } from '../mock/lures/lure_type_select_mock'
 
 type LureData = {
@@ -27,9 +28,7 @@ type LureData = {
 export default function LureForm() {
   function handleSendLureData(values: LureData) {
     alert(JSON.stringify(values))
-
   }
-
 
   function validateData(value: LureData) {
     // let error
@@ -72,7 +71,7 @@ export default function LureForm() {
                     htmlFor='name'
                     textTransform='uppercase'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -114,7 +113,7 @@ export default function LureForm() {
                     htmlFor='color'
                     textTransform='uppercase'
                   >COLOR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='color'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='color' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.color}</FormErrorMessage>
                 </FormControl>
               )}
@@ -147,11 +146,40 @@ export default function LureForm() {
                     htmlFor='company'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
+            <Field name='image' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.image)
+                    && Boolean(form.touched.image)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='image'
+                    textTransform='uppercase'
+                  >IMAGE</FormLabel>
+                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                    value={undefined}
+                    onChange={(event) => {
+                      props.setFieldValue(
+                        "image",
+                        event.currentTarget.files !== null
+                          ? event.currentTarget.files[0]
+                          : null
+                      );
+                    }}
+                  />
+                  <Thumb file={field.value} />
+
+                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
           </Stack>
           <Button
             mt={4}
