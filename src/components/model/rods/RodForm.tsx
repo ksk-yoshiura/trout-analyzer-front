@@ -12,6 +12,7 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react";
+import Thumb from "../../shared/ThumbImage"
 
 type RodData = {
   name: string;
@@ -68,7 +69,7 @@ export default function RodForm() {
                     htmlFor='name'
                     textTransform='uppercase'
                   >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -85,7 +86,7 @@ export default function RodForm() {
                     htmlFor='length'
                     textTransform='uppercase'
                   >LENGTH</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='length'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='length' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.length}</FormErrorMessage>
                 </FormControl>
               )}
@@ -102,7 +103,7 @@ export default function RodForm() {
                     htmlFor='hardness'
                     textTransform='uppercase'
                   >HARDNESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='hardness'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='hardness' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.hardness}</FormErrorMessage>
                 </FormControl>
               )}
@@ -119,12 +120,40 @@ export default function RodForm() {
                     htmlFor='company'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.company}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            
+
+            <Field name='image' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.image)
+                    && Boolean(form.touched.image)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='image'
+                    textTransform='uppercase'
+                  >IMAGE</FormLabel>
+                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                    value={undefined}
+                    onChange={(event) => {
+                      props.setFieldValue(
+                        "image",
+                        event.currentTarget.files !== null
+                          ? event.currentTarget.files[0]
+                          : null
+                      );
+                    }}
+                  />
+                  <Thumb file={field.value} />
+
+                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
           </Stack>
           <Button
             mt={4}
