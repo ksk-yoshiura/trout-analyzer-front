@@ -20,12 +20,11 @@ export default function LuresApi(
   req: NextApiRequest,
   res: NextApiResponse<LuresApiResponse>
 ): void {
-  const id = req.query.id as string
   const lure = fetchLureData()
   if (lure) {
     res.status(200).json({ lure })
   } else {
-    res.status(400).json({ debugMessage: `Lure [id=${id}] not found` })
+    res.status(400).json({ debugMessage: `Lures not found` })
   }
 }
 

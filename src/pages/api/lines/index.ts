@@ -19,12 +19,11 @@ export default function FieldsApi(
   req: NextApiRequest,
   res: NextApiResponse<FieldsApiResponse>
 ): void {
-  const id = req.query.id as string
   const field = fetchFieldData()
   if (field) {
     res.status(200).json({ field })
   } else {
-    res.status(400).json({ debugMessage: `Field [id=${id}] not found` })
+    res.status(400).json({ debugMessage: `Fields not found` })
   }
 }
 
