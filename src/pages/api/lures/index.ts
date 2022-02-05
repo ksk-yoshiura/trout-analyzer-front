@@ -11,7 +11,7 @@ export type Lure = {
 
 // API のレスポンス型
 export type LuresApiResponse = {
-  lure?: Lure[]
+  lures?: Lure[]
   debugMessage?: string
 }
 
@@ -20,9 +20,9 @@ export default function LuresApi(
   req: NextApiRequest,
   res: NextApiResponse<LuresApiResponse>
 ): void {
-  const lure = fetchLureData()
-  if (lure) {
-    res.status(200).json({ lure })
+  const lures = fetchLureData()
+  if (lures) {
+    res.status(200).json({ lures })
   } else {
     res.status(400).json({ debugMessage: `Lures not found` })
   }
