@@ -18,7 +18,8 @@
     "next-auth": "^4.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "swr": "^1.2.1"
   },
   "devDependencies": {
     "@chakra-ui/react": "^1.7.3",
