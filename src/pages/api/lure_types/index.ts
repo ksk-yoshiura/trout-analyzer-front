@@ -7,7 +7,7 @@ export type LureType = {
 
 // API のレスポンス型
 export type LureTypesApiResponse = {
-  lure_type?: LureType[]
+  lure_types?: LureType[]
   debugMessage?: string
 }
 
@@ -16,9 +16,9 @@ export default function LureTypesApi(
   req: NextApiRequest,
   res: NextApiResponse<LureTypesApiResponse>
 ): void {
-  const lure_type = fetchLureTypeData()
-  if (lure_type) {
-    res.status(200).json({ lure_type })
+  const lure_types = fetchLureTypeData()
+  if (lure_types) {
+    res.status(200).json({ lure_types })
   } else {
     res.status(400).json({ debugMessage: `LureType not found` })
   }
@@ -29,43 +29,19 @@ function fetchLureTypeData(): LureType[] | undefined {
   const lure_types: LureType[] = [
     {
       id: '1',
-      type_name: 'super good fishing park'
+      type_name: 'spoon'
     },
     {
       id: '2',
-      type_name: 'super good fishing park'
+      type_name: 'minor'
     },
     {
       id: '3',
-      type_name: 'super good fishing park'
+      type_name: 'crank bait'
     },
     {
       id: '4',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '5',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '6',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '7',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '8',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '9',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '10',
-      type_name: 'super good fishing park'
+      type_name: 'viberation'
     }
   ]
   return lure_types
