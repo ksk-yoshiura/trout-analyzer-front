@@ -16,7 +16,6 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { LureListMock } from '../mock/lures/lure_list_mock'
 import LureDetail from './LureDetail'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
