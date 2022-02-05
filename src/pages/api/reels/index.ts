@@ -12,7 +12,7 @@ export type Reel = {
 
 // API のレスポンス型
 export type ReelsApiResponse = {
-  reel?: Reel[]
+  reels?: Reel[]
   debugMessage?: string
 }
 
@@ -21,9 +21,9 @@ export default function ReelsApi(
   req: NextApiRequest,
   res: NextApiResponse<ReelsApiResponse>
 ): void {
-  const reel = fetchReelData()
-  if (reel) {
-    res.status(200).json({ reel })
+  const reels = fetchReelData()
+  if (reels) {
+    res.status(200).json({ reels })
   } else {
     res.status(400).json({ debugMessage: `Reels not found` })
   }
