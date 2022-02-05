@@ -4,6 +4,10 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
+import useSWR from 'swr'
+import { LinesApiResponse } from "../../../pages/api/lines/[id]"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 import { LineDetailMock } from '../mock/lines/line_detail_mock'
 
 type DetailProps = {
@@ -11,13 +15,17 @@ type DetailProps = {
 }
 
 export default function RodDetail(props: DetailProps): JSX.Element {
-  const property = LineDetailMock
-  // TODO：IDを取り出して詳細を取得
-  console.log(props)
+  // ID取得
+  const { chosenId } = props
+
+  // APIからデータ取得
+  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + props.chosenId, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
+      <Image src={data.line?.imageUrl} alt={data.line?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -25,7 +33,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {property.lineType}
+            {data.line?.lineType}
           </Badge>
         </Box>
 
@@ -37,7 +45,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {property.name}
+          {data.line?.name}
         </Box>
 
         <Stack
@@ -49,16 +57,16 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {property.thickness} g
+            THICKNESS {data.line?.thickness} g
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {property.company}
+            COMPANY {data.line?.company}
           </Box>
           <Box>
-            ADDED {property.createdAt}
+            ADDED {data.line?.createdAt}
           </Box>
           <Box>
-            LAST USED {property.lastUsedAt}
+            LAST USED {data.line?.lastUsedAt}
           </Box>
         </Stack>
 
