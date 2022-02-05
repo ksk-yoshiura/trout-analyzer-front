@@ -16,7 +16,6 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { LineListMock } from '../mock/lines/line_list_mock'
 import LineDetail from './LineDetail'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
