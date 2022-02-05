@@ -18,10 +18,19 @@ import {
 import NextLink from "next/link"
 import { LineListMock } from '../mock/lines/line_list_mock'
 import LineDetail from './LineDetail'
+import useSWR from 'swr'
+import { LinesApiResponse } from "../../../pages/api/lines/index"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function LinesList(): JSX.Element {
+  // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+  // APIからデータ取得
+  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/', fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   function clickHandler(value: string) {
     // 型変換
@@ -57,7 +66,7 @@ export default function LinesList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          LineListMock.map((item, index) => {
+          data.lines?.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
