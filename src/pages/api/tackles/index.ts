@@ -27,7 +27,7 @@ export type Tackle = {
 
 // API のレスポンス型
 export type TacklesApiResponse = {
-  tackle?: Tackle[]
+  tackles?: Tackle[]
   debugMessage?: string
 }
 
@@ -36,10 +36,9 @@ export default function TacklesApi(
   req: NextApiRequest,
   res: NextApiResponse<TacklesApiResponse>
 ): void {
-  const id = req.query.id as string
-  const tackle = fetchTackleData()
-  if (tackle) {
-    res.status(200).json({ tackle })
+  const tackles = fetchTackleData()
+  if (tackles) {
+    res.status(200).json({ tackles })
   } else {
     res.status(400).json({ debugMessage: `Tackle not found` })
   }
