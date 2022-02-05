@@ -4,20 +4,26 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { ReelDetailMock } from '../mock/reels/reel_detail_mock'
+import useSWR from 'swr'
+import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 type DetailProps = {
   chosenId: number
 }
 
 export default function ReelDetail(props: DetailProps): JSX.Element {
-  const property = ReelDetailMock
-  // TODO：IDを取り出して詳細を取得
-  console.log(props)
+  // ID取得
+  const { chosenId } = props
+  // APIからデータ取得
+  const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + chosenId, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
+      <Image src={data.reel?.imageUrl} alt={data.reel?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -25,7 +31,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {property.type}
+            {data.reel?.type}
           </Badge>
         </Box>
 
@@ -37,7 +43,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {property.name}
+          {data.reel?.name}
         </Box>
 
         <Stack
@@ -49,16 +55,16 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            TYPE {property.type}
+            TYPE {data.reel?.type}
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {property.company}
+            COMPANY {data.reel?.company}
           </Box>
           <Box>
-            ADDED {property.createdAt}
+            ADDED {data.reel?.createdAt}
           </Box>
           <Box>
-            LAST USED {property.lastUsedAt}
+            LAST USED {data.reel?.lastUsedAt}
           </Box>
         </Stack>
 
