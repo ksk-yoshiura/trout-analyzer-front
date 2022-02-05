@@ -4,20 +4,27 @@ import {
   Badge,
   Stack
 } from '@chakra-ui/react'
-import { FieldDetailMock } from '../mock/fields/field_detail_mock'
+import useSWR from 'swr'
+import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
 
 type DetailProps = {
   chosenId: number
 }
 
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
+
 export default function FieldDetail(props: DetailProps): JSX.Element {
-  const property = FieldDetailMock
-  // TODO：IDを取り出して詳細を取得
-  console.log(props)
+  // ID取得
+  const { chosenId } = props
+  
+  // APIからデータ取得
+  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + chosenId, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
+      <Image src={data.field?.imageUrl} alt={data.field?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -34,7 +41,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {property.name}
+          {data.field?.name}
         </Box>
 
         <Stack
@@ -46,16 +53,16 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            ADDRESS {property.address}
+            ADDRESS {data.field?.address}
           </Box>
           <Box textTransform='uppercase'>
-            FREQUENCY {property.frequency} times
+            FREQUENCY {data.field?.frequency} times
           </Box>
           <Box>
-            ADDED {property.createdAt}
+            ADDED {data.field?.createdAt}
           </Box>
           <Box>
-            LAST VISITED {property.lastVisitedAt}
+            LAST VISITED {data.field?.lastVisitedAt}
           </Box>
         </Stack>
 
