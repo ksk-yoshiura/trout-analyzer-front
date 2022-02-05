@@ -4,20 +4,26 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { RodDetailMock } from '../mock/rods/rod_detail_mock'
+import useSWR from 'swr'
+import { RodsApiResponse } from "../../../pages/api/rods/[id]"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 type DetailProps = {
   chosenId: number
 }
 
 export default function RodDetail(props: DetailProps): JSX.Element {
-  const property = RodDetailMock
-  // TODO：IDを取り出して詳細を取得
-  console.log(props)
+  // ID取得
+  const { chosenId } = props
+  // APIからデータ取得
+  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + chosenId, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
+      <Image src={data.rod?.imageUrl} alt={data.rod?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -25,7 +31,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {property.hardness}
+            {data.rod?.hardness}
           </Badge>
         </Box>
 
@@ -37,7 +43,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {property.name}
+          {data.rod?.name}
         </Box>
 
         <Stack
@@ -49,16 +55,16 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            LENGTH {property.length} ft
+            LENGTH {data.rod?.length} ft
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {property.company}
+            COMPANY {data.rod?.company}
           </Box>
           <Box>
-            ADDED {property.createdAt}
+            ADDED {data.rod?.createdAt}
           </Box>
           <Box>
-            LAST USED {property.lastUsedAt}
+            LAST USED {data.rod?.lastUsedAt}
           </Box>
         </Stack>
 
