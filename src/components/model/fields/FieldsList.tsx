@@ -18,10 +18,19 @@ import {
 import NextLink from "next/link"
 import { FieldListMock } from '../mock/fields/field_list_mock'
 import FieldDetail from './FieldDetail'
+import useSWR from 'swr'
+import { FieldsApiResponse } from "../../../pages/api/fields/index"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function FieldsList(): JSX.Element {
+  // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+  // APIからデータ取得
+  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/', fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   function clickHandler(value: string) {
     // 型変換
@@ -57,7 +66,7 @@ export default function FieldsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          FieldListMock.map((item, index) => {
+          data.fields?.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -86,7 +95,7 @@ export default function FieldsList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      last visited {item.lastVisited}
+                      last visited {item.lastVisitedAt}
                     </Box>
 
                   </Box>
