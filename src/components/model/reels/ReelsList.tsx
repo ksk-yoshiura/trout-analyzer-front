@@ -16,12 +16,20 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { ReelListMock } from '../mock/reels/reel_list_mock'
 import ReelDetail from './ReelDetail'
+import useSWR from 'swr'
+import { ReelsApiResponse } from "../../../pages/api/reels/index"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function ReelsList(): JSX.Element {
+  // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+  // APIからデータ取得
+  const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/', fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   function clickHandler(value: string) {
     // 型変換
@@ -57,7 +65,7 @@ export default function ReelsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          ReelListMock.map((item, index) => {
+          data.reels?.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
