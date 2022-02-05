@@ -12,7 +12,7 @@ export type Rod = {
 
 // API のレスポンス型
 export type RodsApiResponse = {
-  rod?: Rod[]
+  rods?: Rod[]
   debugMessage?: string
 }
 
@@ -21,9 +21,9 @@ export default function RodsApi(
   req: NextApiRequest,
   res: NextApiResponse<RodsApiResponse>
 ): void {
-  const rod = fetchRodData()
-  if (rod) {
-    res.status(200).json({ rod })
+  const rods = fetchRodData()
+  if (rods) {
+    res.status(200).json({ rods })
   } else {
     res.status(400).json({ debugMessage: `Rods not found` })
   }
