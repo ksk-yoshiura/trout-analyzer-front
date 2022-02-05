@@ -16,7 +16,6 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { FieldListMock } from '../mock/fields/field_list_mock'
 import FieldDetail from './FieldDetail'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
