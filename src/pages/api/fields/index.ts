@@ -13,7 +13,7 @@ export type Field = {
 
 // API のレスポンス型
 export type FieldsApiResponse = {
-  field?: Field[]
+  fields?: Field[]
   debugMessage?: string
 }
 
@@ -22,9 +22,9 @@ export default function FieldsApi(
   req: NextApiRequest,
   res: NextApiResponse<FieldsApiResponse>
 ): void {
-  const field = fetchFieldData()
-  if (field) {
-    res.status(200).json({ field })
+  const fields = fetchFieldData()
+  if (fields) {
+    res.status(200).json({ fields })
   } else {
     res.status(400).json({ debugMessage: `Field not found` })
   }
