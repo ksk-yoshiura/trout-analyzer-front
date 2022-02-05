@@ -4,7 +4,6 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { LureDetailMock } from '../mock/lures/lure_detail_mock'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 
