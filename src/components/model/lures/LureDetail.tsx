@@ -5,19 +5,27 @@ import {
   Stack 
 } from '@chakra-ui/react'
 import { LureDetailMock } from '../mock/lures/lure_detail_mock'
+import useSWR from 'swr'
+import { LuresApiResponse } from "../../../pages/api/lures/[id]"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 type DetailProps = {
   chosenId: number
 }
 
 export default function LuresList(props: DetailProps): JSX.Element {
-  const property = LureDetailMock
-  // TODO：IDを取り出して詳細を取得
-  console.log(props)
+  // ID取得
+  const { chosenId } = props
+  // APIからデータ取得
+  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + chosenId, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
+  
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={property.imageUrl} alt={property.imageAlt} borderRadius='lg' />
+      <Image src={data.lure?.imageUrl} alt={data.lure?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -25,7 +33,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {property.lureType}
+            {data.lure?.lureType}
           </Badge>
         </Box>
 
@@ -37,7 +45,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {property.name}
+          {data.lure?.name}
         </Box>
 
         <Stack
@@ -49,22 +57,22 @@ export default function LuresList(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            WEIGHT {property.weight} g
+            WEIGHT {data.lure?.weight} g
           </Box>
           <Box textTransform='uppercase'>
-            COLOR {property.color}
+            COLOR {data.lure?.color}
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {property.company}
+            COMPANY {data.lure?.company}
           </Box>
           <Box textTransform='uppercase'>
-            FREQUENCY {property.frequency} times
+            FREQUENCY {data.lure?.frequency} times
           </Box>
           <Box>
-            ADDED {property.createdAt}
+            ADDED {data.lure?.createdAt}
           </Box>
           <Box>
-            LAST USED {property.lastUsedAt}
+            LAST USED {data.lure?.lastUsedAt}
           </Box>
         </Stack>
 
