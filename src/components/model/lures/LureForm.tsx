@@ -17,6 +17,11 @@ import {
 import Thumb from "../../shared/ThumbImage"
 import { LureTypeSelectMock } from '../mock/lures/lure_type_select_mock'
 
+import useSWR from 'swr'
+import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
+
 type LureData = {
   name: string;
   company: string;
@@ -30,7 +35,11 @@ export default function LureForm() {
   // パラメータからルアーID取得
   const router = useRouter();
   const { id } = router.query
-  console.log(id)
+
+  // APIからデータ取得
+  const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types/', fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
   
   function handleSendLureData(values: LureData) {
     alert(JSON.stringify(values))
@@ -95,10 +104,10 @@ export default function LureForm() {
                   >LURE TYPE</FormLabel>
                   <Select {...field} width="100%" fontSize="1xl" id='type' placeholder='Lure Type'>
                     {
-                      LureTypeSelectMock.map((item, index) => {
+                      data.lure_types?.map((item, index) => {
                         return (
                           <option key={index} value={item.id}>
-                            {item.type}
+                            {item.type_name}
                           </option>
                         )
                       })
