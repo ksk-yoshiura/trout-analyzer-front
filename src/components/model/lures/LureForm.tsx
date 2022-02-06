@@ -15,7 +15,6 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
-import { LureTypeSelectMock } from '../mock/lures/lure_type_select_mock'
 
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
