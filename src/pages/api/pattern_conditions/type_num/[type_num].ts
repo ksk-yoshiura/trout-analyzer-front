@@ -7,15 +7,15 @@ export type PatternCondition = {
 }
 
 // API のレスポンス型
-export type PatternConditionApiResponse = {
+export type PatternConditionsApiResponse = {
   pattern_condition?: PatternCondition[]
   debugMessage?: string
 }
 
 // API のエントリポイント
-export default function PatternConditionApi(
+export default function PatternConditionsApi(
   req: NextApiRequest,
-  res: NextApiResponse<PatternConditionApiResponse>
+  res: NextApiResponse<PatternConditionsApiResponse>
 ): void {
   const type_num = req.query.type_num as string
   const pattern_condition = fetchPatternConditionData(type_num)
