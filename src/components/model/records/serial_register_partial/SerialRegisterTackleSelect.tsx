@@ -13,12 +13,12 @@ export default function TackleSelect(field: any) {
   if (!data) return <p>Loading...</p>
 
   return (
-    <Select {...field} w='100wh' placeholder='Name'>
+    <Select {...field} w='100wh' placeholder='Select Tackle'>
       {
         data.tackles?.map((item, index) => {
           return (
             <option key={index} value={item.id}>
-              {item.rod}:{item.reel}:{item.line}
+              {item.rod.name}:{item.reel.name}:{item.line.name}
             </option>
           )
         })
