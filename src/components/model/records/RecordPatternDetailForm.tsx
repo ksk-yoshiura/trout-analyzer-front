@@ -5,30 +5,34 @@ import {
   FieldProps
 } from 'formik';
 import {
-  Input,
   Button,
   FormControl,
   FormLabel,
   FormErrorMessage,
   Stack
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
+import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
+import SpeedRadio from './serial_register_partial/SerialRegisterSpeedRadio'
+import DepthRadio from './serial_register_partial/SerialRegisterDepthRadio'
+import LureSelect from './serial_register_partial/SerialRegisterLureSelect'
+import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 
-type RecordData = {
-  name: string;
-  company: string;
-  type: string;
-  gear: string;
-  image: string;
+type SerialRecordData = {
+  result: string;
+  speed: string;
+  depth: string;
+  lure: string;
+  tackle: string;
 }
 
-export default function RecordForm() {
-  function handleSendRecordData(values: RecordData) {
+export default function RecordSerialRegisterForm() {
+  function handleSendSerialRecordData(values: SerialRecordData) {
     alert(JSON.stringify(values))
 
   }
 
 
-  function validateData(value: RecordData) {
+  function validateData(value: SerialRecordData) {
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -41,15 +45,15 @@ export default function RecordForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
-        company: '',
-        gear: '',
-        type: '',
-        image: ''
+        speed: '',
+        result: '',
+        depth: '',
+        lure: '',
+        tackle: ''
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          handleSendRecordData(values)
+          handleSendSerialRecordData(values)
           actions.setSubmitting(false)
         }, 1000)
       }}
@@ -57,73 +61,99 @@ export default function RecordForm() {
       {(props) => (
         <Form>
           <Stack spacing={5}>
-            <Field name='name' validate={validateData}>
+
+            <Field name='result' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.name)
-                    && Boolean(form.touched.name)}
+                  isInvalid={Boolean(form.errors.result)
+                    && Boolean(form.touched.result)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='name'
-                  >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name'  variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    htmlFor='result'
+                    textTransform='uppercase'
+                  >result</FormLabel>
+                  <ResultRadio />
+                  <FormErrorMessage>{form.errors.result}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Field name='gear' validate={validateData}>
+            <Field name='speed' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.gear)
-                    && Boolean(form.touched.gear)}
+                  isInvalid={Boolean(form.errors.speed)
+                    && Boolean(form.touched.speed)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='gear'
-                  >GEAR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='gear'  variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
+                    htmlFor='speed'
+                    textTransform='uppercase'
+                  >speed</FormLabel>
+                  <SpeedRadio />
+                  <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Field name='type' validate={validateData}>
+            <Field name='depth' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.type)
-                    && Boolean(form.touched.type)}
+                  isInvalid={Boolean(form.errors.depth)
+                    && Boolean(form.touched.depth)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='type'
-                  >TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type'  variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                    htmlFor='depth'
+                    textTransform='uppercase'
+                  >depth</FormLabel>
+                  <DepthRadio />
+                  <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Field name='company' validate={validateData}>
+            <Field name='lure' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.company)
-                    && Boolean(form.touched.company)}
+                  isInvalid={Boolean(form.errors.lure)
+                    && Boolean(form.touched.lure)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='company'
-                  >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company'  variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.company}</FormErrorMessage>
+                    htmlFor='lure'
+                    textTransform='uppercase'
+                  >lure</FormLabel>
+
+                  <LureSelect field={field} />
+
+                  <FormErrorMessage>{form.errors.lure}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            
+
+            <Field name='tackle' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.tackle)
+                    && Boolean(form.touched.tackle)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='tackle'
+                    textTransform='uppercase'
+                  >tackle</FormLabel>
+
+                  <TackleSelect field={field} />
+
+                  <FormErrorMessage>{form.errors.tackle}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
           </Stack>
           <Button
-            mt={4}
+            my={4}
             colorScheme='teal'
             isLoading={props.isSubmitting}
             type='submit'
