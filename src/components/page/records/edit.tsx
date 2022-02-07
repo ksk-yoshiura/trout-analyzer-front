@@ -6,12 +6,11 @@ import {
 import { useRouter } from "next/router";
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import NextLink from "next/link"
-
 import RecordPatternDetailForm from '../../model/records/RecordPatternDetailForm'
 
 
 export default function RecordEdit(): JSX.Element {
-  // パラメータからレコードID取得
+  // パラメータからパターンID取得
   const router = useRouter();
   const { id } = router.query
   return (
