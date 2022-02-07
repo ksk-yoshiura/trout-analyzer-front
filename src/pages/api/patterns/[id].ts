@@ -50,15 +50,15 @@ export type Pattern = {
 }
 
 // API のレスポンス型
-export type PatternsApiResponse = {
+export type PatternApiResponse = {
   pattern?: Pattern
   debugMessage?: string
 }
 
 // API のエントリポイント
-export default function PatternsApi(
+export default function PatternApi(
   req: NextApiRequest,
-  res: NextApiResponse<PatternsApiResponse>
+  res: NextApiResponse<PatternApiResponse>
 ): void {
   const id = req.query.id as string
   const pattern = fetchPatternData(id)
