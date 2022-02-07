@@ -19,9 +19,19 @@ import NextLink from "next/link"
 import { RecordListMock } from '../mock/records/record_list_mock'
 import RecordPatternDetail from './RecordPatternDetail'
 
+import useSWR from 'swr'
+import { PatternsApiResponse } from "../../../pages/api/patterns/index"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
+
 export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+
+  // APIからデータ取得
+  const { data, error } = useSWR<PatternsApiResponse, Error>('/api/patterns/', fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   function clickHandler(value: string) {
     // 型変換
@@ -57,7 +67,7 @@ export default function RecordsAllList(): JSX.Element {
     <>
       <Stack spacing={5} mr={5}>
         {
-          RecordListMock.map((item, index) => {
+          data.patterns?.map((item, index) => {
             return (
               <Box
                 key={index}
