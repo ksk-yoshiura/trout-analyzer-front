@@ -5,53 +5,16 @@ export type Pattern = {
   imageUrl: string
   imageAlt: string
   createdAt: string
-  lastUsedAt: string
-  // バッジ情報
-  badge: {
-    // ルアータイプ
-    lureType: string
-    // 釣果と状況
-    result: string
-    weather: string
-    depth: string
-    speed: string
-  },
-  // ルアー情報
-  lure: {
-    lureType: string
-    lureName: string
-    lureCompany: string
-    lureColor: string
-    lureWeight: string
-  },
-
-  // タックル
-  // ロッド
-  rod: {
-    rodName: string
-    rodHardness: string
-    rodLength: string
-    rodCompany: string
-  },
-  // リール
-  reel: {
-    reelName: string
-    reelType: string
-    reelGear: string
-    reelCompany: string
-  },
-  // ライン
-  line: {
-    lineName: string
-    lineThickness: string
-    lineType: string
-    lineCompany: string
-  },
+  result: string
+  lureType: string
+  weather: string
+  depth: string
+  speed: string
 }
 
 // API のレスポンス型
 export type PatternsApiResponse = {
-  pattern?: Pattern[]
+  patterns?: Pattern[]
   debugMessage?: string
 }
 
@@ -60,9 +23,9 @@ export default function PatternsApi(
   req: NextApiRequest,
   res: NextApiResponse<PatternsApiResponse>
 ): void {
-  const pattern = fetchPatternData()
-  if (pattern) {
-    res.status(200).json({ pattern })
+  const patterns = fetchPatternData()
+  if (patterns) {
+    res.status(200).json({ patterns })
   } else {
     res.status(400).json({ debugMessage: `Patterns not found` })
   }
@@ -75,49 +38,144 @@ function fetchPatternData(): Pattern[] | undefined {
       id: '1',
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'lure image',
-      createdAt: '2021/12/28',
-      lastUsedAt: '2021/12/28',
-      // バッジ情報
-      badge: {
-        // ルアータイプ
-        lureType: 'spoon',
-        // 釣果と状況
-        result: 'caught',
-        weather: 'sunny',
-        depth: 'shallow',
-        speed: 'fast'
-      },
-      // ルアー情報
-      lure: {
-        lureType: 'spoon',
-        lureName: 'super great bait',
-        lureCompany: 'no brand',
-        lureColor: 'red',
-        lureWeight: '2',
-      },
-
-      // タックル
-      // ロッド
-      rod: {
-        rodName: 'good rod',
-        rodHardness: 'ML',
-        rodLength: '6',
-        rodCompany: 'no brand'
-      },
-      // リール
-      reel: {
-        reelName: 'good reel',
-        reelType: '2000',
-        reelGear: 'HG',
-        reelCompany: 'no brand'
-      },
-      // ライン
-      line: {
-        lineName: 'great line',
-        lineThickness: '3',
-        lineType: 'nylon',
-        lineCompany: 'no brand'
-      },
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '2',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '3',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '4',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '5',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '6',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '7',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '8',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '9',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '10',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '11',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '12',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
+    },
+    {
+      id: '13',
+      imageUrl: 'https://bit.ly/2Z4KKcF',
+      imageAlt: 'lure image',
+      createdAt: '11:30',
+      result: 'caught',
+      lureType: 'spoon',
+      weather: 'sunny',
+      depth: 'shallow',
+      speed: 'fast'
     }
   ]
   return patterns
