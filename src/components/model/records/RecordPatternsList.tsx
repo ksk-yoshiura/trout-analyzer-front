@@ -16,7 +16,6 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { RecordListMock } from '../mock/records/record_list_mock'
 import RecordPatternDetail from './RecordPatternDetail'
 
 import useSWR from 'swr'
