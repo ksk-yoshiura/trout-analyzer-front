@@ -6,13 +6,22 @@ import {
 import NextLink from "next/link"
 import { RecordAllListMock } from '../mock/records/record_all_list_mock'
 
+import useSWR from 'swr'
+import { RecordsApiResponse } from "../../../pages/api/records/all"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 export default function RecordsAllList(): JSX.Element {
+
+  // APIからデータ取得
+  const { data, error } = useSWR<RecordsApiResponse, Error>('/api/records/all', fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
   
   return (
     <>
       <Stack spacing={5} mr={5}>
         {
-          RecordAllListMock.map((item, index) => {
+          data.records?.map((item, index) => {
             return (
               <NextLink key={index} href={"/records/list/" + item.id} passHref>
                 <Box
