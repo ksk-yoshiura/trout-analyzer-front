@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from "next/router";
 import {
   Box,
   Image,
@@ -21,7 +22,6 @@ import RecordPatternDetail from './RecordPatternDetail'
 export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
-
 
   function clickHandler(value: string) {
     // 型変換
