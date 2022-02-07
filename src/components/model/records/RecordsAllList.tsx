@@ -4,8 +4,6 @@ import {
   Stack
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { RecordAllListMock } from '../mock/records/record_all_list_mock'
-
 import useSWR from 'swr'
 import { RecordsApiResponse } from "../../../pages/api/records/all"
 
