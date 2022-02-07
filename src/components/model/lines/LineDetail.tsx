@@ -8,7 +8,6 @@ import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/[id]"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
-import { LineDetailMock } from '../mock/lines/line_detail_mock'
 
 type DetailProps = {
   chosenId: number
