@@ -12,10 +12,10 @@ import RecordPatternDetailForm from '../../model/records/RecordPatternDetailForm
 export default function RecordEdit(): JSX.Element {
   // パラメータからパターンID取得
   const router = useRouter();
-  const { id } = router.query
+  const { record_id } = router.query
   return (
     <>
-      <NextLink href={"/records/list/" + id} passHref>
+      <NextLink href={"/records/" + record_id + "/patterns/list"} passHref>
         <Link pb={5} as={'button'} color='teal'>
           <Icon as={ArrowBackIcon} />
           Back to records list
