@@ -14,7 +14,7 @@ import {
 import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
 import SpeedRadio from './serial_register_partial/SerialRegisterSpeedRadio'
 import DepthRadio from './serial_register_partial/SerialRegisterDepthRadio'
-import LureSelect from './serial_register_partial/SerialRegisterLureSelect'
+import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 
 type SerialRecordData = {
