@@ -27,6 +27,10 @@ export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
 
+  // クエリからレコードID取得
+  const route = useRouter();
+  const recordId = route.query.record_id
+
   // APIからデータ取得
   const { data, error } = useSWR<PatternsApiResponse, Error>('/api/patterns/', fetcher)
   if (error) return <p>Error: {error.message}</p>
@@ -52,7 +56,7 @@ export default function RecordsAllList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <NextLink href={"/records/edit/" + chosenId} passHref>
+            <NextLink href={"/records/" + recordId + "/patterns/edit/" + chosenId} passHref>
               <Button variant='ghost'>Edit</Button>
             </NextLink>
 
