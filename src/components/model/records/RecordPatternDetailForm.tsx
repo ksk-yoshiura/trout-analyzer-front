@@ -28,9 +28,7 @@ type SerialRecordData = {
 export default function RecordSerialRegisterForm() {
   function handleSendSerialRecordData(values: SerialRecordData) {
     alert(JSON.stringify(values))
-
   }
-
 
   function validateData(value: SerialRecordData) {
     // let error
