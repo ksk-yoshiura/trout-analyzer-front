@@ -6,8 +6,12 @@ import {
 } from '@chakra-ui/react'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/[id]"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type DetailProps = {
   chosenId: number
