@@ -3,8 +3,12 @@ import {
 } from "@chakra-ui/react";
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../../pages/api/tackles/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function TackleSelect(field: any) {
   // APIからデータ取得
