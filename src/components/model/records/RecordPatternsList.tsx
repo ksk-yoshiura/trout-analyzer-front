@@ -17,11 +17,14 @@ import {
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import RecordPatternDetail from './RecordPatternDetail'
-
 import useSWR from 'swr'
 import { PatternsApiResponse } from "../../../pages/api/patterns/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
