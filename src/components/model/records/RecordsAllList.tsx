@@ -6,8 +6,13 @@ import {
 import NextLink from "next/link"
 import useSWR from 'swr'
 import { RecordsApiResponse } from "../../../pages/api/records/all"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
+
 export default function RecordsAllList(): JSX.Element {
 
   // APIからデータ取得
