@@ -19,8 +19,12 @@ import NextLink from "next/link"
 import FieldDetail from './FieldDetail'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function FieldsList(): JSX.Element {
   // モーダル
