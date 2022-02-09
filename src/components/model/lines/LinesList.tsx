@@ -19,8 +19,12 @@ import NextLink from "next/link"
 import LineDetail from './LineDetail'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function LinesList(): JSX.Element {
   // モーダル
