@@ -19,8 +19,12 @@ import NextLink from "next/link"
 import ReelDetail from './ReelDetail'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function ReelsList(): JSX.Element {
   // モーダル
