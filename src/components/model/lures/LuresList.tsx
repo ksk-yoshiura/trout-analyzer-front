@@ -19,8 +19,12 @@ import NextLink from "next/link"
 import LureDetail from './LureDetail'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function LuresList(): JSX.Element {
   // モーダル
