@@ -3,8 +3,12 @@ import {
 } from '@chakra-ui/react'
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 export default function LureTypeSelect() {
   // APIからデータ取得
