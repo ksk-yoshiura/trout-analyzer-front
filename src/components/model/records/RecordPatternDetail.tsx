@@ -7,11 +7,14 @@ import RecordPatternLureDetail from './pattern_detail_partial/RecordPatternLureD
 import RecordPatternReelDetail from './pattern_detail_partial/RecordPatternReelDetail'
 import RecordPatternRodDetail from './pattern_detail_partial/RecordPatternRodDetail'
 import RecordPatternLineDetail from './pattern_detail_partial/RecordPatternLineDetail'
-
 import useSWR from 'swr'
 import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type DetailProps = {
   chosenId: number
