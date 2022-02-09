@@ -6,12 +6,16 @@ import {
 } from '@chakra-ui/react'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
+import axios from'axios'
+
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type DetailProps = {
   chosenId: number
 }
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function FieldDetail(props: DetailProps): JSX.Element {
   // ID取得
