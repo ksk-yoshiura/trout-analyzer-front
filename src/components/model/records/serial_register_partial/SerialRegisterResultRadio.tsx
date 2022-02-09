@@ -6,8 +6,13 @@ import {
 import RadioCard from '../../../shared/RadioCard';
 import useSWR from 'swr'
 import { PatternConditionsApiResponse } from "../../../../pages/api/pattern_conditions/type_num/[type_num]"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
+
 const resultTypeNum = 1;
 
 export default function ResultRadio() {
