@@ -1,49 +1,149 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Field = {
+export type Tackle = {
   id: string
-  imageUrl: string
-  imageAlt: string
   createdAt: string
-  lastVisitedAt: string
-  name: string
-  address: string
-  frequency: string
+  rod: {
+    name: string
+    imageUrl: string
+    imageAlt: string
+    length: string
+    hardness: string
+  },
+  reel: {
+    name: string
+    imageUrl: string
+    imageAlt: string
+    type: string
+    gear: string
+  },
+  line: {
+    name: string
+    imageUrl: string
+    imageAlt: string
+    thickness: string
+  }
 }
 
 // API のレスポンス型
-export type FieldsApiResponse = {
-  field?: Field
+export type TacklesApiResponse = {
+  tackle?: Tackle
   debugMessage?: string
 }
 
 // API のエントリポイント
-export default function FieldsApi(
+export default function TacklesApi(
   req: NextApiRequest,
-  res: NextApiResponse<FieldsApiResponse>
+  res: NextApiResponse<TacklesApiResponse>
 ): void {
   const id = req.query.id as string
-  const field = fetchFieldData(id)
-  if (field) {
-    res.status(200).json({ field })
+  const tackle = fetchTackledData(id)
+  if (tackle) {
+    res.status(200).json({ tackle })
   } else {
-    res.status(400).json({ debugMessage: `Field [id=${id}] not found` })
+    res.status(400).json({ debugMessage: `Tackle [id=${id}] not found` })
   }
 }
 
 // 擬似的なデータフェッチ関数
-function fetchFieldData(id: string): Field | undefined {
-  const fields: Field[] = [
+function fetchTackledData(id: string): Tackle | undefined {
+  const tackles: Tackle[] = [
     {
       id: '1',
-      imageUrl: 'https://bit.ly/2Z4KKcF',
-      imageAlt: 'lure image',
       createdAt: '2021/12/28',
-      lastVisitedAt: '2021/12/28',
-      name: 'super good fishing park',
-      address: 'shiga prefecture',
-      frequency: '5'
+      rod: {
+        name: 'super good rod',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: 'rod image',
+        length: '6',
+        hardness: 'ML'
+      },
+      reel: {
+        name: 'super great reel',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        type: '2000',
+        gear: 'HG'
+      },
+      line: {
+        name: 'good line',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        thickness: '3'
+      }
     },
+    {
+      id: '2',
+      createdAt: '2021/12/28',
+      rod: {
+        name: 'super good rod',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: 'rod image',
+        length: '6',
+        hardness: 'ML'
+      },
+      reel: {
+        name: 'super great reel',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        type: '2000',
+        gear: 'HG'
+      },
+      line: {
+        name: 'good line',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        thickness: '3'
+      }
+    },
+    {
+      id: '3',
+      createdAt: '2021/12/28',
+      rod: {
+        name: 'super good rod',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: 'rod image',
+        length: '6',
+        hardness: 'ML'
+      },
+      reel: {
+        name: 'super great reel',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        type: '2000',
+        gear: 'HG'
+      },
+      line: {
+        name: 'good line',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        thickness: '3'
+      }
+    },
+    {
+      id: '4',
+      createdAt: '2021/12/28',
+      rod: {
+        name: 'super good rod',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: 'rod image',
+        length: '6',
+        hardness: 'ML'
+      },
+      reel: {
+        name: 'super great reel',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        type: '2000',
+        gear: 'HG'
+      },
+      line: {
+        name: 'good line',
+        imageUrl: 'https://bit.ly/2Z4KKcF',
+        imageAlt: '',
+        thickness: '3'
+      }
+    }
   ]
-  return fields.find((field) => field.id === id)
+  return tackles.find((tackle) => tackle.id === id)
 }
