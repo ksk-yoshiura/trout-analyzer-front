@@ -16,7 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import RodDetail from './TackleDetail'
+import TackleDetail from './TackleDetail'
 
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
@@ -52,7 +52,7 @@ export default function TacklesList(): JSX.Element {
           <ModalHeader>Tackle Detail</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <RodDetail chosenId={chosenId} />
+            <TackleDetail chosenId={chosenId} />
           </ModalBody>
 
           <ModalFooter>
