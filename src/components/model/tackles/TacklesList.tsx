@@ -17,7 +17,6 @@ import {
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import TackleDetail from './TackleDetail'
-
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
 import axios from'axios'
