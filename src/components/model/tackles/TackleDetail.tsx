@@ -64,7 +64,84 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
             ADDED {data.tackle?.rod.createdAt}
           </Box>
         </Stack>
+      </Box>
 
+      <Image src={data.tackle?.reel.imageUrl} alt={data.tackle?.reel.imageAlt} borderRadius='lg' />
+      <Box p='2'>
+        <Box display='flex' alignItems='baseline'>
+          <Badge borderRadius='full' px='2' color='gray.500'>
+            {data.tackle?.reel.type}
+          </Badge>
+          <Badge borderRadius='full' px='2' color='gray.500'>
+            {data.tackle?.reel.gear}
+          </Badge>
+        </Box>
+
+        <Box
+          my='2'
+          fontWeight='semibold'
+          fontSize={18}
+          as='h3'
+          lineHeight='tight'
+          isTruncated
+        >
+          {data.tackle?.reel.name}
+        </Box>
+
+        <Stack
+          color='gray.500'
+          fontWeight='semibold'
+          letterSpacing='wide'
+          fontSize='xs'
+          ml='2'
+          spacing={1}
+        >
+          <Box textTransform='uppercase'>
+            COMPANY {data.tackle?.reel.companyName}
+          </Box>
+          <Box>
+            ADDED {data.tackle?.reel.createdAt}
+          </Box>
+        </Stack>
+      </Box>
+
+      <Image src={data.tackle?.line.imageUrl} alt={data.tackle?.line.imageAlt} borderRadius='lg' />
+      <Box p='2'>
+        <Box display='flex' alignItems='baseline'>
+          <Badge borderRadius='full' px='2' color='gray.500'>
+            {data.tackle?.line.lineType}
+          </Badge>
+        </Box>
+
+        <Box
+          my='2'
+          fontWeight='semibold'
+          fontSize={18}
+          as='h3'
+          lineHeight='tight'
+          isTruncated
+        >
+          {data.tackle?.line.name}
+        </Box>
+
+        <Stack
+          color='gray.500'
+          fontWeight='semibold'
+          letterSpacing='wide'
+          fontSize='xs'
+          ml='2'
+          spacing={1}
+        >
+          <Box>
+            THICKNESS {data.tackle?.line.thickness} lb
+          </Box>
+          <Box textTransform='uppercase'>
+            COMPANY {data.tackle?.line.companyName}
+          </Box>
+          <Box>
+            ADDED {data.tackle?.line.createdAt}
+          </Box>
+        </Stack>
       </Box>
     </Box>
   )
