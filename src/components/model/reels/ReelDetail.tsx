@@ -37,6 +37,9 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           <Badge borderRadius='full' px='2' color='gray.500'>
             {data.reel?.type}
           </Badge>
+          <Badge borderRadius='full' px='2' color='gray.500'>
+            {data.reel?.gear}
+          </Badge>
         </Box>
 
         <Box
@@ -58,17 +61,11 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           ml='2'
           spacing={1}
         >
-          <Box>
-            TYPE {data.reel?.type}
-          </Box>
           <Box textTransform='uppercase'>
             COMPANY {data.reel?.company}
           </Box>
           <Box>
             ADDED {data.reel?.createdAt}
-          </Box>
-          <Box>
-            LAST USED {data.reel?.lastUsedAt}
           </Box>
         </Stack>
 

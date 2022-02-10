@@ -5,7 +5,6 @@ export type Line = {
   imageUrl: string
   imageAlt: string
   createdAt: string
-  lastUsedAt: string
   lineType: string
   name: string
   company: string
@@ -40,7 +39,6 @@ function fetchLineData(id: string): Line | undefined {
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'lure image',
       createdAt: '2021/12/28',
-      lastUsedAt: '2021/12/28',
       lineType: 'nylon',
       name: 'super good nylon',
       company: 'DAIWA',

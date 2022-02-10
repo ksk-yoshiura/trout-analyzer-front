@@ -5,7 +5,6 @@ export type Reel = {
   imageUrl: string
   imageAlt: string
   createdAt: string
-  lastUsedAt: string
   name: string
   company: string
   type: string
@@ -40,7 +39,6 @@ function fetchReelData(id: string): Reel | undefined {
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'lure image',
       createdAt: '2021/12/28',
-      lastUsedAt: '2021/12/28',
       type: '3000',
       gear: 'high',
       name: 'super good reel',

@@ -68,9 +68,6 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           <Box>
             ADDED {data.line?.createdAt}
           </Box>
-          <Box>
-            LAST USED {data.line?.lastUsedAt}
-          </Box>
         </Stack>
 
       </Box>
