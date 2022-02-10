@@ -3,26 +3,26 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export type Tackle = {
   id: string
   createdAt: string
-    rod: {
-      name: string
-      imageUrl: string
-      imageAlt: string
-      length: string
-      hardness: string
-    },
-    reel: {
-      name: string
-      imageUrl: string
-      imageAlt: string
-      type: string
-      gear: string
-    },
-    line: {
-      name: string
-      imageUrl: string
-      imageAlt: string
-      thickness: string
-    }
+  rod: {
+    name: string
+    imageUrl: string
+    imageAlt: string
+    length: string
+    hardness: string
+  },
+  reel: {
+    name: string
+    imageUrl: string
+    imageAlt: string
+    type: string
+    gear: string
+  },
+  line: {
+    name: string
+    imageUrl: string
+    imageAlt: string
+    thickness: string
+  }
 }
 
 // API のレスポンス型
