@@ -4,7 +4,6 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
-import { RodDetailMock } from '../mock/rods/rod_detail_mock'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 import axios from'axios'
@@ -19,8 +18,6 @@ type DetailProps = {
 }
 
 export default function TackleDetail(props: DetailProps): JSX.Element {
-  const property = RodDetailMock
-
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
