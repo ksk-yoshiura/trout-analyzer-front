@@ -14,6 +14,7 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/[id]"
 import axios from'axios'
@@ -30,6 +31,9 @@ type RodData = {
   length?: string;
   image?: string;
 }
+
+// ロッド硬さ
+const rodHardnessType = 1
 
 export default function RodForm() {
   // パラメータからロッドID取得
@@ -119,7 +123,7 @@ export default function RodForm() {
                     htmlFor='hardness'
                     textTransform='uppercase'
                   >HARDNESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='hardness' variant='flushed' placeholder='Enter' />
+                  <ToolConditionSelect typeNum={rodHardnessType} />
                   <FormErrorMessage>{form.errors.hardness}</FormErrorMessage>
                 </FormControl>
               )}
