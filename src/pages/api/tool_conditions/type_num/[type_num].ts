@@ -77,7 +77,7 @@ function fetchToolConditionData(type_num: string): ToolCondition[] | undefined {
     {
       id: '10',
       type_num: '3',
-      type_name: '25000'
+      type_name: '2500'
     },
     {
       id: '11',
