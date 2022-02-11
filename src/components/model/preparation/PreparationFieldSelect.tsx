@@ -10,7 +10,7 @@ const fetcher = (url: string) => axios(url)
   return res.data
 })
 
-export default function LureTypeSelect() {
+export default function FieldSelect() {
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/', fetcher)
   if (error) return <p>Error: {error.message}</p>
