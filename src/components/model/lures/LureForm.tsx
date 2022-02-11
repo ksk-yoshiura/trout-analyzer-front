@@ -16,7 +16,7 @@ import {
 import Thumb from "../../shared/ThumbImage"
 import LureTypeSelect from "./LureTypeSelect"
 import useSWR from 'swr'
-import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
+import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 import axios from'axios'
 
 const fetcher = (url: string) => axios(url)
@@ -39,7 +39,7 @@ export default function LureForm() {
   const { id } = router.query
 
   // APIからデータ取得
-  const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types/', fetcher)
+  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/', fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
   
