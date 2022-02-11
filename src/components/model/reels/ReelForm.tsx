@@ -107,7 +107,7 @@ export default function ReelForm() {
                     htmlFor='gear'
                     textTransform='uppercase'
                   >GEAR</FormLabel>
-                  <ToolConditionSelect typeNum={gearType} />
+                  <ToolConditionSelect field={field} typeNum={gearType} />
                   <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
                 </FormControl>
               )}
@@ -124,7 +124,7 @@ export default function ReelForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
-                  <ToolConditionSelect typeNum={reelType} />
+                  <ToolConditionSelect field={field} typeNum={reelType} />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
