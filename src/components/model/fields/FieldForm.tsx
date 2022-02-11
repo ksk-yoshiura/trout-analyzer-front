@@ -25,7 +25,6 @@ const fetcher = (url: string) => axios(url)
 
 type FieldData = {
   name?: string;
-  place?: string;
   address?: string;
   image?: string;
 }
@@ -57,8 +56,7 @@ export default function FieldForm() {
     <Formik
       initialValues={{
         name: data.field?.name,
-        place: '',
-        address: '',
+        address: data.field?.address,
         image: ''
       }}
       onSubmit={(values, actions) => {
@@ -84,23 +82,6 @@ export default function FieldForm() {
                   >NAME</FormLabel>
                   <Input {...field} fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-
-            <Field name='place' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.place)
-                    && Boolean(form.touched.place)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='place'
-                    textTransform='uppercase'
-                  >PLACE</FormLabel>
-                  <Input {...field} fontSize="1xl" id='place' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.place}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
