@@ -25,12 +25,12 @@ const fetcher = (url: string) => axios(url)
 })
 
 type LureData = {
-  name: string;
-  company: string;
-  color: string;
-  weight: string;
-  type: string;
-  image: string;
+  name?: string;
+  company?: string;
+  color?: string;
+  weight?: string;
+  type?: string;
+  image?: string;
 }
 
 export default function LureForm() {
@@ -60,11 +60,11 @@ export default function LureForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
-        company: '',
-        color: '',
-        weight: '',
-        type: '',
+        name: data.lure?.name,
+        company: data.lure?.company,
+        color: data.lure?.color,
+        weight: data.lure?.weight,
+        type: data.lure?.lureType,
         image: ''
       }}
       onSubmit={(values, actions) => {
