@@ -11,10 +11,10 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Select,
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import LureTypeSelect from "./LureTypeSelect"
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
 import axios from'axios'
@@ -104,17 +104,7 @@ export default function LureForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >LURE TYPE</FormLabel>
-                  <Select {...field} width="100%" fontSize="1xl" id='type' placeholder='Lure Type'>
-                    {
-                      data.lure_types?.map((item, index) => {
-                        return (
-                          <option key={index} value={item.id}>
-                            {item.type_name}
-                          </option>
-                        )
-                      })
-                    }
-                  </Select>
+                  <LureTypeSelect />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
