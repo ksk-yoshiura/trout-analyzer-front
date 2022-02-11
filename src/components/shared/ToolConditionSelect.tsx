@@ -16,6 +16,14 @@ type TypeProps = {
   field?: any
 }
 
+// 各タイプのタイトル
+const title = [
+  'Hardness',
+  'Gear',
+  'Type',
+  'LineType'
+]
+
 export default function TooConditionTypeSelect(props: TypeProps) {
   // タイプナンバー
   const { typeNum, field } = props
@@ -25,7 +33,7 @@ export default function TooConditionTypeSelect(props: TypeProps) {
   if (!data) return <p>Loading...</p>
 
   return (
-    <Select {...field} w={150} placeholder='Select Type'>
+    <Select {...field} w={200} placeholder={'Select '+title[typeNum - 1]} >
       {
         data.tool_condition?.map((item, index) => {
           return (
