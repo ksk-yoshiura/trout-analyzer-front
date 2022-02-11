@@ -24,11 +24,11 @@ const fetcher = (url: string) => axios(url)
 })
 
 type ReelData = {
-  name: string;
-  company: string;
-  type: string;
-  gear: string;
-  image: string;
+  name?: string;
+  company?: string;
+  type?: string;
+  gear?: string;
+  image?: string;
 }
 
 export default function ReelForm() {
@@ -57,11 +57,11 @@ export default function ReelForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
-        company: '',
-        gear: '',
-        type: '',
-        image: ''
+        name: data.reel?.name,
+        company: data.reel?.company,
+        gear: data.reel?.gear,
+        type: data.reel?.type,
+        image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
