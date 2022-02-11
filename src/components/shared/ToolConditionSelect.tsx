@@ -13,18 +13,19 @@ const fetcher = (url: string) => axios(url)
 // タイプ
 type TypeProps = {
   typeNum: number
+  field?: any
 }
 
 export default function TooConditionTypeSelect(props: TypeProps) {
   // タイプナンバー
-  const { typeNum } = props
+  const { typeNum, field } = props
   // APIからデータ取得
   const { data, error } = useSWR<ToolConditionApiResponse, Error>('/api/tool_conditions/type_num/' + typeNum, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
   return (
-    <Select w={150} placeholder='Select Type'>
+    <Select {...field} w={150} placeholder='Select Type'>
       {
         data.tool_condition?.map((item, index) => {
           return (
