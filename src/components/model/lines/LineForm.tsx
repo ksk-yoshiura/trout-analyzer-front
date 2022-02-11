@@ -14,6 +14,14 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import useSWR from 'swr'
+import { LinesApiResponse } from "../../../pages/api/lines/[id]"
+import axios from'axios'
+
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type LineData = {
   name: string;
@@ -27,8 +35,10 @@ export default function LineForm() {
   // パラメータからラインID取得
   const router = useRouter();
   const { id } = router.query
-  console.log(id)
-
+  // APIからデータ取得
+  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
   function handleSendLineData(values: LineData) {
     alert(JSON.stringify(values))
   }
