@@ -39,7 +39,7 @@ export default function LureForm() {
   const { id } = router.query
 
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/', fetcher)
+  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
   
