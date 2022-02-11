@@ -14,6 +14,14 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import useSWR from 'swr'
+import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
+import axios from'axios'
+
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type ReelData = {
   name: string;
@@ -27,7 +35,10 @@ export default function ReelForm() {
   // パラメータからリールID取得
   const router = useRouter();
   const { id } = router.query
-  console.log(id)
+  // APIからデータ取得
+  const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + id, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   function handleSendReelData(values: ReelData) {
     alert(JSON.stringify(values))
