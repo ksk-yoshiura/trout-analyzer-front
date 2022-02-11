@@ -14,20 +14,31 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import useSWR from 'swr'
+import { RodsApiResponse } from "../../../pages/api/rods/[id]"
+import axios from'axios'
+
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type RodData = {
-  name: string;
-  company: string;
-  hardness: string;
-  length: string;
-  image: string;
+  name?: string;
+  company?: string;
+  hardness?: string;
+  length?: string;
+  image?: string;
 }
 
 export default function RodForm() {
   // パラメータからロッドID取得
   const router = useRouter();
   const { id } = router.query
-  console.log(id)
+  // APIからデータ取得
+  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + id, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
   function handleSendRodData(values: RodData) {
     alert(JSON.stringify(values))
@@ -47,11 +58,11 @@ export default function RodForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
-        company: '',
-        hardness: '',
-        length: '',
-        image: ''
+        name: data.rod?.name,
+        company: data.rod?.company,
+        hardness: data.rod?.hardness,
+        length: data.rod?.length,
+        image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
