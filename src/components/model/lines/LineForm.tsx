@@ -121,7 +121,7 @@ export default function LineForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
-                  <ToolConditionSelect typeNum={lineType} /><FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                  <ToolConditionSelect field={field} typeNum={lineType} /><FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
