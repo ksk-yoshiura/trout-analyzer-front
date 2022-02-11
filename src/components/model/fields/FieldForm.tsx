@@ -57,7 +57,7 @@ export default function FieldForm() {
       initialValues={{
         name: data.field?.name,
         address: data.field?.address,
-        image: ''
+        image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
