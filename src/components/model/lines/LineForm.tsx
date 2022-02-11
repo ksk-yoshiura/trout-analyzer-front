@@ -24,11 +24,11 @@ const fetcher = (url: string) => axios(url)
 })
 
 type LineData = {
-  name: string;
-  company: string;
-  type: string;
-  thickness: string;
-  image: string;
+  name?: string;
+  company?: string;
+  type?: string;
+  thickness?: string;
+  image?: string;
 }
 
 export default function LineForm() {
@@ -56,11 +56,11 @@ export default function LineForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
-        company: '',
-        thickness: '',
-        type: '',
-        image: ''
+        name: data.line?.name,
+        company: data.line?.company,
+        thickness: data.line?.thickness,
+        type: data.line?.lineType,
+        image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
