@@ -14,6 +14,7 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
 import axios from'axios'
@@ -30,6 +31,11 @@ type ReelData = {
   gear?: string;
   image?: string;
 }
+
+// リールギア比
+const gearType = 2
+// リール型番
+const reelType = 3
 
 export default function ReelForm() {
   // パラメータからリールID取得
@@ -101,7 +107,7 @@ export default function ReelForm() {
                     htmlFor='gear'
                     textTransform='uppercase'
                   >GEAR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='gear' variant='flushed' placeholder='Enter' />
+                  <ToolConditionSelect typeNum={gearType} />
                   <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
                 </FormControl>
               )}
@@ -118,7 +124,7 @@ export default function ReelForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type' variant='flushed' placeholder='Enter' />
+                  <ToolConditionSelect typeNum={reelType} />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
