@@ -14,6 +14,7 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/[id]"
 import axios from'axios'
@@ -30,6 +31,9 @@ type LineData = {
   thickness?: string;
   image?: string;
 }
+
+// ライン種類
+const lineType = 4
 
 export default function LineForm() {
   // パラメータからラインID取得
@@ -117,8 +121,7 @@ export default function LineForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='type' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                  <ToolConditionSelect typeNum={lineType} /><FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
