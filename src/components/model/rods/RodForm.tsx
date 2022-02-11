@@ -123,7 +123,7 @@ export default function RodForm() {
                     htmlFor='hardness'
                     textTransform='uppercase'
                   >HARDNESS</FormLabel>
-                  <ToolConditionSelect typeNum={rodHardnessType} />
+                  <ToolConditionSelect field={field} typeNum={rodHardnessType} />
                   <FormErrorMessage>{form.errors.hardness}</FormErrorMessage>
                 </FormControl>
               )}
