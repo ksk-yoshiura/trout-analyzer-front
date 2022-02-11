@@ -39,7 +39,7 @@ function fetchRodData(id: string): Rod | undefined {
     imageUrl: 'https://bit.ly/2Z4KKcF',
     imageAlt: 'rod image',
     createdAt: '2021/12/28',
-    hardness: 'ultra light',
+    hardness: '1',
     length: '6',
     name: 'super good fishing rod',
     company: 'no brand'
