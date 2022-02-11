@@ -14,19 +14,31 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import useSWR from 'swr'
+import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
+import axios from'axios'
+
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type FieldData = {
-  name: string;
-  place: string;
-  address: string;
-  image: string;
+  name?: string;
+  place?: string;
+  address?: string;
+  image?: string;
 }
-
 
 export default function FieldForm() {
   // パラメータからフィールドID取得
   const router = useRouter();
   const { id } = router.query
+  // APIからデータ取得
+  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
+
   function handleSendFieldData(values: FieldData) {
     alert(JSON.stringify(values))
   }
@@ -44,7 +56,7 @@ export default function FieldForm() {
   return (
     <Formik
       initialValues={{
-        name: '',
+        name: data.field?.name,
         place: '',
         address: '',
         image: ''
