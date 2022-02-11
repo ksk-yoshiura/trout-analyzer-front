@@ -15,11 +15,14 @@ import {
   Stack
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
-
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
+import axios from'axios'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => axios(url)
+.then((res) => {
+  return res.data
+})
 
 type LureData = {
   name: string;
