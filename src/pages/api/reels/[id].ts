@@ -39,8 +39,8 @@ function fetchReelData(id: string): Reel | undefined {
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'lure image',
       createdAt: '2021/12/28',
-      type: '3000',
-      gear: 'high',
+      type: '10',
+      gear: '6',
       name: 'super good reel',
       company: 'daiawa'
     },
