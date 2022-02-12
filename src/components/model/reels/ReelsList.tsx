@@ -55,7 +55,7 @@ export default function ReelsList(): JSX.Element {
           </ModalBody>
 
           <ModalFooter>
-            <NextLink href={"/fields/edit/" + chosenId} passHref>
+            <NextLink href={"/reels/edit/" + chosenId} passHref>
               <Button variant='ghost'>Edit</Button>
             </NextLink>
           </ModalFooter>
