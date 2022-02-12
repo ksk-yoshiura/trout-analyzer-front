@@ -26,6 +26,7 @@ type SerialRecordData = {
 const resultType = 1
 const speedType = 2
 const depthType = 3
+const weatherType = 4
 
 export default function RecordSerialRegisterForm() {
   function handleSendSerialRecordData(values: SerialRecordData) {
@@ -48,6 +49,7 @@ export default function RecordSerialRegisterForm() {
         speed: '',
         result: '',
         depth: '',
+        weather: '',
         lure: '',
         tackle: ''
       }}
@@ -109,6 +111,23 @@ export default function RecordSerialRegisterForm() {
                   >depth</FormLabel>
                   <PatternConditionRadio typeNum={depthType} />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
+            <Field name='weather' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.weather)
+                    && Boolean(form.touched.weather)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='weather'
+                    textTransform='uppercase'
+                  >weather</FormLabel>
+                  <PatternConditionRadio typeNum={weatherType} />
+                  <FormErrorMessage>{form.errors.weather}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
