@@ -63,7 +63,7 @@ function fetchLureData(id: string): Lure | undefined {
       imageAlt: 'lure image',
       createdAt: '2021/12/28',
       lastUsedAt: '2021/12/28',
-      lureType: 'spoon',
+      lureType: '3',
       name: 'super crank bait',
       company: 'no brand',
       color: 'red',
