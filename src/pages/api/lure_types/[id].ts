@@ -30,43 +30,19 @@ function fetchLureTypeData(id: string): LureType | undefined {
   const lure_types: LureType[] = [
     {
       id: '1',
-      type_name: 'super good fishing park'
+      type_name: 'spoon'
     },
     {
       id: '2',
-      type_name: 'super good fishing park'
+      type_name: 'minor'
     },
     {
       id: '3',
-      type_name: 'super good fishing park'
+      type_name: 'crank bait'
     },
     {
       id: '4',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '5',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '6',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '7',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '8',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '9',
-      type_name: 'super good fishing park'
-    },
-    {
-      id: '10',
-      type_name: 'super good fishing park'
+      type_name: 'viberation'
     }
   ]
   return lure_types.find((lure_types) => lure_types.id === id)
