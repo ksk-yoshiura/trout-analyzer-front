@@ -28,7 +28,7 @@ export default function DetailModal(props: DetailProps) {
     <>
     <ModalOverlay />
         <ModalContent>
-          <ModalHeader textTransform={'capitalize'}>Line Detail</ModalHeader>
+          <ModalHeader textTransform={'capitalize'}>{modalTitle + ' Detail'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             { children }
