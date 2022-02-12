@@ -10,14 +10,20 @@ const fetcher = (url: string) => axios(url)
   return res.data
 })
 
-export default function LureTypeSelect() {
+type TypeProp = {
+  field? :any
+}
+
+export default function LureTypeSelect(props: TypeProp) {
+  // LureFormのeditで選択されたタイプ
+  const { field } = props
   // APIからデータ取得
   const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types/', fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
   return (
-    <Select w={150} placeholder='Lure Type'>
+    <Select {...field} w={150} placeholder='Lure Type'>
       {
         data.lure_types?.map((item, index) => {
           return (
