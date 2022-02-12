@@ -23,7 +23,19 @@ export default function ReelsApi(
   res: NextApiResponse<ReelsApiResponse>
 ): void {
   const id = req.query.id as string
-  const reel = fetchReelData(id)
+  // 空データ（タイプチェック用）
+  const vacantData: Reel = {
+    'id': '',
+    'imageUrl': '',
+    'imageAlt': '',
+    'createdAt': '',
+    'name': '',
+    'company': '',
+    'type': '',
+    'gear': '',
+  } 
+  
+  const reel =  id !== 'undefined'? fetchReelData(id) :vacantData
   if (reel) {
     res.status(200).json({ reel })
   } else {

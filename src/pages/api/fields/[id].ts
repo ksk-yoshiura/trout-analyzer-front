@@ -23,7 +23,23 @@ export default function FieldsApi(
   res: NextApiResponse<FieldsApiResponse>
 ): void {
   const id = req.query.id as string
-  const field = fetchFieldData(id)
+  // 空データ（タイプチェック用）
+  const vacantData: Field = {
+    'id': '',
+    'imageUrl': '',
+    'imageAlt': '',
+    'createdAt': '',
+    'lastVisitedAt': '',
+    'name': '',
+    'address': '',
+    'frequency': '',
+  } 
+
+  // cretaeとeditで同じフォームを使いまわしているため、
+  // idが存在しな場合undefinedになる
+  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // 下記記述で回避する
+  const field = id !== 'undefined'? fetchFieldData(id) : vacantData
   if (field) {
     res.status(200).json({ field })
   } else {

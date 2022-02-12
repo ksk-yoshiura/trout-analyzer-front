@@ -23,7 +23,23 @@ export default function LinesApi(
   res: NextApiResponse<LinesApiResponse>
 ): void {
   const id = req.query.id as string
-  const line = fetchLineData(id)
+  // 空データ（タイプチェック用）
+  const vacantData: Line = {
+    'id': '',
+    'imageUrl': '',
+    'imageAlt': '',
+    'createdAt': '',
+    'lineType': '',
+    'name': '',
+    'company': '',
+    'thickness': '',
+  } 
+
+  // cretaeとeditで同じフォームを使いまわしているため、
+  // idが存在しな場合undefinedになる
+  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // 下記記述で回避する
+  const line = id !== 'undefined'? fetchLineData(id): vacantData
   if (line) {
     res.status(200).json({ line })
   } else {

@@ -23,7 +23,23 @@ export default function RodsApi(
   res: NextApiResponse<RodsApiResponse>
 ): void {
   const id = req.query.id as string
-  const rod = fetchRodData(id)
+  // 空データ（タイプチェック用）
+  const vacantData: Rod = {
+    'id': '',
+    'imageUrl': '',
+    'imageAlt': '',
+    'createdAt': '',
+    'hardness': '',
+    'length': '',
+    'name': '',
+    'company': '',
+  } 
+
+  // cretaeとeditで同じフォームを使いまわしているため、
+  // idが存在しな場合undefinedになる
+  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // 下記記述で回避する
+  const rod = id !== 'undefined'? fetchRodData(id) : vacantData
   if (rod) {
     res.status(200).json({ rod })
   } else {
