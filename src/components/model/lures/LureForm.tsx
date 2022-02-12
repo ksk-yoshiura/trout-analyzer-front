@@ -104,7 +104,7 @@ export default function LureForm() {
                     htmlFor='type'
                     textTransform='uppercase'
                   >LURE TYPE</FormLabel>
-                  <LureTypeSelect />
+                  <LureTypeSelect field={field} />
                   <FormErrorMessage>{form.errors.type}</FormErrorMessage>
                 </FormControl>
               )}
