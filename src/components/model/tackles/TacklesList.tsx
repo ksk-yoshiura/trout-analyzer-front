@@ -2,30 +2,21 @@ import { useState } from 'react'
 import {
   Box,
   Image,
-  Badge,
   Wrap,
   WrapItem,
   useDisclosure,
-  Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react'
-import NextLink from "next/link"
+import DetailModal from '../../shared/DetailModal'
 import TackleDetail from './TackleDetail'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
-import axios from'axios'
+import axios from 'axios'
 
 const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
-
+  .then((res) => {
+    return res.data
+  })
 
 export default function TacklesList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -43,23 +34,14 @@ export default function TacklesList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  // モーダルを部分的に移行し共通化
+  // 完全移行はonOpen()が動作しなくなるので断念
   const TackleDetailModal = () => {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Tackle Detail</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <TackleDetail chosenId={chosenId} />
-          </ModalBody>
-
-          <ModalFooter>
-            <NextLink href={"/tackles/edit/" + chosenId}  passHref>
-              <Button variant='ghost'>Edit</Button>
-            </NextLink>
-          </ModalFooter>
-        </ModalContent>
+        <DetailModal chosenId={chosenId} title={'tackle'} >
+          <TackleDetail chosenId={chosenId} />
+        </DetailModal>
       </Modal>
     )
   }
@@ -71,49 +53,49 @@ export default function TacklesList(): JSX.Element {
           data.tackles?.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
-              <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>
-                <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.rod.imageUrl} alt={item.rod.imageAlt} />
-                  <Box p='2'>
-                    <Box
-                      mt='1'
-                      fontWeight='semibold'
-                      as='h3'
-                      lineHeight='tight'
-                    >
-                      {item.rod.name}
-                    </Box>
+                <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>
+                  <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                    <Image src={item.rod.imageUrl} alt={item.rod.imageAlt} />
+                    <Box p='2'>
+                      <Box
+                        mt='1'
+                        fontWeight='semibold'
+                        as='h3'
+                        lineHeight='tight'
+                      >
+                        {item.rod.name}
+                      </Box>
 
-                  </Box>
-                </Box>
-                <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.reel.imageUrl} alt={item.reel.imageAlt} />
-                  <Box p='2'>
-                    <Box
-                      mt='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      lineHeight='tight'
-                    >
-                      {item.reel.name}
                     </Box>
-
                   </Box>
-                </Box>
-                <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.line.imageUrl} alt={item.line.imageAlt} />
-                  <Box p='2'>
-                    <Box
-                      mt='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      lineHeight='tight'
-                    >
-                      {item.line.name}
+                  <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                    <Image src={item.reel.imageUrl} alt={item.reel.imageAlt} />
+                    <Box p='2'>
+                      <Box
+                        mt='1'
+                        fontWeight='semibold'
+                        as='h4'
+                        lineHeight='tight'
+                      >
+                        {item.reel.name}
+                      </Box>
+
                     </Box>
-
                   </Box>
-                </Box>
+                  <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                    <Image src={item.line.imageUrl} alt={item.line.imageAlt} />
+                    <Box p='2'>
+                      <Box
+                        mt='1'
+                        fontWeight='semibold'
+                        as='h4'
+                        lineHeight='tight'
+                      >
+                        {item.line.name}
+                      </Box>
+
+                    </Box>
+                  </Box>
                 </Box>
               </WrapItem>
             )

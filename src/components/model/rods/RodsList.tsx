@@ -6,25 +6,18 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react'
-import NextLink from "next/link"
 import RodDetail from './RodDetail'
+import DetailModal from '../../shared/DetailModal'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/index"
-import axios from'axios'
+import axios from 'axios'
 
 const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
+  .then((res) => {
+    return res.data
+  })
 
 export default function RodsList(): JSX.Element {
   // モーダル
@@ -43,23 +36,14 @@ export default function RodsList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  // モーダルを部分的に移行し共通化
+  // 完全移行はonOpen()が動作しなくなるので断念
   const RodDetailModal = () => {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Rod Detail</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <RodDetail chosenId={chosenId} />
-          </ModalBody>
-
-          <ModalFooter>
-            <NextLink href={"/rods/edit/" + chosenId}  passHref>
-              <Button variant='ghost'>Edit</Button>
-            </NextLink>
-          </ModalFooter>
-        </ModalContent>
+        <DetailModal chosenId={chosenId} title={'rod'} >
+          <RodDetail chosenId={chosenId} />
+        </DetailModal>
       </Modal>
     )
   }

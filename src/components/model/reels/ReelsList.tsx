@@ -6,25 +6,18 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react'
-import NextLink from "next/link"
 import ReelDetail from './ReelDetail'
+import DetailModal from '../../shared/DetailModal'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/index"
-import axios from'axios'
+import axios from 'axios'
 
 const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
+  .then((res) => {
+    return res.data
+  })
 
 export default function ReelsList(): JSX.Element {
   // モーダル
@@ -43,27 +36,17 @@ export default function ReelsList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  // モーダルを部分的に移行し共通化
+  // 完全移行はonOpen()が動作しなくなるので断念
   const ReelDetailModal = () => {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Reel Detail</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <ReelDetail chosenId={chosenId} />
-          </ModalBody>
-
-          <ModalFooter>
-            <NextLink href={"/reels/edit/" + chosenId} passHref>
-              <Button variant='ghost'>Edit</Button>
-            </NextLink>
-          </ModalFooter>
-        </ModalContent>
+        <DetailModal chosenId={chosenId} title={'reel'} >
+          <ReelDetail chosenId={chosenId} />
+        </DetailModal>
       </Modal>
     )
   }
-
 
   return (
     <>

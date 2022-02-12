@@ -6,25 +6,18 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react'
-import NextLink from "next/link"
 import LureDetail from './LureDetail'
+import DetailModal from '../../shared/DetailModal'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
-import axios from'axios'
+import axios from 'axios'
 
 const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
+  .then((res) => {
+    return res.data
+  })
 
 export default function LuresList(): JSX.Element {
   // モーダル
@@ -43,23 +36,14 @@ export default function LuresList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  // モーダルを部分的に移行し共通化
+  // 完全移行はonOpen()が動作しなくなるので断念
   const LureDetailModal = () => {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Lure Detail</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <LureDetail chosenId={chosenId} />
-          </ModalBody>
-
-          <ModalFooter>
-            <NextLink href={"/lures/edit/" + chosenId}  passHref>
-              <Button variant='ghost'>Edit</Button>
-            </NextLink>
-          </ModalFooter>
-        </ModalContent>
+        <DetailModal chosenId={chosenId} title={'lure'} >
+          <LureDetail chosenId={chosenId} />
+        </DetailModal>
       </Modal>
     )
   }
