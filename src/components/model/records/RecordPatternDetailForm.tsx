@@ -11,9 +11,7 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react"
-import ResultRadio from './serial_register_partial/SerialRegisterResultRadio'
-import SpeedRadio from './serial_register_partial/SerialRegisterSpeedRadio'
-import DepthRadio from './serial_register_partial/SerialRegisterDepthRadio'
+import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 
@@ -25,8 +23,14 @@ type SerialRecordData = {
   tackle: string;
 }
 
+const resultType = 1
+const speedType = 2
+const depthType = 3
+const weatherType = 4
+
 export default function RecordSerialRegisterForm() {
   function handleSendSerialRecordData(values: SerialRecordData) {
+    console.log(values)
     alert(JSON.stringify(values))
   }
 
@@ -71,7 +75,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='result'
                     textTransform='uppercase'
                   >result</FormLabel>
-                  <ResultRadio />
+                  <PatternConditionRadio typeNum={resultType} />
                   <FormErrorMessage>{form.errors.result}</FormErrorMessage>
                 </FormControl>
               )}
@@ -88,7 +92,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='speed'
                     textTransform='uppercase'
                   >speed</FormLabel>
-                  <SpeedRadio />
+                  <PatternConditionRadio typeNum={speedType} />
                   <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
                 </FormControl>
               )}
@@ -105,8 +109,25 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='depth'
                     textTransform='uppercase'
                   >depth</FormLabel>
-                  <DepthRadio />
+                  <PatternConditionRadio typeNum={depthType} />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+
+            <Field name='weather' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.weather)
+                    && Boolean(form.touched.weather)}
+                >
+                  <FormLabel
+                    fontSize="12px"
+                    htmlFor='weather'
+                    textTransform='uppercase'
+                  >weather</FormLabel>
+                  <PatternConditionRadio typeNum={weatherType} />
+                  <FormErrorMessage>{form.errors.weather}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
