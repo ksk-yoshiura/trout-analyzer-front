@@ -1,3 +1,4 @@
+import React from 'react'
 import { ReactNode } from "react";
 import {
   Button,
@@ -18,7 +19,7 @@ type DetailProps = {
   children?: ReactNode;
 }
 
-export default function DetailModal(props: DetailProps) {
+export default function DetailModal(props: DetailProps): JSX.Element {
   // 削除モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   // 各値
