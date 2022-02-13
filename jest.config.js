@@ -3,7 +3,11 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['<rootDir>/src'],
   setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/', 
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/__tests__/utils.tsx'
+  ],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
