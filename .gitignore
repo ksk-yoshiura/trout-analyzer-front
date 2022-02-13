@@ -37,4 +37,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # jest
-# *.snap
+*.snap
