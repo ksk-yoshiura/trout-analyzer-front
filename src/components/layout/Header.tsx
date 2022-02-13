@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box, Flex, Button } from '@chakra-ui/react';
 import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
 
