@@ -16,8 +16,8 @@ test('RecordPatternBadgeDetail', () => {
     'speed': 'fast',
   }
   const { asFragment } = render(<RecordPatternBadgeDetail 
-    lureType={badgeProps.result} 
-    result={badgeProps.lureType} 
+    result={badgeProps.result} 
+    lureType={badgeProps.lureType} 
     weather={badgeProps.weather}
     depth={badgeProps.depth}
     speed={badgeProps.speed}
