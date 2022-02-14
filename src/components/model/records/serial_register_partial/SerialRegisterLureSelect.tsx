@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Select
 } from "@chakra-ui/react";
@@ -12,7 +13,7 @@ const fetcher = (url: string) => axios(url)
 
 type LureTypeProps = {
   lureTypeId: string
-  field: any // TODO : any回避
+  field?: any // TODO : any回避
 }
 
 export default function LureSelect(props: LureTypeProps) {
