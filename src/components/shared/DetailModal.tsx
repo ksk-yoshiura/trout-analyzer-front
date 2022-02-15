@@ -12,6 +12,7 @@ import {
   Modal,
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import axios from 'axios'
 
 type DetailProps = {
   chosenId?: number
@@ -26,8 +27,22 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   const { chosenId, title, children } = props
   // 編集ページリンク
   const editURL = '/' + title + 's/edit/' + chosenId
+  // 削除
+  const deleteAPIURL = '/api/' + title + 's/delete/' + chosenId
   // 詳細モーダルタイトル
   const modalTitle = title
+
+  // 削除ボタンクリック時の挙動
+  function handleDeleteButtonClick() {
+    axios
+      .delete(deleteAPIURL)
+      .then(function (response) { // 成功時
+        console.log(response);
+      })
+      .catch(function (error) { // 失敗時
+        console.log(error);
+      });
+  }
 
   // 削除モーダル
   const DeletelModal = () => {
@@ -39,7 +54,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
           <ModalHeader></ModalHeader>
           <ModalBody display={'flex'} justifyContent={'space-around'}>
             <Button colorScheme='gray' variant='solid'>Cancel</Button>
-            <Button colorScheme='red' variant='solid'>Confirm Delete</Button>
+            <Button colorScheme='red' variant='solid' onClick={() => handleDeleteButtonClick()}>Confirm Delete</Button>
           </ModalBody>
           <ModalFooter>
           </ModalFooter>
