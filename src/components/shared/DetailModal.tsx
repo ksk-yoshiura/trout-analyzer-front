@@ -27,7 +27,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   const { chosenId, title, children } = props
   // 編集ページリンク
   const editURL = '/' + title + 's/edit/' + chosenId
-  // 削除
+  // 削除API
   const deleteAPIURL = '/api/' + title + 's/delete/' + chosenId
   // 詳細モーダルタイトル
   const modalTitle = title
