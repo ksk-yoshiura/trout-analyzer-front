@@ -56,11 +56,13 @@ export default function DetailModal(props: DetailProps): JSX.Element {
             <Button 
               onClick={onClose} 
               colorScheme='gray' 
-              variant='solid'>Cancel</Button>
+              variant='solid'
+            >Cancel</Button>
             <Button 
               colorScheme='red' 
               variant='solid' 
-              onClick={() => handleDeleteButtonClick()}>Confirm Delete</Button>
+              onClick={() => handleDeleteButtonClick()}
+            >Confirm Delete</Button>
           </ModalBody>
           <ModalFooter>
           </ModalFooter>
