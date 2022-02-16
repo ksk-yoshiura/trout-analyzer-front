@@ -19,6 +19,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import useSWR from 'swr'
@@ -42,6 +43,8 @@ export default function FieldForm() {
   const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id, fetcher)
@@ -50,15 +53,24 @@ export default function FieldForm() {
 
   function handleSendFieldData(values: FieldData) {
     alert(JSON.stringify(values))
+    // リストページに遷移
+    router.push('/fields')
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'Field registered!',
+      description: "We've created your field data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
+  // バリデーション
   function validateData(value: FieldData) {
-    console.log('hi')
+    // console.log(value)
     // let error
     // if (!value) {
-    //   error = 'Name is required'
-    // } else if (value.toLowerCase() !== 'naruto') {
-    //   error = "Jeez! You're not a fan 😱"
+    //   error = 'required'
     // }
     // return error
   }
@@ -80,7 +92,10 @@ export default function FieldForm() {
             >Cancel</Button>
             <Button
               type="submit"
-              onClick={() => submitForm()}
+              onClick={() => {
+                submitForm(), 
+                setTimeout(() => onClose(), 1000)
+              }}
               colorScheme='teal'
               variant='solid'
             >Confirm</Button>
@@ -97,6 +112,7 @@ export default function FieldForm() {
         address: data.field?.address,
         image: '' // TODO ：適切な形式で
       }}
+      validateOnChange
       onSubmit={(values, actions) => {
         setTimeout(() => {
           handleSendFieldData(values)
