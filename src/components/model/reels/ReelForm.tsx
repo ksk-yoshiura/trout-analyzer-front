@@ -4,7 +4,8 @@ import {
   Formik,
   Form,
   Field,
-  FieldProps
+  FieldProps,
+  useFormikContext
 } from 'formik';
 import {
   Input,
@@ -12,7 +13,12 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Stack
+  Stack,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerContent,
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -42,6 +48,9 @@ export default function ReelForm() {
   // パラメータからリールID取得
   const router = useRouter();
   const { id } = router.query
+  // 確認ドロワー
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
@@ -59,6 +68,33 @@ export default function ReelForm() {
     //   error = "Jeez! You're not a fan 😱"
     // }
     // return error
+  }
+
+  // 確認ドロワー
+  const ConfirmDrawer = () => {
+
+    // サブミット
+    const { submitForm } = useFormikContext();
+    return (
+      <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent h={'30vh'}>
+          <DrawerBody mt={10} display={'flex'} justifyContent={'space-around'}>
+            <Button
+              onClick={onClose}
+              colorScheme='gray'
+              variant='solid'
+            >Cancel</Button>
+            <Button
+              type="submit"
+              onClick={() => submitForm()}
+              colorScheme='teal'
+              variant='solid'
+            >Confirm</Button>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    )
   }
 
   return (
@@ -180,11 +216,12 @@ export default function ReelForm() {
           <Button
             mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
-            type='submit'
+            type='button'
+            onClick={onOpen}
           >
             Register
           </Button>
+          <ConfirmDrawer />
         </Form>
       )}
     </Formik>
