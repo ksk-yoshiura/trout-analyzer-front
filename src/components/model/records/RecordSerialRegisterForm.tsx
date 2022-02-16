@@ -3,14 +3,20 @@ import {
   Formik,
   Form,
   Field,
-  FieldProps
+  FieldProps,
+  useFormikContext
 } from 'formik';
 import {
   Button,
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Stack
+  Stack,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerContent,
 } from "@chakra-ui/react"
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
@@ -30,6 +36,9 @@ const depthType = 3
 const weatherType = 4
 
 export default function RecordSerialRegisterForm() {
+  // 確認ドロワー
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   function handleSendSerialRecordData(values: SerialRecordData) {
     alert(JSON.stringify(values))
   }
@@ -42,6 +51,33 @@ export default function RecordSerialRegisterForm() {
     //   error = "Jeez! You're not a fan 😱"
     // }
     // return error
+  }
+
+  // 確認ドロワー
+  const ConfirmDrawer = () => {
+
+    // サブミット
+    const { submitForm } = useFormikContext();
+    return (
+      <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent h={'30vh'}>
+          <DrawerBody mt={10} display={'flex'} justifyContent={'space-around'}>
+            <Button
+              onClick={onClose}
+              colorScheme='gray'
+              variant='solid'
+            >Cancel</Button>
+            <Button
+              type="submit"
+              onClick={() => submitForm()}
+              colorScheme='teal'
+              variant='solid'
+            >Confirm</Button>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    )
   }
 
   return (
@@ -173,13 +209,14 @@ export default function RecordSerialRegisterForm() {
 
           </Stack>
           <Button
-            my={4}
+            mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
-            type='submit'
+            type='button'
+            onClick={onOpen}
           >
             Register
           </Button>
+          <ConfirmDrawer />
         </Form>
       )}
     </Formik>
