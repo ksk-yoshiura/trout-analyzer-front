@@ -4,7 +4,8 @@ import {
   Formik,
   Form,
   Field,
-  FieldProps
+  FieldProps,
+  useFormikContext
 } from 'formik';
 import {
   Input,
@@ -12,18 +13,23 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Stack
+  Stack,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerContent,
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import LureTypeSelect from "./LureTypeSelect"
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
-import axios from'axios'
+import axios from 'axios'
 
 const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
+  .then((res) => {
+    return res.data
+  })
 
 type LureData = {
   name?: string;
@@ -38,12 +44,14 @@ export default function LureForm() {
   // パラメータからルアーID取得
   const router = useRouter();
   const { id } = router.query
+  // 確認ドロワー
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   // APIからデータ取得
   const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
-  
+
   function handleSendLureData(values: LureData) {
     alert(JSON.stringify(values))
   }
@@ -56,6 +64,33 @@ export default function LureForm() {
     //   error = "Jeez! You're not a fan 😱"
     // }
     // return error
+  }
+
+  // 確認ドロワー
+  const ConfirmDrawer = () => {
+
+    // サブミット
+    const { submitForm } = useFormikContext();
+    return (
+      <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent h={'30vh'}>
+          <DrawerBody mt={10} display={'flex'} justifyContent={'space-around'}>
+            <Button
+              onClick={onClose}
+              colorScheme='gray'
+              variant='solid'
+            >Cancel</Button>
+            <Button
+              type="submit"
+              onClick={() => submitForm()}
+              colorScheme='teal'
+              variant='solid'
+            >Confirm</Button>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    )
   }
 
   return (
@@ -192,11 +227,12 @@ export default function LureForm() {
           <Button
             mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
-            type='submit'
+            type='button'
+            onClick={onOpen}
           >
             Register
           </Button>
+          <ConfirmDrawer />
         </Form>
       )}
     </Formik>
