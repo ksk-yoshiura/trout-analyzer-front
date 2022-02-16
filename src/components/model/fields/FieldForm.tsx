@@ -42,7 +42,7 @@ export default function FieldForm() {
   const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
-  
+
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
@@ -66,8 +66,8 @@ export default function FieldForm() {
   // 確認ドロワー
   const ConfirmDrawer = () => {
 
-  // サブミット
-  const { submitForm } = useFormikContext();
+    // サブミット
+    const { submitForm } = useFormikContext();
     return (
       <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
