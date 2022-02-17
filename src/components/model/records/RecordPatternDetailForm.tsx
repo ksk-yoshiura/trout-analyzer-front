@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -17,6 +18,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react"
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
@@ -36,12 +38,24 @@ const depthType = 3
 const weatherType = 4
 
 export default function RecordSerialRegisterForm() {
+  const router = useRouter();
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   function handleSendSerialRecordData(values: SerialRecordData) {
-    console.log(values)
     alert(JSON.stringify(values))
+    // リストページに遷移
+    router.push('/patterns')
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'pattern registered!',
+      description: "We've created your pattern data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   function validateData(value: SerialRecordData) {
