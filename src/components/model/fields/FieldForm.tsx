@@ -51,18 +51,55 @@ export default function FieldForm() {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
+  // API登録・更新
   function handleSendFieldData(values: FieldData) {
-    alert(JSON.stringify(values))
-    // リストページに遷移
-    router.push('/fields')
-    // アラート代わりにトーストを使用
-    toast({
-      title: 'Field registered!',
-      description: "We've created your field data for you.",
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+    if (id) { // フィールドIDがある場合は更新
+      axios.put('/api/fields/edit/' + id, values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/fields')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Field updated!',
+            description: "We've updated your field data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    } else { // フィールドIDがある場合は登録
+      axios.post('/api/fields/create', values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/fields')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Field registered!',
+            description: "We've created your field data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    }
   }
 
   // バリデーション
@@ -93,8 +130,8 @@ export default function FieldForm() {
             <Button
               type="submit"
               onClick={() => {
-                submitForm(), 
-                setTimeout(() => onClose(), 1000)
+                submitForm(),
+                  setTimeout(() => onClose(), 1000)
               }}
               colorScheme='teal'
               variant='solid'
