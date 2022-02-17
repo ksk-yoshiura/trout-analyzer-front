@@ -76,7 +76,7 @@ export default function FieldForm() {
             isClosable: true,
           })
         })
-    } else { // フィールドIDがある場合は登録
+    } else { // フィールドIDがない場合は登録
       axios.post('/api/fields/create', values)
         .then(function () {
           // リストページに遷移
