@@ -19,6 +19,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -48,6 +49,8 @@ export default function LineForm() {
   const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   // APIからデータ取得
   const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id, fetcher)
@@ -56,6 +59,16 @@ export default function LineForm() {
 
   function handleSendLineData(values: LineData) {
     alert(JSON.stringify(values))
+    // リストページに遷移
+    router.push('/lines')
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'Line registered!',
+      description: "We've created your line data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   function validateData(value: LineData) {
