@@ -55,18 +55,55 @@ export default function LureForm() {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
+  // API登録・更新
   function handleSendLureData(values: LureData) {
-    alert(JSON.stringify(values))
-    // リストページに遷移
-    router.push('/lures')
-    // アラート代わりにトーストを使用
-    toast({
-      title: 'Lure registered!',
-      description: "We've created your lure data for you.",
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+    if (id) { // ルアーIDがある場合は更新
+      axios.put('/api/lures/edit/' + id, values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/lures')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Lure updated!',
+            description: "We've updated your lure data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    } else { // ルアーIDがない場合は登録
+      axios.post('/api/lures/create', values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/lures')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Lure registered!',
+            description: "We've created your lure data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    }
   }
 
   function validateData(value: LureData) {
