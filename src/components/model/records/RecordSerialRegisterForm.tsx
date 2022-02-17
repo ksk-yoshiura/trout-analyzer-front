@@ -17,6 +17,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react"
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
@@ -38,9 +39,19 @@ const weatherType = 4
 export default function RecordSerialRegisterForm() {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   function handleSendSerialRecordData(values: SerialRecordData) {
     alert(JSON.stringify(values))
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'Pattern registered!',
+      description: "We've created your pattern data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   function validateData(value: SerialRecordData) {
