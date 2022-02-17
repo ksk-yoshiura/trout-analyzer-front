@@ -19,6 +19,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import LureTypeSelect from "./LureTypeSelect"
@@ -46,6 +47,8 @@ export default function LureForm() {
   const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   // APIからデータ取得
   const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id, fetcher)
@@ -54,6 +57,16 @@ export default function LureForm() {
 
   function handleSendLureData(values: LureData) {
     alert(JSON.stringify(values))
+    // リストページに遷移
+    router.push('/lures')
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'Lure registered!',
+      description: "We've created your lure data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   function validateData(value: LureData) {
