@@ -1,5 +1,6 @@
 import React from 'react'
 import { ReactNode } from "react";
+import { useRouter } from "next/router";
 import {
   Button,
   ModalOverlay,
@@ -10,6 +11,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   Modal,
+  useToast
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import axios from 'axios'
@@ -31,16 +33,33 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   const deleteAPIURL = '/api/' + title + 's/delete/' + chosenId
   // 詳細モーダルタイトル
   const modalTitle = title
+  // アラート
+  const toast = useToast()
+  const router = useRouter();
 
   // 削除ボタンクリック時の挙動
   function handleDeleteButtonClick() {
-    axios
-      .delete(deleteAPIURL)
+    // TODO：削除完了後モーダルを閉じる
+    axios.delete(deleteAPIURL)
       .then(function (response) { // 成功時
-        console.log(response);
+        // アラート代わりにトーストを使用
+        toast({
+          title: 'Deleted!',
+          description: "We've deleted your data for you.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
       })
       .catch(function (error) { // 失敗時
-        console.log(error);
+        // アラート代わりにトーストを使用
+        toast({
+          title: 'Failed!',
+          description: error,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
       });
   }
 
