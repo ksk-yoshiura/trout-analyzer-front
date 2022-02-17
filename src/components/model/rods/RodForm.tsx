@@ -57,18 +57,55 @@ export default function RodForm() {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
+  // API登録・更新
   function handleSendRodData(values: RodData) {
-    alert(JSON.stringify(values))
-    // リストページに遷移
-    router.push('/rods')
-    // アラート代わりにトーストを使用
-    toast({
-      title: 'Rod registered!',
-      description: "We've created your rod data for you.",
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+    if (id) { // ロッドIDがある場合は更新
+      axios.put('/api/rods/edit/' + id, values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/rods')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Rod updated!',
+            description: "We've updated your rod data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    } else { // ロッドIDがない場合は登録
+      axios.post('/api/rods/create', values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/rods')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Rod registered!',
+            description: "We've created your rod data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    }
   }
 
   // 確認ドロワー
