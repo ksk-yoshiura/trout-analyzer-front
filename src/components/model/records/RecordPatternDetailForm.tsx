@@ -23,7 +23,14 @@ import {
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
+import useSWR from 'swr'
+import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
 import axios from 'axios'
+
+const fetcher = (url: string) => axios(url)
+  .then((res) => {
+    return res.data
+  })
 
 type SerialRecordData = {
   result: string;
@@ -39,36 +46,69 @@ const depthType = 3
 const weatherType = 4
 
 export default function RecordSerialRegisterForm() {
+  // パラメータからパターンID取得
   const router = useRouter();
+  const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
 
-  function handleSendSerialRecordData(values: SerialRecordData) {
+  // APIからデータ取得
+  // TODO：データをセット
+  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id, fetcher)
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <p>Loading...</p>
 
-    axios.post('/api/patterns/create', values)
-      .then(function () {
-        // リストページに遷移
-        router.push('/patterns')
-        // アラート代わりにトーストを使用
-        toast({
-          title: 'Pattern registered!',
-          description: "We've created your pattern data for you.",
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
+  // API登録・更新
+  function handleSendSerialRecordData(values: SerialRecordData) {
+    if (id) { // パターンIDがある場合は更新
+      axios.put('/api/patterns/edit/' + id, values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/patterns')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Pattern updated!',
+            description: "We've updated your pattern data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
         })
-      })
-      .catch(function (error) {
-        toast({
-          title: 'Failed!',
-          description: error,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
         })
-      })
+    } else { // パターンIDがない場合は登録
+      axios.post('/api/patterns/create', values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/patterns')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Pattern registered!',
+            description: "We've created your pattern data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    }
   }
 
   function validateData(value: SerialRecordData) {
