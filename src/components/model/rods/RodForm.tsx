@@ -19,6 +19,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -48,6 +49,8 @@ export default function RodForm() {
   const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   // APIからデータ取得
   const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + id, fetcher)
@@ -56,6 +59,16 @@ export default function RodForm() {
 
   function handleSendRodData(values: RodData) {
     alert(JSON.stringify(values))
+    // リストページに遷移
+    router.push('/rods')
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'Rod registered!',
+      description: "We've created your rod data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   // 確認ドロワー
