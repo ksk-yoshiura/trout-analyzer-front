@@ -27,7 +27,7 @@ export default function RecordsAllList(): JSX.Element {
         {
           data.records?.map((item, index) => {
             return (
-              <NextLink key={index} href={"/records/list/" + item.id} passHref>
+              <NextLink key={index} href={"/records/" + item.id + "/patterns/list"} passHref>
                 <Box
                   display="flex"
                   w='100wh'
