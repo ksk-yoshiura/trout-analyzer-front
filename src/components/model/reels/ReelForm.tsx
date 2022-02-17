@@ -59,18 +59,55 @@ export default function ReelForm() {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
+  // API登録・更新
   function handleSendReelData(values: ReelData) {
-    alert(JSON.stringify(values))
-    // リストページに遷移
-    router.push('/reels')
-    // アラート代わりにトーストを使用
-    toast({
-      title: 'Reel registered!',
-      description: "We've created your reel data for you.",
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+    if (id) { // リールIDがある場合は更新
+      axios.put('/api/reels/edit/' + id, values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/reels')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Reel updated!',
+            description: "We've updated your reel data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    } else { // リールIDがない場合は登録
+      axios.post('/api/reels/create', values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/reels')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Reel registered!',
+            description: "We've created your reel data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+    }
   }
 
   function validateData(value: ReelData) {
