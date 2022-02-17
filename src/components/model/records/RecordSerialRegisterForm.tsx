@@ -22,6 +22,7 @@ import {
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
+import axios from 'axios'
 
 type SerialRecordData = {
   result: string;
@@ -43,15 +44,26 @@ export default function RecordSerialRegisterForm() {
   const toast = useToast()
 
   function handleSendSerialRecordData(values: SerialRecordData) {
-    alert(JSON.stringify(values))
-    // アラート代わりにトーストを使用
-    toast({
-      title: 'Pattern registered!',
-      description: "We've created your pattern data for you.",
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+    axios.post('/api/patterns/create', values)
+      .then(function () {
+        // アラート代わりにトーストを使用
+        toast({
+          title: 'Pattern registered!',
+          description: "We've created your pattern data for you.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
+      })
+      .catch(function (error) {
+        toast({
+          title: 'Failed! Try again!',
+          description: error,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+      })
   }
 
   function validateData(value: SerialRecordData) {
