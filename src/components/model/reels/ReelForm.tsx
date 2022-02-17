@@ -19,6 +19,7 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
+  useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -50,6 +51,8 @@ export default function ReelForm() {
   const { id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
+  // アラート
+  const toast = useToast()
 
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + id, fetcher)
@@ -58,6 +61,16 @@ export default function ReelForm() {
 
   function handleSendReelData(values: ReelData) {
     alert(JSON.stringify(values))
+    // リストページに遷移
+    router.push('/reels')
+    // アラート代わりにトーストを使用
+    toast({
+      title: 'Reel registered!',
+      description: "We've created your reel data for you.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   function validateData(value: ReelData) {
