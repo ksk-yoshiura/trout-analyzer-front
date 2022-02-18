@@ -41,7 +41,6 @@ export default function FieldForm() {
   // パラメータからフィールドID取得
   const router = useRouter();
   const { id } = router.query
-  console.log(router.route)
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
