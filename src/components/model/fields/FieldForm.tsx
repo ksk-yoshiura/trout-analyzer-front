@@ -41,6 +41,7 @@ export default function FieldForm() {
   // パラメータからフィールドID取得
   const router = useRouter();
   const { id } = router.query
+  console.log(router.route)
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
@@ -79,8 +80,13 @@ export default function FieldForm() {
     } else { // フィールドIDがない場合は登録
       axios.post('/api/fields/create', values)
         .then(function () {
-          // リストページに遷移
-          router.push('/fields')
+          if (router.route === '/preparation/field') {
+            // 釣果記録準備画面では登録画面に遷移
+            router.push('/records/serial_register')
+          } else {
+            // リストページに遷移
+            router.push('/fields')
+          }
           // アラート代わりにトーストを使用
           toast({
             title: 'Field registered!',
