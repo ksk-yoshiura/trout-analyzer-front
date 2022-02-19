@@ -113,7 +113,7 @@ export default function TackleForm() {
     // }
     // return error
   }
-  
+
   // 確認ドロワー
   const ConfirmDrawer = () => {
 
@@ -173,7 +173,6 @@ export default function TackleForm() {
                     <Input {...field} type="hidden" id='rodId' />
                     <RodDetail chosenId={Number(data.tackle?.rod.id)} />
                     <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
-
                   </FormControl>
                 )}
               </Field>
