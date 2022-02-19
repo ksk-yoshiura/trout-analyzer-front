@@ -34,9 +34,9 @@ const fetcher = (url: string) => axios(url)
   })
 
 type Tackle = {
-  rodId: string
-  reelId: string
-  lineId: string
+  rodId?: string
+  reelId?: string
+  lineId?: string
 }
 
 export default function TackleForm() {
@@ -146,9 +146,9 @@ export default function TackleForm() {
     <>
       <Formik
         initialValues={{
-          rodId: '',
-          reelId: '',
-          lineId: '',
+          rodId: data.tackle?.rod.id,
+          reelId: data.tackle?.reel.id,
+          lineId: data.tackle?.line.id,
         }}
         onSubmit={(values, actions) => {
           setTimeout(() => {
