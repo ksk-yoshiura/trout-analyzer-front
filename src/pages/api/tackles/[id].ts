@@ -84,7 +84,7 @@ export default function TacklesApi(
   }
 
   // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しな場合undefinedになる
+  // idが存在しない場合undefinedになる
   // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
   // 下記記述で回避する
   const tackle = id !== 'undefined'? fetchTackleData(id) : vacantData
