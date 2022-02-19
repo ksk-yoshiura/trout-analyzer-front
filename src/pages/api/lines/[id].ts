@@ -39,7 +39,7 @@ export default function LinesApi(
   // idが存在しな場合undefinedになる
   // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
   // 下記記述で回避する
-  const line = id !== 'undefined'? fetchLineData(id): vacantData
+  const line = id !== 'undefined' && id !== '0'? fetchLineData(id): vacantData
   if (line) {
     res.status(200).json({ line })
   } else {

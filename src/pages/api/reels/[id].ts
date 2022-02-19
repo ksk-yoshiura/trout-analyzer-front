@@ -35,7 +35,7 @@ export default function ReelsApi(
     'gear': '',
   } 
   
-  const reel =  id !== 'undefined'? fetchReelData(id) :vacantData
+  const reel =  id !== 'undefined' && id !== '0'? fetchReelData(id) :vacantData
   if (reel) {
     res.status(200).json({ reel })
   } else {
