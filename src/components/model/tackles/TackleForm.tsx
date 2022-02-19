@@ -53,8 +53,6 @@ export default function TackleForm() {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
-  console.log(data.tackle?.rod.id)
-
   // API登録・更新
   function handleSendTackleData(values: Tackle) {
     if (id) { // タックルIDがある場合は更新
@@ -172,6 +170,7 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >rod</FormLabel>
                     <Input {...field} type="hidden" id='rodId' />
+                    <RodDetail chosenId={Number(data.tackle?.rod.id)} />
                     <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
 
                   </FormControl>
@@ -190,6 +189,7 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >reel</FormLabel>
                     <Input {...field} type="hidden" id='reelId' />
+                    <ReelDetail chosenId={Number(data.tackle?.reel.id)} />
                     <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -207,21 +207,13 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >line</FormLabel>
                     <Input {...field} type="hidden" id='lineId' />
+                    <LineDetail chosenId={Number(data.tackle?.line.id)} />
                     <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
 
             </Stack>
-            {
-              data.tackle ?
-                <>
-                  <RodDetail chosenId={Number(data.tackle?.rod.id)} />
-                  <ReelDetail chosenId={Number(data.tackle?.reel.id)} />
-                  <LineDetail chosenId={Number(data.tackle?.line.id)} />
-                </>
-                : <></>
-            }
             <Button
               mt={4}
               colorScheme='teal'
