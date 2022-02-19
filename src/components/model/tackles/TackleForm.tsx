@@ -22,14 +22,16 @@ import {
   useToast
 } from "@chakra-ui/react";
 import RodDetail from '../rods/RodDetail'
+import ReelDetail from '../reels/ReelDetail'
+import LineDetail from '../lines/LineDetail'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
-import axios from'axios'
+import axios from 'axios'
 
 const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
+  .then((res) => {
+    return res.data
+  })
 
 type Tackle = {
   rodId: string
@@ -142,92 +144,96 @@ export default function TackleForm() {
 
   return (
     <>
-    <Formik
-      initialValues={{
-        rodId: '',
-        reelId: '',
-        lineId: '',
-      }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          handleSendTackleData(values)
-          actions.setSubmitting(false)
-        }, 1000)
-      }}
-    >
-      {(props) => (
-        <Form>
-          <Stack spacing={5}>
-            <Field name='rodId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.rodId)
-                    && Boolean(form.touched.rodId)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='rodId'
-                    textTransform='uppercase'
-                  >rod</FormLabel>
-                  <Input {...field} type="hidden" id='rodId' />
-                  <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
+      <Formik
+        initialValues={{
+          rodId: '',
+          reelId: '',
+          lineId: '',
+        }}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            handleSendTackleData(values)
+            actions.setSubmitting(false)
+          }, 1000)
+        }}
+      >
+        {(props) => (
+          <Form>
+            <Stack spacing={5}>
+              <Field name='rodId' validate={validateData}>
+                {({ field, form }: FieldProps) => (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.rodId)
+                      && Boolean(form.touched.rodId)}
+                  >
+                    <FormLabel
+                      fontSize="12px"
+                      htmlFor='rodId'
+                      textTransform='uppercase'
+                    >rod</FormLabel>
+                    <Input {...field} type="hidden" id='rodId' />
+                    <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
 
-                </FormControl>
-              )}
-            </Field>
+                  </FormControl>
+                )}
+              </Field>
 
-            <Field name='reelId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.reelId)
-                    && Boolean(form.touched.reelId)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='reelId'
-                    textTransform='uppercase'
-                  >reel</FormLabel>
-                  <Input {...field} type="hidden" id='reelId' />
-                  <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+              <Field name='reelId' validate={validateData}>
+                {({ field, form }: FieldProps) => (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.reelId)
+                      && Boolean(form.touched.reelId)}
+                  >
+                    <FormLabel
+                      fontSize="12px"
+                      htmlFor='reelId'
+                      textTransform='uppercase'
+                    >reel</FormLabel>
+                    <Input {...field} type="hidden" id='reelId' />
+                    <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
 
-            <Field name='lineId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.lineId)
-                    && Boolean(form.touched.lineId)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='lineId'
-                    textTransform='uppercase'
-                  >line</FormLabel>
-                  <Input {...field} type="hidden" id='lineId' />
-                  <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            
-          </Stack>
-          <Button
-            mt={4}
-            colorScheme='teal'
-            type='button'
-            onClick={onOpen}
-          >
-            Register
-          </Button>
-          <ConfirmDrawer />
-        </Form>
-      )}
-    </Formik>
-    {
-      data.tackle?
-      <RodDetail chosenId={Number(data.tackle?.rod.id)} />
-      : <></>
-    }
+              <Field name='lineId' validate={validateData}>
+                {({ field, form }: FieldProps) => (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.lineId)
+                      && Boolean(form.touched.lineId)}
+                  >
+                    <FormLabel
+                      fontSize="12px"
+                      htmlFor='lineId'
+                      textTransform='uppercase'
+                    >line</FormLabel>
+                    <Input {...field} type="hidden" id='lineId' />
+                    <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+            </Stack>
+            {
+              data.tackle ?
+                <>
+                  <RodDetail chosenId={Number(data.tackle?.rod.id)} />
+                  <ReelDetail chosenId={Number(data.tackle?.reel.id)} />
+                  <LineDetail chosenId={Number(data.tackle?.line.id)} />
+                </>
+                : <></>
+            }
+            <Button
+              mt={4}
+              colorScheme='teal'
+              type='button'
+              onClick={onOpen}
+            >
+              Register
+            </Button>
+            <ConfirmDrawer />
+          </Form>
+        )}
+      </Formik>
     </>
   )
 }
