@@ -47,7 +47,47 @@ export default function TacklesApi(
   res: NextApiResponse<TacklesApiResponse>
 ): void {
   const id = req.query.id as string
-  const tackle = fetchTackledData(id)
+  // 空データ（タイプチェック用）
+  const vacantData: Tackle = {
+    'id': '',
+    'createdAt': '',
+    'rod': {
+      'id': '',
+      'name': '',
+      'imageUrl': '',
+      'imageAlt': '',
+      'length': '',
+      'hardness': '',
+      'companyName': '',
+      'createdAt': '',
+    },
+    'reel': {
+      'id': '',
+      'name': '',
+      'imageUrl': '',
+      'imageAlt': '',
+      'type': '',
+      'gear': '',
+      'companyName': '',
+      'createdAt': '',
+    },
+    'line': {
+      'id': '',
+      'name': '',
+      'imageUrl': '',
+      'imageAlt': '',
+      'thickness': '',
+      'lineType': '',
+      'companyName': '',
+      'createdAt': '',
+    }
+  }
+
+  // cretaeとeditで同じフォームを使いまわしているため、
+  // idが存在しな場合undefinedになる
+  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // 下記記述で回避する
+  const tackle = id !== 'undefined'? fetchTackleData(id) : vacantData
   if (tackle) {
     res.status(200).json({ tackle })
   } else {
@@ -56,7 +96,7 @@ export default function TacklesApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchTackledData(id: string): Tackle | undefined {
+function fetchTackleData(id: string): Tackle | undefined {
   const tackles: Tackle[] = [
     {
       id: '1',
