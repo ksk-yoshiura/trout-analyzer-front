@@ -209,11 +209,12 @@ export default function TackleForm() {
           <Button
             mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
-            type='submit'
+            type='button'
+            onClick={onOpen}
           >
             Register
           </Button>
+          <ConfirmDrawer />
         </Form>
       )}
     </Formik>
