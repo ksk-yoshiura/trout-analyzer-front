@@ -1,12 +1,12 @@
 import { 
   Flex
 } from '@chakra-ui/react'
-import RodForm from '../../model/rods/RodForm'
+import TackleForm from '../../model/tackles/TackleForm'
 
-export default function RodEdit(): JSX.Element {
+export default function TackleEdit(): JSX.Element {
   return (
     <Flex textAlign="center" w="100wh">
-      <RodForm />
+      <TackleForm />
     </Flex>
   )
 }
