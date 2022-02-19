@@ -4,6 +4,7 @@ export type Tackle = {
   id: string
   createdAt: string
   rod: {
+    id: string
     name: string
     imageUrl: string
     imageAlt: string
@@ -13,6 +14,7 @@ export type Tackle = {
     createdAt: string
   },
   reel: {
+    id: string
     name: string
     imageUrl: string
     imageAlt: string
@@ -22,6 +24,7 @@ export type Tackle = {
     createdAt: string
   },
   line: {
+    id: string
     name: string
     imageUrl: string
     imageAlt: string
@@ -59,6 +62,7 @@ function fetchTackledData(id: string): Tackle | undefined {
       id: '1',
       createdAt: '2021/12/28',
       rod: {
+        id: '1',
         name: 'super good rod',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: 'rod image',
@@ -68,6 +72,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       reel: {
+        id: '1',
         name: 'super great reel',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -77,6 +82,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       line: {
+        id: '1',
         name: 'good line',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -90,6 +96,7 @@ function fetchTackledData(id: string): Tackle | undefined {
       id: '2',
       createdAt: '2021/12/28',
       rod: {
+        id: '1',
         name: 'super good rod',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: 'rod image',
@@ -99,6 +106,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       reel: {
+        id: '1',
         name: 'super great reel',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -108,6 +116,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       line: {
+        id: '1',
         name: 'good line',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -121,6 +130,7 @@ function fetchTackledData(id: string): Tackle | undefined {
       id: '3',
       createdAt: '2021/12/28',
       rod: {
+        id: '1',
         name: 'super good rod',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: 'rod image',
@@ -130,6 +140,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       reel: {
+        id: '1',
         name: 'super great reel',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -139,6 +150,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       line: {
+        id: '1',
         name: 'good line',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -152,6 +164,7 @@ function fetchTackledData(id: string): Tackle | undefined {
       id: '4',
       createdAt: '2021/12/28',
       rod: {
+        id: '1',
         name: 'super good rod',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: 'rod image',
@@ -161,6 +174,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       reel: {
+        id: '1',
         name: 'super great reel',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
@@ -170,6 +184,7 @@ function fetchTackledData(id: string): Tackle | undefined {
         createdAt: '2021/02/22'
       },
       line: {
+        id: '1',
         name: 'good line',
         imageUrl: 'https://bit.ly/2Z4KKcF',
         imageAlt: '',
