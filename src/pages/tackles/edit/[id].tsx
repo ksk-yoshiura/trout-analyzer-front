@@ -1,7 +1,7 @@
-import RodEdit from '../../../components/page/rods/edit';
+import TackleEdit from '../../../components/page/tackles/edit';
 
 export default function Edit(): JSX.Element {
   return (
-    <RodEdit />
+    <TackleEdit />
   );
 }
