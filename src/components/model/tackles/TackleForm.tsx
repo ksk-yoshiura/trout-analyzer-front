@@ -21,6 +21,7 @@ import {
   DrawerContent,
   useToast
 } from "@chakra-ui/react";
+import RodDetail from '../rods/RodDetail'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 import axios from'axios'
@@ -49,6 +50,8 @@ export default function TackleForm() {
   const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
+
+  console.log(data.tackle?.rod.id)
 
   // API登録・更新
   function handleSendTackleData(values: Tackle) {
@@ -138,6 +141,7 @@ export default function TackleForm() {
   }
 
   return (
+    <>
     <Formik
       initialValues={{
         rodId: '',
@@ -165,8 +169,9 @@ export default function TackleForm() {
                     htmlFor='rodId'
                     textTransform='uppercase'
                   >rod</FormLabel>
-                  <Input {...field} type="hidden" width="100%" fontSize="1xl" id='rodId'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} type="hidden" id='rodId' />
                   <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
+
                 </FormControl>
               )}
             </Field>
@@ -182,7 +187,7 @@ export default function TackleForm() {
                     htmlFor='reelId'
                     textTransform='uppercase'
                   >reel</FormLabel>
-                  <Input {...field} type="hidden" width="100%" fontSize="1xl" id='reelId'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} type="hidden" id='reelId' />
                   <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
                 </FormControl>
               )}
@@ -199,7 +204,7 @@ export default function TackleForm() {
                     htmlFor='lineId'
                     textTransform='uppercase'
                   >line</FormLabel>
-                  <Input {...field} type="hidden" width="100%" fontSize="1xl" id='lineId'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} type="hidden" id='lineId' />
                   <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
                 </FormControl>
               )}
@@ -218,5 +223,11 @@ export default function TackleForm() {
         </Form>
       )}
     </Formik>
+    {
+      data.tackle?
+      <RodDetail chosenId={Number(data.tackle?.rod.id)} />
+      : <></>
+    }
+    </>
   )
 }
