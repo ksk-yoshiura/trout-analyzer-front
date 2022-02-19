@@ -44,7 +44,11 @@ export default function TackleForm() {
   const router = useRouter();
   const { id } = router.query
   // 確認ドロワー
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { 
+    isOpen: isOpneConfirmDrawer, 
+    onOpen: onOpenConfirmDrawer, 
+    onClose: onCloseConfirmDrawer 
+  } = useDisclosure()
   // アラート
   const toast = useToast()
 
@@ -120,12 +124,12 @@ export default function TackleForm() {
     // サブミット
     const { submitForm } = useFormikContext();
     return (
-      <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
+      <Drawer placement={'bottom'} onClose={onCloseConfirmDrawer} isOpen={isOpneConfirmDrawer}>
         <DrawerOverlay />
         <DrawerContent h={'30vh'}>
           <DrawerBody mt={10} display={'flex'} justifyContent={'space-around'}>
             <Button
-              onClick={onClose}
+              onClick={onCloseConfirmDrawer}
               colorScheme='gray'
               variant='solid'
             >Cancel</Button>
@@ -218,7 +222,7 @@ export default function TackleForm() {
               mt={4}
               colorScheme='teal'
               type='button'
-              onClick={onOpen}
+              onClick={onOpenConfirmDrawer}
             >
               Register
             </Button>
