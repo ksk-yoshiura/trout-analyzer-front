@@ -81,7 +81,7 @@ export default function RecordsAllList(): JSX.Element {
                   onOpen(),
                     clickHandler(item.id)
                 }}
-                as={"button"}
+                type='button' as={"button"}
                 display="flex"
                 w='100wh'
                 maxW='sm'

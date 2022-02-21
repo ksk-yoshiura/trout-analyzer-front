@@ -48,14 +48,13 @@ export default function RodsList(): JSX.Element {
     )
   }
 
-
   return (
     <>
       <Wrap spacing={5}>
         {
           data.rods?.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 

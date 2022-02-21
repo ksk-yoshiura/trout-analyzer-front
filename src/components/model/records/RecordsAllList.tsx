@@ -34,7 +34,7 @@ export default function RecordsAllList(): JSX.Element {
                   maxW='sm'
                   borderWidth='1px'
                   borderRadius='lg'
-                  as={"button"}
+                  type='button' as={"button"}
                   overflow='hidden'
                 >
                   <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />

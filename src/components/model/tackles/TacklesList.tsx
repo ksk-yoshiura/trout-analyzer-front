@@ -52,7 +52,7 @@ export default function TacklesList(): JSX.Element {
         {
           data.tackles?.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} type='button' as={"button"}>
                 <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>
                   <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                     <Image src={item.rod.imageUrl} alt={item.rod.imageAlt} />
