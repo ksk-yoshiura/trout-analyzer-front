@@ -25,7 +25,9 @@ import {
 import RodDetail from '../rods/RodDetail'
 import RodsList from '../rods/RodsList'
 import ReelDetail from '../reels/ReelDetail'
+import ReelsList from '../reels/ReelsList'
 import LineDetail from '../lines/LineDetail'
+import LinesList from '../lines/LinesList'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 import axios from 'axios'
@@ -208,6 +210,7 @@ export default function TackleForm() {
                 )}
               </Field>
               <Button>Change</Button>
+              <ReelsList />
 
               <Field name='lineId' validate={validateData}>
                 {({ field, form }: FieldProps) => (
@@ -227,6 +230,7 @@ export default function TackleForm() {
                 )}
               </Field>
               <Button>Change</Button>
+              <LinesList />
 
             </Stack>
             <Button
