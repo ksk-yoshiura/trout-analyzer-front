@@ -15,6 +15,7 @@ import {
   FormErrorMessage,
   Stack,
   useDisclosure,
+  Box,
   Drawer,
   DrawerBody,
   DrawerOverlay,
@@ -44,11 +45,12 @@ export default function TackleForm() {
   const router = useRouter();
   const { id } = router.query
   // 確認ドロワー
-  const { 
-    isOpen: isOpneConfirmDrawer, 
-    onOpen: onOpenConfirmDrawer, 
-    onClose: onCloseConfirmDrawer 
+  const {
+    isOpen: isOpneConfirmDrawer,
+    onOpen: onOpenConfirmDrawer,
+    onClose: onCloseConfirmDrawer
   } = useDisclosure()
+
   // アラート
   const toast = useToast()
 
@@ -145,6 +147,7 @@ export default function TackleForm() {
     )
   }
 
+
   return (
     <>
       <Formik
@@ -175,11 +178,15 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >rod</FormLabel>
                     <Input {...field} type="hidden" id='rodId' />
-                    <RodDetail chosenId={Number(data.tackle?.rod.id)} />
+
+                    <Box borderWidth='5px' borderRadius='lg'>
+                      <RodDetail chosenId={Number(data.tackle?.rod.id)} />
+                    </Box>
                     <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
+              <Button>Change</Button>
 
               <Field name='reelId' validate={validateData}>
                 {({ field, form }: FieldProps) => (
@@ -198,6 +205,7 @@ export default function TackleForm() {
                   </FormControl>
                 )}
               </Field>
+              <Button>Change</Button>
 
               <Field name='lineId' validate={validateData}>
                 {({ field, form }: FieldProps) => (
@@ -216,6 +224,7 @@ export default function TackleForm() {
                   </FormControl>
                 )}
               </Field>
+              <Button>Change</Button>
 
             </Stack>
             <Button
