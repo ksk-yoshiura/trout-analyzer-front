@@ -23,6 +23,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import RodDetail from '../rods/RodDetail'
+import RodsList from '../rods/RodsList'
 import ReelDetail from '../reels/ReelDetail'
 import LineDetail from '../lines/LineDetail'
 import useSWR from 'swr'
@@ -179,14 +180,15 @@ export default function TackleForm() {
                     >rod</FormLabel>
                     <Input {...field} type="hidden" id='rodId' />
 
-                    <Box borderWidth='5px' borderRadius='lg'>
+                    <Box type='button' as='button'>
                       <RodDetail chosenId={Number(data.tackle?.rod.id)} />
                     </Box>
                     <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-              <Button>Change</Button>
+              <Button >Change</Button>
+              <RodsList />
 
               <Field name='reelId' validate={validateData}>
                 {({ field, form }: FieldProps) => (
