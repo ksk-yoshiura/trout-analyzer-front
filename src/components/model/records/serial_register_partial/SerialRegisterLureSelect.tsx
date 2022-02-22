@@ -27,7 +27,6 @@ export default function LureSelect(props: LureTypeProps) {
       <Select {...field} w='100wh' placeholder='Select lure' >
         {
           data?.lures?.map((item, index) => {
-            console.log(item.id)
             return (
               <option key={index} value={item.id}>
                 {item.name} :{item.color}
