@@ -11,7 +11,8 @@ const fetcher = (url: string) => axios(url)
   return res.data
 })
 
-export default function TackleSelect(field: any) {
+export default function TackleSelect(props: any) {
+  const { field } = props
   // APIからデータ取得
   const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/', fetcher)
   if (error) return <p>Error: {error.message}</p>
