@@ -19,11 +19,11 @@ type PatternTypeProp = {
   field?: any
 }
 
-const patternData = [
-  {'name': 'result', 'default': 'caught'},
-  {'name': 'speed', 'default': 'fast'},
-  {'name': 'depth', 'default': 'deep'},
-  {'name': 'weather', 'default': 'sunny'}
+const patternData = [ // 初期データ
+  { 'default': 'caught' },
+  { 'default': 'fast' },
+  { 'default': 'deep' },
+  { 'default': 'sunny' }
 ]
 
 export default function PatternConditionRadio(props: PatternTypeProp) {
