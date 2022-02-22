@@ -12,7 +12,8 @@ const fetcher = (url: string) => axios(url)
   return res.data
 })
 
-export default function LureTypeSelect(field: any) {
+export default function LureTypeSelect(props: any) {
+  const { field } = props
   const [lureTypeId, setLureTypeId] = useState('0')
 
   // APIからデータ取得
