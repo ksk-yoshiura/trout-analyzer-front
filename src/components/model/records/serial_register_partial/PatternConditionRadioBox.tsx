@@ -16,6 +16,7 @@ const fetcher = (url: string) => axios(url)
 
 type PatternTypeProp = {
   typeNum: number
+  field?: any
 }
 
 const patternData = [
@@ -27,14 +28,22 @@ const patternData = [
 
 export default function PatternConditionRadio(props: PatternTypeProp) {
   // パターンタイプ
-  const { typeNum } = props
+  const { typeNum, field } = props
+
+  // 初期データセット
+  const fieldDefaultValue = patternData[typeNum - 1 ].default
 
   // ラジオボタンデータ
   const { getRadioProps } = useRadioGroup({
-    name: patternData[typeNum - 1 ].name,
-    defaultValue: patternData[typeNum - 1 ].default,
-    onChange: console.log // TODO：valueをセットする関数を用意
+    name: field.name,
+    defaultValue: fieldDefaultValue,
+    onChange: setData // TODO：valueをセットする関数を用意
   })
+
+  function setData(val: any) { // 値をセットする
+    field.value = val
+    console.log(field)
+  }
 
   // APIからデータ取得
   const { data, error } = useSWR<PatternConditionsApiResponse, Error>('/api/pattern_conditions/type_num/' + typeNum, fetcher)
@@ -48,11 +57,11 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
 
   return (
     <Wrap>
-      {resultData?.map((value) => {
+      { resultData?.map((value) => {
         const radio = getRadioProps({ value })
         return (
           <WrapItem key={value}>
-            <RadioCard {...radio}>
+            <RadioCard {...radio} field={field}>
               {value}
             </RadioCard>
           </WrapItem>
