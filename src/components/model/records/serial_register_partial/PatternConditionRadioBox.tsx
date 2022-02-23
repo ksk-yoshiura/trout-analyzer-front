@@ -38,7 +38,6 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
     name: field.name,
     defaultValue: fieldDefaultValue
   })
-  const group = getRootProps(field)
 
   // APIからデータ取得
   const { data, error } = useSWR<PatternConditionsApiResponse, Error>('/api/pattern_conditions/type_num/' + typeNum, fetcher)
