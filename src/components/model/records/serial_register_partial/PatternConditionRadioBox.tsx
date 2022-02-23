@@ -21,8 +21,8 @@ type PatternTypeProp = {
 
 const patternData = [ // 初期データ
   { 'default': 'caught' },
-  { 'default': 'fast' },
-  { 'default': 'deep' },
+  { 'default': 'super fast' },
+  { 'default': 'top' },
   { 'default': 'sunny' }
 ]
 
