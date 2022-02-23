@@ -67,6 +67,7 @@ export default function RecordSerialRegisterForm() {
   }
 
   function validateData(value: SerialRecordData) {
+    // console.log(value)
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -135,7 +136,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='result'
                     textTransform='uppercase'
                   >result</FormLabel>
-                  <PatternConditionRadio typeNum={resultType} />
+                  <PatternConditionRadio typeNum={resultType} field={field} />
                   <FormErrorMessage>{form.errors.result}</FormErrorMessage>
                 </FormControl>
               )}
@@ -152,7 +153,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='speed'
                     textTransform='uppercase'
                   >speed</FormLabel>
-                  <PatternConditionRadio typeNum={speedType} />
+                  <PatternConditionRadio typeNum={speedType} field={field} />
                   <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
                 </FormControl>
               )}
@@ -169,7 +170,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='depth'
                     textTransform='uppercase'
                   >depth</FormLabel>
-                  <PatternConditionRadio typeNum={depthType} />
+                  <PatternConditionRadio typeNum={depthType} field={field} />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
                 </FormControl>
               )}
@@ -186,7 +187,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='weather'
                     textTransform='uppercase'
                   >weather</FormLabel>
-                  <PatternConditionRadio typeNum={weatherType} />
+                  <PatternConditionRadio typeNum={weatherType} field={field} />
                   <FormErrorMessage>{form.errors.weather}</FormErrorMessage>
                 </FormControl>
               )}

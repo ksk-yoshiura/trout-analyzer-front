@@ -34,16 +34,11 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   const fieldDefaultValue = patternData[typeNum - 1 ].default
 
   // ラジオボタンデータ
-  const { getRadioProps } = useRadioGroup({
+  const {  getRootProps, getRadioProps } = useRadioGroup({
     name: field.name,
-    defaultValue: fieldDefaultValue,
-    onChange: setData // TODO：valueをセットする関数を用意
+    defaultValue: fieldDefaultValue
   })
-
-  function setData(val: any) { // 値をセットする
-    field.value = val
-    console.log(field)
-  }
+  const group = getRootProps(field)
 
   // APIからデータ取得
   const { data, error } = useSWR<PatternConditionsApiResponse, Error>('/api/pattern_conditions/type_num/' + typeNum, fetcher)
@@ -56,12 +51,12 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   })
 
   return (
-    <Wrap>
+    <Wrap {...field}>
       { resultData?.map((value) => {
         const radio = getRadioProps({ value })
         return (
           <WrapItem key={value}>
-            <RadioCard {...radio} field={field}>
+            <RadioCard {...radio} >
               {value}
             </RadioCard>
           </WrapItem>

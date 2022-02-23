@@ -6,15 +6,14 @@ import {
 } from '@chakra-ui/react'
 
 export default function RadioCard(props:any) { // TODO：一旦anyで退避
-
   const { getInputProps, getCheckboxProps }  = useRadio(props)
 
   const input = getInputProps()
   const checkbox = getCheckboxProps()
 
   return (
-    <Box as='label' >
-      <Input {...input} type='checkbox' />
+    <Box as='label'>
+      <Input {...input} type='radio' />
       <Box
         {...checkbox}
         cursor='pointer'
