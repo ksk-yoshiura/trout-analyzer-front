@@ -34,7 +34,7 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   const fieldDefaultValue = patternData[typeNum - 1 ].default
 
   // ラジオボタンデータ
-  const {  getRootProps, getRadioProps } = useRadioGroup({
+  const { getRadioProps } = useRadioGroup({
     name: field.name,
     defaultValue: fieldDefaultValue
   })
