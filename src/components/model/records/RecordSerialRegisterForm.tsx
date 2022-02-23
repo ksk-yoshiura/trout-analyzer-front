@@ -94,7 +94,7 @@ export default function RecordSerialRegisterForm() {
             >Cancel</Button>
             <Button
               type="submit"
-              onClick={() => submitForm()}
+              onClick={() => {submitForm(),onClose()}}
               colorScheme='teal'
               variant='solid'
             >Confirm</Button>
