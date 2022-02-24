@@ -61,7 +61,61 @@ export default function PatternApi(
   res: NextApiResponse<PatternApiResponse>
 ): void {
   const id = req.query.id as string
-  const pattern = fetchPatternData(id)
+  // 空データ（タイプチェック用）
+  const vacantData: Pattern = {
+    'id': '',
+    'imageUrl': '',
+    'imageAlt': '',
+    'createdAt': '',
+    'lastUsedAt': '',
+    // バッジ情報
+    'badge': {
+      // ルアータイプ
+      'lureType': '',
+      // 釣果と状況
+      'result': '',
+      'weather': '',
+      'depth': '',
+      'speed': '',
+    },
+    // ルアー情報
+    'lure': {
+      'lureType': '',
+      'lureName': '',
+      'lureCompany': '',
+      'lureColor': '',
+      'lureWeight': '',
+    },
+  
+    // タックル
+    // ロッド
+    'rod': {
+      'rodName': '',
+      'rodHardness': '',
+      'rodLength': '',
+      'rodCompany': '',
+    },
+    // リール
+    'reel': {
+      'reelName': '',
+      'reelType': '',
+      'reelGear': '',
+      'reelCompany': '',
+    },
+    // ライン
+    'line': {
+      'lineName': '',
+      'lineThickness': '',
+      'lineType': '',
+      'lineCompany': '',
+    },
+  }
+
+  // cretaeとeditで同じフォームを使いまわしているため、
+  // idが存在しない場合undefinedになる
+  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // 下記記述で回避する
+  const pattern = id !== 'undefined' && id !== '0' ?  fetchPatternData(id) : vacantData
   if (pattern) {
     res.status(200).json({ pattern })
   } else {
