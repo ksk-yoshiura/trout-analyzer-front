@@ -35,6 +35,10 @@ export default function ReelsApi(
     'gear': '',
   } 
   
+  // cretaeとeditで同じフォームを使いまわしているため、
+  // idが存在しない場合undefinedになる
+  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // 下記記述で回避する
   const reel =  id !== 'undefined' && id !== '0'? fetchReelData(id) :vacantData
   if (reel) {
     res.status(200).json({ reel })
