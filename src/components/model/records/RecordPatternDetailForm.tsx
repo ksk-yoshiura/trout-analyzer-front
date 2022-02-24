@@ -55,7 +55,6 @@ export default function RecordSerialRegisterForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  // TODO：データをセット
   const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
