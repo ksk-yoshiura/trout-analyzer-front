@@ -4,16 +4,10 @@ import {
 } from '@chakra-ui/react'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 export default function FieldSelect() {
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/', fetcher)
+  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
