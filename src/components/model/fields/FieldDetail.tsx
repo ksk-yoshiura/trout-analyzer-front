@@ -7,12 +7,6 @@ import {
 } from '@chakra-ui/react'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 type DetailProps = {
   chosenId: number
@@ -23,7 +17,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
   
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + chosenId, fetcher)
+  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
