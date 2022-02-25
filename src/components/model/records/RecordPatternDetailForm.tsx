@@ -27,11 +27,6 @@ import useSWR from 'swr'
 import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
 import axios from 'axios'
 
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
-
 type SerialRecordData = {
   result: string;
   speed: string;
@@ -55,7 +50,7 @@ export default function RecordSerialRegisterForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id, fetcher)
+  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

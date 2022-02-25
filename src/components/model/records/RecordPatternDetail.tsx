@@ -10,12 +10,6 @@ import RecordPatternRodDetail from './pattern_detail_partial/RecordPatternRodDet
 import RecordPatternLineDetail from './pattern_detail_partial/RecordPatternLineDetail'
 import useSWR from 'swr'
 import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 type DetailProps = {
   chosenId: number
@@ -25,7 +19,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + chosenId, fetcher)
+  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

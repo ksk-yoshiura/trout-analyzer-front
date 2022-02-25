@@ -19,12 +19,7 @@ import NextLink from "next/link"
 import RecordPatternDetail from './RecordPatternDetail'
 import useSWR from 'swr'
 import { PatternsApiResponse } from "../../../pages/api/patterns/index"
-import axios from'axios'
 
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -35,7 +30,7 @@ export default function RecordsAllList(): JSX.Element {
   const recordId = route.query.record_id
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternsApiResponse, Error>('/api/patterns/', fetcher)
+  const { data, error } = useSWR<PatternsApiResponse, Error>('/api/patterns/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

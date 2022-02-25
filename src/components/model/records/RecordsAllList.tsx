@@ -7,17 +7,11 @@ import {
 import NextLink from "next/link"
 import useSWR from 'swr'
 import { RecordsApiResponse } from "../../../pages/api/records/all"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 export default function RecordsAllList(): JSX.Element {
 
   // APIからデータ取得
-  const { data, error } = useSWR<RecordsApiResponse, Error>('/api/records/all', fetcher)
+  const { data, error } = useSWR<RecordsApiResponse, Error>('/api/records/all')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
   
