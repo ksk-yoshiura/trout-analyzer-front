@@ -2,6 +2,13 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import Layout from "../components/layout/Layout";
+import { SWRConfig } from 'swr'
+import axios from 'axios'
+
+const fetcher = (url: string) => axios(url)
+  .then((res) => {
+    return res.data
+  })
 
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
@@ -36,14 +43,17 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
    * このページでは全ページ共通項目を設定
    * 1. Chakra UIの読み込み
    * 2. レポンシブヘッダー、サイドメニュー
+   * 3. API利用のためのfetcher準備
    * TODO：アカウント情報を持たせる
   */
-  
+
   return (
     <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SWRConfig value={{ fetcher }}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SWRConfig>
     </ChakraProvider>
   );
 }
