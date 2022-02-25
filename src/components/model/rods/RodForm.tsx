@@ -27,11 +27,6 @@ import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/[id]"
 import axios from'axios'
 
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
-
 type RodData = {
   name?: string;
   company?: string;
@@ -53,7 +48,7 @@ export default function RodForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + id, fetcher)
+  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

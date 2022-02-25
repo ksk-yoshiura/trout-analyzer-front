@@ -7,12 +7,6 @@ import {
 } from '@chakra-ui/react'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/[id]"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 type DetailProps = {
   chosenId: number
@@ -22,7 +16,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + chosenId, fetcher)
+  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

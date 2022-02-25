@@ -12,19 +12,18 @@ import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/index"
-import axios from 'axios'
 
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
+// タックルフォームで呼び出す場合
+type FieldProp = {
+  field?: any
+}
 
-export default function RodsList(): JSX.Element {
+export default function RodsList(props: FieldProp): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/', fetcher)
+  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
