@@ -27,11 +27,6 @@ import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/[id]"
 import axios from'axios'
 
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
-
 type LineData = {
   name?: string;
   company?: string;
@@ -53,7 +48,7 @@ export default function LineForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id, fetcher)
+  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

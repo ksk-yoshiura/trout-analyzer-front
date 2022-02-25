@@ -13,19 +13,13 @@ import LineDetail from './LineDetail'
 import DetailModal from '../../shared/DetailModal'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
-import axios from 'axios'
-
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
 
 export default function LinesList(): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/', fetcher)
+  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
