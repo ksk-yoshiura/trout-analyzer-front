@@ -27,11 +27,6 @@ import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 import axios from 'axios'
 
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
-
 type LureData = {
   name?: string;
   company?: string;
@@ -51,7 +46,7 @@ export default function LureForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id, fetcher)
+  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 

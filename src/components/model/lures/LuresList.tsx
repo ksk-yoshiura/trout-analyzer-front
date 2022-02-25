@@ -13,19 +13,13 @@ import LureDetail from './LureDetail'
 import DetailModal from '../../shared/DetailModal'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
-import axios from 'axios'
-
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
 
 export default function LuresList(): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/', fetcher)
+  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
