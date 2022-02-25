@@ -11,18 +11,12 @@ import DetailModal from '../../shared/DetailModal'
 import TackleDetail from './TackleDetail'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
-import axios from 'axios'
-
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
 
 export default function TacklesList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/', fetcher)
+  const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <p>Loading...</p>
 
