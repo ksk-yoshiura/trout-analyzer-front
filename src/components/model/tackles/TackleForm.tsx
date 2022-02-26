@@ -176,7 +176,7 @@ export default function TackleForm() {
                       && Boolean(form.touched.rodId)}
                   >
                     <FormLabel
-                      fontSize="12px"
+                      fontSize="20px"
                       htmlFor='rodId'
                       textTransform='uppercase'
                     >rod</FormLabel>
@@ -199,7 +199,7 @@ export default function TackleForm() {
                       && Boolean(form.touched.reelId)}
                   >
                     <FormLabel
-                      fontSize="12px"
+                      fontSize="20px"
                       htmlFor='reelId'
                       textTransform='uppercase'
                     >reel</FormLabel>
@@ -219,7 +219,7 @@ export default function TackleForm() {
                       && Boolean(form.touched.lineId)}
                   >
                     <FormLabel
-                      fontSize="12px"
+                      fontSize="20px"
                       htmlFor='lineId'
                       textTransform='uppercase'
                     >line</FormLabel>
