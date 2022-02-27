@@ -38,3 +38,7 @@ yarn-error.log*
 
 # jest
 *.snap
+
+# env
+.env
+.env.local
