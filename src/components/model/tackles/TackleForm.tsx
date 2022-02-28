@@ -28,6 +28,7 @@ import ReelDetail from '../reels/ReelDetail'
 import ReelsList from '../reels/ReelsList'
 import LineDetail from '../lines/LineDetail'
 import LinesList from '../lines/LinesList'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 import axios from 'axios'
@@ -60,7 +61,7 @@ export default function TackleForm() {
   // APIからデータ取得
   const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendTackleData(values: Tackle) {
