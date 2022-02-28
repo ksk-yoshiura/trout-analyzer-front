@@ -1,10 +1,4 @@
-import { useRouter } from "next/router";
-
+// ローディング
 export default function Loading() {
-  const router = useRouter();
-  const isReady = router.isReady;
-  
-  if (!isReady) {
-    return <p>Loading...</p>
-  }
+  return <p>Loading...</p>
 }
