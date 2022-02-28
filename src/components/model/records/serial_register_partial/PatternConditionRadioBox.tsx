@@ -5,6 +5,7 @@ import {
   WrapItem
 } from "@chakra-ui/react";
 import RadioCard from '../../../shared/RadioCard';
+import Loading from '../../../shared/Loading'
 import useSWR from 'swr'
 import { PatternConditionsApiResponse } from "../../../../pages/api/pattern_conditions/type_num/[type_num]"
 import axios from'axios'
@@ -42,7 +43,7 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   // APIからデータ取得
   const { data, error } = useSWR<PatternConditionsApiResponse, Error>('/api/pattern_conditions/type_num/' + typeNum, fetcher)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // 釣果の名称配列作成
   const resultData = data.pattern_condition?.map(function (value) {

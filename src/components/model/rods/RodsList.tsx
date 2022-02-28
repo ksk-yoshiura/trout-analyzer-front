@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/index"
 
@@ -25,7 +26,7 @@ export default function RodsList(props: FieldProp): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

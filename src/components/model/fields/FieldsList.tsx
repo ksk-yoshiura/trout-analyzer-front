@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import FieldDetail from './FieldDetail'
 import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
 
@@ -21,7 +22,7 @@ export default function FieldsList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

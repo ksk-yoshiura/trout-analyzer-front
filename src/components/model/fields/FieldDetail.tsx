@@ -5,6 +5,7 @@ import {
   Badge,
   Stack
 } from '@chakra-ui/react'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
 
@@ -19,7 +20,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>

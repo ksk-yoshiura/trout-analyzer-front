@@ -5,6 +5,7 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
 
@@ -18,7 +19,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>

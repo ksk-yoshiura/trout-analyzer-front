@@ -21,6 +21,7 @@ import {
   DrawerContent,
   useToast
 } from "@chakra-ui/react";
+import Loading from '../../shared/Loading'
 import Thumb from "../../shared/ThumbImage"
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
@@ -44,7 +45,7 @@ export default function FieldForm() {
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendFieldData(values: FieldData) {

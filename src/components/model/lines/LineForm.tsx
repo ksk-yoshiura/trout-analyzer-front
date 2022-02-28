@@ -22,6 +22,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/[id]"
@@ -50,7 +51,7 @@ export default function LineForm() {
   // APIからデータ取得
   const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendLineData(values: LineData) {

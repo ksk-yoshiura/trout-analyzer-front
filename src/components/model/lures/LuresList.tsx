@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import LureDetail from './LureDetail'
 import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
 
@@ -21,7 +22,7 @@ export default function LuresList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

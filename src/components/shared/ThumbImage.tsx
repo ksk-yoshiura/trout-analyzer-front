@@ -4,6 +4,7 @@ import {
   useEffect,
   FC
 } from "react"
+import Loading from '../shared/Loading'
 
 
 type ThumbProps = {
@@ -30,7 +31,7 @@ const Thumb: FC<ThumbProps> = ({ file }) => {
   }
 
   if (loading) {
-    return <p>Loading....</p>;
+    return <Loading />;
   }
 
   return (

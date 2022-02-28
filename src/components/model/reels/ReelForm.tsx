@@ -22,6 +22,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
@@ -52,7 +53,7 @@ export default function ReelForm() {
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + id)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendReelData(values: ReelData) {

@@ -3,6 +3,7 @@ import {
   Box,
   Image
 } from '@chakra-ui/react'
+import Loading from '../../shared/Loading'
 import RecordPatternBadgeDetail from './pattern_detail_partial/RecordPatternBadgeDetail'
 import RecordPatternLureDetail from './pattern_detail_partial/RecordPatternLureDetail'
 import RecordPatternReelDetail from './pattern_detail_partial/RecordPatternReelDetail'
@@ -21,7 +22,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>

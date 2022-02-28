@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import LineDetail from './LineDetail'
 import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
 
@@ -21,7 +22,7 @@ export default function LinesList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

@@ -22,6 +22,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
+import Loading from '../../shared/Loading'
 import LureTypeSelect from "./LureTypeSelect"
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
@@ -48,7 +49,7 @@ export default function LureForm() {
   // APIからデータ取得
   const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendLureData(values: LureData) {

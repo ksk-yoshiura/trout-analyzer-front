@@ -20,6 +20,7 @@ import {
   DrawerContent,
   useToast
 } from "@chakra-ui/react"
+import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
@@ -52,7 +53,7 @@ export default function RecordSerialRegisterForm() {
   // APIからデータ取得
   const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendSerialRecordData(values: SerialRecordData) {

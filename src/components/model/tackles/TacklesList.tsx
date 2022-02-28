@@ -8,6 +8,7 @@ import {
   Modal,
 } from '@chakra-ui/react'
 import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
 import TackleDetail from './TackleDetail'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
@@ -18,7 +19,7 @@ export default function TacklesList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

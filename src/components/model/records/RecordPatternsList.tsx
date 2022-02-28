@@ -15,6 +15,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import Loading from '../../shared/Loading'
 import NextLink from "next/link"
 import RecordPatternDetail from './RecordPatternDetail'
 import useSWR from 'swr'
@@ -32,7 +33,7 @@ export default function RecordsAllList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<PatternsApiResponse, Error>('/api/patterns/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

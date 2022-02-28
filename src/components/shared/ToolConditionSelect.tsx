@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Select,
 } from '@chakra-ui/react'
+import Loading from './Loading'
 import useSWR from 'swr'
 import { ToolConditionApiResponse } from "../../pages/api/tool_conditions/type_num/[type_num]"
 import axios from'axios'
@@ -31,7 +32,7 @@ export default function TooConditionTypeSelect(props: TypeProps) {
   // APIからデータ取得
   const { data, error } = useSWR<ToolConditionApiResponse, Error>('/api/tool_conditions/type_num/' + typeNum, fetcher)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   return (
     <Select {...field} w={200} placeholder={'Select '+title[typeNum - 1]} >

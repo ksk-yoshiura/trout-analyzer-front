@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Select,
 } from '@chakra-ui/react'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
 
@@ -15,7 +16,7 @@ export default function LureTypeSelect(props: TypeProp) {
   // APIからデータ取得
   const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   return (
     <Select {...field} w={150} placeholder='Lure Type'>

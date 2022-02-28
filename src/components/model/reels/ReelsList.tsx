@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import ReelDetail from './ReelDetail'
 import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/index"
 
@@ -20,7 +21,7 @@ export default function ReelsList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   function clickHandler(value: string) {
     // 型変換

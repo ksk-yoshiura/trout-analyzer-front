@@ -3,6 +3,7 @@ import {
   Select
 } from "@chakra-ui/react";
 import LureSelect from './SerialRegisterLureSelect'
+import Loading from '../../../shared/Loading'
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../../pages/api/lure_types/index"
 import axios from'axios'
@@ -20,7 +21,7 @@ export default function LureTypeSelect(props: any) {
   // ルアータイプリストデータ
   const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types', fetcher)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
   
   function changeHandler(event: any) { // TODO：anyで一旦退避
     const { target } = event;

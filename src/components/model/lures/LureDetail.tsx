@@ -5,6 +5,7 @@ import {
   Badge,
   Stack 
 } from '@chakra-ui/react'
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 
@@ -18,7 +19,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
   
 
   return (

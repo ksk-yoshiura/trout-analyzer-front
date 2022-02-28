@@ -5,6 +5,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { RecordsApiResponse } from "../../../pages/api/records/all"
 
@@ -13,7 +14,7 @@ export default function RecordsAllList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<RecordsApiResponse, Error>('/api/records/all')
   if (error) return <p>Error: {error.message}</p>
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
   
   return (
     <>
