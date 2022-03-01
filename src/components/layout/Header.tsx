@@ -1,9 +1,9 @@
 import React from 'react'
+import { signOut } from "next-auth/react"
 import { Box, Flex, Button } from '@chakra-ui/react';
 import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
 
 export default function Header(): JSX.Element {
-  // TODO：左端にロゴ、右端にログアウトボタン
   return (
     <Flex h={50}>
       <Box 
@@ -19,7 +19,7 @@ export default function Header(): JSX.Element {
         pr={5}
         pt={3}
       >
-        <Button colorScheme='teal' variant='link'>
+        <Button colorScheme='teal' variant='link' onClick={() => signOut()}>
           Logout
         </Button>
       </Box>
