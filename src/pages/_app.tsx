@@ -38,7 +38,6 @@ const theme = extendTheme({
   },
 });
 
-
 export default function App({ 
   Component, 
   pageProps: { session, ...pageProps } 
@@ -49,7 +48,6 @@ export default function App({
    * 2. レポンシブヘッダー、サイドメニュー
    * 3. API利用のためのfetcher準備
   */
-
 
   return (
     <ChakraProvider theme={theme}>
