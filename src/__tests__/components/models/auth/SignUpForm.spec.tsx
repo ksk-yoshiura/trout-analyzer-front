@@ -4,9 +4,9 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import LoginForm from '../../../../components/model/auth/LoginForm';
+import SignUpForm from '../../../../components/model/auth/SignUpForm';
 
-test('LoginForm', () => {
-  const { asFragment } = render(<LoginForm />);
+test('SignUpForm', () => {
+  const { asFragment } = render(<SignUpForm />);
   expect(asFragment()).toMatchSnapshot();
 });
