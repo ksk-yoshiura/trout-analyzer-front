@@ -1,4 +1,3 @@
-import Reactfrom from 'react'
 import { getCsrfToken, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { CtxOrReq } from "next-auth/client/_utils";
@@ -16,7 +15,6 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react";
-import axios from 'axios'
 
 type LoginData = {
   mailaddress: string;
