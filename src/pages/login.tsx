@@ -26,7 +26,7 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
   return {
     props: {
       title: "login",
-      csrfToken: await getCsrfToken(context),
+      csrfToken: JSON.stringify(getCsrfToken(context)),
     },
   };
 };
