@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { getCsrfToken, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { CtxOrReq } from "next-auth/client/_utils";
 import {
   Formik,
   Form,
@@ -13,17 +16,36 @@ import {
   FormErrorMessage,
   Stack
 } from "@chakra-ui/react";
+import axios from 'axios'
 
 type LoginData = {
   mailaddress: string;
   password: string;
 }
 
-export default function LoginForm() {
-  function handleSendLoginData(values: LoginData) {
-    alert(JSON.stringify(values))
-  }
+// POSTリクエスト（サインイン・サインアウトなど）に必要なCSRFトークンを返却する
+export const getServerSideProps = async (context: CtxOrReq | undefined) => {
+  return {
+    props: {
+      title: "login",
+      csrfToken: await getCsrfToken(context),
+    },
+  };
+};
 
+export default function LoginForm({ csrfToken }: { csrfToken: string | undefined }) {
+  const router = useRouter();
+  console.log(csrfToken)
+  function handleSendLoginData(values: LoginData) {
+    axios.post('/api/login', values)
+      .then(function () {
+        // リストページに遷移
+        router.push('/')
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
 
   function validateData(value: LoginData) {
     // let error
@@ -50,6 +72,7 @@ export default function LoginForm() {
     >
       {(props) => (
         <Form>
+          <Input name="csrfToken" type="hidden" defaultValue={csrfToken} />
           <Stack spacing={5}>
             <Field name='mailaddress' validate={validateData}>
               {({ field, form }: FieldProps) => (
@@ -62,7 +85,7 @@ export default function LoginForm() {
                     htmlFor='mailaddress'
                     textTransform='uppercase'
                   >mailaddress</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='mailaddress'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='mailaddress' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.mailaddress}</FormErrorMessage>
                 </FormControl>
               )}
@@ -79,12 +102,12 @@ export default function LoginForm() {
                     htmlFor='password'
                     textTransform='uppercase'
                   >password</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='password'  variant='flushed' placeholder='Enter' />
+                  <Input {...field} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
                   <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            
+
           </Stack>
           <Button
             mt={4}
