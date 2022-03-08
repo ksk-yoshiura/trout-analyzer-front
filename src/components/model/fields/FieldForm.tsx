@@ -21,6 +21,8 @@ import {
   DrawerContent,
   useToast
 } from "@chakra-ui/react";
+import { useSession } from "next-auth/react"
+import { getToken } from "next-auth/jwt"
 import Loading from '../../shared/Loading'
 import Thumb from "../../shared/ThumbImage"
 import useSWR from 'swr'
@@ -42,6 +44,28 @@ export default function FieldForm() {
   // アラート
   const toast = useToast()
 
+
+  // セッショントークン取得
+  // フィールド登録・更新API
+  const { data: session } = useSession();
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+  const fieldApi = axios.create({
+    baseURL: 'http://localhost:3030/api/',
+    timeout: 5000
+  })
+
+  fieldApi.interceptors.request.use(config => {
+    
+    if (session?.accessToken && config?.headers) {
+      config.headers.Authorization = `Bearer ${session.accessToken}`
+    }
+    console.log(config)
+    return config
+  })
+  
+
+
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id)
   if (error) return <p>Error: {error.message}</p>
@@ -50,7 +74,7 @@ export default function FieldForm() {
   // API登録・更新
   function handleSendFieldData(values: FieldData) {
     if (id) { // フィールドIDがある場合は更新
-      axios.put('/api/fields/edit/' + id, values)
+      fieldApi.put('/fields/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/fields')
@@ -73,8 +97,9 @@ export default function FieldForm() {
           })
         })
     } else { // フィールドIDがない場合は登録
-      axios.post('/api/fields/create', values)
-        .then(function () {
+      fieldApi.post('fields', values)
+        .then(function (response) {
+          console.log(response)
           if (router.route === '/preparation/field') {
             // 釣果記録準備画面では登録画面に遷移
             router.push('/records/serial_register')
@@ -92,13 +117,14 @@ export default function FieldForm() {
           })
         })
         .catch(function (error) {
-          toast({
-            title: 'Failed!',
-            description: error,
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          })
+          console.log(error)
+          // toast({
+          //   title: 'Failed!',
+          //   description: error,
+          //   status: 'error',
+          //   duration: 9000,
+          //   isClosable: true,
+          // })
         })
     }
   }
