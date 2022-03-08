@@ -17,10 +17,8 @@ export default function Layout({ children }: Props) {
   // TODO：要解消
   // Warning: Expected server HTML to contain a matching <div> in <div>.
   const { data: session } = useSession();
-
   const router = useRouter();
   const isReady = router.isReady;
-  
   if (!isReady) {
     return <Loading />
   }
