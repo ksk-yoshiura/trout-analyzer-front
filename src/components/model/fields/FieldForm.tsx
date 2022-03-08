@@ -53,7 +53,7 @@ export default function FieldForm() {
   // API登録・更新
   function handleSendFieldData(values: FieldData) {
     if (id) { // フィールドIDがある場合は更新
-      axiosInstance.put('/fields/' + id, values)
+      axiosInstance.put('fields/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/fields')
