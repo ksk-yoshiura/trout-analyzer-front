@@ -38,9 +38,9 @@ const theme = extendTheme({
   },
 });
 
-export default function App({ 
-  Component, 
-  pageProps: { session, ...pageProps } 
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
 }: AppProps): JSX.Element {
   /** 
    * このページでは全ページ共通項目を設定
@@ -50,14 +50,14 @@ export default function App({
   */
 
   return (
-    <ChakraProvider theme={theme}>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <ChakraProvider theme={theme}>
         <SWRConfig value={{ fetcher }}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </SWRConfig>
-      </SessionProvider>
-    </ChakraProvider>
+      </ChakraProvider>
+    </SessionProvider>
   );
 }
