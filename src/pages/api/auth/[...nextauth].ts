@@ -30,7 +30,6 @@ export default NextAuth({
         })
         const res = await instance.post('/login', postData)
           .then((v) => {
-            console.log(v.data.token)
             return v.data.token
           })
           .catch((error) => {
@@ -46,7 +45,6 @@ export default NextAuth({
 
             }
           }
-          console.log(data)
           return data;
         }
 
@@ -59,8 +57,6 @@ export default NextAuth({
     async jwt({ token, user, account }) {
       // 最初のサインイン
       if (account && user) {
-        console.log(token)
-        console.log(account)
         console.log(user)
         return {
           ...token,
