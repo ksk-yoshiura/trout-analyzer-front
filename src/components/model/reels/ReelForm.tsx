@@ -26,7 +26,7 @@ import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
-import axios from'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type ReelData = {
   name?: string;
@@ -49,7 +49,9 @@ export default function ReelForm() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
-
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
+  
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + id)
   if (error) return <p>Error: {error.message}</p>
@@ -58,7 +60,7 @@ export default function ReelForm() {
   // API登録・更新
   function handleSendReelData(values: ReelData) {
     if (id) { // リールIDがある場合は更新
-      axios.put('/api/reels/edit/' + id, values)
+      axiosInstance.put('reels/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/reels')
@@ -81,7 +83,7 @@ export default function ReelForm() {
           })
         })
     } else { // リールIDがない場合は登録
-      axios.post('/api/reels/create', values)
+      axiosInstance.post('reels', values)
         .then(function () {
           // リストページに遷移
           router.push('/reels')
