@@ -25,7 +25,7 @@ import Loading from '../../shared/Loading'
 import Thumb from "../../shared/ThumbImage"
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
-import { instance } from "../../../pages/api/utils"
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type FieldData = {
   name?: string;
@@ -43,7 +43,7 @@ export default function FieldForm() {
   const toast = useToast()
 
   // axiosの設定
-  const axiosInstance = instance()
+  const axiosInstance = createAxiosInstance()
   
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id)
