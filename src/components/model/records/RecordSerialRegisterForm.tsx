@@ -22,7 +22,6 @@ import {
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
-import axios from 'axios'
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type SerialRecordData = {
