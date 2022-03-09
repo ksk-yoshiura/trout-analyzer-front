@@ -23,6 +23,7 @@ import PatternConditionRadio from './serial_register_partial/PatternConditionRad
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 import axios from 'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type SerialRecordData = {
   result: string;
@@ -43,8 +44,11 @@ export default function RecordSerialRegisterForm() {
   // アラート
   const toast = useToast()
 
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
+
   function handleSendSerialRecordData(values: SerialRecordData) {
-    axios.post('/api/patterns/create', values)
+    axiosInstance.post('patterns', values)
       .then(function () {
         // アラート代わりにトーストを使用
         toast({
