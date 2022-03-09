@@ -26,7 +26,7 @@ import Loading from '../../shared/Loading'
 import LureTypeSelect from "./LureTypeSelect"
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
-import axios from 'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type LureData = {
   name?: string;
@@ -51,10 +51,13 @@ export default function LureForm() {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
+  
   // API登録・更新
   function handleSendLureData(values: LureData) {
     if (id) { // ルアーIDがある場合は更新
-      axios.put('/api/lures/edit/' + id, values)
+      axiosInstance.put('lures/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/lures')
@@ -77,7 +80,7 @@ export default function LureForm() {
           })
         })
     } else { // ルアーIDがない場合は登録
-      axios.post('/api/lures/create', values)
+      axiosInstance.post('lures', values)
         .then(function () {
           // リストページに遷移
           router.push('/lures')
