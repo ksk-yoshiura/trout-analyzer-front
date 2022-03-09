@@ -26,7 +26,7 @@ import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/[id]"
-import axios from'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type RodData = {
   name?: string;
@@ -47,6 +47,10 @@ export default function RodForm() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
+  
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
+  
 
   // APIからデータ取得
   const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + id)
@@ -56,7 +60,7 @@ export default function RodForm() {
   // API登録・更新
   function handleSendRodData(values: RodData) {
     if (id) { // ロッドIDがある場合は更新
-      axios.put('/api/rods/edit/' + id, values)
+      axiosInstance.put('rods/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/rods')
@@ -79,7 +83,7 @@ export default function RodForm() {
           })
         })
     } else { // ロッドIDがない場合は登録
-      axios.post('/api/rods/create', values)
+      axiosInstance.post('rods', values)
         .then(function () {
           // リストページに遷移
           router.push('/rods')
