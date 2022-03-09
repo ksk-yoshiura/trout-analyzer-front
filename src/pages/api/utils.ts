@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react"
 import axios from 'axios'
 
-export const instance = () => { 
+export const createAxiosInstance = () => { 
   // セッションからアクセストークンを取得
   const { data: session } = useSession();
 
