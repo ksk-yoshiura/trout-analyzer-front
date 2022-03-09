@@ -26,7 +26,7 @@ import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 import useSWR from 'swr'
 import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
-import axios from 'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type SerialRecordData = {
   result: string;
@@ -50,6 +50,9 @@ export default function RecordSerialRegisterForm() {
   // アラート
   const toast = useToast()
 
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
+  
   // APIからデータ取得
   const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id)
   if (error) return <p>Error: {error.message}</p>
@@ -58,7 +61,7 @@ export default function RecordSerialRegisterForm() {
   // API登録・更新
   function handleSendSerialRecordData(values: SerialRecordData) {
     if (id) { // パターンIDがある場合は更新
-      axios.put('/api/patterns/edit/' + id, values)
+      axiosInstance.put('patterns/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/patterns')
@@ -81,7 +84,7 @@ export default function RecordSerialRegisterForm() {
           })
         })
     } else { // パターンIDがない場合は登録
-      axios.post('/api/patterns/create', values)
+      axiosInstance.post('patterns', values)
         .then(function () {
           // リストページに遷移
           router.push('/patterns')
