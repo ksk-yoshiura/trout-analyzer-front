@@ -26,7 +26,7 @@ import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import useSWR from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/[id]"
-import axios from'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type LineData = {
   name?: string;
@@ -48,6 +48,9 @@ export default function LineForm() {
   // アラート
   const toast = useToast()
 
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
+  
   // APIからデータ取得
   const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id)
   if (error) return <p>Error: {error.message}</p>
@@ -56,7 +59,7 @@ export default function LineForm() {
   // API登録・更新
   function handleSendLineData(values: LineData) {
     if (id) { // ラインIDがある場合は更新
-      axios.put('/api/lines/edit/' + id, values)
+      axiosInstance.put('lines/' + id, values)
         .then(function () {
           // リストページに遷移
           router.push('/lines')
@@ -79,7 +82,7 @@ export default function LineForm() {
           })
         })
     } else { // ラインIDがない場合は登録
-      axios.post('/api/lines/create', values)
+      axiosInstance.post('lines', values)
         .then(function () {
           // リストページに遷移
           router.push('/lines')
