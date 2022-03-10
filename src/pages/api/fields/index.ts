@@ -13,8 +13,9 @@ export type Field = {
 
 // API のレスポンス型
 export type FieldsApiResponse = {
-  fields?: Field[]
-  debugMessage?: string
+  result?: Field[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -23,11 +24,6 @@ export default function FieldsApi(
   res: NextApiResponse<FieldsApiResponse>
 ): void {
   const fields = fetchFieldData()
-  if (fields) {
-    res.status(200).json({ fields })
-  } else {
-    res.status(400).json({ debugMessage: `Field not found` })
-  }
 }
 
 // 擬似的なデータフェッチ関数
