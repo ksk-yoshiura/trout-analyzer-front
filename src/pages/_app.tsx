@@ -5,11 +5,8 @@ import { createBreakpoints } from '@chakra-ui/theme-tools';
 import Layout from "../components/layout/Layout";
 import { SWRConfig } from 'swr'
 import axios from 'axios'
+import { createAxiosInstance } from "../pages/api/utils"
 
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
 
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
@@ -48,15 +45,28 @@ export default function App({
    * 2. レポンシブヘッダー、サイドメニュー
    * 3. API利用のためのfetcher準備
   */
+  const SWRComponent = () => {
+    // axiosの設定
+    const axiosInstance = createAxiosInstance()
+    // axiosInstanceはuseSessionからアクセストークンを取得しているので
+    // SessionProviderコンポーネントより内側で呼ぶ必要がある
+    const fetcher = (url: string) => axiosInstance.get(url)
+      .then((res) => {
+        return res.data
+      })
+
+    return (<SWRConfig value={{ fetcher }}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SWRConfig>
+    )
+  }
 
   return (
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>
-        <SWRConfig value={{ fetcher }}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SWRConfig>
+        <SWRComponent />
       </ChakraProvider>
     </SessionProvider>
   );
