@@ -12,8 +12,9 @@ export type Reel = {
 
 // API のレスポンス型
 export type ReelsApiResponse = {
-  reels?: Reel[]
-  debugMessage?: string
+  result?: Reel[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -21,12 +22,12 @@ export default function ReelsApi(
   req: NextApiRequest,
   res: NextApiResponse<ReelsApiResponse>
 ): void {
-  const reels = fetchReelData()
-  if (reels) {
-    res.status(200).json({ reels })
-  } else {
-    res.status(400).json({ debugMessage: `Reels not found` })
-  }
+  // const reels = fetchReelData()
+  // if (reels) {
+  //   res.status(200).json({ reels })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Reels not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
