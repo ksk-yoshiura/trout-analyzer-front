@@ -20,7 +20,7 @@ export default function FieldsList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/')
+  const { data, error } = useSWR<FieldsApiResponse, Error>('fields')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -48,7 +48,7 @@ export default function FieldsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          data.fields?.map((item, index) => {
+          data.result?.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
