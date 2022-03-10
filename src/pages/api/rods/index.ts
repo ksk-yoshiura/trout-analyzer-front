@@ -12,8 +12,9 @@ export type Rod = {
 
 // API のレスポンス型
 export type RodsApiResponse = {
-  rods?: Rod[]
-  debugMessage?: string
+  result: Rod[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -21,12 +22,12 @@ export default function RodsApi(
   req: NextApiRequest,
   res: NextApiResponse<RodsApiResponse>
 ): void {
-  const rods = fetchRodData()
-  if (rods) {
-    res.status(200).json({ rods })
-  } else {
-    res.status(400).json({ debugMessage: `Rods not found` })
-  }
+  // const rods = fetchRodData()
+  // if (rods) {
+  //   res.status(200).json({ rods })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Rods not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
