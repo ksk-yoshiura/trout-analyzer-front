@@ -12,8 +12,9 @@ export type Line = {
 
 // API のレスポンス型
 export type LinesApiResponse = {
-  lines?: Line[]
-  debugMessage?: string
+  result?: Line[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -21,12 +22,12 @@ export default function LinesApi(
   req: NextApiRequest,
   res: NextApiResponse<LinesApiResponse>
 ): void {
-  const lines = fetchLineData()
-  if (lines) {
-    res.status(200).json({ lines })
-  } else {
-    res.status(400).json({ debugMessage: `Lines not found` })
-  }
+  // const lines = fetchLineData()
+  // if (lines) {
+  //   res.status(200).json({ lines })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Lines not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
