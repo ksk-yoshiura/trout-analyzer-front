@@ -46,7 +46,7 @@ export default function FieldForm() {
   const axiosInstance = createAxiosInstance()
   
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + id)
+  const { data, error } = useSWR<FieldsApiResponse, Error>('fields/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -151,8 +151,8 @@ export default function FieldForm() {
   return (
     <Formik
       initialValues={{
-        name: data.field?.name,
-        address: data.field?.address,
+        name: data.result?.name,
+        address: data.result?.address,
         image: '' // TODO ：適切な形式で
       }}
       validateOnChange
