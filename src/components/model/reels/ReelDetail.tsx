@@ -17,13 +17,13 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + chosenId)
+  const { data, error } = useSWR<ReelsApiResponse, Error>('reels/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.reel?.imageUrl} alt={data.reel?.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -31,10 +31,10 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.reel?.type}
+            {data.result?.type}
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.reel?.gear}
+            {data.result?.gear}
           </Badge>
         </Box>
 
@@ -46,7 +46,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.reel?.name}
+          {data.result?.name}
         </Box>
 
         <Stack
@@ -58,10 +58,10 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            COMPANY {data.reel?.company}
+            COMPANY {data.result?.company}
           </Box>
           <Box>
-            ADDED {data.reel?.createdAt}
+            ADDED {data.result?.createdAt}
           </Box>
         </Stack>
 
