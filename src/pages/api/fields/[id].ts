@@ -13,8 +13,9 @@ export type Field = {
 
 // API のレスポンス型
 export type FieldsApiResponse = {
-  field?: Field
-  debugMessage?: string
+  result?: Field
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -22,29 +23,29 @@ export default function FieldsApi(
   req: NextApiRequest,
   res: NextApiResponse<FieldsApiResponse>
 ): void {
-  const id = req.query.id as string
-  // 空データ（タイプチェック用）
-  const vacantData: Field = {
-    'id': '',
-    'imageUrl': '',
-    'imageAlt': '',
-    'createdAt': '',
-    'lastVisitedAt': '',
-    'name': '',
-    'address': '',
-    'frequency': '',
-  } 
+  // const id = req.query.id as string
+  // // 空データ（タイプチェック用）
+  // const vacantData: Field = {
+  //   'id': '',
+  //   'imageUrl': '',
+  //   'imageAlt': '',
+  //   'createdAt': '',
+  //   'lastVisitedAt': '',
+  //   'name': '',
+  //   'address': '',
+  //   'frequency': '',
+  // } 
 
   // cretaeとeditで同じフォームを使いまわしているため、
   // idが存在しない場合undefinedになる
   // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
   // 下記記述で回避する
-  const field = id !== 'undefined'? fetchFieldData(id) : vacantData
-  if (field) {
-    res.status(200).json({ field })
-  } else {
-    res.status(400).json({ debugMessage: `Field [id=${id}] not found` })
-  }
+  // const field = id !== 'undefined'? fetchFieldData(id) : vacantData
+  // if (field) {
+  //   res.status(200).json({ field })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Field [id=${id}] not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
