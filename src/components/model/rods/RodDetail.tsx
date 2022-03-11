@@ -17,13 +17,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + chosenId)
+  const { data, error } = useSWR<RodsApiResponse, Error>('rods/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.rod?.imageUrl} alt={data.rod?.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -31,7 +31,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.rod?.hardness}
+            {data.result?.hardness}
           </Badge>
         </Box>
 
@@ -43,7 +43,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.rod?.name}
+          {data.result?.name}
         </Box>
 
         <Stack
@@ -55,13 +55,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            LENGTH {data.rod?.length} ft
+            LENGTH {data.result?.length} ft
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.rod?.company}
+            COMPANY {data.result?.company}
           </Box>
           <Box>
-            ADDED {data.rod?.createdAt}
+            ADDED {data.result?.createdAt}
           </Box>
         </Stack>
 
