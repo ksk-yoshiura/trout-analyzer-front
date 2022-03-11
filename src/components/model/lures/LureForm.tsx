@@ -47,7 +47,7 @@ export default function LureForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + id)
+  const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -145,11 +145,11 @@ export default function LureForm() {
   return (
     <Formik
       initialValues={{
-        name: data.lure?.name,
-        company: data.lure?.company,
-        color: data.lure?.color,
-        weight: data.lure?.weight,
-        type: data.lure?.lureType,
+        name: data.result?.name,
+        company: data.result?.company,
+        color: data.result?.color,
+        weight: data.result?.weight,
+        type: data.result?.lureType,
         image: ''
       }}
       onSubmit={(values, actions) => {
