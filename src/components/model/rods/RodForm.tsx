@@ -53,7 +53,7 @@ export default function RodForm() {
   
 
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('/api/rods/' + id)
+  const { data, error } = useSWR<RodsApiResponse, Error>('rods/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -148,10 +148,10 @@ export default function RodForm() {
   return (
     <Formik
       initialValues={{
-        name: data.rod?.name,
-        company: data.rod?.company,
-        hardness: data.rod?.hardness,
-        length: data.rod?.length,
+        name: data.result?.name,
+        company: data.result?.company,
+        hardness: data.result?.hardness,
+        length: data.result?.length,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
