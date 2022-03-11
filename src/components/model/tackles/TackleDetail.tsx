@@ -17,17 +17,17 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/' + chosenId)
+  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.tackle?.rod.imageUrl} alt={data.tackle?.rod.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.rod.imageUrl} alt={data.result?.rod.imageAlt} borderRadius='lg' />
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.tackle?.rod.hardness}
+            {data.result?.rod.hardness}
           </Badge>
         </Box>
 
@@ -39,7 +39,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.tackle?.rod.name}
+          {data.result?.rod.name}
         </Box>
 
         <Stack
@@ -51,25 +51,25 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            LENGTH {data.tackle?.rod.length} ft
+            LENGTH {data.result?.rod.length} ft
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.tackle?.rod.companyName}
+            COMPANY {data.result?.rod.companyName}
           </Box>
           <Box>
-            ADDED {data.tackle?.rod.createdAt}
+            ADDED {data.result?.rod.createdAt}
           </Box>
         </Stack>
       </Box>
 
-      <Image src={data.tackle?.reel.imageUrl} alt={data.tackle?.reel.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.reel.imageUrl} alt={data.result?.reel.imageAlt} borderRadius='lg' />
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.tackle?.reel.type}
+            {data.result?.reel.type}
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.tackle?.reel.gear}
+            {data.result?.reel.gear}
           </Badge>
         </Box>
 
@@ -81,7 +81,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.tackle?.reel.name}
+          {data.result?.reel.name}
         </Box>
 
         <Stack
@@ -93,19 +93,19 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            COMPANY {data.tackle?.reel.companyName}
+            COMPANY {data.result?.reel.companyName}
           </Box>
           <Box>
-            ADDED {data.tackle?.reel.createdAt}
+            ADDED {data.result?.reel.createdAt}
           </Box>
         </Stack>
       </Box>
 
-      <Image src={data.tackle?.line.imageUrl} alt={data.tackle?.line.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.line.imageUrl} alt={data.result?.line.imageAlt} borderRadius='lg' />
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.tackle?.line.lineType}
+            {data.result?.line.lineType}
           </Badge>
         </Box>
 
@@ -117,7 +117,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.tackle?.line.name}
+          {data.result?.line.name}
         </Box>
 
         <Stack
@@ -129,13 +129,13 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {data.tackle?.line.thickness} lb
+            THICKNESS {data.result?.line.thickness} lb
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.tackle?.line.companyName}
+            COMPANY {data.result?.line.companyName}
           </Box>
           <Box>
-            ADDED {data.tackle?.line.createdAt}
+            ADDED {data.result?.line.createdAt}
           </Box>
         </Stack>
       </Box>
