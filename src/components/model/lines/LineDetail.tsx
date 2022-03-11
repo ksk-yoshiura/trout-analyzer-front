@@ -18,13 +18,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + props.chosenId)
+  const { data, error } = useSWR<LinesApiResponse, Error>('lines/' + props.chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.line?.imageUrl} alt={data.line?.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -32,7 +32,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.line?.lineType}
+            {data.result?.lineType}
           </Badge>
         </Box>
 
@@ -44,7 +44,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.line?.name}
+          {data.result?.name}
         </Box>
 
         <Stack
@@ -56,13 +56,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {data.line?.thickness} g
+            THICKNESS {data.result?.thickness} g
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.line?.company}
+            COMPANY {data.result?.company}
           </Box>
           <Box>
-            ADDED {data.line?.createdAt}
+            ADDED {data.result?.createdAt}
           </Box>
         </Stack>
 
