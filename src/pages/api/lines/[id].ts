@@ -13,8 +13,9 @@ export type Line = {
 
 // API のレスポンス型
 export type LinesApiResponse = {
-  line?: Line
-  debugMessage?: string
+  result?: Line
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -22,29 +23,29 @@ export default function LinesApi(
   req: NextApiRequest,
   res: NextApiResponse<LinesApiResponse>
 ): void {
-  const id = req.query.id as string
-  // 空データ（タイプチェック用）
-  const vacantData: Line = {
-    'id': '',
-    'imageUrl': '',
-    'imageAlt': '',
-    'createdAt': '',
-    'lineType': '',
-    'name': '',
-    'company': '',
-    'thickness': '',
-  } 
+  // const id = req.query.id as string
+  // // 空データ（タイプチェック用）
+  // const vacantData: Line = {
+  //   'id': '',
+  //   'imageUrl': '',
+  //   'imageAlt': '',
+  //   'createdAt': '',
+  //   'lineType': '',
+  //   'name': '',
+  //   'company': '',
+  //   'thickness': '',
+  // } 
 
-  // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しない場合undefinedになる
-  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
-  // 下記記述で回避する
-  const line = id !== 'undefined' && id !== '0'? fetchLineData(id): vacantData
-  if (line) {
-    res.status(200).json({ line })
-  } else {
-    res.status(400).json({ debugMessage: `Line [id=${id}] not found` })
-  }
+  // // cretaeとeditで同じフォームを使いまわしているため、
+  // // idが存在しない場合undefinedになる
+  // // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // // 下記記述で回避する
+  // const line = id !== 'undefined' && id !== '0'? fetchLineData(id): vacantData
+  // if (line) {
+  //   res.status(200).json({ line })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Line [id=${id}] not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
