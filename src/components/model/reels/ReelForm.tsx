@@ -53,7 +53,7 @@ export default function ReelForm() {
   const axiosInstance = createAxiosInstance()
   
   // APIからデータ取得
-  const { data, error } = useSWR<ReelsApiResponse, Error>('/api/reels/' + id)
+  const { data, error } = useSWR<ReelsApiResponse, Error>('reels/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -148,10 +148,10 @@ export default function ReelForm() {
   return (
     <Formik
       initialValues={{
-        name: data.reel?.name,
-        company: data.reel?.company,
-        gear: data.reel?.gear,
-        type: data.reel?.type,
+        name: data.result?.name,
+        company: data.result?.company,
+        gear: data.result?.gear,
+        type: data.result?.type,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
