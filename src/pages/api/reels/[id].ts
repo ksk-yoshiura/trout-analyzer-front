@@ -13,8 +13,9 @@ export type Reel = {
 
 // API のレスポンス型
 export type ReelsApiResponse = {
-  reel?: Reel
-  debugMessage?: string
+  result?: Reel
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -22,29 +23,29 @@ export default function ReelsApi(
   req: NextApiRequest,
   res: NextApiResponse<ReelsApiResponse>
 ): void {
-  const id = req.query.id as string
-  // 空データ（タイプチェック用）
-  const vacantData: Reel = {
-    'id': '',
-    'imageUrl': '',
-    'imageAlt': '',
-    'createdAt': '',
-    'name': '',
-    'company': '',
-    'type': '',
-    'gear': '',
-  } 
+  // const id = req.query.id as string
+  // // 空データ（タイプチェック用）
+  // const vacantData: Reel = {
+  //   'id': '',
+  //   'imageUrl': '',
+  //   'imageAlt': '',
+  //   'createdAt': '',
+  //   'name': '',
+  //   'company': '',
+  //   'type': '',
+  //   'gear': '',
+  // } 
   
-  // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しない場合undefinedになる
-  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
-  // 下記記述で回避する
-  const reel =  id !== 'undefined' && id !== '0'? fetchReelData(id) :vacantData
-  if (reel) {
-    res.status(200).json({ reel })
-  } else {
-    res.status(400).json({ debugMessage: `Reel [id=${id}] not found` })
-  }
+  // // cretaeとeditで同じフォームを使いまわしているため、
+  // // idが存在しない場合undefinedになる
+  // // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // // 下記記述で回避する
+  // const reel =  id !== 'undefined' && id !== '0'? fetchReelData(id) :vacantData
+  // if (reel) {
+  //   res.status(200).json({ reel })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Reel [id=${id}] not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
