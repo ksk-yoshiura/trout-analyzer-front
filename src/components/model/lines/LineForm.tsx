@@ -147,10 +147,10 @@ export default function LineForm() {
   return (
     <Formik
       initialValues={{
-        name: data.line?.name,
-        company: data.line?.company,
-        thickness: data.line?.thickness,
-        type: data.line?.lineType,
+        name: data.result?.name,
+        company: data.result?.company,
+        thickness: data.result?.thickness,
+        type: data.result?.lineType,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
