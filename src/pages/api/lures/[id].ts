@@ -16,8 +16,9 @@ export type Lure = {
 
 // API のレスポンス型
 export type LuresApiResponse = {
-  lure?: Lure
-  debugMessage?: string
+  result?: Lure
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -25,33 +26,33 @@ export default function LuresApi(
   req: NextApiRequest,
   res: NextApiResponse<LuresApiResponse>
 ): void {
-  // ID取得
-  const id = req.query.id as string
-  // 空データ（タイプチェック用）
-  const vacantData: Lure = {
-    'id': '',
-    'imageUrl': '',
-    'imageAlt': '',
-    'createdAt': '',
-    'lastUsedAt': '',
-    'lureType': '',
-    'name': '',
-    'company': '',
-    'color': '',
-    'weight': '',
-    'frequency': ''
-  } 
+  // // ID取得
+  // const id = req.query.id as string
+  // // 空データ（タイプチェック用）
+  // const vacantData: Lure = {
+  //   'id': '',
+  //   'imageUrl': '',
+  //   'imageAlt': '',
+  //   'createdAt': '',
+  //   'lastUsedAt': '',
+  //   'lureType': '',
+  //   'name': '',
+  //   'company': '',
+  //   'color': '',
+  //   'weight': '',
+  //   'frequency': ''
+  // } 
 
-  // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しない場合undefinedになる
-  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
-  // 下記記述で回避する
-  const lure = id !== 'undefined'? fetchLureData(id): vacantData
-  if (lure) {
-    res.status(200).json({ lure })
-  } else {
-    res.status(400).json({ debugMessage: `Lure [id=${id}] not found` })
-  }
+  // // cretaeとeditで同じフォームを使いまわしているため、
+  // // idが存在しない場合undefinedになる
+  // // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // // 下記記述で回避する
+  // const lure = id !== 'undefined'? fetchLureData(id): vacantData
+  // if (lure) {
+  //   res.status(200).json({ lure })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Lure [id=${id}] not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
