@@ -37,8 +37,9 @@ export type Tackle = {
 
 // API のレスポンス型
 export type TacklesApiResponse = {
-  tackle?: Tackle
-  debugMessage?: string
+  result?: Tackle
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -46,53 +47,53 @@ export default function TacklesApi(
   req: NextApiRequest,
   res: NextApiResponse<TacklesApiResponse>
 ): void {
-  const id = req.query.id as string
-  // 空データ（タイプチェック用）
-  const vacantData: Tackle = {
-    'id': '',
-    'createdAt': '',
-    'rod': {
-      'id': '',
-      'name': '',
-      'imageUrl': '',
-      'imageAlt': '',
-      'length': '',
-      'hardness': '',
-      'companyName': '',
-      'createdAt': '',
-    },
-    'reel': {
-      'id': '',
-      'name': '',
-      'imageUrl': '',
-      'imageAlt': '',
-      'type': '',
-      'gear': '',
-      'companyName': '',
-      'createdAt': '',
-    },
-    'line': {
-      'id': '',
-      'name': '',
-      'imageUrl': '',
-      'imageAlt': '',
-      'thickness': '',
-      'lineType': '',
-      'companyName': '',
-      'createdAt': '',
-    }
-  }
+  // const id = req.query.id as string
+  // // 空データ（タイプチェック用）
+  // const vacantData: Tackle = {
+  //   'id': '',
+  //   'createdAt': '',
+  //   'rod': {
+  //     'id': '',
+  //     'name': '',
+  //     'imageUrl': '',
+  //     'imageAlt': '',
+  //     'length': '',
+  //     'hardness': '',
+  //     'companyName': '',
+  //     'createdAt': '',
+  //   },
+  //   'reel': {
+  //     'id': '',
+  //     'name': '',
+  //     'imageUrl': '',
+  //     'imageAlt': '',
+  //     'type': '',
+  //     'gear': '',
+  //     'companyName': '',
+  //     'createdAt': '',
+  //   },
+  //   'line': {
+  //     'id': '',
+  //     'name': '',
+  //     'imageUrl': '',
+  //     'imageAlt': '',
+  //     'thickness': '',
+  //     'lineType': '',
+  //     'companyName': '',
+  //     'createdAt': '',
+  //   }
+  // }
 
-  // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しない場合undefinedになる
-  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
-  // 下記記述で回避する
-  const tackle = id !== 'undefined'? fetchTackleData(id) : vacantData
-  if (tackle) {
-    res.status(200).json({ tackle })
-  } else {
-    res.status(400).json({ debugMessage: `Tackle [id=${id}] not found` })
-  }
+  // // cretaeとeditで同じフォームを使いまわしているため、
+  // // idが存在しない場合undefinedになる
+  // // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // // 下記記述で回避する
+  // const tackle = id !== 'undefined'? fetchTackleData(id) : vacantData
+  // if (tackle) {
+  //   res.status(200).json({ tackle })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Tackle [id=${id}] not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
