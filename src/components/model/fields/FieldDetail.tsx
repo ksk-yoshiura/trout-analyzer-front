@@ -18,13 +18,13 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
   
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('/api/fields/' + chosenId)
+  const { data, error } = useSWR<FieldsApiResponse, Error>('fields/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.field?.imageUrl} alt={data.field?.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -41,7 +41,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.field?.name}
+          {data.result?.name}
         </Box>
 
         <Stack
@@ -53,16 +53,16 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            ADDRESS {data.field?.address}
+            ADDRESS {data.result?.address}
           </Box>
           <Box textTransform='uppercase'>
-            FREQUENCY {data.field?.frequency} times
+            FREQUENCY {data.result?.frequency} times
           </Box>
           <Box>
-            ADDED {data.field?.createdAt}
+            ADDED {data.result?.createdAt}
           </Box>
           <Box>
-            LAST VISITED {data.field?.lastVisitedAt}
+            LAST VISITED {data.result?.lastVisitedAt}
           </Box>
         </Stack>
 
