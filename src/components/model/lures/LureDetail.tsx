@@ -17,14 +17,14 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('/api/lures/' + chosenId)
+  const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.lure?.imageUrl} alt={data.lure?.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -32,7 +32,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.lure?.lureType}
+            {data.result?.lureType}
           </Badge>
         </Box>
 
@@ -44,7 +44,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.lure?.name}
+          {data.result?.name}
         </Box>
 
         <Stack
@@ -56,22 +56,22 @@ export default function LuresList(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            WEIGHT {data.lure?.weight} g
+            WEIGHT {data.result?.weight} g
           </Box>
           <Box textTransform='uppercase'>
-            COLOR {data.lure?.color}
+            COLOR {data.result?.color}
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.lure?.company}
+            COMPANY {data.result?.company}
           </Box>
           <Box textTransform='uppercase'>
-            FREQUENCY {data.lure?.frequency} times
+            FREQUENCY {data.result?.frequency} times
           </Box>
           <Box>
-            ADDED {data.lure?.createdAt}
+            ADDED {data.result?.createdAt}
           </Box>
           <Box>
-            LAST USED {data.lure?.lastUsedAt}
+            LAST USED {data.result?.lastUsedAt}
           </Box>
         </Stack>
 
