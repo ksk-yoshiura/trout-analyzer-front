@@ -13,8 +13,9 @@ export type Rod = {
 
 // API のレスポンス型
 export type RodsApiResponse = {
-  rod?: Rod
-  debugMessage?: string
+  result?: Rod
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -22,29 +23,29 @@ export default function RodsApi(
   req: NextApiRequest,
   res: NextApiResponse<RodsApiResponse>
 ): void {
-  const id = req.query.id as string
-  // 空データ（タイプチェック用）
-  const vacantData: Rod = {
-    'id': '',
-    'imageUrl': '',
-    'imageAlt': '',
-    'createdAt': '',
-    'hardness': '',
-    'length': '',
-    'name': '',
-    'company': '',
-  }
+  // const id = req.query.id as string
+  // // 空データ（タイプチェック用）
+  // const vacantData: Rod = {
+  //   'id': '',
+  //   'imageUrl': '',
+  //   'imageAlt': '',
+  //   'createdAt': '',
+  //   'hardness': '',
+  //   'length': '',
+  //   'name': '',
+  //   'company': '',
+  // }
 
-  // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しない場合undefinedになる
-  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
-  // 下記記述で回避する
-  const rod = id !== 'undefined' && id !== '0' ? fetchRodData(id) : vacantData
-  if (rod) {
-    res.status(200).json({ rod })
-  } else {
-    res.status(400).json({ debugMessage: `Rod [id=${id}] not found` })
-  }
+  // // cretaeとeditで同じフォームを使いまわしているため、
+  // // idが存在しない場合undefinedになる
+  // // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
+  // // 下記記述で回避する
+  // const rod = id !== 'undefined' && id !== '0' ? fetchRodData(id) : vacantData
+  // if (rod) {
+  //   res.status(200).json({ rod })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Rod [id=${id}] not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
