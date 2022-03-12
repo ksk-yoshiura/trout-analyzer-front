@@ -4,7 +4,6 @@ import { AppProps } from 'next/app';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 import Layout from "../components/layout/Layout";
 import { SWRConfig } from 'swr'
-import axios from 'axios'
 import { createAxiosInstance } from "../pages/api/utils"
 
 
