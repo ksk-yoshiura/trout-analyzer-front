@@ -52,7 +52,7 @@ export default function LineForm() {
   const axiosInstance = createAxiosInstance()
   
   // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('/api/lines/' + id)
+  const { data, error } = useSWR<LinesApiResponse, Error>('lines/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
