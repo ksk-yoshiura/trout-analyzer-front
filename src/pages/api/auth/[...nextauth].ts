@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from 'axios'
+import { axiosDefaultInstance } from '../utils'
 
 export default NextAuth({
   providers: [
@@ -24,11 +24,9 @@ export default NextAuth({
           mailaddress: credentials?.mailaddress,
           password: credentials?.password,
         };
-        const instance = axios.create({
-          baseURL: 'http://localhost:3030',
-          timeout: 5000
-        })
-        const res = await instance.post('/login', postData)
+
+        // ログインAPI
+        const res = await axiosDefaultInstance.post('/login', postData)
           .then((v) => {
             return v.data.token
           })
