@@ -4,12 +4,6 @@ import {
 } from "@chakra-ui/react";
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 type LureTypeProps = {
   lureTypeId: string
@@ -20,7 +14,7 @@ export default function LureSelect(props: LureTypeProps) {
   const { lureTypeId, field } = props
 
   // ルアーデータリスト
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures/type_num/' + lureTypeId, fetcher)
+  const { data, error } = useSWR<LuresApiResponse, Error>('lures/type_num/' + lureTypeId)
   if (error) return <p>Error: {error.message}</p>
   return (
     lureTypeId !== '0' && lureTypeId ?
