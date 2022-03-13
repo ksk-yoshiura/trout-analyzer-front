@@ -12,7 +12,7 @@ import { RecordsApiResponse } from "../../../pages/api/records/all"
 export default function RecordsAllList(): JSX.Element {
 
   // APIからデータ取得
-  const { data, error } = useSWR<RecordsApiResponse, Error>('/api/records/all')
+  const { data, error } = useSWR<RecordsApiResponse, Error>('records/all')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   
@@ -20,7 +20,7 @@ export default function RecordsAllList(): JSX.Element {
     <>
       <Stack spacing={5} mr={5}>
         {
-          data.records?.map((item, index) => {
+          data.result?.map((item, index) => {
             return (
               <NextLink key={index} href={"/records/" + item.id + "/patterns/list"} passHref>
                 <Box
