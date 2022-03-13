@@ -20,52 +20,52 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + chosenId)
+  const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.pattern?.imageUrl} alt={data.pattern?.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
 
       {
-        data.pattern ?
+        data.result ?
           <Box p='2'>
             <RecordPatternBadgeDetail
-              lureType={data.pattern.lure.lureType}
-              result={data.pattern.badge.result}
-              weather={data.pattern.badge.weather}
-              depth={data.pattern.badge.depth}
-              speed={data.pattern.badge.speed}
+              lureType={data.result.lure.lureType}
+              result={data.result.badge.result}
+              weather={data.result.badge.weather}
+              depth={data.result.badge.depth}
+              speed={data.result.badge.speed}
             />
 
             <RecordPatternLureDetail
-              lureType={data.pattern.lure.lureType}
-              lureName={data.pattern.lure.lureName}
-              lureCompany={data.pattern.lure.lureCompany}
-              lureColor={data.pattern.lure.lureColor}
-              lureWeight={data.pattern.lure.lureWeight}
+              lureType={data.result.lure.lureType}
+              lureName={data.result.lure.lureName}
+              lureCompany={data.result.lure.lureCompany}
+              lureColor={data.result.lure.lureColor}
+              lureWeight={data.result.lure.lureWeight}
             />
 
             <RecordPatternReelDetail
-              reelName={data.pattern.reel.reelName}
-              reelType={data.pattern.reel.reelType}
-              reelCompany={data.pattern.reel.reelCompany}
-              reelGear={data.pattern.reel.reelGear}
+              reelName={data.result.reel.reelName}
+              reelType={data.result.reel.reelType}
+              reelCompany={data.result.reel.reelCompany}
+              reelGear={data.result.reel.reelGear}
             />
 
             <RecordPatternRodDetail
-              rodName={data.pattern.rod.rodName}
-              rodHardness={data.pattern.rod.rodHardness}
-              rodCompany={data.pattern.rod.rodCompany}
-              rodLength={data.pattern.rod.rodLength}
+              rodName={data.result.rod.rodName}
+              rodHardness={data.result.rod.rodHardness}
+              rodCompany={data.result.rod.rodCompany}
+              rodLength={data.result.rod.rodLength}
             />
 
             <RecordPatternLineDetail
-              lineName={data.pattern.line.lineName}
-              lineThickness={data.pattern.line.lineThickness}
-              lineCompany={data.pattern.line.lineCompany}
-              lineType={data.pattern.line.lineType}
+              lineName={data.result.line.lineName}
+              lineThickness={data.result.line.lineThickness}
+              lineCompany={data.result.line.lineCompany}
+              lineType={data.result.line.lineType}
             />
           </Box>
 
