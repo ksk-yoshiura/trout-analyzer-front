@@ -12,8 +12,9 @@ export type Record = {
 
 // API のレスポンス型
 export type RecordsApiResponse = {
-  records?: Record[]
-  debugMessage?: string
+  result?: Record[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -21,12 +22,12 @@ export default function RecordsApi(
   req: NextApiRequest,
   res: NextApiResponse<RecordsApiResponse>
 ): void {
-  const records = fetchRecordData()
-  if (records) {
-    res.status(200).json({ records })
-  } else {
-    res.status(400).json({ debugMessage: `Records not found` })
-  }
+  // const records = fetchRecordData()
+  // if (records) {
+  //   res.status(200).json({ records })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Records not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
