@@ -8,8 +8,9 @@ export type PatternCondition = {
 
 // API のレスポンス型
 export type PatternConditionsApiResponse = {
-  pattern_condition?: PatternCondition[]
-  debugMessage?: string
+  result?: PatternCondition[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -17,13 +18,13 @@ export default function PatternConditionsApi(
   req: NextApiRequest,
   res: NextApiResponse<PatternConditionsApiResponse>
 ): void {
-  const type_num = req.query.type_num as string
-  const pattern_condition = fetchPatternConditionData(type_num)
-  if (pattern_condition) {
-    res.status(200).json({ pattern_condition })
-  } else {
-    res.status(400).json({ debugMessage: `PatternCondition not found` })
-  }
+  // const type_num = req.query.type_num as string
+  // const pattern_condition = fetchPatternConditionData(type_num)
+  // if (pattern_condition) {
+  //   res.status(200).json({ pattern_condition })
+  // } else {
+  //   res.status(400).json({ debugMessage: `PatternCondition not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
