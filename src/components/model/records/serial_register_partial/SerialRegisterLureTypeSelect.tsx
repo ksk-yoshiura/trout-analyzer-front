@@ -36,7 +36,7 @@ export default function LureTypeSelect(props: any) {
     <>
       <Select mb={2} w={130} onChange={event => changeHandler(event)} placeholder='Lure Type'>
         {
-          data.lure_types?.map((item, index) => {
+          data.result?.map((item, index) => {
             return (
               <option key={index} value={item.id}>
                 {item.type_name}
