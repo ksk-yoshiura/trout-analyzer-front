@@ -14,14 +14,14 @@ export default function LureTypeSelect(props: TypeProp) {
   // LureFormのeditで選択されたタイプ
   const { field } = props
   // APIからデータ取得
-  const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types/')
+  const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Select {...field} w={150} placeholder='Lure Type'>
       {
-        data.lure_types?.map((item, index) => {
+        data.result?.map((item, index) => {
           return (
             <option key={index} value={item.id}>
               {item.type_name}
