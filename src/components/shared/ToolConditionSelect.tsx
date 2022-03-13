@@ -5,12 +5,6 @@ import {
 import Loading from './Loading'
 import useSWR from 'swr'
 import { ToolConditionApiResponse } from "../../pages/api/tool_conditions/type_num/[type_num]"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 // タイプ
 type TypeProps = {
@@ -30,14 +24,14 @@ export default function TooConditionTypeSelect(props: TypeProps) {
   // タイプナンバー
   const { typeNum, field } = props
   // APIからデータ取得
-  const { data, error } = useSWR<ToolConditionApiResponse, Error>('/api/tool_conditions/type_num/' + typeNum, fetcher)
+  const { data, error } = useSWR<ToolConditionApiResponse, Error>('tool_conditions/type_num/' + typeNum)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   return (
     <Select {...field} w={200} placeholder={'Select '+title[typeNum - 1]} >
       {
-        data.tool_condition?.map((item, index) => {
+        data.result?.map((item, index) => {
           return (
             <option key={index} value={item.id}>
               {item.type_name}
