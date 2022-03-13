@@ -59,7 +59,7 @@ export default function TackleForm() {
   const toast = useToast()
 
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('/api/tackles/' + id, fetcher)
+  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -156,9 +156,9 @@ export default function TackleForm() {
     <>
       <Formik
         initialValues={{
-          rodId: data.tackle?.rod.id,
-          reelId: data.tackle?.reel.id,
-          lineId: data.tackle?.line.id,
+          rodId: data.result?.rod.id,
+          reelId: data.result?.reel.id,
+          lineId: data.result?.line.id,
         }}
         onSubmit={(values, actions) => {
           setTimeout(() => {
@@ -184,7 +184,7 @@ export default function TackleForm() {
                     <Input {...field} type="hidden" id='rodId' />
 
                     <Box type='button' as='button'>
-                      <RodDetail chosenId={Number(data.tackle?.rod.id)} />
+                      <RodDetail chosenId={Number(data.result?.rod.id)} />
                     </Box>
                     <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
                   </FormControl>
@@ -205,7 +205,7 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >reel</FormLabel>
                     <Input {...field} type="hidden" id='reelId' />
-                    <ReelDetail chosenId={Number(data.tackle?.reel.id)} />
+                    <ReelDetail chosenId={Number(data.result?.reel.id)} />
                     <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -225,7 +225,7 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >line</FormLabel>
                     <Input {...field} type="hidden" id='lineId' />
-                    <LineDetail chosenId={Number(data.tackle?.line.id)} />
+                    <LineDetail chosenId={Number(data.result?.line.id)} />
                     <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
                   </FormControl>
                 )}
