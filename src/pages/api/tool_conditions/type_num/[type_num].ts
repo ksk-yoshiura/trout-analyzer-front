@@ -8,8 +8,9 @@ export type ToolCondition = {
 
 // API のレスポンス型
 export type ToolConditionApiResponse = {
-  tool_condition?: ToolCondition[]
-  debugMessage?: string
+  result?: ToolCondition[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -17,13 +18,13 @@ export default function ToolConditionApi(
   req: NextApiRequest,
   res: NextApiResponse<ToolConditionApiResponse>
 ): void {
-  const type_num = req.query.type_num as string
-  const tool_condition = fetchToolConditionData(type_num)
-  if (tool_condition) {
-    res.status(200).json({ tool_condition })
-  } else {
-    res.status(400).json({ debugMessage: `ToolCondition not found` })
-  }
+  // const type_num = req.query.type_num as string
+  // const tool_condition = fetchToolConditionData(type_num)
+  // if (tool_condition) {
+  //   res.status(200).json({ tool_condition })
+  // } else {
+  //   res.status(400).json({ debugMessage: `ToolCondition not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
