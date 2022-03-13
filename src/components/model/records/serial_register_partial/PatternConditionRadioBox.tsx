@@ -8,12 +8,6 @@ import RadioCard from '../../../shared/RadioCard';
 import Loading from '../../../shared/Loading'
 import useSWR from 'swr'
 import { PatternConditionsApiResponse } from "../../../../pages/api/pattern_conditions/type_num/[type_num]"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 type PatternTypeProp = {
   typeNum: number
@@ -41,12 +35,12 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   })
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('/api/pattern_conditions/type_num/' + typeNum, fetcher)
+  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions/type_num/' + typeNum)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   // 釣果の名称配列作成
-  const resultData = data.pattern_condition?.map(function (value) {
+  const resultData = data.result?.map(function (value) {
     return value.type_name
   })
 
