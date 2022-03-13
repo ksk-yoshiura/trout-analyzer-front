@@ -6,12 +6,6 @@ import LureSelect from './SerialRegisterLureSelect'
 import Loading from '../../../shared/Loading'
 import useSWR from 'swr'
 import { LureTypesApiResponse } from "../../../../pages/api/lure_types/index"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 export default function LureTypeSelect(props: any) {
   const { field } = props
@@ -19,7 +13,7 @@ export default function LureTypeSelect(props: any) {
 
   // APIからデータ取得
   // ルアータイプリストデータ
-  const { data, error } = useSWR<LureTypesApiResponse, Error>('/api/lure_types', fetcher)
+  const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   
