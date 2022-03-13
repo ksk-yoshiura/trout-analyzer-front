@@ -27,8 +27,9 @@ export type Tackle = {
 
 // API のレスポンス型
 export type TacklesApiResponse = {
-  tackles?: Tackle[]
-  debugMessage?: string
+  result?: Tackle[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -36,12 +37,12 @@ export default function TacklesApi(
   req: NextApiRequest,
   res: NextApiResponse<TacklesApiResponse>
 ): void {
-  const tackles = fetchTackleData()
-  if (tackles) {
-    res.status(200).json({ tackles })
-  } else {
-    res.status(400).json({ debugMessage: `Tackle not found` })
-  }
+  // const tackles = fetchTackleData()
+  // if (tackles) {
+  //   res.status(200).json({ tackles })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Tackle not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
