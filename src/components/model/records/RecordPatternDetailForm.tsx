@@ -54,7 +54,7 @@ export default function RecordSerialRegisterForm() {
   const axiosInstance = createAxiosInstance()
   
   // APIからデータ取得
-  const { data, error } = useSWR<PatternApiResponse, Error>('/api/patterns/' + id)
+  const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
