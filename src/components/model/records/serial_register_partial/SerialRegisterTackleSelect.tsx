@@ -5,17 +5,11 @@ import {
 import useSWR from 'swr'
 import Loading from '../../../shared/Loading'
 import { TacklesApiResponse } from "../../../../pages/api/tackles/index"
-import axios from'axios'
-
-const fetcher = (url: string) => axios(url)
-.then((res) => {
-  return res.data
-})
 
 export default function TackleSelect(props: any) {
   const { field } = props
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles', fetcher)
+  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
