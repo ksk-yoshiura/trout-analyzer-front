@@ -14,8 +14,9 @@ export type Pattern = {
 
 // API のレスポンス型
 export type PatternsApiResponse = {
-  patterns?: Pattern[]
-  debugMessage?: string
+  result?: Pattern[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -23,12 +24,12 @@ export default function PatternsApi(
   req: NextApiRequest,
   res: NextApiResponse<PatternsApiResponse>
 ): void {
-  const patterns = fetchPatternData()
-  if (patterns) {
-    res.status(200).json({ patterns })
-  } else {
-    res.status(400).json({ debugMessage: `Patterns not found` })
-  }
+  // const patterns = fetchPatternData()
+  // if (patterns) {
+  //   res.status(200).json({ patterns })
+  // } else {
+  //   res.status(400).json({ debugMessage: `Patterns not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
