@@ -7,8 +7,9 @@ export type LureType = {
 
 // API のレスポンス型
 export type LureTypesApiResponse = {
-  lure_types?: LureType[]
-  debugMessage?: string
+  result?: LureType[]
+  status: number
+  message?: string
 }
 
 // API のエントリポイント
@@ -16,12 +17,12 @@ export default function LureTypesApi(
   req: NextApiRequest,
   res: NextApiResponse<LureTypesApiResponse>
 ): void {
-  const lure_types = fetchLureTypeData()
-  if (lure_types) {
-    res.status(200).json({ lure_types })
-  } else {
-    res.status(400).json({ debugMessage: `LureType not found` })
-  }
+  // const lure_types = fetchLureTypeData()
+  // if (lure_types) {
+  //   res.status(200).json({ lure_types })
+  // } else {
+  //   res.status(400).json({ debugMessage: `LureType not found` })
+  // }
 }
 
 // 擬似的なデータフェッチ関数
