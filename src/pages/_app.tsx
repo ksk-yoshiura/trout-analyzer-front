@@ -54,11 +54,12 @@ export default function App({
         return res.data
       })
 
-    return (<SWRConfig value={{ fetcher }}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </SWRConfig>
+    return (
+      <SWRConfig value={{ fetcher }}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SWRConfig>
     )
   }
 
