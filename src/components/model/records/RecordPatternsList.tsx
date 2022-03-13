@@ -31,7 +31,7 @@ export default function RecordsAllList(): JSX.Element {
   const recordId = route.query.record_id
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternsApiResponse, Error>('/api/patterns/')
+  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -69,7 +69,7 @@ export default function RecordsAllList(): JSX.Element {
     <>
       <Stack spacing={5} mr={5}>
         {
-          data.patterns?.map((item, index) => {
+          data.result?.map((item, index) => {
             return (
               <Box
                 key={index}
