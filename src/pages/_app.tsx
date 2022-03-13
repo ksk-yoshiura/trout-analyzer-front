@@ -5,7 +5,7 @@ import { createBreakpoints } from '@chakra-ui/theme-tools';
 import Layout from "../components/layout/Layout";
 import { SWRConfig } from 'swr'
 import { createAxiosInstance } from "../pages/api/utils"
-
+import { useState, useEffect } from 'react'
 
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
@@ -63,11 +63,23 @@ export default function App({
     )
   }
 
+  /**
+   * 下記記事を参考にWarning: Expected server HTML to contain a matching <div> in <div>.
+   * を解消
+   * https://github.com/vercel/next.js/discussions/17443
+   */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <SessionProvider session={session}>
-      <ChakraProvider theme={theme}>
-        <SWRComponent />
-      </ChakraProvider>
-    </SessionProvider>
+    mounted ?
+      <SessionProvider session={session}>
+        <ChakraProvider theme={theme}>
+          <SWRComponent />
+        </ChakraProvider>
+      </SessionProvider>
+      : <></>
   );
 }
