@@ -23,7 +23,6 @@ export const createAxiosInstance = () => {
     if (session?.accessToken && config?.headers) {
       config.headers.Authorization = `Bearer ${session.accessToken}`
     }
-    console.log(config)
     return config
   })
 
