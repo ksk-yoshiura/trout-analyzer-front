@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Field = {
-  id: string
+  ID: string
   imageUrl: string
   imageAlt: string
-  createdAt: string
+  CreatedAt: string
   lastVisitedAt: string
   name: string
   address: string
@@ -23,17 +23,17 @@ export default function FieldsApi(
   req: NextApiRequest,
   res: NextApiResponse<FieldsApiResponse>
 ): void {
-  const fields = fetchFieldData()
+  // const fields = fetchFieldData()
 }
 
 // 擬似的なデータフェッチ関数
 function fetchFieldData(): Field[] | undefined {
   const fields: Field[] = [
     {
-      id: '1',
+      ID: '1',
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'lure image',
-      createdAt: '2021/12/28',
+      CreatedAt: '2021/12/28',
       lastVisitedAt: '2021/12/28',
       name: 'super good fishing park',
       address: 'shiga prefecture',
