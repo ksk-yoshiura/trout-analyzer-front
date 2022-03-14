@@ -59,7 +59,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
             FREQUENCY {data.result?.frequency} times
           </Box>
           <Box>
-            ADDED {data.result?.createdAt}
+            ADDED {data.result?.CreatedAt}
           </Box>
           <Box>
             LAST VISITED {data.result?.lastVisitedAt}
