@@ -78,7 +78,6 @@ export default function FieldForm() {
     } else { // フィールドIDがない場合は登録
       axiosInstance.post('fields', values)
         .then(function (response) {
-          console.log(response)
           if (router.route === '/preparation/field') {
             // 釣果記録準備画面では登録画面に遷移
             router.push('/records/serial_register')
