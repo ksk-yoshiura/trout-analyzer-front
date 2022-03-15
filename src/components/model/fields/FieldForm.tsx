@@ -43,7 +43,7 @@ export default function FieldForm(props: DetailProps) {
   const toast = useToast()
   // ページ遷移
   const router = useRouter();
-
+  // データ各種取得
   const { chosenId, data } = props
 
   // axiosの設定
