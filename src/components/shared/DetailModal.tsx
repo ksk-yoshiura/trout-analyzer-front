@@ -40,7 +40,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
 
   // 削除ボタンクリック時の挙動
   function handleDeleteButtonClick() {
-    // TODO：削除完了後モーダルを閉じる
+    // 削除完了後モーダルを閉じる
     axiosInstance.post(deleteAPIURL)
       .then(function () { // 成功時
         // アラート代わりにトーストを使用
@@ -61,6 +61,9 @@ export default function DetailModal(props: DetailProps): JSX.Element {
           duration: 9000,
           isClosable: true,
         })
+      }).finally(function() {
+        // モーダルを閉じる
+        onClose()
       });
   }
 
