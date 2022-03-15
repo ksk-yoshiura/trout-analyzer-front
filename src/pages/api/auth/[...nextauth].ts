@@ -24,9 +24,9 @@ export default NextAuth({
           mailaddress: credentials?.mailaddress,
           password: credentials?.password,
         };
-
+        
         // ログインAPI
-        const res = await axiosDefaultInstance.post('/login', postData)
+        const res = await axiosDefaultInstance.post('login', postData)
           .then((v) => {
             return v.data.token
           })
