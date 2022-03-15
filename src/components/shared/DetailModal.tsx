@@ -14,7 +14,7 @@ import {
   useToast
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import axios from 'axios'
+import { createAxiosInstance } from "../../pages/api/utils"
 
 type DetailProps = {
   chosenId?: number
@@ -30,18 +30,19 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   // 編集ページリンク
   const editURL = '/' + title + 's/edit/' + chosenId
   // 削除API
-  const deleteAPIURL = '/api/' + title + 's/delete/' + chosenId
+  const deleteAPIURL = title + 's/' + chosenId
   // 詳細モーダルタイトル
   const modalTitle = title
   // アラート
   const toast = useToast()
-  const router = useRouter();
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
 
   // 削除ボタンクリック時の挙動
   function handleDeleteButtonClick() {
     // TODO：削除完了後モーダルを閉じる
-    axios.delete(deleteAPIURL)
-      .then(function (response) { // 成功時
+    axiosInstance.post(deleteAPIURL)
+      .then(function () { // 成功時
         // アラート代わりにトーストを使用
         toast({
           title: 'Deleted!',
