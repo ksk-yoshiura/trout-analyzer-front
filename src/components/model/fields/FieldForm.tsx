@@ -21,10 +21,7 @@ import {
   DrawerContent,
   useToast
 } from "@chakra-ui/react";
-import Loading from '../../shared/Loading'
 import Thumb from "../../shared/ThumbImage"
-import useSWR from 'swr'
-import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type FieldData = {
@@ -33,27 +30,29 @@ type FieldData = {
   image?: string;
 }
 
-export default function FieldForm() {
-  // パラメータからフィールドID取得
-  const router = useRouter();
-  const { id } = router.query
+// 編集データ
+type DetailProps = {
+  chosenId?: string;
+  data?: FieldData;
+}
+
+export default function FieldForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
+  // ページ遷移
+  const router = useRouter();
+
+  const { chosenId, data } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-  
-  // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('fields/' + id)
-  if (error) return <p>Error: {error.message}</p>
-  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendFieldData(values: FieldData) {
-    if (id) { // フィールドIDがある場合は更新
-      axiosInstance.put('fields/' + id, values)
+    if (chosenId !== '0') { // フィールドIDがある場合は更新
+      axiosInstance.put('fields/' + chosenId, values)
         .then(function () {
           // リストページに遷移
           router.push('/fields')
@@ -77,7 +76,7 @@ export default function FieldForm() {
         })
     } else { // フィールドIDがない場合は登録
       axiosInstance.post('fields', values)
-        .then(function (response) {
+        .then(function () {
           if (router.route === '/preparation/field') {
             // 釣果記録準備画面では登録画面に遷移
             router.push('/records/serial_register')
@@ -150,8 +149,8 @@ export default function FieldForm() {
   return (
     <Formik
       initialValues={{
-        name: data.result?.name,
-        address: data.result?.address,
+        name: data?.name,
+        address: data?.address,
         image: '' // TODO ：適切な形式で
       }}
       validateOnChange
