@@ -32,7 +32,7 @@ type FieldData = {
 
 // 編集データ
 type DetailProps = {
-  chosenId?: string;
+  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
   data?: FieldData;
 }
 

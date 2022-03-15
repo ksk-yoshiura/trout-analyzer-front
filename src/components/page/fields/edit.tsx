@@ -21,10 +21,7 @@ export default function FieldEdit(): JSX.Element {
     <>
       <BackToListPageLink name={'fields'} />
       <Flex textAlign="center" w="100wh">
-        {
-          id ?? 
-          <FieldForm chosenId={id} data={data.result} />
-        }
+        <FieldForm chosenId={id} data={data.result} />
       </Flex>
     </>
   )
