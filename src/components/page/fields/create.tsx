@@ -4,9 +4,15 @@ import {
 import FieldForm from '../../model/fields/FieldForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
+type FieldData = {
+  name?: string;
+  address?: string;
+  image?: string;
+}
+
 export default function FieldCreate(): JSX.Element {
   const chosenId = '0'
-  const data = {}
+  const data: FieldData = { name: '', address: '' }
   return (
     <>
       <BackToListPageLink name={'fields'} />
