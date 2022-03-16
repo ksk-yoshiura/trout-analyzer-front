@@ -28,36 +28,48 @@ import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
-type LureData = {
-  name?: string;
-  company?: string;
-  color?: string;
-  weight?: string;
-  type?: string;
-  image?: string;
+type LureType = {
+  ID: string
+  typeName: string
 }
 
-export default function LureForm() {
-  // パラメータからルアーID取得
-  const router = useRouter();
-  const { id } = router.query
+type LureData = {
+  ID?: string
+  imageUrl?: string
+  imageAlt?: string
+  CreatedAt?: string
+  lastUsedAt?: string
+  LureType?: LureType
+  name?: string
+  companyName?: string
+  color?: string
+  weight?: string
+  frequency?: string
+}
+
+// 編集データ
+type DetailProps = {
+  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
+  data?: LureData
+}
+
+export default function LureForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
-
-  // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + id)
-  if (error) return <p>Error: {error.message}</p>
-  if (!data) return <Loading />
+  // ページ遷移
+  const router = useRouter();
+  // データ各種取得
+  const { chosenId, data } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
   
   // API登録・更新
   function handleSendLureData(values: LureData) {
-    if (id) { // ルアーIDがある場合は更新
-      axiosInstance.put('lures/' + id, values)
+    if (chosenId !== '0') { // ルアーIDがある場合は更新
+      axiosInstance.put('lures/' + chosenId, values)
         .then(function () {
           // リストページに遷移
           router.push('/lures')
@@ -145,11 +157,11 @@ export default function LureForm() {
   return (
     <Formik
       initialValues={{
-        name: data.result?.name,
-        company: data.result?.company,
-        color: data.result?.color,
-        weight: data.result?.weight,
-        type: data.result?.lureType,
+        name: data?.name,
+        companyName: data?.companyName,
+        color: data?.color,
+        weight: data?.weight,
+        type: data?.LureType?.typeName,
         image: ''
       }}
       onSubmit={(values, actions) => {
@@ -227,19 +239,19 @@ export default function LureForm() {
                 </FormControl>
               )}
             </Field>
-            <Field name='company' validate={validateData}>
+            <Field name='companyName' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.company)
-                    && Boolean(form.touched.company)}
+                  isInvalid={Boolean(form.errors.companyName)
+                    && Boolean(form.touched.companyName)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='company'
+                    htmlFor='companyName'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
                   <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.company}</FormErrorMessage>
+                  <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
