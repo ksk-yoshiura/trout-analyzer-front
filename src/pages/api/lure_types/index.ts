@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type LureType = {
-  id: string
-  type_name: string
+  ID: string
+  typeName: string
 }
 
 // API のレスポンス型
@@ -26,24 +26,24 @@ export default function LureTypesApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchLureTypeData(): LureType[] | undefined {
-  const lure_types: LureType[] = [
-    {
-      id: '1',
-      type_name: 'spoon'
-    },
-    {
-      id: '2',
-      type_name: 'minor'
-    },
-    {
-      id: '3',
-      type_name: 'crank bait'
-    },
-    {
-      id: '4',
-      type_name: 'viberation'
-    }
-  ]
-  return lure_types
-}
+// function fetchLureTypeData(): LureType[] | undefined {
+//   const lure_types: LureType[] = [
+//     {
+//       id: '1',
+//       type_name: 'spoon'
+//     },
+//     {
+//       id: '2',
+//       type_name: 'minor'
+//     },
+//     {
+//       id: '3',
+//       type_name: 'crank bait'
+//     },
+//     {
+//       id: '4',
+//       type_name: 'viberation'
+//     }
+//   ]
+//   return lure_types
+// }
