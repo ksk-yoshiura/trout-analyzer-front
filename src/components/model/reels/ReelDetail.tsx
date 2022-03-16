@@ -61,7 +61,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             COMPANY {data.result?.company}
           </Box>
           <Box>
-            ADDED {data.result?.createdAt}
+            ADDED {data.result?.CreatedAt}
           </Box>
         </Stack>
 
