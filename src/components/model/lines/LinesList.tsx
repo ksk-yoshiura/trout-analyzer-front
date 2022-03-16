@@ -44,14 +44,13 @@ export default function LinesList(): JSX.Element {
     )
   }
 
-
   return (
     <>
       <Wrap spacing={5}>
         {
           data.result?.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 
@@ -91,7 +90,7 @@ export default function LinesList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.createdAt}
+                      added {item.CreatedAt}
                     </Box>
 
                   </Box>
