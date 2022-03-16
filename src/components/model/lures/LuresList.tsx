@@ -23,7 +23,6 @@ export default function LuresList(): JSX.Element {
   const { data, error } = useSWR<LuresApiResponse, Error>('lures')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-  console.log(data)
 
   function clickHandler(value: string) {
     // 型変換
