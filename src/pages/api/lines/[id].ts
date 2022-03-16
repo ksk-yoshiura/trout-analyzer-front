@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Line = {
-  id: string
+  ID: string
   imageUrl: string
   imageAlt: string
-  createdAt: string
+  CreatedAt: string
   lineType: string
   name: string
   company: string
@@ -49,18 +49,18 @@ export default function LinesApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchLineData(id: string): Line | undefined {
-  const lines: Line[] = [
-    {
-      id: '1',
-      imageUrl: 'https://bit.ly/2Z4KKcF',
-      imageAlt: 'lure image',
-      createdAt: '2021/12/28',
-      lineType: '11',
-      name: 'super good nylon',
-      company: 'DAIWA',
-      thickness: '3'
-    },
-  ]
-  return lines.find((line) => line.id === id)
-}
+// function fetchLineData(id: string): Line | undefined {
+//   const lines: Line[] = [
+//     {
+//       id: '1',
+//       imageUrl: 'https://bit.ly/2Z4KKcF',
+//       imageAlt: 'lure image',
+//       createdAt: '2021/12/28',
+//       lineType: '11',
+//       name: 'super good nylon',
+//       company: 'DAIWA',
+//       thickness: '3'
+//     },
+//   ]
+//   return lines.find((line) => line.id === id)
+// }
