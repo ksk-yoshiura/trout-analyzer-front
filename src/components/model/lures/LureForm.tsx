@@ -22,10 +22,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
-import Loading from '../../shared/Loading'
 import LureTypeSelect from "./LureTypeSelect"
-import useSWR from 'swr'
-import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type LureType = {
