@@ -23,6 +23,7 @@ export default function LuresList(): JSX.Element {
   const { data, error } = useSWR<LuresApiResponse, Error>('lures')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  console.log(data)
 
   function clickHandler(value: string) {
     // 型変換
@@ -61,7 +62,7 @@ export default function LuresList(): JSX.Element {
                         New
                       </Badge>
                       <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.lureType}
+                        {item.LureType.typeName}
                       </Badge>
                     </Box>
                     <Box
@@ -81,7 +82,7 @@ export default function LuresList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.createdAt}
+                      added {item.CreatedAt}
                     </Box>
 
                   </Box>
