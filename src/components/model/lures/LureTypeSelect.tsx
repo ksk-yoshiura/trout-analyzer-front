@@ -17,7 +17,6 @@ export default function LureTypeSelect(props: TypeProp) {
   const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-  console.log(data)
 
   return (
     <Select {...field} w={150} placeholder='Lure Type'>
