@@ -18,7 +18,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('lines/' + props.chosenId)
+  const { data, error } = useSWR<LinesApiResponse, Error>('lines/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -62,7 +62,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             COMPANY {data.result?.company}
           </Box>
           <Box>
-            ADDED {data.result?.createdAt}
+            ADDED {data.result?.CreatedAt}
           </Box>
         </Stack>
 
