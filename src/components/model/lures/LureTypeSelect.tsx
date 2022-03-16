@@ -17,14 +17,15 @@ export default function LureTypeSelect(props: TypeProp) {
   const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  console.log(data)
 
   return (
     <Select {...field} w={150} placeholder='Lure Type'>
       {
         data.result?.map((item, index) => {
           return (
-            <option key={index} value={item.id}>
-              {item.type_name}
+            <option key={index} value={item.ID}>
+              {item.typeName}
             </option>
           )
         })
