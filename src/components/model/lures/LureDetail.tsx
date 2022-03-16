@@ -32,7 +32,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.lureType}
+            {data.result?.LureType.typeName}
           </Badge>
         </Box>
 
@@ -62,13 +62,13 @@ export default function LuresList(props: DetailProps): JSX.Element {
             COLOR {data.result?.color}
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.company}
+            COMPANY {data.result?.companyName}
           </Box>
           <Box textTransform='uppercase'>
             FREQUENCY {data.result?.frequency} times
           </Box>
           <Box>
-            ADDED {data.result?.createdAt}
+            ADDED {data.result?.CreatedAt}
           </Box>
           <Box>
             LAST USED {data.result?.lastUsedAt}
