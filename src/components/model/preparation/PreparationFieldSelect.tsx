@@ -17,7 +17,7 @@ export default function FieldSelect() {
       {
         data.result?.map((item, index) => {
           return (
-            <option key={index} value={item.id}>
+            <option key={index} value={item.ID}>
               {item.name}
             </option>
           )
