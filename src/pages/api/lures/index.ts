@@ -6,7 +6,7 @@ type LureType = {
 }
 
 export type Lure = {
-  id: string
+  ID: string
   imageUrl: string
   imageAlt: string
   CreatedAt: string
