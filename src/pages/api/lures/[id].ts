@@ -1,14 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+type LureType = {
+  ID: string
+  typeName: string
+}
+
 export type Lure = {
   id: string
   imageUrl: string
   imageAlt: string
-  createdAt: string
+  CreatedAt: string
   lastUsedAt: string
-  lureType: string
+  LureType: LureType
   name: string
-  company: string
+  companyName: string
   color: string
   weight: string
   frequency: string
@@ -56,21 +61,21 @@ export default function LuresApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchLureData(id: string): Lure | undefined {
-  const lures: Lure[] = [
-    {
-      id: '1',
-      imageUrl: 'https://bit.ly/2Z4KKcF',
-      imageAlt: 'lure image',
-      createdAt: '2021/12/28',
-      lastUsedAt: '2021/12/28',
-      lureType: '3',
-      name: 'super crank bait',
-      company: 'no brand',
-      color: 'red',
-      weight: '2',
-      frequency: '5'
-    },
-  ]
-  return lures.find((lure) => lure.id === id)
-}
+// function fetchLureData(id: string): Lure | undefined {
+//   const lures: Lure[] = [
+//     {
+//       id: '1',
+//       imageUrl: 'https://bit.ly/2Z4KKcF',
+//       imageAlt: 'lure image',
+//       createdAt: '2021/12/28',
+//       lastUsedAt: '2021/12/28',
+//       lureType: '3',
+//       name: 'super crank bait',
+//       company: 'no brand',
+//       color: 'red',
+//       weight: '2',
+//       frequency: '5'
+//     },
+//   ]
+//   return lures.find((lure) => lure.id === id)
+// }
