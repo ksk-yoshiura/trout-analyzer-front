@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Reel = {
-  id: string
+  ID: string
   imageUrl: string
   imageAlt: string
-  createdAt: string
+  CreatedAt: string
   name: string
   company: string
   type: string
@@ -49,18 +49,18 @@ export default function ReelsApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchReelData(id: string): Reel | undefined {
-  const reels: Reel[] = [
-    {
-      id: '1',
-      imageUrl: 'https://bit.ly/2Z4KKcF',
-      imageAlt: 'lure image',
-      createdAt: '2021/12/28',
-      type: '10',
-      gear: '6',
-      name: 'super good reel',
-      company: 'daiawa'
-    },
-  ]
-  return reels.find((reel) => reel.id === id)
-}
+// function fetchReelData(id: string): Reel | undefined {
+//   const reels: Reel[] = [
+//     {
+//       id: '1',
+//       imageUrl: 'https://bit.ly/2Z4KKcF',
+//       imageAlt: 'lure image',
+//       createdAt: '2021/12/28',
+//       type: '10',
+//       gear: '6',
+//       name: 'super good reel',
+//       company: 'daiawa'
+//     },
+//   ]
+//   return reels.find((reel) => reel.id === id)
+// }
