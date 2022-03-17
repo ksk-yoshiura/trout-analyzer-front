@@ -106,7 +106,7 @@ export default function LureForm(props: DetailProps) {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
