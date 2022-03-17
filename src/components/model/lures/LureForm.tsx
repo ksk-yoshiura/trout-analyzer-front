@@ -36,7 +36,7 @@ type LureData = {
   imageAlt?: string
   CreatedAt?: string
   lastUsedAt?: string
-  LureType?: LureType
+  lureTypeId?: string
   name?: string
   companyName?: string
   color?: string
@@ -65,6 +65,7 @@ export default function LureForm(props: DetailProps) {
   
   // API登録・更新
   function handleSendLureData(values: LureData) {
+    console.log(values)
     if (chosenId !== '0') { // ルアーIDがある場合は更新
       axiosInstance.put('lures/' + chosenId, values)
         .then(function () {
@@ -82,7 +83,7 @@ export default function LureForm(props: DetailProps) {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -158,7 +159,7 @@ export default function LureForm(props: DetailProps) {
         companyName: data?.companyName,
         color: data?.color,
         weight: data?.weight,
-        type: data?.LureType?.typeName,
+        lureTypeId: data?.lureTypeId,
         image: ''
       }}
       onSubmit={(values, actions) => {
@@ -187,15 +188,15 @@ export default function LureForm(props: DetailProps) {
                 </FormControl>
               )}
             </Field>
-            <Field name='type' validate={validateData}>
+            <Field name='lureTypeId' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.type)
-                    && Boolean(form.touched.type)}
+                  isInvalid={Boolean(form.errors.lureTypeId)
+                    && Boolean(form.touched.lureTypeId)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='type'
+                    htmlFor='lureTypeId'
                     textTransform='uppercase'
                   >LURE TYPE</FormLabel>
                   <LureTypeSelect field={field} />
