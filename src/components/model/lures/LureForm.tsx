@@ -65,7 +65,6 @@ export default function LureForm(props: DetailProps) {
   
   // API登録・更新
   function handleSendLureData(values: LureData) {
-    console.log(values)
     if (chosenId !== '0') { // ルアーIDがある場合は更新
       axiosInstance.put('lures/' + chosenId, values)
         .then(function () {
