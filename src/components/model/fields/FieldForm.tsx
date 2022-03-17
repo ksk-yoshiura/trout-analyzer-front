@@ -68,7 +68,7 @@ export default function FieldForm(props: DetailProps) {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -94,14 +94,13 @@ export default function FieldForm(props: DetailProps) {
           })
         })
         .catch(function (error) {
-          console.log(error)
-          // toast({
-          //   title: 'Failed!',
-          //   description: error,
-          //   status: 'error',
-          //   duration: 9000,
-          //   isClosable: true,
-          // })
+          toast({
+            title: 'Failed!',
+            description: error.messsage,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
         })
     }
   }
