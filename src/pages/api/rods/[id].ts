@@ -1,14 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Rod = {
-  id: string
+  ID: string
   imageUrl: string
   imageAlt: string
-  createdAt: string
-  hardness: string
+  CreatedAt: string
+  RodHardnessCondition: { typeName: string }
+  hardnessa: string
   length: string
   name: string
-  company: string
+  companyName: string
 }
 
 // API のレスポンス型
@@ -49,18 +50,18 @@ export default function RodsApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchRodData(id: string): Rod | undefined {
-  const rods: Rod[] = [
-    {
-      id: '1',
-    imageUrl: 'https://bit.ly/2Z4KKcF',
-    imageAlt: 'rod image',
-    createdAt: '2021/12/28',
-    hardness: '1',
-    length: '6',
-    name: 'super good fishing rod',
-    company: 'no brand'
-    },
-  ]
-  return rods.find((rod) => rod.id === id)
-}
+// function fetchRodData(id: string): Rod | undefined {
+//   const rods: Rod[] = [
+//     {
+//       id: '1',
+//     imageUrl: 'https://bit.ly/2Z4KKcF',
+//     imageAlt: 'rod image',
+//     createdAt: '2021/12/28',
+//     hardness: '1',
+//     length: '6',
+//     name: 'super good fishing rod',
+//     company: 'no brand'
+//     },
+//   ]
+//   return rods.find((rod) => rod.id === id)
+// }
