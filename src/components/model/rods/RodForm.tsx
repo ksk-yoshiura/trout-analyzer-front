@@ -22,45 +22,43 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
-import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
-import useSWR from 'swr'
-import { RodsApiResponse } from "../../../pages/api/rods/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type RodData = {
   name?: string;
-  company?: string;
+  companyName?: string;
   hardness?: string;
   length?: string;
   image?: string;
 }
 
+// 編集データ
+type DetailProps = {
+  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
+  data?: RodData;
+}
+
 // ロッド硬さ
 const rodHardnessType = 1
 
-export default function RodForm() {
-  // パラメータからロッドID取得
-  const router = useRouter();
-  const { id } = router.query
+export default function RodForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
-  
+  // ページ遷移
+  const router = useRouter();
+  // データ各種取得
+  const { chosenId, data } = props
+
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-  
-
-  // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('rods/' + id)
-  if (error) return <p>Error: {error.message}</p>
-  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendRodData(values: RodData) {
-    if (id) { // ロッドIDがある場合は更新
-      axiosInstance.put('rods/' + id, values)
+    if (chosenId !== '0') { // ロッドIDがある場合は更新
+      axiosInstance.put('rods/' + chosenId, values)
         .then(function () {
           // リストページに遷移
           router.push('/rods')
@@ -76,7 +74,7 @@ export default function RodForm() {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -99,7 +97,7 @@ export default function RodForm() {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -148,10 +146,10 @@ export default function RodForm() {
   return (
     <Formik
       initialValues={{
-        name: data.result?.name,
-        company: data.result?.company,
-        hardness: data.result?.hardness,
-        length: data.result?.length,
+        name: data?.name,
+        company: data?.companyName,
+        hardness: data?.hardness,
+        length: data?.length,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
@@ -215,19 +213,19 @@ export default function RodForm() {
               )}
             </Field>
 
-            <Field name='company' validate={validateData}>
+            <Field name='companyName' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.company)
-                    && Boolean(form.touched.company)}
+                  isInvalid={Boolean(form.errors.companyName)
+                    && Boolean(form.touched.companyName)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='company'
+                    htmlFor='companyName'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.company}</FormErrorMessage>
+                  <Input {...field} width="100%" fontSize="1xl" id='companyName' variant='flushed' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
