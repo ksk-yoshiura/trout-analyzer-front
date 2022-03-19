@@ -7,8 +7,8 @@ export type Reel = {
   CreatedAt: string
   name: string
   company: string
-  type: string
-  gear: string
+  TypeNumberCondition: { typeName: string }
+  GearCondition: { typeName: string }
 }
 
 // API のレスポンス型
