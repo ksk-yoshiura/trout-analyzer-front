@@ -8,7 +8,7 @@ export type Line = {
   lineType: string
   name: string
   company: string
-  thickness: string
+  thickness: number
 }
 
 // API のレスポンス型
