@@ -20,11 +20,21 @@ const title = [
   'LineType'
 ]
 
+// 各タイプのURL
+const typeURL = [
+  'default',
+  'rod_hardness',
+  'reel_gear',
+  'reel_type',
+  'line_type'
+]
+
+
 export default function TooConditionTypeSelect(props: TypeProps) {
   // タイプナンバー
   const { typeNum, field } = props
   // APIからデータ取得
-  const { data, error } = useSWR<ToolConditionApiResponse, Error>('tool_conditions/type_num/' + typeNum)
+  const { data, error } = useSWR<ToolConditionApiResponse, Error>('tool_conditions/' + typeURL[typeNum])
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -33,8 +43,8 @@ export default function TooConditionTypeSelect(props: TypeProps) {
       {
         data.result?.map((item, index) => {
           return (
-            <option key={index} value={item.id}>
-              {item.type_name}
+            <option key={index} value={item.ID}>
+              {item.typeName}
             </option>
           )
         })
