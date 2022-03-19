@@ -21,6 +21,15 @@ const patternData = [ // 初期データ
   { 'default': 'sunny' }
 ]
 
+// 各タイプのURL
+const typeURL = [
+  'default',
+  'result',
+  'lure_speed',
+  'lure_depth',
+  'weather'
+]
+
 export default function PatternConditionRadio(props: PatternTypeProp) {
   // パターンタイプ
   const { typeNum, field } = props
@@ -35,13 +44,13 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   })
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions/type_num/' + typeNum)
+  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions/' + typeURL[typeNum])
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   // 釣果の名称配列作成
   const resultData = data.result?.map(function (value) {
-    return value.type_name
+    return value.typeName
   })
 
   return (
