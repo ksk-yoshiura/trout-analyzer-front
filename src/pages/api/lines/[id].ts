@@ -7,7 +7,7 @@ export type Line = {
   CreatedAt: string
   lineType: string
   name: string
-  company: string
+  companyName: string
   thickness: number
 }
 
