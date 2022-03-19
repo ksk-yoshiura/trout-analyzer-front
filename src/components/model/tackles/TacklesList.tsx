@@ -47,10 +47,10 @@ export default function TacklesList(): JSX.Element {
         {
           data.result?.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>
                   <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Image src={item.rod.imageUrl} alt={item.rod.imageAlt} />
+                    <Image src={item.Rod.imageUrl} alt={item.Rod.imageAlt} />
                     <Box p='2'>
                       <Box
                         mt='1'
@@ -58,13 +58,13 @@ export default function TacklesList(): JSX.Element {
                         as='h3'
                         lineHeight='tight'
                       >
-                        {item.rod.name}
+                        {item.Rod.name}
                       </Box>
 
                     </Box>
                   </Box>
                   <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Image src={item.reel.imageUrl} alt={item.reel.imageAlt} />
+                    <Image src={item.Reel.imageUrl} alt={item.Reel.imageAlt} />
                     <Box p='2'>
                       <Box
                         mt='1'
@@ -72,13 +72,13 @@ export default function TacklesList(): JSX.Element {
                         as='h4'
                         lineHeight='tight'
                       >
-                        {item.reel.name}
+                        {item.Reel.name}
                       </Box>
 
                     </Box>
                   </Box>
                   <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Image src={item.line.imageUrl} alt={item.line.imageAlt} />
+                    <Image src={item.Line.imageUrl} alt={item.Line.imageAlt} />
                     <Box p='2'>
                       <Box
                         mt='1'
@@ -86,7 +86,7 @@ export default function TacklesList(): JSX.Element {
                         as='h4'
                         lineHeight='tight'
                       >
-                        {item.line.name}
+                        {item.Line.name}
                       </Box>
 
                     </Box>
