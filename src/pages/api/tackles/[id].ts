@@ -1,37 +1,37 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Tackle = {
-  id: string
-  createdAt: string
-  rod: {
-    id: string
+  ID: string
+  CreatedAt: string
+  Rod: {
+    ID: string
     name: string
     imageUrl: string
     imageAlt: string
     length: string
-    hardness: string
+    RodHardnessCondition: { typeName: string }
     companyName: string
-    createdAt: string
+    CreatedAt: string
   },
-  reel: {
-    id: string
+  Reel: {
+    ID: string
     name: string
     imageUrl: string
     imageAlt: string
-    type: string
-    gear: string
+    TypeNumberCondition: { typeName: string }
+    GearCondition: { typeName: string }
     companyName: string
-    createdAt: string
+    CreatedAt: string
   },
-  line: {
-    id: string
+  Line: {
+    ID: string
     name: string
     imageUrl: string
     imageAlt: string
     thickness: string
     lineType: string
     companyName: string
-    createdAt: string
+    CreatedAt: string
   }
 }
 
@@ -97,144 +97,144 @@ export default function TacklesApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchTackleData(id: string): Tackle | undefined {
-  const tackles: Tackle[] = [
-    {
-      id: '1',
-      createdAt: '2021/12/28',
-      rod: {
-        id: '1',
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      },
-      reel: {
-        id: '1',
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG',
-        companyName: 'Shimano',
-        createdAt: '2021/02/22'
-      },
-      line: {
-        id: '1',
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3',
-        lineType: 'Nylon',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      }
-    },
-    {
-      id: '2',
-      createdAt: '2021/12/28',
-      rod: {
-        id: '1',
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      },
-      reel: {
-        id: '1',
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG',
-        companyName: 'Shimano',
-        createdAt: '2021/02/22'
-      },
-      line: {
-        id: '1',
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3',
-        lineType: 'Nylon',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      }
-    },
-    {
-      id: '3',
-      createdAt: '2021/12/28',
-      rod: {
-        id: '1',
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      },
-      reel: {
-        id: '1',
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG',
-        companyName: 'Shimano',
-        createdAt: '2021/02/22'
-      },
-      line: {
-        id: '1',
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3',
-        lineType: 'Nylon',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      }
-    },
-    {
-      id: '4',
-      createdAt: '2021/12/28',
-      rod: {
-        id: '1',
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      },
-      reel: {
-        id: '1',
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG',
-        companyName: 'Shimano',
-        createdAt: '2021/02/22'
-      },
-      line: {
-        id: '1',
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3',
-        lineType: 'Nylon',
-        companyName: 'Daiwa',
-        createdAt: '2021/02/22'
-      }
-    }
-  ]
-  return tackles.find((tackle) => tackle.id === id)
-}
+// function fetchTackleData(id: string): Tackle | undefined {
+//   const tackles: Tackle[] = [
+//     {
+//       id: '1',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         id: '1',
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       },
+//       reel: {
+//         id: '1',
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG',
+//         companyName: 'Shimano',
+//         createdAt: '2021/02/22'
+//       },
+//       line: {
+//         id: '1',
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3',
+//         lineType: 'Nylon',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       }
+//     },
+//     {
+//       id: '2',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         id: '1',
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       },
+//       reel: {
+//         id: '1',
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG',
+//         companyName: 'Shimano',
+//         createdAt: '2021/02/22'
+//       },
+//       line: {
+//         id: '1',
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3',
+//         lineType: 'Nylon',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       }
+//     },
+//     {
+//       id: '3',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         id: '1',
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       },
+//       reel: {
+//         id: '1',
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG',
+//         companyName: 'Shimano',
+//         createdAt: '2021/02/22'
+//       },
+//       line: {
+//         id: '1',
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3',
+//         lineType: 'Nylon',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       }
+//     },
+//     {
+//       id: '4',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         id: '1',
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       },
+//       reel: {
+//         id: '1',
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG',
+//         companyName: 'Shimano',
+//         createdAt: '2021/02/22'
+//       },
+//       line: {
+//         id: '1',
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3',
+//         lineType: 'Nylon',
+//         companyName: 'Daiwa',
+//         createdAt: '2021/02/22'
+//       }
+//     }
+//   ]
+//   return tackles.find((tackle) => tackle.id === id)
+// }
