@@ -1,27 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Tackle = {
-  id: string
-  createdAt: string
-  rod: {
+  ID: string
+  CreatedAt: string
+  Rod: {
     name: string
     imageUrl: string
     imageAlt: string
     length: string
-    hardness: string
+    RodHardnessCondition: { typeName: string }
   },
-  reel: {
+  Reel: {
     name: string
     imageUrl: string
     imageAlt: string
-    type: string
-    gear: string
+    TypeNumberCondition: { typeName: string }
+    GearCondition: { typeName: string }
   },
-  line: {
+  Line: {
     name: string
     imageUrl: string
     imageAlt: string
     thickness: string
+    lineType: string
   }
 }
 
@@ -46,176 +47,176 @@ export default function TacklesApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchTackleData(): Tackle[] | undefined {
-  const tackles: Tackle[] = [
-    {
-      id: '1',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    },
-    {
-      id: '2',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    },
-    {
-      id: '3',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    },
-    {
-      id: '4',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    },
-    {
-      id: '5',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    },
-    {
-      id: '6',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    },
-    {
-      id: '7',
-      createdAt: '2021/12/28',
-      rod: {
-        name: 'super good rod',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'rod image',
-        length: '6',
-        hardness: 'ML'
-      },
-      reel: {
-        name: 'super great reel',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        type: '2000',
-        gear: 'HG'
-      },
-      line: {
-        name: 'good line',
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: '',
-        thickness: '3'
-      }
-    }
-  ]
-  return tackles
-}
+// function fetchTackleData(): Tackle[] | undefined {
+//   const tackles: Tackle[] = [
+//     {
+//       id: '1',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     },
+//     {
+//       id: '2',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     },
+//     {
+//       id: '3',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     },
+//     {
+//       id: '4',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     },
+//     {
+//       id: '5',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     },
+//     {
+//       id: '6',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     },
+//     {
+//       id: '7',
+//       createdAt: '2021/12/28',
+//       rod: {
+//         name: 'super good rod',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: 'rod image',
+//         length: '6',
+//         hardness: 'ML'
+//       },
+//       reel: {
+//         name: 'super great reel',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         type: '2000',
+//         gear: 'HG'
+//       },
+//       line: {
+//         name: 'good line',
+//         imageUrl: 'https://bit.ly/2Z4KKcF',
+//         imageAlt: '',
+//         thickness: '3'
+//       }
+//     }
+//   ]
+//   return tackles
+// }
