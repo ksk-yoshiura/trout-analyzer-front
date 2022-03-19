@@ -9,7 +9,7 @@ type LineData = {
   CreatedAt?: string
   lineType?: string
   name?: string
-  company?: string
+  companyName?: string
   thickness?: number
 }
 
@@ -20,7 +20,7 @@ export default function LineCreate(): JSX.Element {
     CreatedAt: '',
     lineType: '',
     name: '',
-    company: '',
+    companyName: '',
     thickness: 0, 
   }
   return (

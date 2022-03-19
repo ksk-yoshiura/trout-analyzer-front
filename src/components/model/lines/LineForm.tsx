@@ -27,7 +27,7 @@ import { createAxiosInstance } from "../../../pages/api/utils"
 
 type LineData = {
   name?: string;
-  company?: string;
+  companyName?: string;
   lineTypeId?: string;
   thickness?: number;
   imageUrl?: string;
@@ -148,7 +148,7 @@ export default function LineForm(props: DetailProps) {
     <Formik
       initialValues={{
         name: data?.name,
-        company: data?.company,
+        company: data?.companyName,
         thickness: data?.thickness,
         type: data?.lineTypeId,
         image: '' // TODO ：適切な形式で
@@ -213,19 +213,19 @@ export default function LineForm(props: DetailProps) {
               )}
             </Field>
 
-            <Field name='company' validate={validateData}>
+            <Field name='companyName' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.company)
-                    && Boolean(form.touched.company)}
+                  isInvalid={Boolean(form.errors.companyName)
+                    && Boolean(form.touched.companyName)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='company'
+                    htmlFor='companyName'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.company}</FormErrorMessage>
+                  <Input {...field} width="100%" fontSize="1xl" id='companyName' variant='flushed' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>

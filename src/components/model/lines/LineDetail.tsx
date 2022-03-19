@@ -59,7 +59,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             THICKNESS {data.result?.thickness} g
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.company}
+            COMPANY {data.result?.companyName}
           </Box>
           <Box>
             ADDED {data.result?.CreatedAt}
