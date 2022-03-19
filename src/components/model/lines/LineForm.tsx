@@ -31,35 +31,37 @@ import { createAxiosInstance } from "../../../pages/api/utils"
 type LineData = {
   name?: string;
   company?: string;
-  type?: string;
+  lineTypeId?: string;
   thickness?: string;
   image?: string;
+}
+
+// 編集データ
+type DetailProps = {
+  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
+  data?: LineData;
 }
 
 // ライン種類
 const lineType = 4
 
-export default function LineForm() {
-  // パラメータからラインID取得
-  const router = useRouter();
-  const { id } = router.query
+export default function LineForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
+  // ページ遷移
+  const router = useRouter();
+  // データ各種取得
+  const { chosenId, data } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
   
-  // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('lines/' + id)
-  if (error) return <p>Error: {error.message}</p>
-  if (!data) return <Loading />
-
   // API登録・更新
   function handleSendLineData(values: LineData) {
-    if (id) { // ラインIDがある場合は更新
-      axiosInstance.put('lines/' + id, values)
+    if (chosenId !== '0') { // ラインIDがある場合は更新
+      axiosInstance.put('lines/' + chosenId, values)
         .then(function () {
           // リストページに遷移
           router.push('/lines')
@@ -75,7 +77,7 @@ export default function LineForm() {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -98,7 +100,7 @@ export default function LineForm() {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -147,10 +149,10 @@ export default function LineForm() {
   return (
     <Formik
       initialValues={{
-        name: data.result?.name,
-        company: data.result?.company,
-        thickness: data.result?.thickness,
-        type: data.result?.lineType,
+        name: data?.name,
+        company: data?.company,
+        thickness: data?.thickness,
+        type: data?.lineTypeId,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
@@ -197,18 +199,18 @@ export default function LineForm() {
               )}
             </Field>
 
-            <Field name='type' validate={validateData}>
+            <Field name='lineTypeId' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.type)
-                    && Boolean(form.touched.type)}
+                  isInvalid={Boolean(form.errors.lineTypeId)
+                    && Boolean(form.touched.lineTypeId)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='type'
+                    htmlFor='lineTypeId'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
-                  <ToolConditionSelect field={field} typeNum={lineType} /><FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                  <ToolConditionSelect field={field} typeNum={lineType} /><FormErrorMessage>{form.errors.lineTypeId}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
