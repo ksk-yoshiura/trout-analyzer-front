@@ -54,7 +54,7 @@ export default function RodsList(props: FieldProp): JSX.Element {
         {
           data.result?.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.id) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                   <Image src={item.imageUrl} alt={item.imageAlt} />
 
@@ -64,7 +64,7 @@ export default function RodsList(props: FieldProp): JSX.Element {
                         New
                       </Badge>
                       <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.hardness}
+                        {item.RodHardnessCondition.typeName}
                       </Badge>
                     </Box>
                     <Box
@@ -94,7 +94,7 @@ export default function RodsList(props: FieldProp): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.createdAt}
+                      added {item.CreatedAt}
                     </Box>
 
                   </Box>
