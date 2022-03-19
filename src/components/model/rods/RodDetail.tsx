@@ -31,7 +31,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.hardness}
+            {data.result?.RodHardnessCondition.typeName}
           </Badge>
         </Box>
 
@@ -58,10 +58,10 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             LENGTH {data.result?.length} ft
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.company}
+            COMPANY {data.result?.companyName}
           </Box>
           <Box>
-            ADDED {data.result?.createdAt}
+            ADDED {data.result?.CreatedAt}
           </Box>
         </Stack>
 
