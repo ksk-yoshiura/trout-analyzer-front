@@ -31,10 +31,10 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.type}
+            {data.result?.TypeNumberCondition.typeName}
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.gear}
+            {data.result?.GearCondition.typeName}
           </Badge>
         </Box>
 
