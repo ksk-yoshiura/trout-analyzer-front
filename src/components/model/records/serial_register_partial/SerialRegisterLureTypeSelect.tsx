@@ -32,8 +32,8 @@ export default function LureTypeSelect(props: any) {
         {
           data.result?.map((item, index) => {
             return (
-              <option key={index} value={item.id}>
-                {item.type_name}
+              <option key={index} value={item.ID}>
+                {item.typeName}
               </option>
             )
           })
