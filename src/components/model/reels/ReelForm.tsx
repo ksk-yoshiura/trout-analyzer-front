@@ -22,18 +22,21 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
-import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
-import useSWR from 'swr'
-import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type ReelData = {
   name?: string;
   company?: string;
-  type?: string;
-  gear?: string;
+  typeNumberId?: string;
+  gearId?: string;
   image?: string;
+}
+
+// 編集データ
+type DetailProps = {
+  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
+  data?: ReelData;
 }
 
 // リールギア比
@@ -41,26 +44,23 @@ const gearType = 2
 // リール型番
 const reelType = 3
 
-export default function ReelForm() {
-  // パラメータからリールID取得
-  const router = useRouter();
-  const { id } = router.query
+export default function ReelForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
+  // ページ遷移
+  const router = useRouter();
+  // データ各種取得
+  const { chosenId, data } = props
+
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-  
-  // APIからデータ取得
-  const { data, error } = useSWR<ReelsApiResponse, Error>('reels/' + id)
-  if (error) return <p>Error: {error.message}</p>
-  if (!data) return <Loading />
 
   // API登録・更新
   function handleSendReelData(values: ReelData) {
-    if (id) { // リールIDがある場合は更新
-      axiosInstance.put('reels/' + id, values)
+    if (chosenId !== '0') { // リールIDがある場合は更新
+      axiosInstance.put('reels/' + chosenId, values)
         .then(function () {
           // リストページに遷移
           router.push('/reels')
@@ -76,7 +76,7 @@ export default function ReelForm() {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -99,7 +99,7 @@ export default function ReelForm() {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.message,
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -148,10 +148,10 @@ export default function ReelForm() {
   return (
     <Formik
       initialValues={{
-        name: data.result?.name,
-        company: data.result?.company,
-        gear: data.result?.gear,
-        type: data.result?.type,
+        name: data?.name,
+        company: data?.company,
+        gearId: data?.gearId,
+        typeNumberId: data?.typeNumberId,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
@@ -181,36 +181,36 @@ export default function ReelForm() {
               )}
             </Field>
 
-            <Field name='gear' validate={validateData}>
+            <Field name='gearId' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.gear)
-                    && Boolean(form.touched.gear)}
+                  isInvalid={Boolean(form.errors.gearId)
+                    && Boolean(form.touched.gearId)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='gear'
+                    htmlFor='gearId'
                     textTransform='uppercase'
                   >GEAR</FormLabel>
                   <ToolConditionSelect field={field} typeNum={gearType} />
-                  <FormErrorMessage>{form.errors.gear}</FormErrorMessage>
+                  <FormErrorMessage>{form.errors.gearId}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Field name='type' validate={validateData}>
+            <Field name='typeNumberId' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.type)
-                    && Boolean(form.touched.type)}
+                  isInvalid={Boolean(form.errors.typeNumberId)
+                    && Boolean(form.touched.typeNumberId)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='type'
+                    htmlFor='typeNumberId'
                     textTransform='uppercase'
                   >TYPE</FormLabel>
                   <ToolConditionSelect field={field} typeNum={reelType} />
-                  <FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                  <FormErrorMessage>{form.errors.typeNumberId}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
