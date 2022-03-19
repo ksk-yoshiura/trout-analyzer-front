@@ -23,11 +23,11 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.result?.rod.imageUrl} alt={data.result?.rod.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.Rod.imageUrl} alt={data.result?.Rod.imageAlt} borderRadius='lg' />
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.rod.hardness}
+            {data.result?.Rod.RodHardnessCondition.typeName}
           </Badge>
         </Box>
 
@@ -39,7 +39,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.result?.rod.name}
+          {data.result?.Rod.name}
         </Box>
 
         <Stack
@@ -51,25 +51,25 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            LENGTH {data.result?.rod.length} ft
+            LENGTH {data.result?.Rod.length} ft
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.rod.companyName}
+            COMPANY {data.result?.Rod.companyName}
           </Box>
           <Box>
-            ADDED {data.result?.rod.createdAt}
+            ADDED {data.result?.Rod.CreatedAt}
           </Box>
         </Stack>
       </Box>
 
-      <Image src={data.result?.reel.imageUrl} alt={data.result?.reel.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.Reel.imageUrl} alt={data.result?.Reel.imageAlt} borderRadius='lg' />
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.reel.type}
+            {data.result?.Reel.TypeNumberCondition.typeName}
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.reel.gear}
+            {data.result?.Reel.GearCondition.typeName}
           </Badge>
         </Box>
 
@@ -81,7 +81,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.result?.reel.name}
+          {data.result?.Reel.name}
         </Box>
 
         <Stack
@@ -93,19 +93,19 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.reel.companyName}
+            COMPANY {data.result?.Reel.companyName}
           </Box>
           <Box>
-            ADDED {data.result?.reel.createdAt}
+            ADDED {data.result?.Reel.CreatedAt}
           </Box>
         </Stack>
       </Box>
 
-      <Image src={data.result?.line.imageUrl} alt={data.result?.line.imageAlt} borderRadius='lg' />
+      <Image src={data.result?.Line.imageUrl} alt={data.result?.Line.imageAlt} borderRadius='lg' />
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.line.lineType}
+            {data.result?.Line.lineType}
           </Badge>
         </Box>
 
@@ -117,7 +117,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.result?.line.name}
+          {data.result?.Line.name}
         </Box>
 
         <Stack
@@ -129,13 +129,13 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {data.result?.line.thickness} lb
+            THICKNESS {data.result?.Line.thickness} lb
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.line.companyName}
+            COMPANY {data.result?.Line.companyName}
           </Box>
           <Box>
-            ADDED {data.result?.line.createdAt}
+            ADDED {data.result?.Line.CreatedAt}
           </Box>
         </Stack>
       </Box>
