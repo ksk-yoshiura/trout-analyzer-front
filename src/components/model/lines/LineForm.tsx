@@ -22,18 +22,16 @@ import {
   useToast
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
-import Loading from '../../shared/Loading'
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
-import useSWR from 'swr'
-import { LinesApiResponse } from "../../../pages/api/lines/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type LineData = {
   name?: string;
   company?: string;
   lineTypeId?: string;
-  thickness?: string;
-  image?: string;
+  thickness?: number;
+  imageUrl?: string;
+  CreatedAt?: string
 }
 
 // 編集データ
