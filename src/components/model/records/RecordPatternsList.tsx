@@ -75,7 +75,7 @@ export default function RecordsAllList(): JSX.Element {
                 key={index}
                 onClick={() => {
                   onOpen(),
-                    clickHandler(item.id)
+                  clickHandler(item.id)
                 }}
                 type='button' as={"button"}
                 display="flex"
