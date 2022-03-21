@@ -17,7 +17,7 @@ export default function LureTypeSelect(props: any) {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   
-  function changeHandler(event: any) { // TODO：anyで一旦退避
+  function changeHandler(event: React.FormEvent<HTMLSelectElement>) {
     const { target } = event;
     if (!(target instanceof HTMLSelectElement)) {
       return; // or throw new TypeError();
@@ -39,7 +39,11 @@ export default function LureTypeSelect(props: any) {
           })
         }
       </Select>
-      <LureSelect lureTypeId={lureTypeId} field={field} />
+      {
+        lureTypeId !== '0'
+        ?<LureSelect lureTypeId={lureTypeId} field={field} />
+        : <></>
+      }
     </>
   )
 }
