@@ -14,7 +14,7 @@ export default function LureSelect(props: LureTypeProps) {
   const { lureTypeId, field } = props
 
   // ルアーデータリスト
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures/type_num/' + lureTypeId)
+  const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + lureTypeId)
   if (error) return <p>Error: {error.message}</p>
   return (
     lureTypeId !== '0' && lureTypeId ?
@@ -22,7 +22,7 @@ export default function LureSelect(props: LureTypeProps) {
         {
           data?.result?.map((item, index) => {
             return (
-              <option key={index} value={item.id}>
+              <option key={index} value={item.ID}>
                 {item.name} :{item.color}
               </option>
             )
