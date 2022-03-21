@@ -15,12 +15,19 @@ import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
 
-export default function LuresList(): JSX.Element {
+type ListProps = {
+  typeId: string;
+}
+
+export default function LuresList(props: ListProps): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+
+  // ルアータイプID
+  const { typeId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures')
+  const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -43,7 +50,6 @@ export default function LuresList(): JSX.Element {
       </Modal>
     )
   }
-
 
   return (
     <>
