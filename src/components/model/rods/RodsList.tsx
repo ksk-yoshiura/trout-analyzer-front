@@ -14,11 +14,11 @@ import useSWR from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/index"
 
 // タックルフォームで呼び出す場合
-type FieldProp = {
+type DetailProp = {
   field?: any
 }
 
-export default function RodsList(props: FieldProp): JSX.Element {
+export default function RodsList(props: DetailProp): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
