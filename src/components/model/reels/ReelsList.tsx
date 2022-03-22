@@ -6,7 +6,6 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Modal,
 } from '@chakra-ui/react'
 import ReelDetail from './ReelDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -32,14 +31,11 @@ export default function ReelsList(): JSX.Element {
   }
 
   // モーダルを部分的に移行し共通化
-  // 完全移行はonOpen()が動作しなくなるので断念
   const ReelDetailModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <DetailModal chosenId={chosenId} title={'reel'} >
-          <ReelDetail chosenId={chosenId} />
-        </DetailModal>
-      </Modal>
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} >
+        <ReelDetail chosenId={chosenId} />
+      </DetailModal>
     )
   }
 

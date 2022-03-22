@@ -7,7 +7,6 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Modal,
 } from '@chakra-ui/react'
 import FieldDetail from './FieldDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -36,11 +35,9 @@ export default function FieldsList(): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const FieldDetailModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <DetailModal chosenId={chosenId} title={'field'} >
-          <FieldDetail chosenId={chosenId} />
-        </DetailModal>
-      </Modal>
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'field'} >
+        <FieldDetail chosenId={chosenId} />
+      </DetailModal>
     )
   }
 

@@ -7,7 +7,6 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Modal,
 } from '@chakra-ui/react'
 import LureDetail from './LureDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -43,11 +42,9 @@ export default function LuresList(props: ListProps): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const LureDetailModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <DetailModal chosenId={chosenId} title={'lure'} >
-          <LureDetail chosenId={chosenId} />
-        </DetailModal>
-      </Modal>
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'lure'} >
+        <LureDetail chosenId={chosenId} />
+      </DetailModal>
     )
   }
 

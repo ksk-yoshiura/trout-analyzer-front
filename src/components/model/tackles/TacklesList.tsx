@@ -5,7 +5,6 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Modal,
 } from '@chakra-ui/react'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
@@ -30,14 +29,11 @@ export default function TacklesList(): JSX.Element {
   }
 
   // モーダルを部分的に移行し共通化
-  // 完全移行はonOpen()が動作しなくなるので断念
   const TackleDetailModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <DetailModal chosenId={chosenId} title={'tackle'} >
-          <TackleDetail chosenId={chosenId} />
-        </DetailModal>
-      </Modal>
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'tackle'} >
+        <TackleDetail chosenId={chosenId} />
+      </DetailModal>
     )
   }
 
