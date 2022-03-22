@@ -19,14 +19,20 @@ import { createAxiosInstance } from "../../pages/api/utils"
 type DetailProps = {
   chosenId?: number
   title: string
+  isOpen: boolean
+  onClose: any
   children?: ReactNode;
 }
 
 export default function DetailModal(props: DetailProps): JSX.Element {
   // 削除モーダル
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isConfirmOpen,
+    onOpen: onConfirmOpen,
+    onClose: onConfirmClose
+  } = useDisclosure()
   // 各値
-  const { chosenId, title, children } = props
+  const { chosenId, title, children, isOpen, onClose } = props
   // 編集ページリンク
   const editURL = '/' + title + 's/edit/' + chosenId
   // 削除API
@@ -61,8 +67,9 @@ export default function DetailModal(props: DetailProps): JSX.Element {
           duration: 9000,
           isClosable: true,
         })
-      }).finally(function() {
+      }).finally(function () {
         // モーダルを閉じる
+        onConfirmClose()
         onClose()
       });
   }
@@ -70,20 +77,20 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   // 削除モーダル
   const DeletelModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isConfirmOpen} onClose={onConfirmClose}>
         <ModalOverlay />
         <ModalContent h={125} margin={'auto'}>
           <ModalCloseButton />
           <ModalHeader></ModalHeader>
           <ModalBody display={'flex'} justifyContent={'space-around'}>
-            <Button 
-              onClick={onClose} 
-              colorScheme='gray' 
+            <Button
+              onClick={onConfirmClose}
+              colorScheme='gray'
               variant='solid'
             >Cancel</Button>
-            <Button 
-              colorScheme='red' 
-              variant='solid' 
+            <Button
+              colorScheme='red'
+              variant='solid'
               onClick={() => handleDeleteButtonClick()}
             >Confirm Delete</Button>
           </ModalBody>
@@ -95,7 +102,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   }
 
   return ( // 詳細モーダル
-    <>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader textTransform={'capitalize'}>{modalTitle + ' Detail'}</ModalHeader>
@@ -105,13 +112,13 @@ export default function DetailModal(props: DetailProps): JSX.Element {
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'space-between'}>
-          <Button colorScheme='red' variant='solid' onClick={() => onOpen()}>Delete</Button>
+          <Button colorScheme='red' variant='solid' onClick={() => onConfirmOpen()}>Delete</Button>
           <NextLink href={editURL} passHref>
             <Button colorScheme='blue' variant='solid'>Edit</Button>
           </NextLink>
         </ModalFooter>
       </ModalContent>
       <DeletelModal />
-    </>
+    </Modal>
   )
 }
