@@ -5,8 +5,7 @@ import {
   Badge,
   Wrap,
   WrapItem,
-  useDisclosure,
-  Modal,
+  useDisclosure
 } from '@chakra-ui/react'
 import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -23,6 +22,7 @@ export default function RodsList(props: FieldProp): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+
   // APIからデータ取得
   const { data, error } = useSWR<RodsApiResponse, Error>('rods')
   if (error) return <p>Error: {error.message}</p>
@@ -37,14 +37,11 @@ export default function RodsList(props: FieldProp): JSX.Element {
   }
 
   // モーダルを部分的に移行し共通化
-  // 完全移行はonOpen()が動作しなくなるので断念
   const RodDetailModal = () => {
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <DetailModal chosenId={chosenId} title={'rod'} >
-          <RodDetail chosenId={chosenId} />
-        </DetailModal>
-      </Modal>
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} >
+        <RodDetail chosenId={chosenId} />
+      </DetailModal>
     )
   }
 
