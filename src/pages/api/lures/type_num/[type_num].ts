@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Lure = {
-  id: string
+  ID: string
   lureType: string
   name: string
   color: string
@@ -29,86 +29,86 @@ export default function LuresApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchLureData(type_num: string): Lure[] | undefined {
-  const lures: Lure[] = [
-    {
-      id: '1',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '2',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '3',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '4',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '5',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '6',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '7',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '8',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '9',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '10',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '11',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '12',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    },
-    {
-      id: '13',
-      color: 'red',
-      name: 'super crank bait',
-      lureType: '1'
-    }
-  ]
-  return lures.filter((lure) => lure.lureType === type_num)
-}
+// function fetchLureData(type_num: string): Lure[] | undefined {
+//   const lures: Lure[] = [
+//     {
+//       id: '1',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '2',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '3',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '4',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '5',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '6',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '7',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '8',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '9',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '10',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '11',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '12',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     },
+//     {
+//       id: '13',
+//       color: 'red',
+//       name: 'super crank bait',
+//       lureType: '1'
+//     }
+//   ]
+//   return lures.filter((lure) => lure.lureType === type_num)
+// }

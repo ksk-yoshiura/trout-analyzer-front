@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type PatternCondition = {
-  id: string
+  ID: string
   typeNum: string
   typeName: string
 }
