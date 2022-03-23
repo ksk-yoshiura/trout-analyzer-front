@@ -2,8 +2,20 @@ import React from 'react'
 import { signOut } from "next-auth/react"
 import { Box, Flex, Button } from '@chakra-ui/react';
 import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
+import { useEffect } from 'react'
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/router";
 
 export default function Header(): JSX.Element {
+  const { data: session } = useSession();
+  const router = useRouter();
+  
+  useEffect(() => {
+    // 未ログインの場合、ログインページへリダイレクト
+  if (!session && router.pathname !== '/login') {
+    router.push('/login')
+  }
+  }, [session])
   return (
     <Flex h={50}>
       <Box 

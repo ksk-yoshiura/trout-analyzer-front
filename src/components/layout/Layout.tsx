@@ -21,10 +21,6 @@ export default function Layout({ children }: Props) {
     return <Loading />
   }
 
-  // 未ログインの場合、ログインページへリダイレクト
-  if (!session && router.pathname !== '/login') {
-    router.push('/login')
-  }
 
   return (
     session ? // ログイン状態か
@@ -37,7 +33,7 @@ export default function Layout({ children }: Props) {
           </MainContent>
         </Flex>
       </Box>
-      : 
+      :
       <MainContent>
         {children}
       </MainContent>
