@@ -15,7 +15,7 @@ import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
 
 type ListProps = {
-  typeId: string;
+  typeId?: string;
 }
 
 export default function LuresList(props: ListProps): JSX.Element {

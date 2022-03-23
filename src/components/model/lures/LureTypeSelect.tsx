@@ -8,12 +8,12 @@ import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
 
 type TypeProp = {
   field? :any
-  setTypeId: React.Dispatch<React.SetStateAction<string>>;
+  setTypeId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function LureTypeSelect(props: TypeProp) {
   // LureFormのeditで選択されたタイプ
-  const { field, setTypeId } = props
+  const { field } = props
   // APIからデータ取得
   const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (error) return <p>Error: {error.message}</p>
@@ -26,7 +26,7 @@ export default function LureTypeSelect(props: TypeProp) {
       return; // or throw new TypeError();
     }
     const targetLureTypeId = target.value
-    setTypeId(targetLureTypeId)
+    props.setTypeId?.(targetLureTypeId)
   }
 
   return (
