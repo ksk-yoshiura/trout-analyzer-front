@@ -10,7 +10,7 @@ import {
 import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/index"
 
 // タックルフォームで呼び出す場合
@@ -39,7 +39,7 @@ export default function RodsList(props: DetailProp): JSX.Element {
   // モーダルを部分的に移行し共通化
   const RodDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} mutate={mutate} >
         <RodDetail chosenId={chosenId} />
       </DetailModal>
     )
