@@ -1,6 +1,5 @@
 import React from 'react'
 import { ReactNode } from "react";
-import { useRouter } from "next/router";
 import {
   Button,
   ModalOverlay,
@@ -15,12 +14,14 @@ import {
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import { createAxiosInstance } from "../../pages/api/utils"
+import { mutate } from 'swr';
 
 type DetailProps = {
   chosenId?: number
   title: string
   isOpen: boolean
   onClose: any
+  mutate: any
   children?: ReactNode;
 }
 
@@ -37,6 +38,8 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   const editURL = '/' + title + 's/edit/' + chosenId
   // 削除API
   const deleteAPIURL = title + 's/' + chosenId
+  // 削除後リスト更新
+  const updateListURL = title + 's'
   // 詳細モーダルタイトル
   const modalTitle = title
   // アラート
@@ -57,12 +60,13 @@ export default function DetailModal(props: DetailProps): JSX.Element {
           duration: 9000,
           isClosable: true,
         })
+        mutate(updateListURL)
       })
       .catch(function (error) { // 失敗時
         // アラート代わりにトーストを使用
         toast({
           title: 'Failed!',
-          description: error,
+          description: error.message,
           status: 'error',
           duration: 9000,
           isClosable: true,
