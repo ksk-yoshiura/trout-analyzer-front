@@ -9,7 +9,7 @@ import {
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
 import TackleDetail from './TackleDetail'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
 
 export default function TacklesList(): JSX.Element {
@@ -31,7 +31,7 @@ export default function TacklesList(): JSX.Element {
   // モーダルを部分的に移行し共通化
   const TackleDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'tackle'} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'tackle'} mutate={mutate}>
         <TackleDetail chosenId={chosenId} />
       </DetailModal>
     )

@@ -11,7 +11,7 @@ import {
 import FieldDetail from './FieldDetail'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
 
 export default function FieldsList(): JSX.Element {
@@ -35,7 +35,7 @@ export default function FieldsList(): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const FieldDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'field'} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'field'} mutate={mutate} >
         <FieldDetail chosenId={chosenId} />
       </DetailModal>
     )

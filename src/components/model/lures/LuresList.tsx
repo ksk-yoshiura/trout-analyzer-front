@@ -11,7 +11,7 @@ import {
 import LureDetail from './LureDetail'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
 
 type ListProps = {
@@ -42,7 +42,7 @@ export default function LuresList(props: ListProps): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const LureDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'lure'} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'lure'} mutate={mutate} >
         <LureDetail chosenId={chosenId} />
       </DetailModal>
     )

@@ -10,7 +10,7 @@ import {
 import ReelDetail from './ReelDetail'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/index"
 
 export default function ReelsList(): JSX.Element {
@@ -33,7 +33,7 @@ export default function ReelsList(): JSX.Element {
   // モーダルを部分的に移行し共通化
   const ReelDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} mutate={mutate} >
         <ReelDetail chosenId={chosenId} />
       </DetailModal>
     )

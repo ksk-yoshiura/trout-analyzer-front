@@ -11,7 +11,7 @@ import {
 import LineDetail from './LineDetail'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
 
 export default function LinesList(): JSX.Element {
@@ -35,7 +35,7 @@ export default function LinesList(): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const LineDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} mutate={mutate} >
         <LineDetail chosenId={chosenId} />
       </DetailModal>
     )
