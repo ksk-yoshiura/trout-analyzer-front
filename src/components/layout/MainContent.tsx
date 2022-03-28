@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from "react";
-import { 
+import {
   Flex
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react"
@@ -12,13 +12,14 @@ type Props = {
 export default function MainContent({ children }: Props) {
   const { data: session } = useSession();
   const router = useRouter();
-  
+
   useEffect(() => {
     // 未ログインの場合、ログインページへリダイレクト
-  if (session !== undefined && router.pathname !== '/login') {
-    router.push('/login')
-  }
+    if (!session?.accessToken && session !== undefined && router.pathname !== '/login') {
+      router.push('/login')
+    }
   }, [session])
+  
   return (
     <Flex
       flexDirection="column"
