@@ -42,3 +42,9 @@ yarn-error.log*
 # env
 .env
 .env.local
+
+# terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
