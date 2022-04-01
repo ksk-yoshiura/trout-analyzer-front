@@ -22,7 +22,7 @@ export default function RecordsAllList(): JSX.Element {
         {
           data.result?.map((item, index) => {
             return (
-              <NextLink key={index} href={"/records/" + item.id + "/patterns/list"} passHref>
+              <NextLink key={index} href={"/records/" + item.ID + "/patterns/list"} passHref>
                 <Box
                   display="flex"
                   w='100wh'
@@ -32,7 +32,7 @@ export default function RecordsAllList(): JSX.Element {
                   type='button' as={"button"}
                   overflow='hidden'
                 >
-                  <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
+                  <Image p='2' w='40%' src={item.Field.imageUrl} alt={item.Field.imageAlt} />
 
                   <Box p='2' w='50%'>
                     <Box
@@ -42,7 +42,7 @@ export default function RecordsAllList(): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.name}
+                      {item.Field.name}
                     </Box>
                     <Box
                       color='gray.500'
