@@ -23,13 +23,27 @@ import PatternConditionRadio from './serial_register_partial/PatternConditionRad
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 import { createAxiosInstance } from "../../../pages/api/utils"
+import useSWR from 'swr'
+import { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
+import Loading from '../../shared/Loading'
+
 
 type SerialRecordData = {
-  result: string;
-  speed: string;
-  depth: string;
-  lure: string;
-  tackle: string;
+  result?: string;
+  speed?: string;
+  depth?: string;
+  weather?: string;
+  lure?: string;
+  tackle?: string;
+}
+
+type recordFormData = {
+  result?: number;
+  speed?: number;
+  depth?: number;
+  weather?: number;
+  lureId?: number;
+  tackleId?: number;
 }
 
 const resultType = 1
@@ -46,8 +60,62 @@ export default function RecordSerialRegisterForm() {
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
+  // APIからデータ取得
+  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions')
+  if (error) return <p>Error: {error.message}</p>
+  if (!data) return <Loading />
+
+  const patternDataSet = data.result?.map(function (value: any) { // TODO：any退避
+    const dataSet = {'ID': undefined , 'typeName': ''}
+    dataSet.ID = value.ID
+    dataSet.typeName = value.typeName
+    return dataSet
+  })
+
+  // ラジオボタンの値を名前からIDに変換
+  function radioValueConvert(values: SerialRecordData) {
+    // 整形前
+    const valuesBeforeConvert = values
+
+    // 入力データ
+    const serialRecordData: recordFormData = {
+      result: 0,
+      speed: 0,
+      depth: 0,
+      weather: 0,
+      lureId: 0,
+      tackleId: 0,
+    }
+    // パターンのnameをidに変換する
+    patternDataSet.map(function (val) {
+      if (val.typeName === valuesBeforeConvert.result) { // 釣果
+        // 上書きする
+        serialRecordData.result = val.ID
+      }
+      if (val.typeName === valuesBeforeConvert.speed) { // 速度
+        // 上書きする
+        serialRecordData.speed = val.ID
+      }
+      if (val.typeName === valuesBeforeConvert.depth) { // 深度
+        // 上書きする
+        serialRecordData.depth = val.ID
+      }
+      if (val.typeName === valuesBeforeConvert.weather) { // 天気
+        // 上書きする
+        serialRecordData.weather = val.ID
+      }
+    })
+    // タイプをnumberに変更
+    serialRecordData.tackleId = Number(valuesBeforeConvert.tackle)
+    serialRecordData.lureId = Number(valuesBeforeConvert.lure)
+
+    return serialRecordData
+  }
+
   function handleSendSerialRecordData(values: SerialRecordData) {
-    axiosInstance.post('patterns', values)
+    const convertValues = radioValueConvert(values)
+    console.log(convertValues)
+    axiosInstance.post('patterns', convertValues)
       .then(function () {
         // アラート代わりにトーストを使用
         toast({
@@ -61,7 +129,7 @@ export default function RecordSerialRegisterForm() {
       .catch(function (error) {
         toast({
           title: 'Failed! Try again!',
-          description: error,
+          description: error.message,
           status: 'error',
           duration: 9000,
           isClosable: true,
