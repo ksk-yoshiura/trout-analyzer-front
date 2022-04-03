@@ -44,6 +44,11 @@ type recordFormData = {
   weather?: number;
   lureId?: number;
   tackleId?: number;
+  recordId?: number;
+}
+
+type RecordDetailProp = {
+  recordId: string | string[] | undefined
 }
 
 const resultType = 1
@@ -51,11 +56,13 @@ const speedType = 2
 const depthType = 3
 const weatherType = 4
 
-export default function RecordSerialRegisterForm() {
+export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
+  // レコードID
+  const { recordId } = prop
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -85,6 +92,7 @@ export default function RecordSerialRegisterForm() {
       weather: 0,
       lureId: 0,
       tackleId: 0,
+      recordId: Number(recordId)
     }
     // パターンのnameをidに変換する
     patternDataSet.map(function (val) {
@@ -182,8 +190,10 @@ export default function RecordSerialRegisterForm() {
         result: '',
         depth: '',
         weather: '',
-        lure: '',
-        tackle: ''
+        lureId: '',
+        tackleId: '',
+        recordId: recordId
+
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
