@@ -4,7 +4,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import PreparationFieldSelect from '../../../../components/model/preparation/PreparationFieldSelect';
+import PreparationFieldSelect from '../../../../components/model/records/preparation/PreparationFieldSelect';
 
 test('PreparationFieldSelect', () => {
   const { asFragment } = render(<PreparationFieldSelect />);
