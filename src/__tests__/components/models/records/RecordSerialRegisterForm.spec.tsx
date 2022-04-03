@@ -45,6 +45,8 @@ test('RecordSerialRegisterForm', () => {
 
   (useSession as jest.Mock).mockReturnValueOnce([mockSession, false]);
 
-  const { asFragment } = render(<RecordSerialRegisterForm />);
+  // レコードID
+  const recordId = "1"
+  const { asFragment } = render(<RecordSerialRegisterForm recordId={recordId} />);
   expect(asFragment()).toMatchSnapshot();
 });
