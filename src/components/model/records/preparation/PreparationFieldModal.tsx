@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import FieldForm from '../fields/FieldForm'
+import FieldForm from '../../fields/FieldForm'
 
 export default function PreparationFieldModal() {
 
@@ -24,7 +24,6 @@ export default function PreparationFieldModal() {
         <ModalCloseButton />
         <ModalBody>
           <FieldForm />
-
         </ModalBody>
       </ModalContent>
     </Modal>
