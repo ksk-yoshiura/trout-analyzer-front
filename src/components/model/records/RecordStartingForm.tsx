@@ -133,7 +133,7 @@ export default function RecordStartingForm(): JSX.Element {
                       && Boolean(form.touched.fieldId)}
                   >
                     <Flex py={50} w="100wh" justifyContent={'center'}>
-                      <PreparationFieldSelect {...field} />
+                      <PreparationFieldSelect field={field} />
                       <PreparationFieldModal />
                     </Flex>
                     <FormErrorMessage>{form.errors.fieldId}</FormErrorMessage>
