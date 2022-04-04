@@ -31,7 +31,7 @@ export default function RecordsAllList(): JSX.Element {
   const recordId = route.query.record_id
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/')
+  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
@@ -75,7 +75,7 @@ export default function RecordsAllList(): JSX.Element {
                 key={index}
                 onClick={() => {
                   onOpen(),
-                  clickHandler(item.id)
+                  clickHandler(item.ID)
                 }}
                 type='button' as={"button"}
                 display="flex"
@@ -85,24 +85,22 @@ export default function RecordsAllList(): JSX.Element {
                 borderRadius='lg'
                 overflow='hidden'
               >
-                <Image p='2' w='40%' src={item.imageUrl} alt={item.imageAlt} />
-
-                <Box pt='2' w='60%'>
+                <Box pt='2'>
                   <Box display='inline-block' alignItems='baseline'>
                     <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-                      {item.result}
+                      {item.ResultCondition.typeName}
                     </Badge>
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-                      {item.lureType}
+                      { item.Lure.LureType.typeName }
                     </Badge>
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-                      {item.weather}
+                      {item.WeatherCondition.typeName}
                     </Badge>
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-                      {item.depth}
+                      {item.DepthCondition.typeName}
                     </Badge>
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-                      {item.speed}
+                      {item.SpeedCondition.typeName}
                     </Badge>
                   </Box>
                   <Box
@@ -113,7 +111,7 @@ export default function RecordsAllList(): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    time {item.createdAt}
+                    time {item.CreatedAt}
                   </Box>
                 </Box>
               </Box>
