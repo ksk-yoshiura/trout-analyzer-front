@@ -21,6 +21,7 @@ import {
   DrawerContent,
   useToast
 } from "@chakra-ui/react";
+import { mutate } from 'swr'
 import Thumb from "../../shared/ThumbImage"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
@@ -36,6 +37,12 @@ type DetailProps = {
   data?: FieldData;
 }
 
+// 空データ（タイプチェック用）
+  const vacantData: FieldData = {
+    name: '',
+    address: '',
+  } 
+
 export default function FieldForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -46,12 +53,17 @@ export default function FieldForm(props: DetailProps) {
   // データ各種取得
   const { chosenId, data } = props
 
+  // 初期値がない場合はからデータをセット
+  // 下記エラーを解消するため
+  // Warning: A component is changing an uncontrolled input to be controlled.
+  const initData = data? data: vacantData
+
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
   function handleSendFieldData(values: FieldData) {
-    if (chosenId !== '0') { // フィールドIDがある場合は更新
+    if (chosenId && chosenId !== '0') { // フィールドIDがある場合は更新
       axiosInstance.put('fields/' + chosenId, values)
         .then(function () {
           // リストページに遷移
@@ -78,8 +90,8 @@ export default function FieldForm(props: DetailProps) {
       axiosInstance.post('fields', values)
         .then(function () {
           if (router.route === '/preparation/field') {
-            // 釣果記録準備画面では登録画面に遷移
-            router.push('/records/serial_register')
+            // 追加されて選択できる
+            mutate('fields')
           } else {
             // リストページに遷移
             router.push('/fields')
@@ -145,11 +157,12 @@ export default function FieldForm(props: DetailProps) {
     )
   }
 
+
   return (
     <Formik
       initialValues={{
-        name: data?.name,
-        address: data?.address,
+        name: initData.name,
+        address: initData.address,
         image: '' // TODO ：適切な形式で
       }}
       validateOnChange
