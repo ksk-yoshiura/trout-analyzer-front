@@ -34,7 +34,7 @@ export default function RecordsAllList(): JSX.Element {
                 >
                   <Image p='2' w='40%' src={item.Field.imageUrl} alt={item.Field.imageAlt} />
 
-                  <Box p='2' w='50%'>
+                  <Box p='2' w='60%'>
                     <Box
                       mt='1'
                       fontWeight='semibold'
@@ -52,17 +52,7 @@ export default function RecordsAllList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      sum {item.caughtSum}
-                    </Box>
-                    <Box
-                      color='gray.500'
-                      fontWeight='semibold'
-                      letterSpacing='wide'
-                      fontSize='xs'
-                      textTransform='uppercase'
-                      ml='2'
-                    >
-                      visited {item.visitedAt}
+                      visited {item.CreatedAt}
                     </Box>
 
                   </Box>
