@@ -1,51 +1,70 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Pattern = {
-  id: string
-  imageUrl: string
-  imageAlt: string
-  createdAt: string
-  lastUsedAt: string
+  ID: string
+  CreatedAt: string
   // バッジ情報
-  badge: {
-    // ルアータイプ
-    lureType: string
-    // 釣果と状況
-    result: string
-    weather: string
-    depth: string
-    speed: string
+  // 釣果
+  ResultCondition: {
+    typeName: string
+  },
+  SpeedCondition: {
+    typeName: string
+  },
+  DepthCondition: {
+    typeName: string
+  },
+  WeatherCondition: {
+    typeName: string
   },
   // ルアー情報
-  lure: {
-    lureType: string
-    lureName: string
-    lureCompany: string
-    lureColor: string
-    lureWeight: string
+  Lure: {
+    ID: string
+    LureType: {
+      typeName: string
+    }
+    name: string
+    companyName: string
+    color: string
+    weight: string
   },
-
   // タックル
-  // ロッド
-  rod: {
-    rodName: string
-    rodHardness: string
-    rodLength: string
-    rodCompany: string
-  },
-  // リール
-  reel: {
-    reelName: string
-    reelType: string
-    reelGear: string
-    reelCompany: string
-  },
-  // ライン
-  line: {
-    lineName: string
-    lineThickness: string
-    lineType: string
-    lineCompany: string
+  Tackle: {
+    ID: string
+    // ロッド
+    Rod: {
+      ID: string
+      name: string
+      hardness: string
+      length: string
+      companyName: string
+      RodHardnessCondition: {
+        typeName: string
+      }
+    },
+    // リール
+    Reel: {
+      ID: string
+      name: string
+      gear: string
+      companyName: string
+      TypeNumberCondition: {
+        typeName: string
+      }
+      GearCondition: {
+        typeName: string
+      }
+    },
+    // ライン
+    Line: {
+      ID: string
+      name: string
+      thickness: string
+      companyName: string
+      LineCondition: {
+        typeName: string
+      }
+    },
   },
 }
 
@@ -125,56 +144,56 @@ export default function PatternApi(
 }
 
 // 擬似的なデータフェッチ関数
-function fetchPatternData(id: string): Pattern | undefined {
-  const patterns: Pattern[] = [
-    {
-      id: '1',
-      imageUrl: 'https://bit.ly/2Z4KKcF',
-      imageAlt: 'lure image',
-      createdAt: '2021/12/28',
-      lastUsedAt: '2021/12/28',
-      // バッジ情報
-      badge: {
-        // ルアータイプ
-        lureType: 'spoon',
-        // 釣果と状況
-        result: 'caught',
-        weather: 'sunny',
-        depth: 'shallow',
-        speed: 'fast'
-      },
-      // ルアー情報
-      lure: {
-        lureType: 'spoon',
-        lureName: 'super great bait',
-        lureCompany: 'no brand',
-        lureColor: 'red',
-        lureWeight: '2',
-      },
+// function fetchPatternData(id: string): Pattern | undefined {
+//   const patterns: Pattern[] = [
+//     {
+//       id: '1',
+//       imageUrl: 'https://bit.ly/2Z4KKcF',
+//       imageAlt: 'lure image',
+//       createdAt: '2021/12/28',
+//       lastUsedAt: '2021/12/28',
+//       // バッジ情報
+//       badge: {
+//         // ルアータイプ
+//         lureType: 'spoon',
+//         // 釣果と状況
+//         result: 'caught',
+//         weather: 'sunny',
+//         depth: 'shallow',
+//         speed: 'fast'
+//       },
+//       // ルアー情報
+//       lure: {
+//         lureType: 'spoon',
+//         lureName: 'super great bait',
+//         lureCompany: 'no brand',
+//         lureColor: 'red',
+//         lureWeight: '2',
+//       },
 
-      // タックル
-      // ロッド
-      rod: {
-        rodName: 'good rod',
-        rodHardness: 'ML',
-        rodLength: '6',
-        rodCompany: 'no brand'
-      },
-      // リール
-      reel: {
-        reelName: 'good reel',
-        reelType: '2000',
-        reelGear: 'HG',
-        reelCompany: 'no brand'
-      },
-      // ライン
-      line: {
-        lineName: 'great line',
-        lineThickness: '3',
-        lineType: 'nylon',
-        lineCompany: 'no brand'
-      },
-    }
-  ]
-  return patterns.find((pattern) => pattern.id === id)
-}
+//       // タックル
+//       // ロッド
+//       rod: {
+//         rodName: 'good rod',
+//         rodHardness: 'ML',
+//         rodLength: '6',
+//         rodCompany: 'no brand'
+//       },
+//       // リール
+//       reel: {
+//         reelName: 'good reel',
+//         reelType: '2000',
+//         reelGear: 'HG',
+//         reelCompany: 'no brand'
+//       },
+//       // ライン
+//       line: {
+//         lineName: 'great line',
+//         lineThickness: '3',
+//         lineType: 'nylon',
+//         lineCompany: 'no brand'
+//       },
+//     }
+//   ]
+//   return patterns.find((pattern) => pattern.id === id)
+// }
