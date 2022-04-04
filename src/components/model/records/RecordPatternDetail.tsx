@@ -23,55 +23,53 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  console.log(data)
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
-
       {
         data.result ?
           <Box p='2'>
             <RecordPatternBadgeDetail
-              lureType={data.result.lure.lureType}
-              result={data.result.badge.result}
-              weather={data.result.badge.weather}
-              depth={data.result.badge.depth}
-              speed={data.result.badge.speed}
+              lureType={data.result.Lure.LureType.typeName}
+              result={data.result.ResultCondition.typeName}
+              weather={data.result.WeatherCondition.typeName}
+              depth={data.result.DepthCondition.typeName}
+              speed={data.result.SpeedCondition.typeName}
             />
 
             <RecordPatternLureDetail
-              lureType={data.result.lure.lureType}
-              lureName={data.result.lure.lureName}
-              lureCompany={data.result.lure.lureCompany}
-              lureColor={data.result.lure.lureColor}
-              lureWeight={data.result.lure.lureWeight}
+              lureType={data.result.Lure.LureType.typeName}
+              lureName={data.result.Lure.name}
+              lureCompany={data.result.Lure.companyName}
+              lureColor={data.result.Lure.color}
+              lureWeight={data.result.Lure.weight}
             />
 
             <RecordPatternReelDetail
-              reelName={data.result.reel.reelName}
-              reelType={data.result.reel.reelType}
-              reelCompany={data.result.reel.reelCompany}
-              reelGear={data.result.reel.reelGear}
+              reelName={data.result.Tackle.Reel.name}
+              reelType={data.result.Tackle.Reel.TypeNumberCondition.typeName}
+              reelCompany={data.result.Tackle.Reel.companyName}
+              reelGear={data.result.Tackle.Reel.GearCondition.typeName}
             />
 
             <RecordPatternRodDetail
-              rodName={data.result.rod.rodName}
-              rodHardness={data.result.rod.rodHardness}
-              rodCompany={data.result.rod.rodCompany}
-              rodLength={data.result.rod.rodLength}
+              rodName={data.result.Tackle.Rod.name}
+              rodHardness={data.result.Tackle.Rod.RodHardnessCondition.typeName}
+              rodCompany={data.result.Tackle.Rod.companyName}
+              rodLength={data.result.Tackle.Rod.length}
             />
 
             <RecordPatternLineDetail
-              lineName={data.result.line.lineName}
-              lineThickness={data.result.line.lineThickness}
-              lineCompany={data.result.line.lineCompany}
-              lineType={data.result.line.lineType}
+              lineName={data.result.Tackle.Line.name}
+              lineThickness={data.result.Tackle.Line.thickness}
+              lineCompany={data.result.Tackle.Line.companyName}
+              lineType={data.result.Tackle.Line.LineCondition.typeName}
             />
           </Box>
 
           : <></>
       }
-
     </Box>
   )
 }
