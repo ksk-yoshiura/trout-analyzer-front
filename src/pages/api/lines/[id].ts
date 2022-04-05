@@ -5,7 +5,10 @@ export type Line = {
   imageUrl: string
   imageAlt: string
   CreatedAt: string
-  lineType: string
+  LineCondition: {
+    typeName: string
+  }
+  lineTypeId: string
   name: string
   companyName: string
   thickness: string
