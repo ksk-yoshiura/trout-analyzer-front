@@ -19,18 +19,8 @@ export default function LureTypeSelect(props: TypeProp) {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
-  // ルアータイプセレクト
-  function changeHandler(event: React.FormEvent<HTMLSelectElement>) {
-    const { target } = event;
-    if (!(target instanceof HTMLSelectElement)) {
-      return; // or throw new TypeError();
-    }
-    const targetLureTypeId = target.value
-    props.setTypeId?.(targetLureTypeId)
-  }
-
   return (
-    <Select {...field} w={150} placeholder='Lure Type' onChange={(event) => changeHandler(event)}>
+    <Select {...field} w={150} placeholder='Lure Type' >
       {
         data.result?.map((item, index) => {
           return (
