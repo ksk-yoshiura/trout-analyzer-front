@@ -58,7 +58,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.company}
+            COMPANY {data.result?.companyName}
           </Box>
           <Box>
             ADDED {data.result?.CreatedAt}
