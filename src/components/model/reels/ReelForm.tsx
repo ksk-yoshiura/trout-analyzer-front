@@ -27,7 +27,7 @@ import { createAxiosInstance } from "../../../pages/api/utils"
 
 type ReelData = {
   name?: string;
-  company?: string;
+  companyName?: string;
   typeNumberId?: string;
   gearId?: string;
   image?: string;
@@ -38,6 +38,14 @@ type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
   data?: ReelData;
 }
+
+// 空データ（タイプチェック用）
+  const vacantData: ReelData = {
+    name: '',
+    companyName: '',
+    typeNumberId: '',
+    gearId: '',
+  } 
 
 // リールギア比
 const gearType = 2
@@ -54,12 +62,17 @@ export default function ReelForm(props: DetailProps) {
   // データ各種取得
   const { chosenId, data } = props
 
+  // 初期値がない場合はからデータをセット
+  // 下記エラーを解消するため
+  // Warning: A component is changing an uncontrolled input to be controlled.
+  const initData = data? data: vacantData
+
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
   function handleSendReelData(values: ReelData) {
-    if (chosenId !== '0') { // リールIDがある場合は更新
+    if (chosenId && chosenId !== '0') { // リールIDがある場合は更新
       axiosInstance.put('reels/' + chosenId, values)
         .then(function () {
           // リストページに遷移
@@ -148,10 +161,10 @@ export default function ReelForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: data?.name,
-        company: data?.company,
-        gearId: data?.gearId,
-        typeNumberId: data?.typeNumberId,
+        name: initData.name,
+        companyName: initData.companyName,
+        gearId: initData.gearId,
+        typeNumberId: initData.typeNumberId,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
@@ -215,19 +228,19 @@ export default function ReelForm(props: DetailProps) {
               )}
             </Field>
 
-            <Field name='company' validate={validateData}>
+            <Field name='companyName' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.company)
-                    && Boolean(form.touched.company)}
+                  isInvalid={Boolean(form.errors.companyName)
+                    && Boolean(form.touched.companyName)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='company'
+                    htmlFor='companyName'
                     textTransform='uppercase'
                   >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.company}</FormErrorMessage>
+                  <Input {...field} width="100%" fontSize="1xl" id='companyName' variant='flushed' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
