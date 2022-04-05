@@ -32,7 +32,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.lineType}
+            {data.result?.LineCondition.typeName}
           </Badge>
         </Box>
 
