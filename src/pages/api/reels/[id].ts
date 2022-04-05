@@ -6,7 +6,7 @@ export type Reel = {
   imageAlt: string
   CreatedAt: string
   name: string
-  company: string
+  companyName: string
   TypeNumberCondition: { typeName: string }
   GearCondition: { typeName: string }
 }
