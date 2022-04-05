@@ -29,10 +29,18 @@ type LineData = {
   name?: string;
   companyName?: string;
   lineTypeId?: string;
-  thickness?: number;
+  thickness?: string;
   imageUrl?: string;
   CreatedAt?: string
 }
+
+// 空データ（タイプチェック用）
+const vacantData: LineData = {
+  lineTypeId: '',
+  name: '',
+  companyName: '',
+  thickness: '',
+} 
 
 // 編集データ
 type DetailProps = {
@@ -53,12 +61,17 @@ export default function LineForm(props: DetailProps) {
   // データ各種取得
   const { chosenId, data } = props
 
+  // 初期値がない場合はからデータをセット
+  // 下記エラーを解消するため
+  // Warning: A component is changing an uncontrolled input to be controlled.
+  const initData = data? data: vacantData
+
   // axiosの設定
   const axiosInstance = createAxiosInstance()
   
   // API登録・更新
   function handleSendLineData(values: LineData) {
-    if (chosenId !== '0') { // ラインIDがある場合は更新
+    if (chosenId && chosenId !== '0') { // ラインIDがある場合は更新
       axiosInstance.put('lines/' + chosenId, values)
         .then(function () {
           // リストページに遷移
@@ -147,10 +160,10 @@ export default function LineForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: data?.name,
-        company: data?.companyName,
-        thickness: data?.thickness,
-        type: data?.lineTypeId,
+        name: initData.name,
+        companyName: initData.companyName,
+        thickness: initData.thickness,
+        type: initData.lineTypeId,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
