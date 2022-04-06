@@ -5,29 +5,27 @@ import LineForm from '../../model/lines/LineForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
 type LineData = {
-  imageUrl?: string
-  CreatedAt?: string
-  lineType?: string
-  name?: string
-  companyName?: string
-  thickness?: number
+  imageUrl: string
+  lineTypeId: string
+  name: string
+  companyName: string
+  thickness: string
 }
 
 export default function LineCreate(): JSX.Element {
   const chosenId = '0'
-  const data: LineData = { 
+  const vacantData: LineData = { 
     imageUrl: '',
-    CreatedAt: '',
-    lineType: '',
+    lineTypeId: '',
     name: '',
     companyName: '',
-    thickness: 0, 
+    thickness: '', 
   }
   return (
     <>
       <BackToListPageLink name={'lines'} />
       <Flex textAlign="center" w="100wh">
-        <LineForm chosenId={chosenId} data={data} />
+        <LineForm chosenId={chosenId} data={vacantData} />
       </Flex>
     </>
   )
