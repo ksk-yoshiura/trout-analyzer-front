@@ -6,7 +6,7 @@ import BackToListPageLink from '../../shared/BackToListPageLink'
 
 type ReelData = {
   name?: string;
-  company?: string;
+  companyName?: string;
   type?: string;
   gear?: string;
   image?: string;
@@ -14,9 +14,9 @@ type ReelData = {
 
 export default function ReelCreate(): JSX.Element {
   const chosenId = '0'
-  const data: ReelData = {
+  const vacantData: ReelData = {
     name: '',
-    company: '',
+    companyName: '',
     type: '',
     gear: '',
   }
@@ -24,7 +24,7 @@ export default function ReelCreate(): JSX.Element {
     <>
       <BackToListPageLink name={'reels'} />
       <Flex textAlign="center" w="100wh">
-        <ReelForm />
+        <ReelForm data={vacantData} chosenId={chosenId} />
       </Flex>
     </>
   )

@@ -39,14 +39,6 @@ type DetailProps = {
   data?: ReelData;
 }
 
-// 空データ（タイプチェック用）
-  const vacantData: ReelData = {
-    name: '',
-    companyName: '',
-    typeNumberId: '',
-    gearId: '',
-  } 
-
 // リールギア比
 const gearType = 2
 // リール型番
@@ -61,11 +53,6 @@ export default function ReelForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
-
-  // 初期値がない場合はからデータをセット
-  // 下記エラーを解消するため
-  // Warning: A component is changing an uncontrolled input to be controlled.
-  const initData = data? data: vacantData
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -161,10 +148,10 @@ export default function ReelForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: initData.name,
-        companyName: initData.companyName,
-        gearId: initData.gearId,
-        typeNumberId: initData.typeNumberId,
+        name: data?.name,
+        companyName: data?.companyName,
+        gearId: data?.gearId,
+        typeNumberId: data?.typeNumberId,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
