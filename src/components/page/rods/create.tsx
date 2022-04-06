@@ -6,7 +6,7 @@ import BackToListPageLink from '../../shared/BackToListPageLink'
 
 type RodData = {
   name?: string;
-  company?: string;
+  companyName?: string;
   hardness?: string;
   length?: string;
   image?: string;
@@ -14,9 +14,9 @@ type RodData = {
 
 export default function RodCreate(): JSX.Element {
   const chosenId = '0'
-  const data: RodData = {
+  const vacantData: RodData = {
     name: '',
-    company: '',
+    companyName: '',
     hardness: '',
     length: '',
     image: '',
@@ -25,7 +25,7 @@ export default function RodCreate(): JSX.Element {
     <>
       <BackToListPageLink name={'rods'} />
       <Flex textAlign="center" w="100wh">
-        <RodForm chosenId={chosenId} data={data} />
+        <RodForm chosenId={chosenId} data={vacantData} />
       </Flex>
     </>
   )

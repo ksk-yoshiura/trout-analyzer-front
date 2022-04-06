@@ -26,11 +26,20 @@ import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type RodData = {
+  ID?: string
   name?: string;
   companyName?: string;
   hardness?: string;
   length?: string;
   image?: string;
+}
+
+// 空データ
+const vacantData: RodData = {
+  hardness: '',
+  length: '',
+  name: '',
+  companyName: '',
 }
 
 // 編集データ
@@ -52,12 +61,18 @@ export default function RodForm(props: DetailProps) {
   // データ各種取得
   const { chosenId, data } = props
 
+  // 初期値がない場合はからデータをセット
+  // 下記エラーを解消するため
+  // Warning: A component is changing an uncontrolled input to be controlled.
+  const initData = data? data: vacantData
+  console.log(initData)
+
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
   function handleSendRodData(values: RodData) {
-    if (chosenId !== '0') { // ロッドIDがある場合は更新
+    if (chosenId && chosenId !== '0') { // ロッドIDがある場合は更新
       axiosInstance.put('rods/' + chosenId, values)
         .then(function () {
           // リストページに遷移
@@ -146,10 +161,10 @@ export default function RodForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: data?.name,
-        company: data?.companyName,
-        hardness: data?.hardness,
-        length: data?.length,
+        name: initData.name,
+        companyName: initData.companyName,
+        hardness: initData.hardness,
+        length: initData.length,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
