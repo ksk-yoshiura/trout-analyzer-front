@@ -34,15 +34,6 @@ type LureData = {
   weight?: string
 }
 
-// 空データ
-const vacantData: LureData = {
-  lureTypeId: '',
-  name: '',
-  companyName: '',
-  color: '',
-  weight: ''
-}
-
 // 編集データ
 type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
@@ -58,11 +49,6 @@ export default function LureForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
-
-  // 初期値がない場合はからデータをセット
-  // 下記エラーを解消するため
-  // Warning: A component is changing an uncontrolled input to be controlled.
-  const initData = data? data: vacantData
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -158,11 +144,11 @@ export default function LureForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: initData.name,
-        companyName: initData.companyName,
-        color: initData.color,
-        weight: initData.weight,
-        lureTypeId: initData.lureTypeId,
+        name: data?.name,
+        companyName: data?.companyName,
+        color: data?.color,
+        weight: data?.weight,
+        lureTypeId: data?.lureTypeId,
         image: ''
       }}
       onSubmit={(values, actions) => {

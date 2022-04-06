@@ -11,10 +11,6 @@ type LureType = {
 
 type LureData = {
   ID: string
-  imageUrl: string
-  imageAlt: string
-  CreatedAt: string
-  lastUsedAt: string
   LureType: LureType
   name: string
   companyName: string
@@ -25,12 +21,8 @@ type LureData = {
 
 export default function LureCreate(): JSX.Element {
   const chosenId = '0'
-  const data: LureData = { 
+  const vacantData: LureData = { 
     ID: '',
-    imageUrl: '',
-    imageAlt: '',
-    CreatedAt: '',
-    lastUsedAt: '',
     LureType: { ID: '', typeName: '' },
     name: '',
     companyName: '',
@@ -42,7 +34,7 @@ export default function LureCreate(): JSX.Element {
     <>
       <BackToListPageLink name={'lures'} />
       <Flex textAlign="center" w="100wh">
-        <LureForm chosenId={chosenId} data={data} />
+        <LureForm chosenId={chosenId} data={vacantData} />
       </Flex>
     </>
   )
