@@ -25,23 +25,22 @@ import Thumb from "../../shared/ThumbImage"
 import LureTypeSelect from "./LureTypeSelect"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
-type LureType = {
-  ID: string
-  typeName: string
-}
-
 type LureData = {
   ID?: string
-  imageUrl?: string
-  imageAlt?: string
-  CreatedAt?: string
-  lastUsedAt?: string
   lureTypeId?: string
   name?: string
   companyName?: string
   color?: string
   weight?: string
-  frequency?: string
+}
+
+// 空データ
+const vacantData: LureData = {
+  lureTypeId: '',
+  name: '',
+  companyName: '',
+  color: '',
+  weight: ''
 }
 
 // 編集データ
@@ -59,6 +58,11 @@ export default function LureForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
+
+  // 初期値がない場合はからデータをセット
+  // 下記エラーを解消するため
+  // Warning: A component is changing an uncontrolled input to be controlled.
+  const initData = data? data: vacantData
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -154,11 +158,11 @@ export default function LureForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: data?.name,
-        companyName: data?.companyName,
-        color: data?.color,
-        weight: data?.weight,
-        lureTypeId: data?.lureTypeId,
+        name: initData.name,
+        companyName: initData.companyName,
+        color: initData.color,
+        weight: initData.weight,
+        lureTypeId: initData.lureTypeId,
         image: ''
       }}
       onSubmit={(values, actions) => {
