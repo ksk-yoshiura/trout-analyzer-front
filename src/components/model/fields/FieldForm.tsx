@@ -37,12 +37,6 @@ type DetailProps = {
   data?: FieldData;
 }
 
-// 空データ（タイプチェック用）
-  const vacantData: FieldData = {
-    name: '',
-    address: '',
-  } 
-
 export default function FieldForm(props: DetailProps) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -52,11 +46,6 @@ export default function FieldForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
-
-  // 初期値がない場合はからデータをセット
-  // 下記エラーを解消するため
-  // Warning: A component is changing an uncontrolled input to be controlled.
-  const initData = data? data: vacantData
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -161,8 +150,8 @@ export default function FieldForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: initData.name,
-        address: initData.address,
+        name: data?.name,
+        address: data?.address,
         image: '' // TODO ：適切な形式で
       }}
       validateOnChange

@@ -12,12 +12,12 @@ type FieldData = {
 
 export default function FieldCreate(): JSX.Element {
   const chosenId = '0'
-  const data: FieldData = { name: '', address: '' }
+  const vacantData: FieldData = { name: '', address: '' }
   return (
     <>
       <BackToListPageLink name={'fields'} />
       <Flex textAlign="center" w="100wh">
-        <FieldForm chosenId={chosenId} data={data} />
+        <FieldForm chosenId={chosenId} data={vacantData} />
       </Flex>
     </>
   )
