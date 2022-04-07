@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from "next/router";
 import {
   Formik,
@@ -41,6 +41,9 @@ export default function RecordStartingForm(): JSX.Element {
   const toast = useToast()
   // ページ遷移
   const router = useRouter();
+
+  // submitボタンはフィールドが選ばれると押せるようになる
+  const [isFieldReady, setField] = useState(false)
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -133,7 +136,7 @@ export default function RecordStartingForm(): JSX.Element {
                       && Boolean(form.touched.fieldId)}
                   >
                     <Flex py={50} w="100wh" justifyContent={'center'}>
-                      <PreparationFieldSelect field={field} />
+                      <PreparationFieldSelect field={field} setField={setField} />
                       <PreparationFieldModal />
                     </Flex>
                     <FormErrorMessage>{form.errors.fieldId}</FormErrorMessage>
@@ -144,9 +147,11 @@ export default function RecordStartingForm(): JSX.Element {
             </Stack>
             <Button
               mt={4}
-              colorScheme='teal'
+              width="100%"
+              colorScheme='orange'
               type='button'
               onClick={onOpen}
+              disabled={!isFieldReady}
             >
               Start
             </Button>
