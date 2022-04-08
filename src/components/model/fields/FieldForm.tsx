@@ -35,6 +35,7 @@ type FieldData = {
 type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
   data?: FieldData;
+  onFieldModalClose?: React.Dispatch<React.SetStateAction<null>>
 }
 
 export default function FieldForm(props: DetailProps) {
@@ -45,7 +46,7 @@ export default function FieldForm(props: DetailProps) {
   // ページ遷移
   const router = useRouter();
   // データ各種取得
-  const { chosenId, data } = props
+  const { chosenId, data, onFieldModalClose } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -79,6 +80,8 @@ export default function FieldForm(props: DetailProps) {
       axiosInstance.post('fields', values)
         .then(function () {
           if (router.route === '/preparation/field') {
+            // モーダル閉じる
+            onFieldModalClose?.(null)
             // 追加されて選択できる
             mutate('fields')
           } else {
