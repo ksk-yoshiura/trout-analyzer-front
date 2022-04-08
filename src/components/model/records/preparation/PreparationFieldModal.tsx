@@ -11,19 +11,27 @@ import {
 } from '@chakra-ui/react'
 import FieldForm from '../../fields/FieldForm'
 
-export default function PreparationFieldModal() {
+type FieldData = {
+  name?: string;
+  address?: string;
+  image?: string;
+}
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export default function PreparationFieldModal() {
+  const chosenId = '0'
+  const vacantData: FieldData = { name: '', address: '' }
+
+  const { isOpen, onOpen, onClose: onFieldModalClose } = useDisclosure()
   return (
     <>
     <Button onClick={onOpen} mr={5} pl={10} pr={10} colorScheme='teal'>New Field</Button>
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onFieldModalClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Register New Field</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FieldForm />
+          <FieldForm chosenId={chosenId} data={vacantData} onFieldModalClose={onFieldModalClose} />
         </ModalBody>
       </ModalContent>
     </Modal>
