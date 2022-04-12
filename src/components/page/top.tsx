@@ -11,7 +11,7 @@ export default function TopPage(): JSX.Element {
       <TopStatistic />
 
       <Stack mt={50} spacing={10}>
-        <NextLink href="/preparation/tackle" passHref>
+        <NextLink href="/preparation/field" passHref>
           <Button color="white" bg='tomato' size='lg' w={300} p={4}>
             Get Started
           </Button>
