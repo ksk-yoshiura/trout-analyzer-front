@@ -32,7 +32,6 @@ type RecordFormData = {
   fieldId?: number;
 }
 
-
 export default function RecordStartingForm(): JSX.Element {
   // TODO：New Fieldで登録後登録されたfieldを選択状態にしたい
   // 確認ドロワー
@@ -43,13 +42,14 @@ export default function RecordStartingForm(): JSX.Element {
   const router = useRouter();
 
   // submitボタンはフィールドが選ばれると押せるようになる
-  const [isFieldReady, setField] = useState(false)
+  const [fieldValue, setFieldValue] = useState("0")
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
   function handleSendRecordData(values: RecordData) {
+    console.log(values)
 
     // idはnumber
     const convertedValue: RecordFormData = {fieldId: 0}
@@ -90,7 +90,7 @@ export default function RecordStartingForm(): JSX.Element {
               type="submit"
               onClick={() => {
                 submitForm(),
-                  setTimeout(() => onClose(), 1000)
+                setTimeout(() => onClose(), 1000)
               }}
               colorScheme='teal'
               variant='solid'
@@ -120,8 +120,9 @@ export default function RecordStartingForm(): JSX.Element {
         }}
         validateOnChange
         onSubmit={(values, actions) => {
+          console.log(values)
           setTimeout(() => {
-            handleSendRecordData(values)
+            // handleSendRecordData(values)
             actions.setSubmitting(false)
           }, 1000)
         }}
@@ -136,7 +137,7 @@ export default function RecordStartingForm(): JSX.Element {
                       && Boolean(form.touched.fieldId)}
                   >
                     <Flex py={50} w="100wh" justifyContent={'center'}>
-                      <PreparationFieldSelect field={field} setField={setField} />
+                      <PreparationFieldSelect field={field} fieldValue={fieldValue} setFieldValue={setFieldValue} />
                       <PreparationFieldModal />
                     </Flex>
                     <FormErrorMessage>{form.errors.fieldId}</FormErrorMessage>
@@ -151,7 +152,6 @@ export default function RecordStartingForm(): JSX.Element {
               colorScheme='orange'
               type='button'
               onClick={onOpen}
-              disabled={!isFieldReady}
             >
               Start
             </Button>
