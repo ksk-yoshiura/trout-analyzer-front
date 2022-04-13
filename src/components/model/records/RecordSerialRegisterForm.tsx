@@ -120,6 +120,7 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
     return serialRecordData
   }
 
+  // 釣果記録
   function handleSendSerialRecordData(values: SerialRecordData) {
     const convertValues = radioValueConvert(values)
     console.log(convertValues)
