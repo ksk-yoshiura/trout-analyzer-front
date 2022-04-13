@@ -315,6 +315,8 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
           </Stack>
           <Button
             mt={4}
+            width={"100%"}
+            size='lg'
             colorScheme='teal'
             type='button'
             onClick={onOpen}
