@@ -49,7 +49,6 @@ export default function RecordStartingForm(): JSX.Element {
 
   // API登録・更新
   function handleSendRecordData(values: RecordData) {
-    console.log(values)
 
     // idはnumber
     const convertedValue: RecordFormData = {fieldId: 0}
@@ -120,9 +119,8 @@ export default function RecordStartingForm(): JSX.Element {
         }}
         validateOnChange
         onSubmit={(values, actions) => {
-          console.log(values)
           setTimeout(() => {
-            // handleSendRecordData(values)
+            handleSendRecordData(values)
             actions.setSubmitting(false)
           }, 1000)
         }}
