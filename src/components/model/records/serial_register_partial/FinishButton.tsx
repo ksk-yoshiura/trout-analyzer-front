@@ -1,7 +1,6 @@
 import {
   Button,
   FormControl,
-  FormLabel,
   FormErrorMessage,
   Stack,
   Input,
@@ -64,7 +63,6 @@ export default function FinishButton(props: DetailProp) {
             isClosable: true,
           })
         })
-
   }
 
   // 確認ドロワー
