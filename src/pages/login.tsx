@@ -13,8 +13,12 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Stack
+  Stack,
+  Link,
+  Icon
 } from "@chakra-ui/react";
+import { ArrowForwardIcon } from '@chakra-ui/icons'
+import NextLink from "next/link"
 
 type LoginData = {
   mailaddress: string;
@@ -33,7 +37,6 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
   const router = useRouter();
-
   const signInUser = async (data: LoginData) => {
       await signIn<any>("credentials", {
         redirect: false,
@@ -62,6 +65,7 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
   }
 
   return (
+    <>
     <Formik
       initialValues={{
         mailaddress: '',
@@ -124,5 +128,12 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
         </Form>
       )}
     </Formik>
+      <NextLink href="/sign_up" passHref>
+        <Link py={5} as={'button'} color='teal'>
+          sign_up
+          <Icon as={ArrowForwardIcon} />
+        </Link>
+      </NextLink>
+    </>
   )
 }

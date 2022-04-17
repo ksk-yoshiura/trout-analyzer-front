@@ -11,7 +11,7 @@ export default function SignUpPage(): JSX.Element {
     <>
       <SignUpForm />
       <NextLink href="/login" passHref>
-        <Link pb={5} as={'button'} color='teal'>
+        <Link py={5} as={'button'} color='teal'>
           <Icon as={ArrowBackIcon} />
           login
         </Link>
