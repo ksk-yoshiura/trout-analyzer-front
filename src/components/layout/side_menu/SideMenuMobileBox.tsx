@@ -11,7 +11,7 @@ import {
   Stack,
   IconButton,
   useDisclosure,
-  LinkOverlay,
+  Link,
   Divider
 } from '@chakra-ui/react'
 import {
@@ -49,7 +49,7 @@ export default function SideMenuContents() {
         <DrawerContent style={{ width: "250px" }}>
           <DrawerCloseButton />
           <DrawerHeader>
-            <LinkOverlay href="/" >
+            <Link href="/" >
               <Button
                 colorScheme='teal'
                 variant='ghost'
@@ -60,7 +60,7 @@ export default function SideMenuContents() {
               >
                 Trout Analyzer
               </Button>
-            </LinkOverlay>
+            </Link>
             <Divider />
 
           </DrawerHeader>

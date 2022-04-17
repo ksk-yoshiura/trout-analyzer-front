@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Button,
-  LinkOverlay,
+  Link,
   List,
   ListItem,
   ListIcon,
@@ -34,12 +34,12 @@ export default function SnipeMenuLinkList() {
                     return (
                       <>
                         <ListItem pl='10px' key={index}>
-                          <LinkOverlay href={item.path}>
+                          <Link href={item.path}>
                             <ListIcon as={ArrowForwardIcon} color='green.500' />
                             <Button colorScheme='teal' variant='ghost'>
                               {item.title}
                             </Button>
-                          </LinkOverlay>
+                          </Link>
                         </ListItem>
                         <Divider />
                       </>

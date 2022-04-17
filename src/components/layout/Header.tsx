@@ -1,6 +1,6 @@
 import React from 'react'
 import { signOut } from "next-auth/react"
-import { Box, Flex, Button, Image, LinkOverlay } from '@chakra-ui/react';
+import { Box, Flex, Button, Image, Link } from '@chakra-ui/react';
 import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
 import { useRouter } from "next/router"
 
@@ -17,7 +17,7 @@ export default function Header(): JSX.Element {
   return (
     isHeaderNotNecessary ?
       <Flex h={55} borderColor='gray.500' borderBottom={'1px'}>
-        <LinkOverlay href="/">
+        <Link href="/">
           <Box
             maxWidth="260"
             pt={1}
@@ -25,7 +25,7 @@ export default function Header(): JSX.Element {
           >
             <Image src='/logo_teal.png' alt='TRANAZA Logo' />
           </Box>
-        </LinkOverlay>
+        </Link>
         <Box
           // bg="teal"
           w="100%"

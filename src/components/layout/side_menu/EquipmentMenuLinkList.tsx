@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  LinkOverlay,
+  Link,
   List,
   ListItem,
   ListIcon,
@@ -34,12 +34,12 @@ export default function SnipeMenuLinkList() {
                     return (
                       <>
                         <ListItem pl='10' key={index}>
-                          <LinkOverlay href={item.path}>
+                          <Link href={item.path}>
                             <ListIcon as={ArrowForwardIcon} color='green.500' />
                             <Button colorScheme='teal' variant='ghost'>
                               {item.title}
                             </Button>
-                          </LinkOverlay>
+                          </Link>
                         </ListItem>
                         <Divider />
                       </>
