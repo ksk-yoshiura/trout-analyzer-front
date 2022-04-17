@@ -56,6 +56,14 @@ const speedType = 2
 const depthType = 3
 const weatherType = 4
 
+// 初期値
+const defaultValueList = {
+  result: 1,
+  speed: 4,
+  depth: 9, 
+  weather: 14
+}
+
 export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -86,10 +94,10 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
 
     // 入力データ
     const serialRecordData: recordFormData = {
-      result: 0,
-      speed: 0,
-      depth: 0,
-      weather: 0,
+      result: defaultValueList.result,
+      speed: defaultValueList.speed,
+      depth: defaultValueList.depth,
+      weather: defaultValueList.weather,
       lureId: 0,
       tackleId: 0,
       recordId: Number(recordId)
@@ -187,8 +195,8 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   return (
     <Formik
       initialValues={{
-        speed: '',
         result: '',
+        speed: '',
         depth: '',
         weather: '',
         lureId: '',
