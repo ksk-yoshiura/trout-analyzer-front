@@ -28,12 +28,33 @@ import useSWR from 'swr'
 import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
-type SerialRecordData = {
-  result: string;
-  speed: string;
-  depth: string;
-  lure: string;
-  tackle: string;
+type SerialRecordData = { // TODO：応急処置的に対応
+  result?: string | number;
+  speed?: string | number;
+  depth?: string | number;
+  weather?: string | number;
+  lure?: string | number;
+  tackle?: string | number;
+}
+
+type recordFormData = {
+  result?: number;
+  speed?: number;
+  depth?: number;
+  weather?: number;
+  lureId: number;
+  tackleId: number;
+  recordId: number;
+}
+
+type PatternData = {
+  ID: number | undefined,
+  typeName: string,
+}
+
+type PatternDataProps = {
+  patternDataSet: PatternData[]
+  backLinkToPatternListPage: URL
 }
 
 const resultType = 1
@@ -41,34 +62,79 @@ const speedType = 2
 const depthType = 3
 const weatherType = 4
 
-export default function RecordSerialRegisterForm() {
+export default function RecordSerialRegisterForm(props: PatternDataProps) {
   // パラメータからパターンID取得
   const router = useRouter();
-  const { id } = router.query
+  const { id, record_id } = router.query
   // 確認ドロワー
   const { isOpen, onOpen, onClose } = useDisclosure()
   // アラート
   const toast = useToast()
+  // パターンのデータ、戻るリンクURL取得
+  const { patternDataSet, backLinkToPatternListPage } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-  
+
   // APIからデータ取得
   const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
+  console.log(data)
+  // ラジオボタンの値を名前からIDに変換
+  function radioValueConvert(values: SerialRecordData) {
+    // 整形前
+    const valuesBeforeConvert = values
+
+    // 入力データ
+    const serialRecordData: recordFormData = {
+      result: 0,
+      speed: 0,
+      depth: 0,
+      weather: 0,
+      lureId: 0,
+      tackleId: 0,
+      recordId: Number(record_id)
+    }
+    // パターンのnameをidに変換する
+    patternDataSet.map(function (val) {
+      if (val.typeName === valuesBeforeConvert.result) { // 釣果
+        // 上書きする
+        serialRecordData.result = val.ID
+      }
+      if (val.typeName === valuesBeforeConvert.speed) { // 速度
+        // 上書きする
+        serialRecordData.speed = val.ID
+      }
+      if (val.typeName === valuesBeforeConvert.depth) { // 深度
+        // 上書きする
+        serialRecordData.depth = val.ID
+      }
+      if (val.typeName === valuesBeforeConvert.weather) { // 天気
+        // 上書きする
+        serialRecordData.weather = val.ID
+      }
+    })
+    // タイプをnumberに変更
+    serialRecordData.tackleId = Number(valuesBeforeConvert.tackle)
+    serialRecordData.lureId = Number(valuesBeforeConvert.lure)
+
+    return serialRecordData
+  }
+
   // API登録・更新
   function handleSendSerialRecordData(values: SerialRecordData) {
+    const convertValues = radioValueConvert(values)
     if (id) { // パターンIDがある場合は更新
-      axiosInstance.put('patterns/' + id, values)
+      axiosInstance.put('patterns/' + id, convertValues)
         .then(function () {
           // リストページに遷移
-          router.push('/patterns')
+          router.push(backLinkToPatternListPage)
           // アラート代わりにトーストを使用
           toast({
-            title: 'Pattern updated!',
-            description: "We've updated your pattern data for you.",
+            title: 'Pattern edited!',
+            description: "We've edited your pattern data for you.",
             status: 'success',
             duration: 9000,
             isClosable: true,
@@ -84,10 +150,10 @@ export default function RecordSerialRegisterForm() {
           })
         })
     } else { // パターンIDがない場合は登録
-      axiosInstance.post('patterns', values)
+      axiosInstance.post('patterns', convertValues)
         .then(function () {
           // リストページに遷移
-          router.push('/patterns')
+          router.push(backLinkToPatternListPage)
           // アラート代わりにトーストを使用
           toast({
             title: 'Pattern registered!',
@@ -149,11 +215,12 @@ export default function RecordSerialRegisterForm() {
   return (
     <Formik
       initialValues={{
-        speed: '',
-        result: '',
-        depth: '',
-        lure: '',
-        tackle: ''
+        speed: data.result?.speed,
+        result: data.result?.result,
+        depth: data.result?.depth,
+        weather: data.result?.weather,
+        lureId: data.result?.lureId,
+        tackleId: data.result?.tackleId
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
@@ -177,7 +244,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='result'
                     textTransform='uppercase'
                   >result</FormLabel>
-                  <PatternConditionRadio typeNum={resultType} />
+                  <PatternConditionRadio typeNum={resultType} field={field} />
                   <FormErrorMessage>{form.errors.result}</FormErrorMessage>
                 </FormControl>
               )}
@@ -194,7 +261,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='speed'
                     textTransform='uppercase'
                   >speed</FormLabel>
-                  <PatternConditionRadio typeNum={speedType} />
+                  <PatternConditionRadio typeNum={speedType} field={field} />
                   <FormErrorMessage>{form.errors.speed}</FormErrorMessage>
                 </FormControl>
               )}
@@ -211,7 +278,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='depth'
                     textTransform='uppercase'
                   >depth</FormLabel>
-                  <PatternConditionRadio typeNum={depthType} />
+                  <PatternConditionRadio typeNum={depthType} field={field} />
                   <FormErrorMessage>{form.errors.depth}</FormErrorMessage>
                 </FormControl>
               )}
@@ -228,7 +295,7 @@ export default function RecordSerialRegisterForm() {
                     htmlFor='weather'
                     textTransform='uppercase'
                   >weather</FormLabel>
-                  <PatternConditionRadio typeNum={weatherType} />
+                  <PatternConditionRadio typeNum={weatherType} field={field} />
                   <FormErrorMessage>{form.errors.weather}</FormErrorMessage>
                 </FormControl>
               )}
@@ -275,6 +342,8 @@ export default function RecordSerialRegisterForm() {
           </Stack>
           <Button
             mt={4}
+            width={"100%"}
+            size='lg'
             colorScheme='teal'
             type='button'
             onClick={onOpen}

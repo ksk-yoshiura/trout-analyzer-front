@@ -64,8 +64,15 @@ export type Pattern = {
       LineCondition: {
         typeName: string
       }
-    },
+    }
   },
+  depth: number
+  lureId: number
+  recordId: number
+  result: number
+  speed: number
+  tackleId: number
+  weather: number
 }
 
 // API のレスポンス型
@@ -106,7 +113,7 @@ export default function PatternApi(
   //     'lureColor': '',
   //     'lureWeight': '',
   //   },
-  
+
   //   // タックル
   //   // ロッド
   //   'rod': {
