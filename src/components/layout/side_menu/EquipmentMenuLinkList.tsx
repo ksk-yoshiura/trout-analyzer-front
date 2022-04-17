@@ -1,12 +1,13 @@
 import React from 'react'
 import {
-  Link,
+  LinkOverlay,
   List,
   ListItem,
   ListIcon,
   Button,
   Stack,
-  useDisclosure
+  useDisclosure,
+  Divider
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { EquipmentMenuData } from './equipment_menu_data'
@@ -25,19 +26,23 @@ export default function SnipeMenuLinkList() {
             >
               Equipment
             </Button>
+            <Divider />
             <Stack>
               <List spacing={3}>
                 {
                   EquipmentMenuData.map((item, index) => {
                     return (
-                      <ListItem key={index}>
-                        <Link href={item.path}>
-                          <ListIcon as={ArrowForwardIcon} color='green.500' />
-                          <Button colorScheme='teal' variant='ghost'>
-                            {item.title}
-                          </Button>
-                        </Link>
-                      </ListItem>
+                      <>
+                        <ListItem pl='10' key={index}>
+                          <LinkOverlay href={item.path}>
+                            <ListIcon as={ArrowForwardIcon} color='green.500' />
+                            <Button colorScheme='teal' variant='ghost'>
+                              {item.title}
+                            </Button>
+                          </LinkOverlay>
+                        </ListItem>
+                        <Divider />
+                      </>
                     )
                   })
                 }
@@ -45,13 +50,16 @@ export default function SnipeMenuLinkList() {
             </Stack>
           </>
           :
-          <Button
-            colorScheme='teal'
-            variant='ghost'
-            onClick={onOpen}
-          >
-            Equipment
-          </Button>
+          <>
+            <Button
+              colorScheme='teal'
+              variant='ghost'
+              onClick={onOpen}
+            >
+              Equipment
+            </Button>
+            <Divider />
+          </>
       }
     </>
   )

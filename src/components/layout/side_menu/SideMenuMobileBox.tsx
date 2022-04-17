@@ -11,7 +11,8 @@ import {
   Stack,
   IconButton,
   useDisclosure,
-  Link
+  LinkOverlay,
+  Divider
 } from '@chakra-ui/react'
 import {
   HamburgerIcon
@@ -48,27 +49,30 @@ export default function SideMenuContents() {
         <DrawerContent style={{ width: "250px" }}>
           <DrawerCloseButton />
           <DrawerHeader>
-            <Link href="/" >
+            <LinkOverlay href="/" >
               <Button
                 colorScheme='teal'
                 variant='ghost'
-                fontWeight='bold' 
+                fontWeight='bold'
                 fontSize='20px'
+                pt={5}
+                pb={10}
               >
                 Trout Analyzer
               </Button>
-            </Link>
+            </LinkOverlay>
+            <Divider />
 
           </DrawerHeader>
 
           <DrawerBody>
-            <Stack spacing='24px'>
+            <Stack spacing='10px'>
               <EquipmentMenuLinkList />
               <RecordsMenuLinkList />
             </Stack>
           </DrawerBody>
 
-          <DrawerFooter 
+          <DrawerFooter
             justifyContent="space-between"
             flexDirection="column"
           >

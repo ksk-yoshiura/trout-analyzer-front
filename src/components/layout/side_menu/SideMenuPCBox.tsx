@@ -1,9 +1,7 @@
 import React from 'react'
 import {
   Box,
-  Button,
   Stack,
-  Link,
   Flex
 } from "@chakra-ui/react";
 import EquipmentMenuLinkList from './EquipmentMenuLinkList'
@@ -19,16 +17,6 @@ export default function SideMenuContentsPC() {
     >
       <Box>
         <Stack spacing='23px' pt={4} display="flex">
-          <Link href="/">
-            <Button
-              colorScheme='teal'
-              variant='ghost'
-              fontWeight='bold'
-              fontSize='20px'
-            >
-              Trout Analyzer
-            </Button>
-          </Link>
           <EquipmentMenuLinkList />
           <RecordsMenuLinkList />
         </Stack>
