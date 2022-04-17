@@ -13,9 +13,13 @@ export default function MainContent({ children }: Props) {
   const { data: session } = useSession();
   const router = useRouter();
 
+  // 未ログイン時、ログイン画面、サインアップ画面以外はログインページにリダイレクト対象
+  const redirectToList = ['/login', '/sign_up']
+  const isRedirectNecessary = redirectToList.indexOf(router.pathname) === -1 ? true: false
+
   useEffect(() => {
     // 未ログインの場合、ログインページへリダイレクト
-    if (!session?.accessToken && session !== undefined && router.pathname !== '/login') {
+    if (!session?.accessToken && session !== undefined && isRedirectNecessary) {
       router.push('/login')
     }
   }, [session])
