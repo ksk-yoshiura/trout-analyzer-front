@@ -32,8 +32,8 @@ export default function SnipeMenuLinkList() {
                 {
                   RecordsMenuData.map((item, index) => {
                     return (
-                      <>
-                        <ListItem pl='10px' key={index}>
+                      <Stack key={index}>
+                        <ListItem pl='10'>
                           <Link href={item.path}>
                             <ListIcon as={ArrowForwardIcon} color='green.500' />
                             <Button colorScheme='teal' variant='ghost'>
@@ -42,7 +42,7 @@ export default function SnipeMenuLinkList() {
                           </Link>
                         </ListItem>
                         <Divider />
-                      </>
+                      </Stack>
                     )
                   })
                 }
