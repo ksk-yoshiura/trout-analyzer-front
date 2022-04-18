@@ -33,7 +33,7 @@ export default function RecordEdit(): JSX.Element {
         </Link>
       </NextLink>
       <Flex textAlign="center" w="100wh">
-        <RecordPatternDetailForm recordData={data.result} backLinkToPatternListPage={backLinkToPatternListPage} />
+        <RecordPatternDetailForm patternData={data.result} backLinkToPatternListPage={backLinkToPatternListPage} />
       </Flex>
     </>
   )

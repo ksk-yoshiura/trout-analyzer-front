@@ -48,7 +48,7 @@ type patternFormData = {
 }
 
 type DetailDataProps = {
-  recordData?: patternFormData
+  patternData?: patternFormData
   backLinkToPatternListPage: string
 }
 
@@ -74,7 +74,7 @@ export default function RecordSerialRegisterForm(props: DetailDataProps) {
   // アラート
   const toast = useToast()
   // パターンのデータ、戻るリンクURL取得
-  const { recordData, backLinkToPatternListPage } = props
+  const { patternData, backLinkToPatternListPage } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -226,12 +226,12 @@ export default function RecordSerialRegisterForm(props: DetailDataProps) {
   return (
     <Formik
       initialValues={{
-        speed: recordData?.speed,
-        result: recordData?.result,
-        depth: recordData?.depth,
-        weather: recordData?.weather,
-        lureId: recordData?.lureId,
-        tackleId: recordData?.tackleId
+        speed: patternData?.speed,
+        result: patternData?.result,
+        depth: patternData?.depth,
+        weather: patternData?.weather,
+        lureId: patternData?.lureId,
+        tackleId: patternData?.tackleId
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {

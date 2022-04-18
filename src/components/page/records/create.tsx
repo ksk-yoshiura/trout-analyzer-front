@@ -51,7 +51,7 @@ export default function RecordCreate(): JSX.Element {
         </Link>
       </NextLink>
       <Flex textAlign="center" w="100wh">
-        <RecordPatternDetailForm recordData={vacantData} backLinkToPatternListPage={backLinkToPatternListPage} />
+        <RecordPatternDetailForm patternData={vacantData} backLinkToPatternListPage={backLinkToPatternListPage} />
       </Flex>
     </>
   )

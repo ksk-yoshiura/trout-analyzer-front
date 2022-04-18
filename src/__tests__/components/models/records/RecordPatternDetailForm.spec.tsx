@@ -45,13 +45,18 @@ test('RecordPatternDetailForm', () => {
 
   (useSession as jest.Mock).mockReturnValueOnce([mockSession, false]);
   const backLinkToPatternListPage = '/records/1/patterns/list';
-  const patternDataSet = [
-    { ID: 1, typeName: 'Spoon' },
-    { ID: 2, typeName: 'Minor' }
-  ]
+  const patternData = {
+    result: 1,
+    speed: 1,
+    depth: 1,
+    weather: 1,
+    lureId: 1,
+    tackleId: 1,
+    recordId: 1,
+  }
 
   const { asFragment } = render(<RecordPatternDetailForm
-    patternDataSet={patternDataSet}
+    patternData={patternData}
     backLinkToPatternListPage={backLinkToPatternListPage}
   />);
   expect(asFragment()).toMatchSnapshot();
