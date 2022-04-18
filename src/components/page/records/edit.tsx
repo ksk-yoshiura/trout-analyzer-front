@@ -16,7 +16,7 @@ export default function RecordEdit(): JSX.Element {
   const router = useRouter();
   const { record_id } = router.query
   // 戻るリンク
-  const backLinkToPatternListPage  = "/records/" + record_id + "/patterns/list"
+  const backLinkToPatternListPage = "/records/" + record_id + "/patterns/list"
   // APIからデータ取得
   const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions')
   if (error) return <p>Error: {error.message}</p>

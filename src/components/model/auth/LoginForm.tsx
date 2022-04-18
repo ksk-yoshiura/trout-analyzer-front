@@ -35,7 +35,6 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 
 export default function LoginForm({ csrfToken }: { csrfToken: string | undefined }) {
   const router = useRouter();
-  console.log(csrfToken)
   function handleSendLoginData(values: LoginData) {
     axios.post('/api/login', values)
       .then(function () {
