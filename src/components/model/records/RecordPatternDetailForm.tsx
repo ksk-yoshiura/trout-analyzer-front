@@ -81,7 +81,6 @@ export default function RecordSerialRegisterForm(props: PatternDataProps) {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
-  console.log(data)
   // ラジオボタンの値を名前からIDに変換
   function radioValueConvert(values: SerialRecordData) {
     // 整形前
