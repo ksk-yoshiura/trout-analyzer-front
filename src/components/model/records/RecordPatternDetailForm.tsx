@@ -54,7 +54,7 @@ type PatternData = {
 
 type PatternDataProps = {
   patternDataSet: PatternData[]
-  backLinkToPatternListPage: URL
+  backLinkToPatternListPage: string
 }
 
 const resultType = 1
