@@ -25,7 +25,7 @@ import PatternConditionRadio from './serial_register_partial/PatternConditionRad
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 import useSWR from 'swr'
-import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
+import { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type SerialRecordData = { // TODO：応急処置的に対応
@@ -37,23 +37,18 @@ type SerialRecordData = { // TODO：応急処置的に対応
   tackle?: string | number;
 }
 
-type recordFormData = {
+type patternFormData = {
   result?: number;
   speed?: number;
   depth?: number;
   weather?: number;
-  lureId: number;
-  tackleId: number;
-  recordId: number;
+  lureId?: number;
+  tackleId?: number;
+  recordId?: number;
 }
 
-type PatternData = {
-  ID: number | undefined,
-  typeName: string,
-}
-
-type PatternDataProps = {
-  patternDataSet: PatternData[]
+type DetailDataProps = {
+  recordData?: patternFormData
   backLinkToPatternListPage: string
 }
 
@@ -62,7 +57,15 @@ const speedType = 2
 const depthType = 3
 const weatherType = 4
 
-export default function RecordSerialRegisterForm(props: PatternDataProps) {
+// 初期値
+const defaultValueList = {
+  result: 1,
+  speed: 4,
+  depth: 9, 
+  weather: 14
+}
+
+export default function RecordSerialRegisterForm(props: DetailDataProps) {
   // パラメータからパターンID取得
   const router = useRouter();
   const { id, record_id } = router.query
@@ -71,15 +74,24 @@ export default function RecordSerialRegisterForm(props: PatternDataProps) {
   // アラート
   const toast = useToast()
   // パターンのデータ、戻るリンクURL取得
-  const { patternDataSet, backLinkToPatternListPage } = props
+  const { recordData, backLinkToPatternListPage } = props
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + id)
+  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+
+  // パターンリスト
+  const patternDataSet = data.result?.map(function (value: any) { // TODO：any退避
+    const dataSet = {ID: undefined , typeName: ''}
+    dataSet.ID = value.ID
+    dataSet.typeName = value.typeName
+    return dataSet
+  })
+
 
   // ラジオボタンの値を名前からIDに変換
   function radioValueConvert(values: SerialRecordData) {
@@ -87,11 +99,11 @@ export default function RecordSerialRegisterForm(props: PatternDataProps) {
     const valuesBeforeConvert = values
 
     // 入力データ
-    const serialRecordData: recordFormData = {
-      result: 0,
-      speed: 0,
-      depth: 0,
-      weather: 0,
+    const serialRecordData: patternFormData = {
+      result: defaultValueList.result,
+      speed: defaultValueList.speed,
+      depth: defaultValueList.depth,
+      weather: defaultValueList.weather,
       lureId: 0,
       tackleId: 0,
       recordId: Number(record_id)
@@ -214,12 +226,12 @@ export default function RecordSerialRegisterForm(props: PatternDataProps) {
   return (
     <Formik
       initialValues={{
-        speed: data.result?.speed,
-        result: data.result?.result,
-        depth: data.result?.depth,
-        weather: data.result?.weather,
-        lureId: data.result?.lureId,
-        tackleId: data.result?.tackleId
+        speed: recordData?.speed,
+        result: recordData?.result,
+        depth: recordData?.depth,
+        weather: recordData?.weather,
+        lureId: recordData?.lureId,
+        tackleId: recordData?.tackleId
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {

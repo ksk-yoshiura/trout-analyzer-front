@@ -8,27 +8,21 @@ import { ArrowBackIcon } from '@chakra-ui/icons'
 import NextLink from "next/link"
 import RecordPatternDetailForm from '../../model/records/RecordPatternDetailForm'
 import useSWR from 'swr'
-import { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
+import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
 import Loading from '../../shared/Loading'
 
 export default function RecordEdit(): JSX.Element {
   // パラメータからパターンID取得
   const router = useRouter();
-  const { record_id } = router.query
+  const { id, record_id } = router.query
+
   // 戻るリンク
   const backLinkToPatternListPage = "/records/" + record_id + "/patterns/list"
+
   // APIからデータ取得
-  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions')
+  const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-
-  // パターンリスト
-  const patternDataSet = data.result?.map(function (value: any) { // TODO：any退避
-    const dataSet = {ID: undefined , typeName: ''}
-    dataSet.ID = value.ID
-    dataSet.typeName = value.typeName
-    return dataSet
-  })
 
   return (
     <>
@@ -39,7 +33,7 @@ export default function RecordEdit(): JSX.Element {
         </Link>
       </NextLink>
       <Flex textAlign="center" w="100wh">
-        <RecordPatternDetailForm patternDataSet={patternDataSet} backLinkToPatternListPage={backLinkToPatternListPage} />
+        <RecordPatternDetailForm recordData={data.result} backLinkToPatternListPage={backLinkToPatternListPage} />
       </Flex>
     </>
   )
