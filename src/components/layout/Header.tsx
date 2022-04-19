@@ -19,7 +19,7 @@ export default function Header(): JSX.Element {
       <Flex h={55} borderColor='gray.500' borderBottom={'1px'}>
         <Link href="/">
           <Box
-            maxWidth="260"
+            w={145}
             pt={1}
             px={1}
           >
