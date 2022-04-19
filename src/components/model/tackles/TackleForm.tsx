@@ -298,7 +298,7 @@ export default function TackleForm(props: DetailProps) {
 
           </Stack>
           <Button
-            mt={4}
+            my={10}
             colorScheme='teal'
             type='button'
             onClick={onOpenConfirmDrawer}
