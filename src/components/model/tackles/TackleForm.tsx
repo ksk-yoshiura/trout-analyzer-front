@@ -33,11 +33,6 @@ import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 import axios from 'axios'
 
-const fetcher = (url: string) => axios(url)
-  .then((res) => {
-    return res.data
-  })
-
 type Tackle = {
   ID: string
   CreatedAt: string
@@ -108,7 +103,7 @@ export default function TackleForm(props: DetailProps) {
   const { tackleData } = props
 
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + id, fetcher)
+  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   console.log(data)
@@ -203,118 +198,116 @@ export default function TackleForm(props: DetailProps) {
 
 
   return (
-    <>
-      <Formik
-        initialValues={{
-          rodId: tackleData?.Rod.ID,
-          reelId: tackleData?.Reel.ID,
-          lineId: tackleData?.Line.ID,
-        }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            handleSendTackleData(values)
-            actions.setSubmitting(false)
-          }, 1000)
-        }}
-      >
-        {(props) => (
-          <Form>
-            <Stack spacing={5}>
-              <Field name='rodId' validate={validateData}>
-                {({ field, form }: FieldProps) => (
-                  <FormControl
-                    isInvalid={Boolean(form.errors.rodId)
-                      && Boolean(form.touched.rodId)}
-                  >
-                    <FormLabel
-                      fontSize="20px"
-                      htmlFor='rodId'
-                      textTransform='uppercase'
-                    >rod</FormLabel>
-                    <Input {...field} type="hidden" id='rodId' />
+    <Formik
+      initialValues={{
+        rodId: tackleData?.Rod.ID,
+        reelId: tackleData?.Reel.ID,
+        lineId: tackleData?.Line.ID,
+      }}
+      onSubmit={(values, actions) => {
+        setTimeout(() => {
+          handleSendTackleData(values)
+          actions.setSubmitting(false)
+        }, 1000)
+      }}
+    >
+      {(props) => (
+        <Form>
+          <Stack spacing={5}>
+            <Field name='rodId' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.rodId)
+                    && Boolean(form.touched.rodId)}
+                >
+                  <FormLabel
+                    fontSize="20px"
+                    htmlFor='rodId'
+                    textTransform='uppercase'
+                  >rod</FormLabel>
+                  <Input {...field} type="hidden" id='rodId' />
 
-                    <Box type='button' as='button'>
-                      <RodDetail chosenId={Number(tackleData?.Rod.ID)} />
-                    </Box>
-                    <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
-              <Button onClick={() => setRodChange(!rodChange)}>
-                {
-                  rodChange? <>Close</>: <>Change</>
-                }
-              </Button>
+                  <Box type='button' as='button'>
+                    <RodDetail chosenId={Number(tackleData?.Rod.ID)} />
+                  </Box>
+                  <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button onClick={() => setRodChange(!rodChange)}>
               {
-                rodChange? <RodsList />: <></> 
+                rodChange ? <>Close</> : <>Change</>
               }
-
-              <Field name='reelId' validate={validateData}>
-                {({ field, form }: FieldProps) => (
-                  <FormControl
-                    isInvalid={Boolean(form.errors.reelId)
-                      && Boolean(form.touched.reelId)}
-                  >
-                    <FormLabel
-                      fontSize="20px"
-                      htmlFor='reelId'
-                      textTransform='uppercase'
-                    >reel</FormLabel>
-                    <Input {...field} type="hidden" id='reelId' />
-                    <ReelDetail chosenId={Number(tackleData?.Reel.ID)} />
-                    <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
-              <Button onClick={() => setReelChange(!reelChange)}>
-                {
-                  reelChange? <>Close</>: <>Change</>
-                }
-              </Button>
-              {
-                reelChange? <ReelsList />: <></> 
-              }
-
-              <Field name='lineId' validate={validateData}>
-                {({ field, form }: FieldProps) => (
-                  <FormControl
-                    isInvalid={Boolean(form.errors.lineId)
-                      && Boolean(form.touched.lineId)}
-                  >
-                    <FormLabel
-                      fontSize="20px"
-                      htmlFor='lineId'
-                      textTransform='uppercase'
-                    >line</FormLabel>
-                    <Input {...field} type="hidden" id='lineId' />
-                    <LineDetail chosenId={Number(tackleData?.Line.ID)} />
-                    <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
-                  </FormControl>
-                )}
-              </Field>
-              <Button onClick={() => setLineChange(!lineChange)}>
-                {
-                  lineChange? <>Close</>: <>Change</>
-                }
-              </Button>
-              {
-                lineChange? <LinesList />: <></> 
-              }
-              
-
-            </Stack>
-            <Button
-              mt={4}
-              colorScheme='teal'
-              type='button'
-              onClick={onOpenConfirmDrawer}
-            >
-              Register
             </Button>
-            <ConfirmDrawer />
-          </Form>
-        )}
-      </Formik>
-    </>
+            {
+              rodChange ? <RodsList /> : <></>
+            }
+
+            <Field name='reelId' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.reelId)
+                    && Boolean(form.touched.reelId)}
+                >
+                  <FormLabel
+                    fontSize="20px"
+                    htmlFor='reelId'
+                    textTransform='uppercase'
+                  >reel</FormLabel>
+                  <Input {...field} type="hidden" id='reelId' />
+                  <ReelDetail chosenId={Number(tackleData?.Reel.ID)} />
+                  <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button onClick={() => setReelChange(!reelChange)}>
+              {
+                reelChange ? <>Close</> : <>Change</>
+              }
+            </Button>
+            {
+              reelChange ? <ReelsList /> : <></>
+            }
+
+            <Field name='lineId' validate={validateData}>
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isInvalid={Boolean(form.errors.lineId)
+                    && Boolean(form.touched.lineId)}
+                >
+                  <FormLabel
+                    fontSize="20px"
+                    htmlFor='lineId'
+                    textTransform='uppercase'
+                  >line</FormLabel>
+                  <Input {...field} type="hidden" id='lineId' />
+                  <LineDetail chosenId={Number(tackleData?.Line.ID)} />
+                  <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button onClick={() => setLineChange(!lineChange)}>
+              {
+                lineChange ? <>Close</> : <>Change</>
+              }
+            </Button>
+            {
+              lineChange ? <LinesList /> : <></>
+            }
+
+
+          </Stack>
+          <Button
+            mt={4}
+            colorScheme='teal'
+            type='button'
+            onClick={onOpenConfirmDrawer}
+          >
+            Register
+          </Button>
+          <ConfirmDrawer />
+        </Form>
+      )}
+    </Formik>
   )
 }
