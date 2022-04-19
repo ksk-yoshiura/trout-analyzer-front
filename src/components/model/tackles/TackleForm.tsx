@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from "next/router";
 import {
   Formik,
@@ -39,12 +39,51 @@ const fetcher = (url: string) => axios(url)
   })
 
 type Tackle = {
+  ID: string
+  CreatedAt: string
+  Rod: {
+    ID: string
+    name: string
+    imageUrl: string
+    imageAlt: string
+    length: string
+    RodHardnessCondition: { typeName: string }
+    companyName: string
+    CreatedAt: string
+  },
+  Reel: {
+    ID: string
+    name: string
+    imageUrl: string
+    imageAlt: string
+    TypeNumberCondition: { typeName: string }
+    GearCondition: { typeName: string }
+    companyName: string
+    CreatedAt: string
+  },
+  Line: {
+    ID: string
+    name: string
+    imageUrl: string
+    imageAlt: string
+    thickness: string
+    lineType: string
+    companyName: string
+    CreatedAt: string
+  }
+}
+
+type DetailProps = {
+  tackleData?: Tackle
+}
+
+type TackleForm = {
   rodId?: string
   reelId?: string
   lineId?: string
 }
 
-export default function TackleForm() {
+export default function TackleForm(props: DetailProps) {
   // パラメータからタックルID取得
   const router = useRouter();
   const { id } = router.query
@@ -55,16 +94,27 @@ export default function TackleForm() {
     onClose: onCloseConfirmDrawer
   } = useDisclosure()
 
+  // ロッドリスト表示・非表示切り替え
+  const [rodChange, setRodChange] = useState(false)
+  // リールリスト表示・非表示切り替え
+  const [reelChange, setReelChange] = useState(false)
+  // ラインリスト表示・非表示切り替え
+  const [lineChange, setLineChange] = useState(false)
+
   // アラート
   const toast = useToast()
+
+  // タックルデータ
+  const { tackleData } = props
 
   // APIからデータ取得
   const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + id, fetcher)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  console.log(data)
 
   // API登録・更新
-  function handleSendTackleData(values: Tackle) {
+  function handleSendTackleData(values: TackleForm) {
     if (id) { // タックルIDがある場合は更新
       axios.put('/api/tackles/edit/' + id, values)
         .then(function () {
@@ -114,7 +164,7 @@ export default function TackleForm() {
     }
   }
 
-  function validateData(value: Tackle) {
+  function validateData(value: TackleForm) {
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -156,9 +206,9 @@ export default function TackleForm() {
     <>
       <Formik
         initialValues={{
-          rodId: data.result?.rod.id,
-          reelId: data.result?.reel.id,
-          lineId: data.result?.line.id,
+          rodId: tackleData?.Rod.ID,
+          reelId: tackleData?.Reel.ID,
+          lineId: tackleData?.Line.ID,
         }}
         onSubmit={(values, actions) => {
           setTimeout(() => {
@@ -184,14 +234,20 @@ export default function TackleForm() {
                     <Input {...field} type="hidden" id='rodId' />
 
                     <Box type='button' as='button'>
-                      <RodDetail chosenId={Number(data.result?.rod.id)} />
+                      <RodDetail chosenId={Number(tackleData?.Rod.ID)} />
                     </Box>
                     <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-              <Button >Change</Button>
-              <RodsList />
+              <Button onClick={() => setRodChange(!rodChange)}>
+                {
+                  rodChange? <>Close</>: <>Change</>
+                }
+              </Button>
+              {
+                rodChange? <RodsList />: <></> 
+              }
 
               <Field name='reelId' validate={validateData}>
                 {({ field, form }: FieldProps) => (
@@ -205,13 +261,19 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >reel</FormLabel>
                     <Input {...field} type="hidden" id='reelId' />
-                    <ReelDetail chosenId={Number(data.result?.reel.id)} />
+                    <ReelDetail chosenId={Number(tackleData?.Reel.ID)} />
                     <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-              <Button>Change</Button>
-              <ReelsList />
+              <Button onClick={() => setReelChange(!reelChange)}>
+                {
+                  reelChange? <>Close</>: <>Change</>
+                }
+              </Button>
+              {
+                reelChange? <ReelsList />: <></> 
+              }
 
               <Field name='lineId' validate={validateData}>
                 {({ field, form }: FieldProps) => (
@@ -225,13 +287,20 @@ export default function TackleForm() {
                       textTransform='uppercase'
                     >line</FormLabel>
                     <Input {...field} type="hidden" id='lineId' />
-                    <LineDetail chosenId={Number(data.result?.line.id)} />
+                    <LineDetail chosenId={Number(tackleData?.Line.ID)} />
                     <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-              <Button>Change</Button>
-              <LinesList />
+              <Button onClick={() => setLineChange(!lineChange)}>
+                {
+                  lineChange? <>Close</>: <>Change</>
+                }
+              </Button>
+              {
+                lineChange? <LinesList />: <></> 
+              }
+              
 
             </Stack>
             <Button
