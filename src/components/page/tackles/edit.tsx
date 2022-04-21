@@ -7,7 +7,6 @@ import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 
-
 export default function TackleEdit(): JSX.Element {
   // パラメータからタックルID取得
   const router = useRouter();
