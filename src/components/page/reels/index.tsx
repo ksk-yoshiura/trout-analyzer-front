@@ -14,7 +14,7 @@ export default function Reelndex(): JSX.Element {
           <Button  pl={10} pr={10} colorScheme='teal'>New Reel</Button>
         </NextLink>
       </Flex>
-      <ReelsList />
+      <ReelsList isTackle={false} />
     </>
   );
 }

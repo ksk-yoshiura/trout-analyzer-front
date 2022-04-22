@@ -14,7 +14,7 @@ export default function RodIndex(): JSX.Element {
           <Button  pl={10} pr={10} colorScheme='teal'>New Rod</Button>
         </NextLink>
       </Flex>
-      <RodsList />
+      <RodsList isTackle={false} />
     </>
   );
 }

@@ -14,7 +14,7 @@ export default function LineIndex(): JSX.Element {
           <Button  pl={10} pr={10} colorScheme='teal'>New Line</Button>
         </NextLink>
       </Flex>
-      <LinesList />
+      <LinesList isTackle={false} />
     </>
   );
 }
