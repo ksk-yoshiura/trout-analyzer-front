@@ -100,9 +100,9 @@ export default function TackleForm(props: DetailProps) {
   const { tackleData, chosenId } = props
 
   // 初期値
-  const defaultRodId = tackleData? tackleData.Rod.ID : 0;
-  const defaultReelId = tackleData? tackleData.Reel.ID : 0;
-  const defaultLineId = tackleData? tackleData.Line.ID : 0;
+  const defaultRodId = tackleData? Number(tackleData.Rod.ID) : 0;
+  const defaultReelId = tackleData? Number(tackleData.Reel.ID) : 0;
+  const defaultLineId = tackleData? Number(tackleData.Line.ID) : 0;
 
   // ロッドID
   const [newRodId, setNewRodId] = useState(defaultRodId)
