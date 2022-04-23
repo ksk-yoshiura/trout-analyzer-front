@@ -19,7 +19,7 @@ import { RodsApiResponse } from "../../../pages/api/rods/index"
 
 type ListProps = {
   isTackle: boolean
-  setNewRodId: React.Dispatch<React.SetStateAction<string | number>>;
+  setNewRodId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function RodsList(props: ListProps): JSX.Element {

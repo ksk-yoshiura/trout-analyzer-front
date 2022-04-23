@@ -19,7 +19,7 @@ import { ReelsApiResponse } from "../../../pages/api/reels/index"
 
 type ListProps = {
   isTackle: boolean
-  setNewReelId: React.Dispatch<React.SetStateAction<string | number>>;
+  setNewReelId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function ReelsList(props: ListProps): JSX.Element {

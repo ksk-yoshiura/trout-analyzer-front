@@ -19,7 +19,7 @@ import { LinesApiResponse } from "../../../pages/api/lines/index"
 
 type ListProps = {
   isTackle: boolean
-  setNewLineId: React.Dispatch<React.SetStateAction<string | number>>;
+  setNewLineId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function LinesList(props: ListProps): JSX.Element {
