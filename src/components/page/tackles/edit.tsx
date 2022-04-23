@@ -1,8 +1,9 @@
-import { 
+import {
   Flex
 } from '@chakra-ui/react'
 import TackleForm from '../../model/tackles/TackleForm'
 import { useRouter } from "next/router";
+import BackToListPageLink from '../../shared/BackToListPageLink'
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
@@ -16,8 +17,11 @@ export default function TackleEdit(): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   return (
-    <Flex textAlign="center" w="100wh">
-      <TackleForm tackleData={data?.result} />
-    </Flex>
+    <>
+      <BackToListPageLink name={'tackles'} />
+      <Flex textAlign="center" w="100wh">
+        <TackleForm chosenId={id} tackleData={data?.result} />
+      </Flex>
+    </>
   )
 }
