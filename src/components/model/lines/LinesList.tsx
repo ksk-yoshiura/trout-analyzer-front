@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Image,
@@ -7,17 +6,29 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
+  Button,
+  ModalFooter,
+  ModalBody,
 } from '@chakra-ui/react'
 import LineDetail from './LineDetail'
 import DetailModal from '../../shared/DetailModal'
+import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
 
-export default function LinesList(): JSX.Element {
+type ListProps = {
+  isTackle: boolean
+  setNewLineId: React.Dispatch<React.SetStateAction<string | number>>;
+}
+
+export default function LinesList(props: ListProps): JSX.Element {
+  // タックルフォームでの呼び出しの場合
+  const { isTackle, setNewLineId } = props
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+
   // APIからデータ取得
   const { data, error } = useSWR<LinesApiResponse, Error>('lines')
   if (error) return <p>Error: {error.message}</p>
@@ -31,6 +42,13 @@ export default function LinesList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  // タックル用ライン選択
+  function selectLineForTackleHandler(event: any) {
+    const { target } = event
+    const selectId = target.value
+    setNewLineId(selectId)
+  }
+
   // モーダルを部分的に移行し共通化
   // 完全移行はonOpen()が動作しなくなるので断念
   const LineDetailModal = () => {
@@ -38,6 +56,31 @@ export default function LinesList(): JSX.Element {
       <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} mutate={mutate} >
         <LineDetail chosenId={chosenId} />
       </DetailModal>
+    )
+  }
+
+  // タックル用モーダル
+  const LineDetailForTackleModal = () => {
+    return (
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} mutate={mutate} >
+        <ModalBody>
+          <LineDetail chosenId={chosenId} />
+        </ModalBody>
+
+        <ModalFooter display={'flex'} justifyContent={'space-between'}>
+          <Button variant='solid' onClick={() => onClose()}>Cancel</Button>
+          <Button
+            colorScheme='blue'
+            value={chosenId}
+            variant='solid'
+            onClick={
+              (event) => {
+                selectLineForTackleHandler(event);
+                onClose()
+              }
+            }>Select</Button>
+        </ModalFooter>
+      </DetailTackleModal>
     )
   }
 
@@ -95,8 +138,9 @@ export default function LinesList(): JSX.Element {
           )
         })
       }
-      <LineDetailModal />
-
+      {
+        isTackle ? <LineDetailForTackleModal /> : <LineDetailModal />
+      }
     </Wrap>
   )
 }

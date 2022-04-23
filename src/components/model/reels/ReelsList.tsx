@@ -6,14 +6,25 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
+  Button,
+  ModalFooter,
+  ModalBody,
 } from '@chakra-ui/react'
 import ReelDetail from './ReelDetail'
 import DetailModal from '../../shared/DetailModal'
+import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/index"
 
-export default function ReelsList(): JSX.Element {
+type ListProps = {
+  isTackle: boolean
+  setNewReelId: React.Dispatch<React.SetStateAction<string | number>>;
+}
+
+export default function ReelsList(props: ListProps): JSX.Element {
+  // タックルフォームでの呼び出しの場合
+  const { isTackle, setNewReelId } = props
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
@@ -30,12 +41,44 @@ export default function ReelsList(): JSX.Element {
     idState(lureIdNumber)
   }
 
+  // タックル用リール選択
+  function selectReelForTackleHandler(event: any) {
+    const { target } = event
+    const selectId = target.value
+    setNewReelId(selectId)
+  }
+
   // モーダルを部分的に移行し共通化
   const ReelDetailModal = () => {
     return (
       <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} mutate={mutate} >
         <ReelDetail chosenId={chosenId} />
       </DetailModal>
+    )
+  }
+
+  // タックル用モーダル
+  const ReelDetailForTackleModal = () => {
+    return (
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} mutate={mutate} >
+        <ModalBody>
+          <ReelDetail chosenId={chosenId} />
+        </ModalBody>
+
+        <ModalFooter display={'flex'} justifyContent={'space-between'}>
+          <Button variant='solid' onClick={() => onClose()}>Cancel</Button>
+          <Button
+            colorScheme='blue'
+            value={chosenId}
+            variant='solid'
+            onClick={
+              (event) => {
+                selectReelForTackleHandler(event);
+                onClose()
+              }
+            }>Select</Button>
+        </ModalFooter>
+      </DetailTackleModal>
     )
   }
 
@@ -84,7 +127,9 @@ export default function ReelsList(): JSX.Element {
             )
           })
         }
-        <ReelDetailModal />
+        {
+          isTackle ? <ReelDetailForTackleModal /> : <ReelDetailModal />
+        }
 
       </Wrap>
     </>

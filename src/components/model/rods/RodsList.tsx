@@ -5,20 +5,26 @@ import {
   Badge,
   Wrap,
   WrapItem,
-  useDisclosure
+  useDisclosure,
+  Button,
+  ModalFooter,
+  ModalBody,
 } from '@chakra-ui/react'
 import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
+import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { RodsApiResponse } from "../../../pages/api/rods/index"
 
-// タックルフォームで呼び出す場合
-type DetailProp = {
-  field?: any
+type ListProps = {
+  isTackle: boolean
+  setNewRodId: React.Dispatch<React.SetStateAction<string | number>>;
 }
 
-export default function RodsList(props: DetailProp): JSX.Element {
+export default function RodsList(props: ListProps): JSX.Element {
+  // タックルフォームでの呼び出しの場合
+  const { isTackle, setNewRodId } = props
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
@@ -31,9 +37,15 @@ export default function RodsList(props: DetailProp): JSX.Element {
   function clickHandler(value: string) {
     // 型変換
     const lureIdNumber = Number(value)
-
     // クリックされたカードから得たIDを更新
     idState(lureIdNumber)
+  }
+
+  // タックル用ロッド選択
+  function selectRodForTackleHandler(event: any) {
+    const { target } = event
+    const selectId = target.value
+    setNewRodId(selectId)
   }
 
   // モーダルを部分的に移行し共通化
@@ -42,6 +54,31 @@ export default function RodsList(props: DetailProp): JSX.Element {
       <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} mutate={mutate} >
         <RodDetail chosenId={chosenId} />
       </DetailModal>
+    )
+  }
+
+  // タックル用モーダル
+  const RodDetailForTackleModal = () => {
+    return (
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} mutate={mutate} >
+        <ModalBody>
+          <RodDetail chosenId={chosenId} />
+        </ModalBody>
+
+        <ModalFooter display={'flex'} justifyContent={'space-between'}>
+          <Button variant='solid' onClick={() => onClose()}>Cancel</Button>
+          <Button 
+            colorScheme='blue' 
+            value={chosenId} 
+            variant='solid' 
+            onClick={
+              (event) => {
+                selectRodForTackleHandler(event); 
+                onClose()
+              }
+            }>Select</Button>
+        </ModalFooter>
+      </DetailTackleModal>
     )
   }
 
@@ -100,8 +137,9 @@ export default function RodsList(props: DetailProp): JSX.Element {
             )
           })
         }
-        <RodDetailModal />
-
+        {
+          isTackle ? <RodDetailForTackleModal /> : <RodDetailModal />
+        }
       </Wrap>
     </>
   )
