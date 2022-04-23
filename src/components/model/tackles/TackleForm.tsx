@@ -28,7 +28,7 @@ import ReelDetail from '../reels/ReelDetail'
 import ReelsList from '../reels/ReelsList'
 import LineDetail from '../lines/LineDetail'
 import LinesList from '../lines/LinesList'
-import axios from 'axios'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type Tackle = {
   ID: string
@@ -67,6 +67,7 @@ type Tackle = {
 
 type DetailProps = {
   tackleData?: Tackle
+  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
 }
 
 type TackleForm = {
@@ -76,9 +77,6 @@ type TackleForm = {
 }
 
 export default function TackleForm(props: DetailProps) {
-  // パラメータからタックルID取得
-  const router = useRouter();
-  const { id } = router.query
   // 確認ドロワー
   const {
     isOpen: isOpneConfirmDrawer,
@@ -93,12 +91,13 @@ export default function TackleForm(props: DetailProps) {
   // ラインリスト表示・非表示切り替え
   const [lineChange, setLineChange] = useState(false)
 
-
   // アラート
   const toast = useToast()
+  // ページ遷移
+  const router = useRouter();
 
   // タックルデータ
-  const { tackleData } = props
+  const { tackleData, chosenId } = props
 
   // 初期値
   const defaultRodId = tackleData? tackleData.Rod.ID : 0;
@@ -112,13 +111,25 @@ export default function TackleForm(props: DetailProps) {
   // ラインID
   const [newLineId, setNewLineId] = useState(defaultLineId)
 
+  // axiosの設定
+  const axiosInstance = createAxiosInstance()
 
-  console.log(newRodId)
+  // fieldにセットする方法がわからないので
+  // ここでセットする
+  function setSendingData(values: TackleForm) {
+    values.rodId = Number(newRodId)
+    values.reelId = Number(newReelId)
+    values.lineId = Number(newLineId)
+
+    return values
+  }
 
   // API登録・更新
   function handleSendTackleData(values: TackleForm) {
-    if (id) { // タックルIDがある場合は更新
-      axios.put('/api/tackles/edit/' + id, values)
+    const sendingData = setSendingData(values)
+
+    if (chosenId && chosenId !== '0') { // タックルIDがある場合は更新
+      axiosInstance.put('tackles/' + chosenId, sendingData)
         .then(function () {
           // リストページに遷移
           router.push('/tackles')
@@ -134,14 +145,14 @@ export default function TackleForm(props: DetailProps) {
         .catch(function (error) {
           toast({
             title: 'Failed!',
-            description: error,
+            description: error.messages,
             status: 'error',
             duration: 9000,
             isClosable: true,
           })
         })
     } else { // タックルIDがない場合は登録
-      axios.post('/api/tackles/create', values)
+      axiosInstance.post('tackles', sendingData)
         .then(function () {
           // リストページに遷移
           router.push('/tackles')
@@ -213,8 +224,7 @@ export default function TackleForm(props: DetailProps) {
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          console.log(values)
-          // handleSendTackleData(values)
+          handleSendTackleData(values)
           actions.setSubmitting(false)
         }, 1000)
       }}
@@ -283,7 +293,7 @@ export default function TackleForm(props: DetailProps) {
               }
             </Button>
             {
-              reelChange ? <ReelsList isTackle={true} /> : <></>
+              reelChange ? <ReelsList isTackle={true} setNewReelId={setNewReelId} /> : <></>
             }
 
             <Field name='lineId' validate={validateData}>
@@ -315,7 +325,7 @@ export default function TackleForm(props: DetailProps) {
               }
             </Button>
             {
-              lineChange ? <LinesList isTackle={true} /> : <></>
+              lineChange ? <LinesList isTackle={true} setNewLineId={setNewLineId} /> : <></>
             }
 
 
