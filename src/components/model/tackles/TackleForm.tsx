@@ -28,9 +28,6 @@ import ReelDetail from '../reels/ReelDetail'
 import ReelsList from '../reels/ReelsList'
 import LineDetail from '../lines/LineDetail'
 import LinesList from '../lines/LinesList'
-import Loading from '../../shared/Loading'
-import useSWR from 'swr'
-import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 import axios from 'axios'
 
 type Tackle = {
@@ -73,9 +70,9 @@ type DetailProps = {
 }
 
 type TackleForm = {
-  rodId?: string
-  reelId?: string
-  lineId?: string
+  rodId?: string | number
+  reelId?: string | number
+  lineId?: string | number
 }
 
 export default function TackleForm(props: DetailProps) {
@@ -96,17 +93,27 @@ export default function TackleForm(props: DetailProps) {
   // ラインリスト表示・非表示切り替え
   const [lineChange, setLineChange] = useState(false)
 
+
   // アラート
   const toast = useToast()
 
   // タックルデータ
   const { tackleData } = props
 
-  // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + id)
-  if (error) return <p>Error: {error.message}</p>
-  if (!data) return <Loading />
-  console.log(data)
+  // 初期値
+  const defaultRodId = tackleData? tackleData.Rod.ID : 0;
+  const defaultReelId = tackleData? tackleData.Reel.ID : 0;
+  const defaultLineId = tackleData? tackleData.Line.ID : 0;
+
+  // ロッドID
+  const [newRodId, setNewRodId] = useState(defaultRodId)
+  // リールID
+  const [newReelId, setNewReelId] = useState(defaultReelId)
+  // ラインID
+  const [newLineId, setNewLineId] = useState(defaultLineId)
+
+
+  console.log(newRodId)
 
   // API登録・更新
   function handleSendTackleData(values: TackleForm) {
@@ -200,13 +207,14 @@ export default function TackleForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        rodId: tackleData?.Rod.ID,
-        reelId: tackleData?.Reel.ID,
-        lineId: tackleData?.Line.ID,
+        rodId: defaultRodId ,
+        reelId: defaultReelId,
+        lineId: defaultLineId,
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          handleSendTackleData(values)
+          console.log(values)
+          // handleSendTackleData(values)
           actions.setSubmitting(false)
         }, 1000)
       }}
@@ -226,10 +234,13 @@ export default function TackleForm(props: DetailProps) {
                     textTransform='uppercase'
                   >rod</FormLabel>
                   <Input {...field} type="hidden" id='rodId' />
-
-                  <Box type='button' as='button'>
-                    <RodDetail chosenId={Number(tackleData?.Rod.ID)} />
-                  </Box>
+                  {
+                    newRodId && newRodId !== 0
+                    ?<Box type='button' as='button'>
+                      <RodDetail chosenId={Number(newRodId)} />
+                    </Box>
+                    :<></>
+                  }
                   <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
                 </FormControl>
               )}
@@ -240,7 +251,7 @@ export default function TackleForm(props: DetailProps) {
               }
             </Button>
             {
-              rodChange ? <RodsList /> : <></>
+              rodChange ? <RodsList isTackle={true} setNewRodId={setNewRodId} /> : <></>
             }
 
             <Field name='reelId' validate={validateData}>
@@ -255,7 +266,13 @@ export default function TackleForm(props: DetailProps) {
                     textTransform='uppercase'
                   >reel</FormLabel>
                   <Input {...field} type="hidden" id='reelId' />
-                  <ReelDetail chosenId={Number(tackleData?.Reel.ID)} />
+                  {
+                    newReelId && newReelId !== 0
+                    ?<Box type='button' as='button'>
+                      <ReelDetail chosenId={Number(newReelId)} />
+                    </Box>
+                    :<></>
+                  }
                   <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
                 </FormControl>
               )}
@@ -266,7 +283,7 @@ export default function TackleForm(props: DetailProps) {
               }
             </Button>
             {
-              reelChange ? <ReelsList /> : <></>
+              reelChange ? <ReelsList isTackle={true} /> : <></>
             }
 
             <Field name='lineId' validate={validateData}>
@@ -281,7 +298,13 @@ export default function TackleForm(props: DetailProps) {
                     textTransform='uppercase'
                   >line</FormLabel>
                   <Input {...field} type="hidden" id='lineId' />
-                  <LineDetail chosenId={Number(tackleData?.Line.ID)} />
+                  {
+                    newLineId && newLineId !== 0
+                    ?<Box type='button' as='button'>
+                      <LineDetail chosenId={Number(newLineId)} />
+                    </Box>
+                    :<></>
+                  }
                   <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
                 </FormControl>
               )}
@@ -292,7 +315,7 @@ export default function TackleForm(props: DetailProps) {
               }
             </Button>
             {
-              lineChange ? <LinesList /> : <></>
+              lineChange ? <LinesList isTackle={true} /> : <></>
             }
 
 
