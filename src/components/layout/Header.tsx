@@ -23,7 +23,7 @@ export default function Header(): JSX.Element {
             pt={1}
             px={1}
           >
-            <Image src='/logo_teal.png' alt='TRANAZA Logo' />
+            <Image src='/logo/logo_second.png' alt='TRANAZA Logo' />
           </Box>
         </Link>
         <Box
