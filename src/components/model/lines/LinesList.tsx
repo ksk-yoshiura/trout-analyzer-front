@@ -19,7 +19,7 @@ import { LinesApiResponse } from "../../../pages/api/lines/index"
 
 type ListProps = {
   isTackle: boolean
-  setNewLineId: React.Dispatch<React.SetStateAction<number>>;
+  setNewLineId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function LinesList(props: ListProps): JSX.Element {
@@ -46,7 +46,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   function selectLineForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewLineId(selectId)
+    setNewLineId?(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化

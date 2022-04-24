@@ -19,7 +19,7 @@ import { RodsApiResponse } from "../../../pages/api/rods/index"
 
 type ListProps = {
   isTackle: boolean
-  setNewRodId: React.Dispatch<React.SetStateAction<number>>;
+  setNewRodId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function RodsList(props: ListProps): JSX.Element {
@@ -45,7 +45,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   function selectRodForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewRodId(selectId)
+    setNewRodId?(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化

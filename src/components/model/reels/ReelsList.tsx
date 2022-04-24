@@ -19,7 +19,7 @@ import { ReelsApiResponse } from "../../../pages/api/reels/index"
 
 type ListProps = {
   isTackle: boolean
-  setNewReelId: React.Dispatch<React.SetStateAction<number>>;
+  setNewReelId?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function ReelsList(props: ListProps): JSX.Element {
@@ -45,7 +45,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   function selectReelForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewReelId(selectId)
+    setNewReelId?(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化
