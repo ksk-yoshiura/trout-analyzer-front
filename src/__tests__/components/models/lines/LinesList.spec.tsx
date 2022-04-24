@@ -7,6 +7,7 @@ import { render } from '../../../utils';
 import LinesList from '../../../../components/model/lines/LinesList';
 
 test('LinesList', () => {
-  const { asFragment } = render(<LinesList />);
+  const isTackle = true
+  const { asFragment } = render(<LinesList isTackle={isTackle} />);
   expect(asFragment()).toMatchSnapshot();
 });

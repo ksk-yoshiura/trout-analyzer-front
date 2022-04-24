@@ -7,6 +7,7 @@ import { render } from '../../../utils';
 import RodsList from '../../../../components/model/rods/RodsList';
 
 test('RodsList', () => {
-  const { asFragment } = render(<RodsList />);
+  const isTackle = true
+  const { asFragment } = render(<RodsList isTackle={isTackle} />);
   expect(asFragment()).toMatchSnapshot();
 });

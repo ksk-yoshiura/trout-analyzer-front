@@ -7,6 +7,7 @@ import { render } from '../../../utils';
 import ReelsList from '../../../../components/model/reels/ReelsList';
 
 test('ReelsList', () => {
-  const { asFragment } = render(<ReelsList />);
+  const isTackle = true
+  const { asFragment } = render(<ReelsList isTackle={isTackle} />);
   expect(asFragment()).toMatchSnapshot();
 });
