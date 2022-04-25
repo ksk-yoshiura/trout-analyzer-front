@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from "next/router";
 import {
   Formik,
   Form,
@@ -11,18 +12,38 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Stack
+  Stack,
+  useToast
 } from "@chakra-ui/react";
+import { axiosDefaultInstance } from '../../../pages/api/utils'
 
 type SignUpData = {
-  mailaddress: string;
+  email: string;
   password: string;
   passwordConfirm: string;
 }
 
 export default function SignUpForm() {
+  // アラート
+  const toast = useToast()
+  // ページ遷移
+  const router = useRouter();
+
   function handleSendSignUpData(values: SignUpData) {
-    alert(JSON.stringify(values))
+    axiosDefaultInstance.post('sign_up', values)
+        .then(function () {
+          // ログインページに遷移
+          router.push('/login')
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error.message,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
   }
 
 
@@ -39,7 +60,7 @@ export default function SignUpForm() {
   return (
     <Formik
       initialValues={{
-        mailaddress: '',
+        email: '',
         password: '',
         passwordConfirm: '',
       }}
@@ -53,19 +74,19 @@ export default function SignUpForm() {
       {(props) => (
         <Form>
           <Stack spacing={5}>
-            <Field name='mailaddress' validate={validateData}>
+            <Field name='email' validate={validateData}>
               {({ field, form }: FieldProps) => (
                 <FormControl
-                  isInvalid={Boolean(form.errors.mailaddress)
-                    && Boolean(form.touched.mailaddress)}
+                  isInvalid={Boolean(form.errors.email)
+                    && Boolean(form.touched.email)}
                 >
                   <FormLabel
                     fontSize="12px"
-                    htmlFor='mailaddress'
+                    htmlFor='email'
                     textTransform='uppercase'
-                  >mailaddress</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='mailaddress' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.mailaddress}</FormErrorMessage>
+                  >email</FormLabel>
+                  <Input {...field} width="100%" fontSize="1xl" id='email' variant='flushed' placeholder='Enter' />
+                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
