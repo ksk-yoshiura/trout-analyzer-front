@@ -34,6 +34,14 @@ export default function SignUpForm() {
         .then(function () {
           // ログインページに遷移
           router.push('/login')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Your account created!',
+            description: "We've created your account for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
         })
         .catch(function (error) {
           toast({
