@@ -1,3 +1,4 @@
+import React from 'react'
 import RecordSerialRegisterForm from '../../model/records/RecordSerialRegisterForm'
 import FinishButton from '../../model/records/serial_register_partial/FinishButton'
 import { useRouter } from "next/router"
