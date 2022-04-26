@@ -10,7 +10,6 @@ import FieldForm from '../../../../components/model/fields/FieldForm';
 
 jest.mock("next-auth/react")
 
-
 test('FieldForm', () => {
   const mockSession: Session = {
     expires: "1",
