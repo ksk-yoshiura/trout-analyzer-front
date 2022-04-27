@@ -4,8 +4,8 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import  { useSession } from "next-auth/react";
-import  { Session } from "next-auth";
+import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 import ReelCreate from '../../../../components/page/reels/create';
 
 jest.mock("next-auth/react")
