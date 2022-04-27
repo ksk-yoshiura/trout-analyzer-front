@@ -1,10 +1,40 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { render } from '@testing-library/react'
+import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { NextRouter } from 'next/router';
 import React from 'react'
 
 // Chakra UI対応
 const AllTheProviders = ({ children }: { children: JSX.Element }) => {
-  return <ChakraProvider>{children}</ChakraProvider>
+  const mockRouter: NextRouter = {
+    route: '/',
+    pathname: '/',
+    query: {},
+    asPath: '/',
+    basePath: '/',
+    isLocaleDomain: true,
+    isReady: true,
+    push: jest.fn(),
+    prefetch: jest.fn(),
+    replace: jest.fn(),
+    reload: jest.fn(),
+    back: jest.fn(),
+    beforePopState: jest.fn(),
+    events: {
+      on: jest.fn(),
+      off: jest.fn(),
+      emit: jest.fn(),
+    },
+    isFallback: false,
+    isPreview: false,
+  };
+  return (
+    <ChakraProvider>
+      <RouterContext.Provider value={mockRouter}>
+        {children}
+      </RouterContext.Provider>
+    </ChakraProvider>
+  )
 }
 
 const customRender = (ui: JSX.Element, options?: any) =>
