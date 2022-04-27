@@ -60,7 +60,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   // タックル用モーダル
   const ReelDetailForTackleModal = () => {
     return (
-      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} mutate={mutate} >
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} >
         <ModalBody>
           <ReelDetail chosenId={chosenId} />
         </ModalBody>

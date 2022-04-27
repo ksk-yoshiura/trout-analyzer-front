@@ -60,7 +60,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   // タックル用モーダル
   const RodDetailForTackleModal = () => {
     return (
-      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} mutate={mutate} >
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} >
         <ModalBody>
           <RodDetail chosenId={chosenId} />
         </ModalBody>

@@ -62,7 +62,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   // タックル用モーダル
   const LineDetailForTackleModal = () => {
     return (
-      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} mutate={mutate} >
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} >
         <ModalBody>
           <LineDetail chosenId={chosenId} />
         </ModalBody>

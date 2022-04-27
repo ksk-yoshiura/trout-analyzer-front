@@ -12,7 +12,6 @@ type DetailProps = {
   title: string
   isOpen: boolean
   onClose: any
-  mutate: any
   children?: ReactNode;
 }
 
