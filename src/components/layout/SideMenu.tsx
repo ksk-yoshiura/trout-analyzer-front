@@ -1,6 +1,6 @@
 import React from 'react'
 import { 
-  Flex, Box
+  Flex, Box, Image
 } from "@chakra-ui/react";
 import SideMenuPCBox from "./side_menu/SideMenuPCBox";
 
@@ -15,6 +15,7 @@ export default function SideMenu() {
         w={250} 
         px={6}
       >
+        <Image src='/logo/logo_second.png' alt='TRANAZA Logo' />
         <SideMenuPCBox />
       </Box>
     </Flex>

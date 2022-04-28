@@ -16,7 +16,12 @@ export default function Header(): JSX.Element {
 
   return (
     isHeaderNotNecessary ?
-      <Flex h={55} borderColor='gray.500' borderBottom={'1px'}>
+      <Box 
+      display={{ base: "block", md: "none" }}  >
+      <Flex 
+        h={55} borderColor='gray.500' 
+        borderBottom={'1px'}
+      >
         <Link href="/">
           <Box
             w={145}
@@ -27,7 +32,6 @@ export default function Header(): JSX.Element {
           </Box>
         </Link>
         <Box
-          // bg="teal"
           w="100%"
           align='right'
           pr={5}
@@ -41,6 +45,7 @@ export default function Header(): JSX.Element {
           <SideMenuMobileBox />
         </Box>
       </Flex>
+      </Box>
       : <></>
   );
 }
