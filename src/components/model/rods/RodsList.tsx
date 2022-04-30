@@ -9,6 +9,8 @@ import {
   Button,
   ModalFooter,
   ModalBody,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -33,6 +35,8 @@ export default function RodsList(props: ListProps): JSX.Element {
   const { data, error } = useSWR<RodsApiResponse, Error>('rods')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // ロッドデータ
+  const rodListData = data.result? data.result: []
 
   function clickHandler(value: string) {
     // 型変換
@@ -86,7 +90,7 @@ export default function RodsList(props: ListProps): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          data.result?.map((item, index) => {
+          rodListData.length > 0? rodListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -135,7 +139,11 @@ export default function RodsList(props: ListProps): JSX.Element {
                 </Box>
               </WrapItem>
             )
-          })
+          }): 
+          <Alert status='error' w="300px">
+            <AlertIcon />
+            Register new rods!
+          </Alert>
         }
         {
           isTackle ? <RodDetailForTackleModal /> : <RodDetailModal />

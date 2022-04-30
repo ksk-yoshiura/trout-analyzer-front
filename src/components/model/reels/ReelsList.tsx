@@ -9,6 +9,8 @@ import {
   Button,
   ModalFooter,
   ModalBody,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import ReelDetail from './ReelDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -32,6 +34,8 @@ export default function ReelsList(props: ListProps): JSX.Element {
   const { data, error } = useSWR<ReelsApiResponse, Error>('reels')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // リールデータ
+  const reelListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -45,7 +49,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   function selectReelForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewReelId?(selectId) : null
+    setNewReelId ? (selectId) : null
   }
 
   // モーダルを部分的に移行し共通化
@@ -86,7 +90,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          data.result?.map((item, index) => {
+          reelListData.length > 0 ? reelListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -125,7 +129,11 @@ export default function ReelsList(props: ListProps): JSX.Element {
                 </Box>
               </WrapItem>
             )
-          })
+          }) :
+            <Alert status='error' w="300px">
+              <AlertIcon />
+              Register new reels!
+            </Alert>
         }
         {
           isTackle ? <ReelDetailForTackleModal /> : <ReelDetailModal />

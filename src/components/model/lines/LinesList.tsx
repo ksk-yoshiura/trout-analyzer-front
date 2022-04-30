@@ -9,6 +9,8 @@ import {
   Button,
   ModalFooter,
   ModalBody,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import LineDetail from './LineDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -33,6 +35,8 @@ export default function LinesList(props: ListProps): JSX.Element {
   const { data, error } = useSWR<LinesApiResponse, Error>('lines')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // ラインデータ
+  const lineListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -46,7 +50,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   function selectLineForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewLineId?(selectId) : null
+    setNewLineId ? (selectId) : null
   }
 
   // モーダルを部分的に移行し共通化
@@ -87,7 +91,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   return (
     <Wrap spacing={5}>
       {
-        data.result?.map((item, index) => {
+        lineListData.length > 0 ? lineListData.map((item, index) => {
           return (
             <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
               <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -136,7 +140,11 @@ export default function LinesList(props: ListProps): JSX.Element {
               </Box>
             </WrapItem>
           )
-        })
+        }) :
+          <Alert status='error' w="300px">
+            <AlertIcon />
+            Register new ines!
+          </Alert>
       }
       {
         isTackle ? <LineDetailForTackleModal /> : <LineDetailModal />
