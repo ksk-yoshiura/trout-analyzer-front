@@ -1,8 +1,9 @@
 import React from 'react'
-import { 
+import {
   Flex
 } from '@chakra-ui/react'
 import TackleForm from '../../model/tackles/TackleForm'
+import BackToListPageLink from '../../shared/BackToListPageLink'
 
 type TackleData = {
   ID: string
@@ -40,7 +41,7 @@ type TackleData = {
 }
 
 export default function TackleCreate(): JSX.Element {
-  const vacantData:TackleData = {
+  const vacantData: TackleData = {
     ID: '',
     CreatedAt: '',
     Rod: {
@@ -75,8 +76,11 @@ export default function TackleCreate(): JSX.Element {
     }
   }
   return (
-    <Flex textAlign="center" w="100wh">
-      <TackleForm tackleData={vacantData} />
-    </Flex>
+    <>
+      <BackToListPageLink name={'tackles'} />
+      <Flex textAlign="center" w="100wh">
+        <TackleForm tackleData={vacantData} />
+      </Flex>
+    </>
   )
 }
