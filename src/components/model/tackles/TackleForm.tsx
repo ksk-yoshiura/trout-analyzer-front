@@ -255,7 +255,7 @@ export default function TackleForm(props: DetailProps) {
                 </FormControl>
               )}
             </Field>
-            <Button onClick={() => setRodChange(!rodChange)}>
+            <Button w={300} onClick={() => setRodChange(!rodChange)}>
               {
                 rodChange ? <>Close</> : <>Change</>
               }
@@ -287,7 +287,7 @@ export default function TackleForm(props: DetailProps) {
                 </FormControl>
               )}
             </Field>
-            <Button onClick={() => setReelChange(!reelChange)}>
+            <Button w={300} onClick={() => setReelChange(!reelChange)}>
               {
                 reelChange ? <>Close</> : <>Change</>
               }
@@ -319,7 +319,7 @@ export default function TackleForm(props: DetailProps) {
                 </FormControl>
               )}
             </Field>
-            <Button onClick={() => setLineChange(!lineChange)}>
+            <Button w={300} onClick={() => setLineChange(!lineChange)}>
               {
                 lineChange ? <>Close</> : <>Change</>
               }
