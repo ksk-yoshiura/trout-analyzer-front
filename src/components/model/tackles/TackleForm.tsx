@@ -257,7 +257,7 @@ export default function TackleForm(props: DetailProps) {
             </Field>
             <Button w={300} onClick={() => setRodChange(!rodChange)}>
               {
-                rodChange ? <>Close</> : <>Change</>
+                rodChange ? <>Close</> : <>Select</>
               }
             </Button>
             {
@@ -289,7 +289,7 @@ export default function TackleForm(props: DetailProps) {
             </Field>
             <Button w={300} onClick={() => setReelChange(!reelChange)}>
               {
-                reelChange ? <>Close</> : <>Change</>
+                reelChange ? <>Close</> : <>Select</>
               }
             </Button>
             {
@@ -321,13 +321,12 @@ export default function TackleForm(props: DetailProps) {
             </Field>
             <Button w={300} onClick={() => setLineChange(!lineChange)}>
               {
-                lineChange ? <>Close</> : <>Change</>
+                lineChange ? <>Close</> : <>Select</>
               }
             </Button>
             {
               lineChange ? <LinesList isTackle={true} setNewLineId={setNewLineId} /> : <></>
             }
-
 
           </Stack>
           <Button
