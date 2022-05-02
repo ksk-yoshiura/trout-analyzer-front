@@ -214,7 +214,6 @@ export default function TackleForm(props: DetailProps) {
     )
   }
 
-
   return (
     <Formik
       initialValues={{
