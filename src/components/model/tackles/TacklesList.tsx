@@ -27,7 +27,6 @@ export default function TacklesList(): JSX.Element {
   function clickHandler(value: string) {
     // 型変換
     const tackleIdNumber = Number(value)
-
     // クリックされたカードから得たIDを更新
     idState(tackleIdNumber)
   }
