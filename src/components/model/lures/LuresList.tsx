@@ -32,7 +32,7 @@ export default function LuresList(props: ListProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // ルアーデータ
-  const lureListData = data.result ? data.result : []
+  const luresListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -56,7 +56,7 @@ export default function LuresList(props: ListProps): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          lureListData.length > 0 ? lureListData.map((item, index) => {
+          luresListData.length > 0 ? luresListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

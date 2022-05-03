@@ -22,7 +22,7 @@ export default function TacklesList(): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // タックルデータ
-  const tackleListData = data.result ? data.result : []
+  const tacklesListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -45,7 +45,7 @@ export default function TacklesList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          tackleListData.length > 0 ? tackleListData.map((item, index) => {
+          tacklesListData.length > 0 ? tacklesListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>

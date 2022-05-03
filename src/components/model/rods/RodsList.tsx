@@ -36,7 +36,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // ロッドデータ
-  const rodListData = data.result? data.result: []
+  const rodsListData = data.result? data.result: []
 
   function clickHandler(value: string) {
     // 型変換
@@ -77,7 +77,7 @@ export default function RodsList(props: ListProps): JSX.Element {
             variant='solid' 
             onClick={
               (event) => {
-                selectRodForTackleHandler(event); 
+                selectRodForTackleHandler(event);
                 onClose()
               }
             }>Select</Button>
@@ -90,7 +90,7 @@ export default function RodsList(props: ListProps): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          rodListData.length > 0? rodListData.map((item, index) => {
+          rodsListData.length > 0? rodsListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

@@ -36,7 +36,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // ラインデータ
-  const lineListData = data.result ? data.result : []
+  const linesListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -91,7 +91,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   return (
     <Wrap spacing={5}>
       {
-        lineListData.length > 0 ? lineListData.map((item, index) => {
+        linesListData.length > 0 ? linesListData.map((item, index) => {
           return (
             <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
               <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>

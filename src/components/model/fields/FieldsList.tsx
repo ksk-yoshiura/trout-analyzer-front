@@ -25,7 +25,7 @@ export default function FieldsList(): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // フィールドデータ
-  const fieldListData = data.result ? data.result : []
+  const fieldsListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -49,7 +49,7 @@ export default function FieldsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          fieldListData.length > 0 ? fieldListData.map((item, index) => {
+          fieldsListData.length > 0 ? fieldsListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
