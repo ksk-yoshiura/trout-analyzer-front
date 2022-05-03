@@ -7,6 +7,8 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import LureDetail from './LureDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -29,6 +31,8 @@ export default function LuresList(props: ListProps): JSX.Element {
   const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // ルアーデータ
+  const lureListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -52,7 +56,7 @@ export default function LuresList(props: ListProps): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          data.result?.map((item, index) => {
+          lureListData.length > 0 ? lureListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -91,7 +95,11 @@ export default function LuresList(props: ListProps): JSX.Element {
                 </Box>
               </WrapItem>
             )
-          })
+          }) :
+            <Alert status='error' w="300px">
+              <AlertIcon />
+              Register new lures!
+            </Alert>
         }
         <LureDetailModal />
 
