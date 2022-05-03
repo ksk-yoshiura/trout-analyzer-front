@@ -244,7 +244,7 @@ export default function TackleForm(props: DetailProps) {
                   >rod</FormLabel>
                   <Input {...field} type="hidden" id='rodId' />
                   {
-                    newRodId && newRodId !== 0
+                    newRodId && newRodId > 0
                     ?<Box type='button' as='button'>
                       <RodDetail chosenId={Number(newRodId)} />
                     </Box>
@@ -276,7 +276,7 @@ export default function TackleForm(props: DetailProps) {
                   >reel</FormLabel>
                   <Input {...field} type="hidden" id='reelId' />
                   {
-                    newReelId && newReelId !== 0
+                    newReelId && newReelId > 0
                     ?<Box type='button' as='button'>
                       <ReelDetail chosenId={Number(newReelId)} />
                     </Box>
@@ -308,7 +308,7 @@ export default function TackleForm(props: DetailProps) {
                   >line</FormLabel>
                   <Input {...field} type="hidden" id='lineId' />
                   {
-                    newLineId && newLineId !== 0
+                    newLineId && newLineId > 0
                     ?<Box type='button' as='button'>
                       <LineDetail chosenId={Number(newLineId)} />
                     </Box>
