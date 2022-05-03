@@ -7,6 +7,7 @@ import {
   useDisclosure,
   Alert,
   AlertIcon,
+  Badge
 } from '@chakra-ui/react'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
@@ -23,6 +24,9 @@ export default function TacklesList(): JSX.Element {
   if (!data) return <Loading />
   // タックルデータ
   const tacklesListData = data.result ? data.result : []
+
+  console.log(tacklesListData)
+
 
   function clickHandler(value: string) {
     // 型変換
@@ -48,46 +52,92 @@ export default function TacklesList(): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>
-                  <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                  <Box w={150} maxW='sm' borderWidth='1px' pb='1' borderRadius='lg' overflow='hidden'>
+                    <Box
+                      mt='1'
+                      ml='1'
+                      fontWeight='semibold'
+                      as='h4'
+                      textAlign={'left'}
+                      lineHeight='tight'
+                      color='gray.500'
+                      isTruncated
+                    >
+                      Rod
+                    </Box>
                     <Image src={item.Rod.imageUrl} alt={item.Rod.imageAlt} />
-                    <Box p='2'>
-                      <Box
-                        mt='1'
-                        fontWeight='semibold'
-                        as='h3'
-                        lineHeight='tight'
-                      >
-                        {item.Rod.name}
-                      </Box>
+                    <Box
+                      mt='1'
+                      fontWeight='semibold'
+                      as='h3'
+                      lineHeight='tight'
+                    >
+                      {item.Rod.name}
+                    </Box>
 
+                    <Box display='inline-block' alignItems='baseline'>
+                      <Badge borderRadius='full' px='2' color='gray.500'>
+                        {item.Rod.RodHardnessCondition.typeName}
+                      </Badge>
                     </Box>
                   </Box>
-                  <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                  <Box w={150} maxW='sm' borderWidth='1px'  pb='1' borderRadius='lg' overflow='hidden'>
                     <Image src={item.Reel.imageUrl} alt={item.Reel.imageAlt} />
-                    <Box p='2'>
-                      <Box
-                        mt='1'
-                        fontWeight='semibold'
-                        as='h4'
-                        lineHeight='tight'
-                      >
-                        {item.Reel.name}
-                      </Box>
 
+                    <Box
+                      mt='1'
+                      ml='1'
+                      fontWeight='semibold'
+                      as='h4'
+                      textAlign={'left'}
+                      lineHeight='tight'
+                      color='gray.500'
+                      isTruncated
+                    >
+                      Reel
+                    </Box>
+                    <Box
+                      mt='1'
+                      fontWeight='semibold'
+                      as='h4'
+                      lineHeight='tight'
+                    >
+                      {item.Reel.name}
+                    </Box>
+                    <Box display='inline-block' alignItems='baseline'>
+                      <Badge borderRadius='full' px='2' color='gray.500'>
+                        {item.Reel.TypeNumberCondition.typeName}
+                      </Badge>
                     </Box>
                   </Box>
-                  <Box w={150} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Image src={item.Line.imageUrl} alt={item.Line.imageAlt} />
-                    <Box p='2'>
-                      <Box
-                        mt='1'
-                        fontWeight='semibold'
-                        as='h4'
-                        lineHeight='tight'
-                      >
-                        {item.Line.name}
-                      </Box>
 
+                  <Box w={150} maxW='sm' borderWidth='1px' pb='1' borderRadius='lg' overflow='hidden'>
+                    <Image src={item.Line.imageUrl} alt={item.Line.imageAlt} />
+                    <Box
+                      mt='1'
+                      ml='1'
+                      fontWeight='semibold'
+                      as='h4'
+                      textAlign={'left'}
+                      lineHeight='tight'
+                      color='gray.500'
+                      isTruncated
+                    >
+                      Line
+                    </Box>
+                    <Box
+                      mt='1'
+                      fontWeight='semibold'
+                      as='h4'
+                      lineHeight='tight'
+                    >
+                      {item.Line.name}
+                    </Box>
+
+                    <Box display='inline-block' alignItems='baseline'>
+                      <Badge borderRadius='full' px='2' color='gray.500'>
+                        {item.Line.LineCondition.typeName}
+                      </Badge>
                     </Box>
                   </Box>
                 </Box>
