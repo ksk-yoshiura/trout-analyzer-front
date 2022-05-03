@@ -23,6 +23,7 @@ export type Tackle = {
     imageAlt: string
     thickness: string
     lineType: string
+    LineCondition: { typeName: string }
   }
 }
 
