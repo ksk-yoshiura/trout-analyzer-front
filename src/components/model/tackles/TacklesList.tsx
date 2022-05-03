@@ -26,10 +26,10 @@ export default function TacklesList(): JSX.Element {
 
   function clickHandler(value: string) {
     // 型変換
-    const lureIdNumber = Number(value)
+    const tackleIdNumber = Number(value)
 
     // クリックされたカードから得たIDを更新
-    idState(lureIdNumber)
+    idState(tackleIdNumber)
   }
 
   // モーダルを部分的に移行し共通化
