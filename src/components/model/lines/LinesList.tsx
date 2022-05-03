@@ -143,7 +143,7 @@ export default function LinesList(props: ListProps): JSX.Element {
         }) :
           <Alert status='error' w="300px">
             <AlertIcon />
-            Register new ines!
+            Register new lines!
           </Alert>
       }
       {
