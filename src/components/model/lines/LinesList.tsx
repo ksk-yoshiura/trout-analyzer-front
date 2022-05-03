@@ -50,7 +50,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   function selectLineForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewLineId ? (selectId) : null
+    setNewLineId? setNewLineId(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化

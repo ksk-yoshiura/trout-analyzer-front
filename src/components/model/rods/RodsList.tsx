@@ -49,7 +49,8 @@ export default function RodsList(props: ListProps): JSX.Element {
   function selectRodForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewRodId?(selectId) : null
+    console.log(selectId)
+    setNewRodId? setNewRodId(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化

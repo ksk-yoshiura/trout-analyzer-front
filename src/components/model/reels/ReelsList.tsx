@@ -49,7 +49,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   function selectReelForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewReelId ? (selectId) : null
+    setNewReelId? setNewReelId(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化
