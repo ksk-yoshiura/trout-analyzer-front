@@ -7,6 +7,8 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import FieldDetail from './FieldDetail'
 import DetailModal from '../../shared/DetailModal'
@@ -22,6 +24,8 @@ export default function FieldsList(): JSX.Element {
   const { data, error } = useSWR<FieldsApiResponse, Error>('fields')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // フィールドデータ
+  const fieldListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -45,7 +49,7 @@ export default function FieldsList(): JSX.Element {
     <>
       <Wrap spacing={5}>
         {
-          data.result?.map((item, index) => {
+          fieldListData.length > 0 ? fieldListData.map((item, index) => {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -81,7 +85,11 @@ export default function FieldsList(): JSX.Element {
                 </Box>
               </WrapItem>
             )
-          })
+          }) :
+          <Alert status='error' w="300px">
+            <AlertIcon />
+            Register new fields!
+          </Alert>
         }
         <FieldDetailModal />
 
