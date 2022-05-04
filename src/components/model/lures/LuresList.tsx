@@ -7,11 +7,10 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react'
 import LureDetail from './LureDetail'
 import DetailModal from '../../shared/DetailModal'
+import NoDataAlert from '../../shared/NoDataAlert'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
@@ -96,10 +95,7 @@ export default function LuresList(props: ListProps): JSX.Element {
               </WrapItem>
             )
           }) :
-            <Alert status='error' w="300px">
-              <AlertIcon />
-              Register new lures!
-            </Alert>
+            <NoDataAlert title={'lures'} />
         }
         <LureDetailModal />
 

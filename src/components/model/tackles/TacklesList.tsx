@@ -5,12 +5,11 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Alert,
-  AlertIcon,
   Badge
 } from '@chakra-ui/react'
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
+import NoDataAlert from '../../shared/NoDataAlert'
 import TackleDetail from './TackleDetail'
 import useSWR, { mutate } from 'swr'
 import { TacklesApiResponse } from "../../../pages/api/tackles/index"
@@ -81,7 +80,7 @@ export default function TacklesList(): JSX.Element {
                       </Badge>
                     </Box>
                   </Box>
-                  <Box w={150} maxW='sm' borderWidth='1px'  pb='1' borderRadius='lg' overflow='hidden'>
+                  <Box w={150} maxW='sm' borderWidth='1px' pb='1' borderRadius='lg' overflow='hidden'>
                     <Image src={item.Reel.imageUrl} alt={item.Reel.imageAlt} />
 
                     <Box
@@ -144,10 +143,7 @@ export default function TacklesList(): JSX.Element {
               </WrapItem>
             )
           }) :
-            <Alert status='error' w="300px">
-              <AlertIcon />
-              Register new tackles!
-            </Alert>
+            <NoDataAlert title={'tackles'} />
         }
         <TackleDetailModal />
 

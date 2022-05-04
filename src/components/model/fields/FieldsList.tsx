@@ -7,11 +7,10 @@ import {
   Wrap,
   WrapItem,
   useDisclosure,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react'
 import FieldDetail from './FieldDetail'
 import DetailModal from '../../shared/DetailModal'
+import NoDataAlert from '../../shared/NoDataAlert'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
@@ -86,10 +85,7 @@ export default function FieldsList(): JSX.Element {
               </WrapItem>
             )
           }) :
-          <Alert status='error' w="300px">
-            <AlertIcon />
-            Register new fields!
-          </Alert>
+            <NoDataAlert title={'fields'} />
         }
         <FieldDetailModal />
 

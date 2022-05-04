@@ -8,12 +8,11 @@ import {
   useDisclosure,
   Button,
   ModalFooter,
-  ModalBody,
-  Alert,
-  AlertIcon,
+  ModalBody
 } from '@chakra-ui/react'
 import LineDetail from './LineDetail'
 import DetailModal from '../../shared/DetailModal'
+import NoDataAlert from '../../shared/NoDataAlert'
 import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
@@ -50,7 +49,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   function selectLineForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewLineId? setNewLineId(selectId) : null
+    setNewLineId ? setNewLineId(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化
@@ -141,10 +140,7 @@ export default function LinesList(props: ListProps): JSX.Element {
             </WrapItem>
           )
         }) :
-          <Alert status='error' w="300px">
-            <AlertIcon />
-            Register new lines!
-          </Alert>
+          <NoDataAlert title={'lines'} />
       }
       {
         isTackle ? <LineDetailForTackleModal /> : <LineDetailModal />

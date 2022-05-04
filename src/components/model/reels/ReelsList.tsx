@@ -9,11 +9,10 @@ import {
   Button,
   ModalFooter,
   ModalBody,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react'
 import ReelDetail from './ReelDetail'
 import DetailModal from '../../shared/DetailModal'
+import NoDataAlert from '../../shared/NoDataAlert'
 import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
@@ -49,7 +48,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   function selectReelForTackleHandler(event: any) {
     const { target } = event
     const selectId = target.value
-    setNewReelId? setNewReelId(selectId) : null
+    setNewReelId ? setNewReelId(selectId) : null
   }
 
   // モーダルを部分的に移行し共通化
@@ -130,10 +129,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
               </WrapItem>
             )
           }) :
-            <Alert status='error' w="300px">
-              <AlertIcon />
-              Register new reels!
-            </Alert>
+            <NoDataAlert title={'reels'} />
         }
         {
           isTackle ? <ReelDetailForTackleModal /> : <ReelDetailModal />
