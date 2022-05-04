@@ -24,9 +24,6 @@ export default function TacklesList(): JSX.Element {
   // タックルデータ
   const tacklesListData = data.result ? data.result : []
 
-  console.log(tacklesListData)
-
-
   function clickHandler(value: string) {
     // 型変換
     const tackleIdNumber = Number(value)
