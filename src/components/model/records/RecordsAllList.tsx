@@ -6,6 +6,7 @@ import {
 } from '@chakra-ui/react'
 import NextLink from "next/link"
 import Loading from '../../shared/Loading'
+import NoDataAlert from '../../shared/NoDataAlert'
 import useSWR from 'swr'
 import { RecordsApiResponse } from "../../../pages/api/records/all"
 
@@ -15,12 +16,14 @@ export default function RecordsAllList(): JSX.Element {
   const { data, error } = useSWR<RecordsApiResponse, Error>('records/all')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // レコードデータ
+  const recordListData = data.result ? data.result : []
   
   return (
     <>
       <Stack spacing={5} mr={5}>
         {
-          data.result?.map((item, index) => {
+          recordListData.length > 0 ? recordListData.map((item, index) => {
             return (
               <NextLink key={index} href={"/records/" + item.ID + "/patterns/list"} passHref>
                 <Box
@@ -59,7 +62,8 @@ export default function RecordsAllList(): JSX.Element {
                 </Box>
               </NextLink>
             )
-          })
+          }) :
+          <NoDataAlert title={'records'} />
         }
 
       </Stack>
