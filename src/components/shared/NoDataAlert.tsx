@@ -17,8 +17,8 @@ export default function NoDataAlert(props: DetailProp) {
   const isRecordsAll = title === "records" ? true : false
   // メッセージ
   const message = isRecordsAll
-    ? "Register new " + title + "!"
-    : "Enjoy fishing and Create records!!"
+    ? "Enjoy fishing and Create records!!"
+    : "Register new " + title + "!"
   // メッセージタイプ
   const messageType = title !== "records" ? "error" : "success"
 
