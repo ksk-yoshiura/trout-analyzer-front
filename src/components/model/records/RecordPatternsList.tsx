@@ -16,6 +16,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import Loading from '../../shared/Loading'
+import NoDataAlert from '../../shared/NoDataAlert'
 import NextLink from "next/link"
 import RecordPatternDetail from './RecordPatternDetail'
 import useSWR from 'swr'
@@ -34,6 +35,8 @@ export default function RecordsAllList(): JSX.Element {
   const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
+  // パターンデータ
+  const patternsListData = data.result ? data.result : []
 
   function clickHandler(value: string) {
     // 型変換
@@ -69,7 +72,7 @@ export default function RecordsAllList(): JSX.Element {
     <>
       <Stack spacing={5} mr={5}>
         {
-          data.result?.map((item, index) => {
+          patternsListData.length > 0 ? patternsListData.map((item, index) => {
             return (
               <Box
                 key={index}
@@ -116,7 +119,8 @@ export default function RecordsAllList(): JSX.Element {
                 </Box>
               </Box>
             )
-          })
+          }) :
+          <NoDataAlert title={'patterns'} />
         }
 
         <RecordPatternDetailModal />
