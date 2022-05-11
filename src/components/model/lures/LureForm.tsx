@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import LureTypeSelect from "./LureTypeSelect"
+import LuresColorPalette from "./LuresColorPalette"
 import { createAxiosInstance } from "../../../pages/api/utils"
 
 type LureData = {
@@ -204,7 +205,7 @@ export default function LureForm(props: DetailProps) {
                     htmlFor='color'
                     textTransform='uppercase'
                   >COLOR</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='color' variant='flushed' placeholder='Enter' />
+                  <LuresColorPalette field={field} />
                   <FormErrorMessage>{form.errors.color}</FormErrorMessage>
                 </FormControl>
               )}
