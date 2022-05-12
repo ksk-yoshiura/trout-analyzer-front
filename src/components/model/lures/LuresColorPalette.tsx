@@ -23,12 +23,12 @@ export default function LuresColorPalette(props: DetailProp) {
 
   return (
     <>
-      <Wrap mb='20px'>
+      <Wrap mb='20px' p='10px' bg='gray.50'>
         {
           ColorList.map((item, index) => {
             return (
               <WrapItem key={index} >
-                <Circle onClick={() => handleClickColor(item.color)} mr='5px' size='30px' bg={item.code}>
+                <Circle boxShadow='dark-lg' onClick={() => handleClickColor(item.color)} mr='5px' size='30px' bg={item.code}>
                 </Circle>
               </WrapItem>
             )
