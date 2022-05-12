@@ -23,7 +23,7 @@ export default function LuresColorPalette(props: DetailProp) {
 
   return (
     <>
-      <Wrap mb='20px' p='10px' bg='gray.50'>
+      <Wrap mb='20px' p='10px' bg='gray.30'>
         {
           ColorList.map((item, index) => {
             return (
