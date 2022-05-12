@@ -275,6 +275,7 @@ export default function LureForm(props: DetailProps) {
           </Stack>
           <Button
             mt={4}
+            mb='50px'
             colorScheme='teal'
             type='button'
             onClick={onOpen}
