@@ -1,7 +1,7 @@
+import React, { useState } from 'react'
 import {
   Circle, Wrap, WrapItem, Input
 } from "@chakra-ui/react";
-import React, { useState } from 'react'
 import { ColorList } from "./color_data_list"
 
 type DetailProp = {
