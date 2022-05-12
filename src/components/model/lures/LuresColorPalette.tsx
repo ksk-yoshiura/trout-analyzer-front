@@ -35,7 +35,7 @@ export default function LuresColorPalette(props: DetailProp) {
           })
         }
       </Wrap>
-      <Input {...field} width="100%" fontSize="1xl" id='color' value={color} variant='flushed' placeholder='Enter' />
+      <Input {...field} dsiabled={'true'} width="100%" fontSize="1xl" id='color' value={color} variant='flushed' placeholder='Enter' />
     </>
   )
 }
