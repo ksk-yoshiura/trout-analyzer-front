@@ -19,5 +19,4 @@ export default function BackToListPageLink(props: PageName) {
       </Link>
     </NextLink>
   ) 
-
 }
