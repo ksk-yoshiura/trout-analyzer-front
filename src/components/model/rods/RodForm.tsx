@@ -5,7 +5,8 @@ import {
   Form,
   Field,
   FieldProps,
-  useFormikContext
+  useFormikContext,
+  useField
 } from 'formik';
 import {
   Input,
@@ -19,7 +20,9 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
-  useToast
+  useToast,
+  HStack,
+  useNumberInput
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -61,11 +64,38 @@ export default function RodForm(props: DetailProps) {
   // データ各種取得
   const { chosenId, data } = props
 
+  // ロッド長さ
+  const InputLengthNumber = (props:any) => {
+    const [field, meta, helpers] = useField(props);
+
+    const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+      useNumberInput({
+        name: field.name,
+        step: 0.1,
+        defaultValue: 6.0,
+        min: 5,
+        max: 7,
+        precision: 1,
+        onChange: (valueAsString, valueAsNumber) => helpers.setValue(valueAsNumber),
+      })
+
+    const inc = getIncrementButtonProps()
+    const dec = getDecrementButtonProps()
+    const input = getInputProps()
+
+    return (
+      <HStack maxW='150px' >
+        <Button {...inc}>+</Button>
+        <Input {...input} fontSize="1xl" variant='flushed' {...field} />
+        <Button {...dec}>-</Button>
+      </HStack>
+    )
+  }
+
   // 初期値がない場合はからデータをセット
   // 下記エラーを解消するため
   // Warning: A component is changing an uncontrolled input to be controlled.
-  const initData = data? data: vacantData
-  console.log(initData)
+  const initData = data ? data : vacantData
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -96,28 +126,29 @@ export default function RodForm(props: DetailProps) {
           })
         })
     } else { // ロッドIDがない場合は登録
-      axiosInstance.post('rods', values)
-        .then(function () {
-          // リストページに遷移
-          router.push('/rods')
-          // アラート代わりにトーストを使用
-          toast({
-            title: 'Rod registered!',
-            description: "We've created your rod data for you.",
-            status: 'success',
-            duration: 9000,
-            isClosable: true,
-          })
-        })
-        .catch(function (error) {
-          toast({
-            title: 'Failed!',
-            description: error.message,
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          })
-        })
+      console.log(values)
+      // axiosInstance.post('rods', values)
+      //   .then(function () {
+      //     // リストページに遷移
+      //     router.push('/rods')
+      //     // アラート代わりにトーストを使用
+      //     toast({
+      //       title: 'Rod registered!',
+      //       description: "We've created your rod data for you.",
+      //       status: 'success',
+      //       duration: 9000,
+      //       isClosable: true,
+      //     })
+      //   })
+      //   .catch(function (error) {
+      //     toast({
+      //       title: 'Failed!',
+      //       description: error.message,
+      //       status: 'error',
+      //       duration: 9000,
+      //       isClosable: true,
+      //     })
+      //   })
     }
   }
 
@@ -205,7 +236,7 @@ export default function RodForm(props: DetailProps) {
                     htmlFor='length'
                     textTransform='uppercase'
                   >LENGTH</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='length' variant='flushed' placeholder='Enter' />
+                  <InputLengthNumber {...field} />
                   <FormErrorMessage>{form.errors.length}</FormErrorMessage>
                 </FormControl>
               )}
