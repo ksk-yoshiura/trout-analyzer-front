@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from "next/router";
 import {
   Formik,
@@ -68,15 +68,21 @@ export default function RodForm(props: DetailProps) {
   const InputLengthNumber = (props:any) => {
     const [field, meta, helpers] = useField(props);
 
+    // 初期値表示
+    const defaultValue = field.value !== ''? field.value: '6.0'
+    useEffect(() => { // 初期値をフィールドにセット
+      helpers.setValue(defaultValue)
+    }, [])
+
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
       useNumberInput({
-        name: field.name,
         step: 0.1,
-        defaultValue: 6.0,
         min: 5,
         max: 7,
         precision: 1,
-        onChange: (valueAsString, valueAsNumber) => helpers.setValue(valueAsNumber),
+        name: field.name,
+        value: defaultValue,
+        onChange: (valueAsString, valueAsNumber) => helpers.setValue(valueAsString)
       })
 
     const inc = getIncrementButtonProps()
@@ -86,7 +92,7 @@ export default function RodForm(props: DetailProps) {
     return (
       <HStack maxW='150px' >
         <Button {...inc}>+</Button>
-        <Input {...input} fontSize="1xl" variant='flushed' {...field} />
+        <Input {...input} fontSize="1xl" variant='flushed' />
         <Button {...dec}>-</Button>
       </HStack>
     )
@@ -95,7 +101,7 @@ export default function RodForm(props: DetailProps) {
   // 初期値がない場合はからデータをセット
   // 下記エラーを解消するため
   // Warning: A component is changing an uncontrolled input to be controlled.
-  const initData = data ? data : vacantData
+  const initData = data? data : vacantData
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
@@ -126,29 +132,28 @@ export default function RodForm(props: DetailProps) {
           })
         })
     } else { // ロッドIDがない場合は登録
-      console.log(values)
-      // axiosInstance.post('rods', values)
-      //   .then(function () {
-      //     // リストページに遷移
-      //     router.push('/rods')
-      //     // アラート代わりにトーストを使用
-      //     toast({
-      //       title: 'Rod registered!',
-      //       description: "We've created your rod data for you.",
-      //       status: 'success',
-      //       duration: 9000,
-      //       isClosable: true,
-      //     })
-      //   })
-      //   .catch(function (error) {
-      //     toast({
-      //       title: 'Failed!',
-      //       description: error.message,
-      //       status: 'error',
-      //       duration: 9000,
-      //       isClosable: true,
-      //     })
-      //   })
+      axiosInstance.post('rods', values)
+        .then(function () {
+          // リストページに遷移
+          router.push('/rods')
+          // アラート代わりにトーストを使用
+          toast({
+            title: 'Rod registered!',
+            description: "We've created your rod data for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
+        .catch(function (error) {
+          toast({
+            title: 'Failed!',
+            description: error.message,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        })
     }
   }
 
