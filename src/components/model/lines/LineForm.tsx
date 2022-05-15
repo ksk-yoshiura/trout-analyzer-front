@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from "next/router";
 import {
   Formik,
   Form,
   Field,
   FieldProps,
-  useFormikContext
+  useFormikContext,
+  useField
 } from 'formik';
 import {
   Input,
@@ -19,7 +20,10 @@ import {
   DrawerBody,
   DrawerOverlay,
   DrawerContent,
-  useToast
+  useToast,
+  HStack,
+  useNumberInput,
+  Box
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -56,6 +60,43 @@ export default function LineForm(props: DetailProps) {
   // axiosの設定
   const axiosInstance = createAxiosInstance()
   
+  
+  // ラインの太さ
+  const InputThicknessNumber = (props:any) => {
+    const [field, meta, helpers] = useField(props);
+
+    // 初期値表示
+    const defaultValue = field.value !== ''? field.value: '3.0'
+    useEffect(() => { // 初期値をフィールドにセット
+      helpers.setValue(defaultValue)
+    }, [])
+
+    const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+      useNumberInput({
+        step: 0.5,
+        min: 1,
+        max: 10,
+        precision: 1,
+        name: field.name,
+        value: defaultValue,
+        onChange: (valueAsString, valueAsNumber) => helpers.setValue(valueAsString)
+      })
+
+    const inc = getIncrementButtonProps()
+    const dec = getDecrementButtonProps()
+    const input = getInputProps()
+
+    return (
+      <HStack maxW='150px' >
+        <Button {...inc}>+</Button>
+        <Input {...input} fontSize="1xl" variant='flushed' />
+        <Button {...dec}>-</Button>
+        <Box>lb</Box>
+      </HStack>
+    )
+  }
+
+
   // API登録・更新
   function handleSendLineData(values: LineData) {
     if (chosenId && chosenId !== '0') { // ラインIDがある場合は更新
@@ -191,7 +232,7 @@ export default function LineForm(props: DetailProps) {
                     htmlFor='thickness'
                     textTransform='uppercase'
                   >THICKNESS</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='thickness' variant='flushed' placeholder='Enter' />
+                  <InputThicknessNumber {...field} />
                   <FormErrorMessage>{form.errors.thickness}</FormErrorMessage>
                 </FormControl>
               )}
