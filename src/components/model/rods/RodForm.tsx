@@ -22,7 +22,8 @@ import {
   DrawerContent,
   useToast,
   HStack,
-  useNumberInput
+  useNumberInput,
+  Box
 } from "@chakra-ui/react";
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -94,6 +95,7 @@ export default function RodForm(props: DetailProps) {
         <Button {...inc}>+</Button>
         <Input {...input} fontSize="1xl" variant='flushed' />
         <Button {...dec}>-</Button>
+        <Box>ft</Box>
       </HStack>
     )
   }
