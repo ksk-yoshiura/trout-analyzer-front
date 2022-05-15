@@ -56,7 +56,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {data.result?.thickness} g
+            THICKNESS {data.result?.thickness} lb
           </Box>
           <Box textTransform='uppercase'>
             COMPANY {data.result?.companyName}
