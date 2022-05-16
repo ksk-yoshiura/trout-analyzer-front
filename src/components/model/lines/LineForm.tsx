@@ -60,7 +60,6 @@ export default function LineForm(props: DetailProps) {
   // axiosの設定
   const axiosInstance = createAxiosInstance()
   
-  
   // ラインの太さ
   const InputThicknessNumber = (props:any) => {
     const [field, meta, helpers] = useField(props);
