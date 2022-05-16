@@ -1,9 +1,9 @@
 import React from 'react'
-import { 
-  Box, 
-  Image, 
+import {
+  Box,
+  Image,
   Badge,
-  Stack 
+  Stack
 } from '@chakra-ui/react'
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
@@ -20,11 +20,15 @@ export default function LuresList(props: DetailProps): JSX.Element {
   const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-  
+
+  // 画像URL
+  const imageUrl = data.result?.imageUrl ? data.result.imageUrl : '/no_image.png'
+  // 画像alt
+  const imageAlt = data.result?.imageAlt ? data.result.imageAlt : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={data.result?.imageUrl} alt={data.result?.imageAlt} borderRadius='lg' />
+      <Image src={imageUrl} alt={imageAlt} borderRadius='lg' />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
