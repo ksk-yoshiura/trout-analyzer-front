@@ -34,8 +34,8 @@ export default function RecordsAllList(): JSX.Element {
                   borderRadius='lg'
                   type='button' as={"button"}
                   overflow='hidden'
-                >
-                  <Image p='2' w='40%' src={item.Field.imageUrl} alt={item.Field.imageAlt} />
+                > 
+                  <Image p='2' w='40%' src={item.Field.imageUrl?? '/no_image.png'} alt={item.Field.imageAlt ?? 'No Image'} />
 
                   <Box p='2' w='60%'>
                     <Box
