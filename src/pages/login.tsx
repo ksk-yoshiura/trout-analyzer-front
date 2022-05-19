@@ -123,7 +123,7 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
             isLoading={props.isSubmitting}
             type='submit'
           >
-            Register
+            Login
           </Button>
         </Form>
       )}
