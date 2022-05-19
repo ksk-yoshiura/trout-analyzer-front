@@ -1,7 +1,7 @@
 import React from 'react'
+import Image from "next/image"
 import {
   Box,
-  Image,
   Badge,
   Stack
 } from '@chakra-ui/react'
@@ -28,7 +28,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
 
   return (
     <Box maxW='sm' overflow='hidden'>
-      <Image src={imageUrl} alt={imageAlt} borderRadius='lg' />
+      <Image src={imageUrl} alt={imageAlt} width={366} height={366} />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>

@@ -1,9 +1,9 @@
 import React from 'react'
-import { 
-  Box, 
-  Image, 
+import Image from "next/image";
+import {
+  Box,
   Badge,
-  Stack 
+  Stack
 } from '@chakra-ui/react'
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
@@ -22,13 +22,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   if (!data) return <Loading />
 
   // 画像URL
-  const imageUrl = data.result?.imageUrl? data.result.imageUrl: '/no_image.png'
+  const imageUrl = data.result?.imageUrl ? data.result.imageUrl : '/no_image.png'
   // 画像alt
-  const imageAlt = data.result?.imageAlt? data.result.imageAlt: 'No Image'
+  const imageAlt = data.result?.imageAlt ? data.result.imageAlt : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
-    <Image src={imageUrl} alt={imageAlt} borderRadius='lg' />
+      <Image src={imageUrl} alt={imageAlt} width={366} height={366} />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
