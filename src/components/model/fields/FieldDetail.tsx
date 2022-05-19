@@ -1,7 +1,7 @@
 import React from 'react'
+import Image from "next/image";
 import {
   Box,
-  Image,
   Badge,
   Stack
 } from '@chakra-ui/react'
@@ -16,20 +16,20 @@ type DetailProps = {
 export default function FieldDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
-  
+
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('fields/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
   // 画像URL
-  const imageUrl = data.result?.imageUrl? data.result.imageUrl: '/no_image.png'
+  const imageUrl = data.result?.imageUrl ? data.result.imageUrl : '/no_image.png'
   // 画像alt
-  const imageAlt = data.result?.imageAlt? data.result.imageAlt: 'No Image'
+  const imageAlt = data.result?.imageAlt ? data.result.imageAlt : 'No Image'
 
   return (
-    <Box maxW='sm' overflow='hidden'>
-    <Image src={imageUrl} alt={imageAlt} borderRadius='lg' />
+    <Box maxW='sm' overflow='hidden' textAlign='center'>
+      <Image src={imageUrl} alt={imageAlt} width={366} height={366} />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
