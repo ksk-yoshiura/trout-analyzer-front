@@ -29,9 +29,10 @@ export default function MainContent({ children }: Props) {
       flexDirection="column"
       alignItems="center"
       w="100%"
-      h="100vh"
+      h="100%"
       // bg="gray.800"
-      py={10}
+      pt={5}
+      pb={100}
       px={4}
     >
       {children}
