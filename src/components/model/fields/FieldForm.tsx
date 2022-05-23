@@ -28,7 +28,7 @@ import { createAxiosInstance } from "../../../pages/api/utils"
 type FieldData = {
   name?: string;
   address?: string;
-  image?: string;
+  image?: any; // 一旦anyで回避
 }
 
 // 編集データ
@@ -51,11 +51,30 @@ export default function FieldForm(props: DetailProps) {
   // axiosの設定
   const axiosInstance = createAxiosInstance()
 
+  // Base64に変換
+  function convertFileIntoBase64(file: File) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
   // API登録・更新
-  function handleSendFieldData(values: FieldData) {
+  async function handleSendFieldData(values: FieldData) {
+    // 画像データはbase64に変換
+    const imageBase64 = await convertFileIntoBase64(values.image)
+    const fieldPostData = {
+      name: values.name,
+      address: values.address,
+      image: imageBase64
+    }
+    console.log(fieldPostData)
+
     if (chosenId && chosenId !== '0') { // フィールドIDがある場合は更新
-      axiosInstance.put('fields/' + chosenId, values)
-        .then(function () {
+      axiosInstance.put('fields/' + chosenId, fieldPostData)
+        .then(function (res) {
           // リストページに遷移
           router.push('/fields')
           // アラート代わりにトーストを使用
@@ -77,7 +96,7 @@ export default function FieldForm(props: DetailProps) {
           })
         })
     } else { // フィールドIDがない場合は登録
-      axiosInstance.post('fields', values)
+      axiosInstance.post('fields', fieldPostData)
         .then(function () {
           if (router.route === '/preparation/field') {
             // モーダル閉じる
