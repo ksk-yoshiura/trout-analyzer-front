@@ -10,4 +10,7 @@ module.exports = withPWA({
     dest: "public", // swの出力ディレクトリ
     // runtimeCaching: []
   },
+  images: {
+    domains: ['localhost'],
+  },
 });
