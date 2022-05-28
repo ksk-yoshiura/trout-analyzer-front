@@ -14,8 +14,6 @@ export type Line = {
   thickness: string
   LineImage: {
     ID: String
-    CreatedAt: string
-    line_id: number
     image_file: string
   }
 }

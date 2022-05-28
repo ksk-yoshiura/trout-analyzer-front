@@ -19,8 +19,6 @@ export type Lure = {
   frequency: string
   LureImage: {
     ID: String
-    CreatedAt: string
-    lure_id: number
     image_file: string
   }
 }

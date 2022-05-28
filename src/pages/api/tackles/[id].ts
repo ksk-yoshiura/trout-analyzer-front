@@ -12,6 +12,10 @@ export type Tackle = {
     RodHardnessCondition: { typeName: string }
     companyName: string
     CreatedAt: string
+    RodImage: {
+      ID: String
+      image_file: string
+    }
   },
   Reel: {
     ID: string
@@ -22,6 +26,10 @@ export type Tackle = {
     GearCondition: { typeName: string }
     companyName: string
     CreatedAt: string
+    ReelImage: {
+      ID: String
+      image_file: string
+    }
   },
   Line: {
     ID: string
@@ -32,6 +40,10 @@ export type Tackle = {
     lineType: string
     companyName: string
     CreatedAt: string
+    LineImage: {
+      ID: String
+      image_file: string
+    }
   }
 }
 

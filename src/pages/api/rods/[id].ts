@@ -12,8 +12,6 @@ export type Rod = {
   companyName: string
   RodImage: {
     ID: String
-    CreatedAt: string
-    rod_id: number
     image_file: string
   }
 }

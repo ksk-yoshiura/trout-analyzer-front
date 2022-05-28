@@ -11,8 +11,6 @@ export type Reel = {
   GearCondition: { typeName: string }
   ReelImage: {
     ID: String
-    CreatedAt: string
-    reel_id: number
     image_file: string
   }
 }
