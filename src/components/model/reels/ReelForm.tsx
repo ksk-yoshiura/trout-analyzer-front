@@ -24,13 +24,14 @@ import {
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import { createAxiosInstance } from "../../../pages/api/utils"
+import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 
 type ReelData = {
   name?: string;
   companyName?: string;
   typeNumberId?: string;
   gearId?: string;
-  image?: string;
+  image?: any;
 }
 
 // 編集データ
@@ -58,9 +59,18 @@ export default function ReelForm(props: DetailProps) {
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
-  function handleSendReelData(values: ReelData) {
+  async function handleSendReelData(values: ReelData) {
+    // 画像データはbase64に変換
+    const imageBase64 = await convertFileIntoBase64(values.image)
+    const fieldPostData = {
+      name: values.name,
+      companyName: values.companyName,
+      typeNumberId: values.typeNumberId,
+      gearId: values.gearId,
+      image: imageBase64
+    }
     if (chosenId && chosenId !== '0') { // リールIDがある場合は更新
-      axiosInstance.put('reels/' + chosenId, values)
+      axiosInstance.put('reels/' + chosenId, fieldPostData)
         .then(function () {
           // リストページに遷移
           router.push('/reels')
@@ -83,7 +93,7 @@ export default function ReelForm(props: DetailProps) {
           })
         })
     } else { // リールIDがない場合は登録
-      axiosInstance.post('reels', values)
+      axiosInstance.post('reels', fieldPostData)
         .then(function () {
           // リストページに遷移
           router.push('/reels')

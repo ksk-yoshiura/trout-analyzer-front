@@ -28,6 +28,7 @@ import {
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import { createAxiosInstance } from "../../../pages/api/utils"
+import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 
 type RodData = {
   ID?: string
@@ -35,7 +36,7 @@ type RodData = {
   companyName?: string;
   hardness?: string;
   length?: string;
-  image?: string;
+  image?: any;
 }
 
 // 空データ
@@ -109,9 +110,17 @@ export default function RodForm(props: DetailProps) {
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
-  function handleSendRodData(values: RodData) {
+  async function handleSendRodData(values: RodData) {// 画像データはbase64に変換
+    const imageBase64 = await convertFileIntoBase64(values.image)
+    const rodPostData = {
+      name: values.name,
+      companyName: values.companyName,
+      hardness: values.hardness,
+      length: values.length,
+      image: imageBase64
+    }
     if (chosenId && chosenId !== '0') { // ロッドIDがある場合は更新
-      axiosInstance.put('rods/' + chosenId, values)
+      axiosInstance.put('rods/' + chosenId, rodPostData)
         .then(function () {
           // リストページに遷移
           router.push('/rods')
@@ -134,7 +143,7 @@ export default function RodForm(props: DetailProps) {
           })
         })
     } else { // ロッドIDがない場合は登録
-      axiosInstance.post('rods', values)
+      axiosInstance.post('rods', rodPostData)
         .then(function () {
           // リストページに遷移
           router.push('/rods')

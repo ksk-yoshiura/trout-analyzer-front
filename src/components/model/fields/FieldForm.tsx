@@ -24,6 +24,7 @@ import {
 import { mutate } from 'swr'
 import Thumb from "../../shared/ThumbImage"
 import { createAxiosInstance } from "../../../pages/api/utils"
+import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 
 type FieldData = {
   name?: string;
@@ -50,16 +51,6 @@ export default function FieldForm(props: DetailProps) {
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-
-  // Base64に変換
-  function convertFileIntoBase64(file: File) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
 
   // API登録・更新
   async function handleSendFieldData(values: FieldData) {

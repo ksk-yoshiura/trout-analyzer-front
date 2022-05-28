@@ -29,6 +29,7 @@ import Thumb from "../../shared/ThumbImage"
 import LureTypeSelect from "./LureTypeSelect"
 import LuresColorPalette from "./LuresColorPalette"
 import { createAxiosInstance } from "../../../pages/api/utils"
+import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 
 type LureData = {
   ID?: string
@@ -37,6 +38,7 @@ type LureData = {
   companyName?: string
   color?: string
   weight?: string
+  image?: any; // 一旦anyで回避
 }
 
 // 編集データ
@@ -57,14 +59,14 @@ export default function LureForm(props: DetailProps) {
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-  
-  
+
+
   // ルアー重さ
-  const InputWightNumber = (props:any) => {
+  const InputWightNumber = (props: any) => {
     const [field, meta, helpers] = useField(props);
 
     // 初期値表示
-    const defaultValue = field.value !== ''? field.value: '2.0'
+    const defaultValue = field.value !== '' ? field.value : '2.0'
     useEffect(() => { // 初期値をフィールドにセット
       helpers.setValue(defaultValue)
     }, [])
@@ -96,9 +98,19 @@ export default function LureForm(props: DetailProps) {
 
 
   // API登録・更新
-  function handleSendLureData(values: LureData) {
+  async function handleSendLureData(values: LureData) {
+    // 画像データはbase64に変換
+    const imageBase64 = await convertFileIntoBase64(values.image)
+    const lurePostData = {
+      lureTypeId: values.lureTypeId,
+      name: values.name,
+      companyName: values.companyName,
+      color: values.color,
+      weight: values.weight,
+      image: imageBase64
+    }
     if (chosenId !== '0') { // ルアーIDがある場合は更新
-      axiosInstance.put('lures/' + chosenId, values)
+      axiosInstance.put('lures/' + chosenId, lurePostData)
         .then(function () {
           // リストページに遷移
           router.push('/lures')
@@ -121,7 +133,7 @@ export default function LureForm(props: DetailProps) {
           })
         })
     } else { // ルアーIDがない場合は登録
-      axiosInstance.post('lures', values)
+      axiosInstance.post('lures', lurePostData)
         .then(function () {
           // リストページに遷移
           router.push('/lures')

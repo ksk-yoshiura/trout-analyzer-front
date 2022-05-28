@@ -28,6 +28,7 @@ import {
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 import { createAxiosInstance } from "../../../pages/api/utils"
+import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 
 type LineData = {
   name?: string;
@@ -35,7 +36,8 @@ type LineData = {
   lineTypeId?: string;
   thickness?: string;
   imageUrl?: string;
-  CreatedAt?: string
+  CreatedAt?: string;
+  image?: any;
 }
 
 // 編集データ
@@ -59,13 +61,13 @@ export default function LineForm(props: DetailProps) {
 
   // axiosの設定
   const axiosInstance = createAxiosInstance()
-  
+
   // ラインの太さ
-  const InputThicknessNumber = (props:any) => {
+  const InputThicknessNumber = (props: any) => {
     const [field, meta, helpers] = useField(props);
 
     // 初期値表示
-    const defaultValue = field.value !== ''? field.value: '3.0'
+    const defaultValue = field.value !== '' ? field.value : '3.0'
     useEffect(() => { // 初期値をフィールドにセット
       helpers.setValue(defaultValue)
     }, [])
@@ -97,9 +99,17 @@ export default function LineForm(props: DetailProps) {
 
 
   // API登録・更新
-  function handleSendLineData(values: LineData) {
+  async function handleSendLineData(values: LineData) {// 画像データはbase64に変換
+    const imageBase64 = await convertFileIntoBase64(values.image)
+    const linePostData = {
+      name: values.name,
+      companyName: values.companyName,
+      lineTypeId: values.lineTypeId,
+      thickness: values.thickness,
+      image: imageBase64
+    }
     if (chosenId && chosenId !== '0') { // ラインIDがある場合は更新
-      axiosInstance.put('lines/' + chosenId, values)
+      axiosInstance.put('lines/' + chosenId, linePostData)
         .then(function () {
           // リストページに遷移
           router.push('/lines')
@@ -122,7 +132,7 @@ export default function LineForm(props: DetailProps) {
           })
         })
     } else { // ラインIDがない場合は登録
-      axiosInstance.post('lines', values)
+      axiosInstance.post('lines', linePostData)
         .then(function () {
           // リストページに遷移
           router.push('/lines')
@@ -160,8 +170,8 @@ export default function LineForm(props: DetailProps) {
   // 確認ドロワー
   const ConfirmDrawer = () => {
 
-  // サブミット
-  const { submitForm } = useFormikContext();
+    // サブミット
+    const { submitForm } = useFormikContext();
     return (
       <Drawer placement={'bottom'} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
