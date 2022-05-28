@@ -9,6 +9,12 @@ export type Reel = {
   companyName: string
   TypeNumberCondition: { typeName: string }
   GearCondition: { typeName: string }
+  ReelImage: {
+    ID: String
+    CreatedAt: string
+    reel_id: number
+    image_file: string
+  }
 }
 
 // API のレスポンス型

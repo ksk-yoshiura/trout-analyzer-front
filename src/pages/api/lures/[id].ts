@@ -17,6 +17,12 @@ export type Lure = {
   color: string
   weight: string
   frequency: string
+  LureImage: {
+    ID: String
+    CreatedAt: string
+    lure_id: number
+    image_file: string
+  }
 }
 
 // API のレスポンス型

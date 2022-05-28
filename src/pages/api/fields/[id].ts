@@ -9,6 +9,12 @@ export type Field = {
   name: string
   address: string
   frequency: string
+  FieldImage: {
+    ID: String
+    CreatedAt: string
+    field_id: number
+    image_file: string
+  }
 }
 
 // API のレスポンス型

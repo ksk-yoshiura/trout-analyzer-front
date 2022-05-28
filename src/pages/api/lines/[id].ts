@@ -12,6 +12,12 @@ export type Line = {
   name: string
   companyName: string
   thickness: string
+  LineImage: {
+    ID: String
+    CreatedAt: string
+    line_id: number
+    image_file: string
+  }
 }
 
 // API のレスポンス型
