@@ -21,8 +21,10 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
+  // S3パス
+  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = data.result?.imageUrl ? data.result.imageUrl : '/no_image.png'
+  const imageUrl = data.result ? s3DomainPath + data.result.RodImage.image_file + '.png'  : '/no_image.png'
   // 画像alt
   const imageAlt = data.result?.imageAlt ? data.result.imageAlt : 'No Image'
 
