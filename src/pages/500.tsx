@@ -12,7 +12,7 @@ export default function CustomErrorPage() {
       </Heading>
       <Text fontSize="2xl">{router.asPath} Page does not exist</Text>
       <Link href="/">
-        <Box _hover={{ cursor: 'pointer', color: 'blue.400' }} color="blue.600">
+        <Box _hover={{ cursor: 'pointer', color: 'teal' }} color="teal">
           Go back to home
         </Box>
       </Link>
