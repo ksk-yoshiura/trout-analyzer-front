@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-  Circle, Wrap, WrapItem, Input, Tooltip
+  useField
+} from 'formik';
+import {
+  Circle, Wrap, WrapItem, Input, Tooltip, 
 } from "@chakra-ui/react";
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { ColorsApiResponse } from "../../../pages/api/colors/index"
 
-type DetailProp = {
-  field?: any
-}
-
 // ルアーカラー用
-export default function LuresColorPalette(props: DetailProp) {
-
-  const { field } = props
+export default function LuresColorPalette(props: any) {
+  const [field, meta, helpers] = useField(props.field);
+  // 初期値表示
+  const defaultValue = field.value ? field.value : null
+  useEffect(() => { // 初期値をフィールドにセット
+    helpers.setValue(defaultValue)
+  }, [])
   // カラークリック
-  const [color, setColor] = useState('')
+  const [colorName, setColorName] = useState('')
 
   // APIからデータ取得
   const { data, error } = useSWR<ColorsApiResponse, Error>('colors')
@@ -25,7 +28,17 @@ export default function LuresColorPalette(props: DetailProp) {
   const colorList = data.result ? data.result : []
   // カラーパレットの色クリック
   function handleClickColor(value: string) {
-    setColor(value)
+    helpers.setValue(value)
+    // カラー名（表示用）
+    getColorName(value)
+  }
+
+  function getColorName(value: string) {
+    const selectedColorId = value
+    const colorName = colorList.filter((val) => {
+      return selectedColorId === val.ID
+    })
+    setColorName(colorName[0].name)
   }
 
   return (
@@ -36,7 +49,7 @@ export default function LuresColorPalette(props: DetailProp) {
             return (
               <WrapItem key={index} >
                 <Tooltip label={item.name} aria-label='A tooltip'>
-                  <Circle boxShadow='dark-lg' onClick={() => handleClickColor(item.name)} mr='5px' size='30px' bg={item.code}>
+                  <Circle boxShadow='dark-lg' onClick={() => handleClickColor(item.ID)} mr='5px' size='30px' bg={item.code}>
                   </Circle>
                 </Tooltip>
               </WrapItem>
@@ -44,7 +57,7 @@ export default function LuresColorPalette(props: DetailProp) {
           })
         }
       </Wrap>
-      <Input {...field} dsiabled={'true'} width="100%" fontSize="1xl" id='color' value={color} variant='flushed' placeholder='Select' />
+      <Input float={'left'} width={'auto'} isDisabled={true} variant='flushed' value={colorName} />
     </>
   )
 }
