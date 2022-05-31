@@ -100,7 +100,7 @@ export default function LureForm(props: DetailProps) {
   // API登録・更新
   async function handleSendLureData(values: LureData) {
     // 画像データはbase64に変換
-    const imageBase64 = await convertFileIntoBase64(values.image)
+    const imageBase64 = values.image? await convertFileIntoBase64(values.image) : ''
     const lurePostData = {
       lureTypeId: values.lureTypeId,
       name: values.name,
@@ -109,6 +109,7 @@ export default function LureForm(props: DetailProps) {
       weight: values.weight,
       image: imageBase64
     }
+
     if (chosenId !== '0') { // ルアーIDがある場合は更新
       axiosInstance.put('lures/' + chosenId, lurePostData)
         .then(function () {
