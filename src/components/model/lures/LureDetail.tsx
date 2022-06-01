@@ -21,7 +21,6 @@ export default function LuresList(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
-  console.log(data)
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
