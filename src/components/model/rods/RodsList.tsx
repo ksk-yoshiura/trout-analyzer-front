@@ -9,8 +9,6 @@ import {
   Button,
   ModalFooter,
   ModalBody,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react'
 import RodDetail from './RodDetail'
 import DetailModal from '../../shared/DetailModal'
