@@ -19,7 +19,7 @@ export default function TackleSelect(props: any) {
         data.result?.map((item, index) => {
           return (
             <option key={index} value={item.ID}>
-              {item.Rod.name}:{item.Reel.name}:{item.Line.name}
+              [ROD]：{item.Rod.name} [REEL]：{item.Reel.name} [LINE]：{item.Line.name}
             </option>
           )
         })
