@@ -26,12 +26,20 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
   const reelData = data.result?.Reel?.ID != '0' ? data.result?.Reel : null
   const lineData = data.result?.Line?.ID != '0' ? data.result?.Line : null
 
+  // S3パス
+  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
+  // 画像URL
+  const rodImageUrl = data.result ? s3DomainPath + data.result.Rod.RodImage.image_file + '.png'  : '/no_image.png'
+  const reelImageUrl = data.result ? s3DomainPath + data.result.Reel.ReelImage.image_file + '.png'  : '/no_image.png'
+  const lineImageUrl = data.result ? s3DomainPath + data.result.Line.LineImage.image_file + '.png'  : '/no_image.png'
+  // 画像alt
+  const imageAlt = data.result?.Rod.imageAlt ? data.result.Rod.imageAlt : 'No Image'
   return (
     <Box maxW='sm' overflow='hidden'>
       {
         rodData ?
           <>
-            <Image src={rodData.imageUrl} alt={rodData.imageAlt} borderRadius='lg' />
+            <Image src={rodImageUrl} alt={rodData.imageAlt} borderRadius='lg' />
             <Box p='2'>
               <Box display='flex' alignItems='baseline'>
                 <Badge borderRadius='full' px='2' color='gray.500'>
@@ -75,7 +83,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
       {
         reelData ?
           <>
-            <Image src={data.result?.Reel.imageUrl} alt={data.result?.Reel.imageAlt} borderRadius='lg' />
+            <Image src={reelImageUrl} alt={data.result?.Reel.imageAlt} borderRadius='lg' />
             <Box p='2'>
               <Box display='flex' alignItems='baseline'>
                 <Badge borderRadius='full' px='2' color='gray.500'>
@@ -120,7 +128,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
       {
         lineData ?
           <>
-            <Image src={data.result?.Line.imageUrl} alt={data.result?.Line.imageAlt} borderRadius='lg' />
+            <Image src={lineImageUrl} alt={data.result?.Line.imageAlt} borderRadius='lg' />
             <Box p='2'>
               <Box display='flex' alignItems='baseline'>
                 <Badge borderRadius='full' px='2' color='gray.500'>
