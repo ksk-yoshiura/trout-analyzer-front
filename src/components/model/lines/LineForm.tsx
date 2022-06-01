@@ -100,7 +100,7 @@ export default function LineForm(props: DetailProps) {
 
   // API登録・更新
   async function handleSendLineData(values: LineData) {// 画像データはbase64に変換
-    const imageBase64 = await convertFileIntoBase64(values.image)
+    const imageBase64 = values.image? await convertFileIntoBase64(values.image): ''
     const linePostData = {
       name: values.name,
       companyName: values.companyName,

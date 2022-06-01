@@ -61,7 +61,7 @@ export default function ReelForm(props: DetailProps) {
   // API登録・更新
   async function handleSendReelData(values: ReelData) {
     // 画像データはbase64に変換
-    const imageBase64 = await convertFileIntoBase64(values.image)
+    const imageBase64 = values.image? await convertFileIntoBase64(values.image): ''
     const fieldPostData = {
       name: values.name,
       companyName: values.companyName,

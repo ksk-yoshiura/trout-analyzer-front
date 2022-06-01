@@ -55,13 +55,12 @@ export default function FieldForm(props: DetailProps) {
   // API登録・更新
   async function handleSendFieldData(values: FieldData) {
     // 画像データはbase64に変換
-    const imageBase64 = await convertFileIntoBase64(values.image)
+    const imageBase64 = values.image? await convertFileIntoBase64(values.image): ''
     const fieldPostData = {
       name: values.name,
       address: values.address,
       image: imageBase64
     }
-    console.log(fieldPostData)
 
     if (chosenId && chosenId !== '0') { // フィールドIDがある場合は更新
       axiosInstance.put('fields/' + chosenId, fieldPostData)
