@@ -21,6 +21,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
+  console.log(data)
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
@@ -65,19 +66,13 @@ export default function LuresList(props: DetailProps): JSX.Element {
             WEIGHT {data.result?.weight} g
           </Box>
           <Box textTransform='uppercase'>
-            COLOR {data.result?.color}
+            COLOR {data.result?.Color.name}
           </Box>
           <Box textTransform='uppercase'>
             COMPANY {data.result?.companyName}
           </Box>
-          <Box textTransform='uppercase'>
-            FREQUENCY {data.result?.frequency} times
-          </Box>
           <Box>
             ADDED {data.result?.CreatedAt}
-          </Box>
-          <Box>
-            LAST USED {data.result?.lastUsedAt}
           </Box>
         </Stack>
 

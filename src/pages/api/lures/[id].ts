@@ -17,6 +17,11 @@ export type Lure = {
   color: string
   weight: string
   frequency: string
+  Color: {
+    ID: string
+    code: string
+    name: string
+  }
   LureImage: {
     ID: String
     image_file: string
