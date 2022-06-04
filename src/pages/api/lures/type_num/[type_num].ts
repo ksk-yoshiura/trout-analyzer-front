@@ -4,7 +4,12 @@ export type Lure = {
   ID: string
   lureType: string
   name: string
-  color: string
+  weight: string
+  Color: {
+    ID: string
+    name: string
+    code: string
+  }
 }
 
 // API のレスポンス型

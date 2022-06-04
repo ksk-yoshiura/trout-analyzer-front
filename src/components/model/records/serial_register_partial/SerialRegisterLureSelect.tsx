@@ -23,7 +23,7 @@ export default function LureSelect(props: LureTypeProps) {
           data?.result?.map((item, index) => {
             return (
               <option key={index} value={item.ID}>
-                {item.name} :{item.color}
+                {item.name} :{item.Color.name}
               </option>
             )
           })
