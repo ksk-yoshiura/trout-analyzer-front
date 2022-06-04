@@ -3,12 +3,15 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export type Record = {
   ID: string
   CreatedAt: string
-  caughtSum: string
   Field: {
-    imageUrl: string
-    imageAlt: string
+    ID: string
     CreatedAt: string
     name: string
+
+    FieldImage: {
+      ID: string  
+      image_file: string
+    }
   }
 }
 

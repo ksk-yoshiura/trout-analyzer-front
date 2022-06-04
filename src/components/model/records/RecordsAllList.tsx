@@ -19,6 +19,10 @@ export default function RecordsAllList(): JSX.Element {
   // レコードデータ
   const recordListData = data.result ? data.result : []
   
+  // S3パス
+  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
+  // 画像拡張子
+  const image_ext = '.png'
   return (
     <>
       <Stack spacing={5} mr={5}>
@@ -35,7 +39,7 @@ export default function RecordsAllList(): JSX.Element {
                   type='button' as={"button"}
                   overflow='hidden'
                 > 
-                  <Image p='2' w='40%' src={item.Field.imageUrl?? '/no_image.png'} alt={item.Field.imageAlt ?? 'No Image'} />
+                  <Image p='2' w='40%' src={s3DomainPath + item.Field.FieldImage.image_file + image_ext?? '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
 
                   <Box p='2' w='60%'>
                     <Box
