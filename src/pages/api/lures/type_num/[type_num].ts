@@ -10,6 +10,10 @@ export type Lure = {
     name: string
     code: string
   }
+  LureImage: {
+    ID: string  
+    image_file: string
+  }
 }
 
 // API のレスポンス型

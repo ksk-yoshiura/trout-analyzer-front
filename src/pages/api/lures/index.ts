@@ -7,11 +7,13 @@ type LureType = {
 
 export type Lure = {
   ID: string
-  imageUrl: string
-  imageAlt: string
   CreatedAt: string
   LureType: LureType
   name: string
+  LureImage: {
+    ID: string  
+    image_file: string
+  }
 }
 
 // API のレスポンス型
