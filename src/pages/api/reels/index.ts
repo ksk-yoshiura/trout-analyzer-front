@@ -2,12 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Reel = {
   ID: string
-  imageUrl: string
-  imageAlt: string
   CreatedAt: string
   type: string
   gear: string
   name: string
+  ReelImage: {
+    ID: string  
+    image_file: string
+  }
 }
 
 // API のレスポンス型
