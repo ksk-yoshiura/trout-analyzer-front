@@ -8,7 +8,6 @@ import NextLink from "next/link"
 export default function TopPage(): JSX.Element {
   return (
     <>
-
       <Stack mt={50} spacing={10}>
         <NextLink href="/preparation/field" passHref>
           <Button color="white" bg='tomato' size='lg' w={300} p={4}>
