@@ -2,13 +2,15 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export type Rod = {
   ID: string
-  imageUrl: string
-  imageAlt: string
   CreatedAt: string
   RodHardnessCondition: { typeName: string }
   hardnessa: string
   length: string
   name: string
+  RodImage: {
+    ID: string  
+    image_file: string
+  }
 }
 
 // API のレスポンス型
