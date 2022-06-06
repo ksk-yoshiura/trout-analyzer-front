@@ -17,6 +17,7 @@ import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { LinesApiResponse } from "../../../pages/api/lines/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 type ListProps = {
   isTackle: boolean
@@ -136,7 +137,7 @@ export default function LinesList(props: ListProps): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    added {item.CreatedAt}
+                    added {getDateFormatted(item.CreatedAt)}
                   </Box>
 
                 </Box>
