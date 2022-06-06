@@ -22,13 +22,14 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   const { data, error } = useSWR<FieldsApiResponse, Error>('fields/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-
+  // フィールドデータ
+  const fieldDetailData = data.result? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = data.result ? s3DomainPath + data.result.FieldImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = fieldDetailData?.FieldImage? s3DomainPath + fieldDetailData.FieldImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = data.result?.imageAlt ? data.result.imageAlt : 'No Image'
+  const imageAlt = fieldDetailData?.FieldImage? fieldDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden' textAlign='center'>
@@ -49,7 +50,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.result?.name}
+          {fieldDetailData?.name}
         </Box>
 
         <Stack
@@ -61,13 +62,13 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            ADDRESS {data.result?.address}
+            ADDRESS {fieldDetailData?.address}
           </Box>
           <Box>
-            ADDED {data.result? getDateFormatted(data.result.CreatedAt) : null}
+            ADDED {fieldDetailData? getDateFormatted(fieldDetailData.CreatedAt) : null}
           </Box>
           <Box>
-            LAST VISITED {data.result? getDateFormatted(data.result.lastVisitedAt) : null}
+            LAST VISITED {fieldDetailData? getDateFormatted(fieldDetailData.lastVisitedAt) : null}
           </Box>
         </Stack>
 

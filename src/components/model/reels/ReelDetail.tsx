@@ -21,13 +21,14 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   const { data, error } = useSWR<ReelsApiResponse, Error>('reels/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-
+  // リールデータ
+  const reelDetailData = data.result? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = data.result ? s3DomainPath + data.result.ReelImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = reelDetailData?.ReelImage ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = data.result?.imageAlt? data.result.imageAlt: 'No Image'
+  const imageAlt = reelDetailData?.ReelImage? reelDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -39,10 +40,10 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.TypeNumberCondition.typeName}
+            {reelDetailData?.TypeNumberCondition.typeName}
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.GearCondition.typeName}
+            {reelDetailData?.GearCondition.typeName}
           </Badge>
         </Box>
 
@@ -54,7 +55,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.result?.name}
+          {reelDetailData?.name}
         </Box>
 
         <Stack
@@ -66,10 +67,10 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.companyName}
+            COMPANY {reelDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {data.result? getDateFormatted(data.result.CreatedAt) : null}
+            ADDED {reelDetailData? getDateFormatted(reelDetailData.CreatedAt) : null}
           </Box>
         </Stack>
 

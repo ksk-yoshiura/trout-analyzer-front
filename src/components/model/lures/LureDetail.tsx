@@ -21,13 +21,14 @@ export default function LuresList(props: DetailProps): JSX.Element {
   const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + chosenId)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-
+  // ルアーデータ
+  const lureDetailData = data.result? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = data.result ? s3DomainPath + data.result.LureImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = lureDetailData?.LureImage? s3DomainPath + lureDetailData.LureImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = data.result?.imageAlt ? data.result.imageAlt : 'No Image'
+  const imageAlt = lureDetailData?.LureImage? lureDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -39,7 +40,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             New
           </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
-            {data.result?.LureType.typeName}
+            {lureDetailData?.LureType.typeName}
           </Badge>
         </Box>
 
@@ -51,7 +52,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {data.result?.name}
+          {lureDetailData?.name}
         </Box>
 
         <Stack
@@ -63,16 +64,16 @@ export default function LuresList(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            WEIGHT {data.result?.weight} g
+            WEIGHT {lureDetailData?.weight} g
           </Box>
           <Box textTransform='uppercase'>
-            COLOR {data.result?.Color.name}
+            COLOR {lureDetailData?.Color.name}
           </Box>
           <Box textTransform='uppercase'>
-            COMPANY {data.result?.companyName}
+            COMPANY {lureDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {data.result? getDateFormatted(data.result.CreatedAt) : null}
+            ADDED {lureDetailData? getDateFormatted(lureDetailData.CreatedAt) : null}
           </Box>
         </Stack>
 
