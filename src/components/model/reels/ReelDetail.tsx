@@ -8,6 +8,7 @@ import {
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 type DetailProps = {
   chosenId: number
@@ -68,7 +69,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             COMPANY {data.result?.companyName}
           </Box>
           <Box>
-            ADDED {data.result?.CreatedAt}
+            ADDED {data.result? getDateFormatted(data.result.CreatedAt) : null}
           </Box>
         </Stack>
 

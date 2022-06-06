@@ -17,6 +17,7 @@ import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { ReelsApiResponse } from "../../../pages/api/reels/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 type ListProps = {
   isTackle: boolean
@@ -34,7 +35,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // リールデータ
-  const reelsListData = data.result ? data.result : []
+  const reelsListData = data.result? data.result : []
 
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
@@ -125,7 +126,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.CreatedAt}
+                      added { getDateFormatted(item.CreatedAt)} 
                     </Box>
 
                   </Box>
