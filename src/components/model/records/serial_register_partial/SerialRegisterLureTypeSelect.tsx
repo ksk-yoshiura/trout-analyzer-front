@@ -10,6 +10,8 @@ import { LureTypesApiResponse } from "../../../../pages/api/lure_types/index"
 export default function LureTypeSelect(props: any) {
   const { field } = props
   const [lureTypeId, setLureTypeId] = useState('0')
+  // 画像
+  const [lureImageURL, setLureImageURL] = useState('')
 
   // APIからデータ取得
   // ルアータイプリストデータ
@@ -24,6 +26,8 @@ export default function LureTypeSelect(props: any) {
     }
     const targetLureTypeId = target.value
     setLureTypeId(targetLureTypeId)
+    // 画像URLを一旦無効化
+    setLureImageURL('') 
   }
 
   return (
@@ -41,7 +45,7 @@ export default function LureTypeSelect(props: any) {
       </Select>
       {
         lureTypeId !== '0'
-        ?<LureSelect lureTypeId={lureTypeId} field={field} />
+        ?<LureSelect lureImageURL={lureImageURL} setLureImageURL={setLureImageURL} lureTypeId={lureTypeId} field={field} />
         : <></>
       }
     </>
