@@ -8,6 +8,7 @@ import {
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/[id]"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 type DetailProps = {
   chosenId: number
@@ -71,7 +72,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             COMPANY {data.result?.companyName}
           </Box>
           <Box>
-            ADDED {data.result?.CreatedAt}
+            ADDED {data.result? getDateFormatted(data.result.CreatedAt) : null}
           </Box>
         </Stack>
 

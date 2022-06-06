@@ -14,6 +14,7 @@ import NoDataAlert from '../../shared/NoDataAlert'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { LuresApiResponse } from "../../../pages/api/lures/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 type ListProps = {
   typeId?: string;
@@ -63,7 +64,7 @@ export default function LuresList(props: ListProps): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={s3DomainPath + item.LureImage.image_file + image_ext?? '/no_image.png'} alt={item.name ?? 'No Image'}  />
+                  <Image src={s3DomainPath + item.LureImage.image_file + image_ext ?? '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
@@ -91,7 +92,7 @@ export default function LuresList(props: ListProps): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {item.CreatedAt}
+                      added {getDateFormatted(item.CreatedAt)}
                     </Box>
 
                   </Box>
