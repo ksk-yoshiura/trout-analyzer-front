@@ -32,12 +32,10 @@ export default function LureSelect(props: LureTypeProps) {
     const targetLureId = target.value
     lureList.map(function(val) {
       if (val.ID == targetLureId && val.LureImage.image_file) {
-      console.log(val.LureImage.image_file)
       setLureImageURL(val.LureImage.image_file)
       }
     })
   }
-  console.log(lureTypeId)
   return (
     <>
       {
@@ -47,7 +45,7 @@ export default function LureSelect(props: LureTypeProps) {
               lureList.map((item, index) => {
                 return (
                   <option key={index} value={item.ID}>
-                    {item.name} :{item.Color.name}
+                    {item.name} {item.Color.name} {item.weight} g
                   </option>
                 )
               })
