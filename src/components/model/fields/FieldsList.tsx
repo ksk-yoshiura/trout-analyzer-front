@@ -14,6 +14,7 @@ import NoDataAlert from '../../shared/NoDataAlert'
 import Loading from '../../shared/Loading'
 import useSWR, { mutate } from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 export default function FieldsList(): JSX.Element {
   // モーダル
@@ -82,7 +83,7 @@ export default function FieldsList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      last visited {item.lastVisitedAt}
+                      last visited {item.lastVisitedAt? getDateFormatted(item.lastVisitedAt): null}
                     </Box>
 
                   </Box>

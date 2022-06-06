@@ -8,6 +8,7 @@ import {
 import Loading from '../../shared/Loading'
 import useSWR from 'swr'
 import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 type DetailProps = {
   chosenId: number
@@ -62,14 +63,11 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           <Box textTransform='uppercase'>
             ADDRESS {data.result?.address}
           </Box>
-          <Box textTransform='uppercase'>
-            FREQUENCY {data.result?.frequency} times
+          <Box>
+            ADDED {data.result? getDateFormatted(data.result.CreatedAt) : null}
           </Box>
           <Box>
-            ADDED {data.result?.CreatedAt}
-          </Box>
-          <Box>
-            LAST VISITED {data.result?.lastVisitedAt}
+            LAST VISITED {data.result? getDateFormatted(data.result.lastVisitedAt) : null}
           </Box>
         </Stack>
 
