@@ -6,6 +6,8 @@ export type Reel = {
   type: string
   gear: string
   name: string
+  TypeNumberCondition: { typeName: string }
+  GearCondition: { typeName: string }
   ReelImage: {
     ID: string  
     image_file: string
