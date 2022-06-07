@@ -6,6 +6,9 @@ export type Line = {
   lineType: string
   name: string
   thickness: string
+  LineCondition: {
+    typeName: string
+  }
   LineImage: {
     ID: string  
     image_file: string
