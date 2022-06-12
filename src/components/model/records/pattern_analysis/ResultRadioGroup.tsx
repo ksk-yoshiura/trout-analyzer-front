@@ -1,10 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import {
+  useField
+} from 'formik';
 import { Radio, RadioGroup,  Stack } from '@chakra-ui/react'
 
-export default function ResultRadioGroup() {
-  const [value, setValue] = useState('1')
+type DetailProps = {
+  field: any
+}
+
+export default function ResultRadioGroup(props: DetailProps) {
+  const [field, meta, helpers] = useField(props.field);
+  // 初期値表示
+  const defaultValue = field.value ? field.value : '0'
+  useEffect(() => { // 初期値をフィールドにセット
+    helpers.setValue(defaultValue)
+  }, [])
+
+  function handleSelectRadio(value: string) {
+    helpers.setValue(value)
+
+  }
   return (
-    <RadioGroup pb={5} onChange={setValue} value={value}>
+    <RadioGroup {...field} pb={5} onChange={(val) => handleSelectRadio(val)}>
       <Stack direction='row'>
         <Radio value='0'>All</Radio>
         <Radio value='1'>Caught</Radio>
