@@ -20,6 +20,7 @@ import NextLink from "next/link"
 import RecordPatternDetail from './RecordPatternDetail'
 import useSWR from 'swr'
 import { PatternsApiResponse } from "../../../pages/api/patterns/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 
 export default function RecordsAllList(): JSX.Element {
@@ -113,7 +114,7 @@ export default function RecordsAllList(): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    time {item.CreatedAt}
+                    time {getDateFormatted(item.CreatedAt)}
                   </Box>
                 </Box>
               </Box>

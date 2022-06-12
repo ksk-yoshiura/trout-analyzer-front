@@ -9,6 +9,7 @@ import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import useSWR from 'swr'
 import { RecordsApiResponse } from "../../../pages/api/records/all"
+import { getDateFormatted } from "../../../utils/dateFormat"
 
 export default function RecordsAllList(): JSX.Element {
 
@@ -59,7 +60,7 @@ export default function RecordsAllList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      visited {item.CreatedAt}
+                      visited {getDateFormatted(item.CreatedAt)}
                     </Box>
 
                   </Box>
