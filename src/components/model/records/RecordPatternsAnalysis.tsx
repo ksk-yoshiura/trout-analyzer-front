@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react"
 import ResultRadioGroup from '../records/pattern_analysis/ResultRadioGroup'
 import TargetCheckBox from '../records/pattern_analysis/TargetCheckBox'
+import SingleTargetGraph from '../records/pattern_analysis/SingleTargetGraph'
 
 type PatternAnalyzeProp = {
   result: string
@@ -126,6 +127,7 @@ export default function RecordPatternAnalysis() {
             </Stack>
             <Button
               mt={4}
+              mb={10}
               width={"100%"}
               colorScheme='teal'
               type='button'
@@ -137,6 +139,8 @@ export default function RecordPatternAnalysis() {
           </Form>
         )}
       </Formik>
+
+      <SingleTargetGraph />
     </>
   )
 }
