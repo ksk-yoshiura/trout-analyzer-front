@@ -7,9 +7,6 @@ import {
   useFormikContext
 } from 'formik';
 import {
-  Text,
-  Box,
-  Divider,
   Button,
   FormControl,
   FormLabel,
@@ -19,12 +16,12 @@ import {
   Drawer,
   DrawerBody,
   DrawerOverlay,
-  DrawerContent,
-  useToast
+  DrawerContent
 } from "@chakra-ui/react"
 import ResultRadioGroup from '../records/pattern_analysis/ResultRadioGroup'
 import TargetCheckBox from '../records/pattern_analysis/TargetCheckBox'
 import SingleTargetGraph from '../records/pattern_analysis/SingleTargetGraph'
+import { createAxiosInstance } from "../../../pages/api/utils"
 
 type PatternAnalyzeProp = {
   result: string
