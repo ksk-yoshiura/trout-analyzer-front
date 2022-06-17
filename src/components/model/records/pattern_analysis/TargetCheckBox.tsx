@@ -1,9 +1,7 @@
 import {
   Checkbox,
   CheckboxGroup,
-  Stack,
-  useRadio,
-  Input
+  Stack
 } from '@chakra-ui/react'
 
 type DetailProps = {
