@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+  useField
+} from 'formik';
 import {
   Select, Image
 } from "@chakra-ui/react";
@@ -13,7 +16,13 @@ type LureTypeProps = {
 }
 
 export default function LureSelect(props: LureTypeProps) {
-  const { lureTypeId, field, lureImageURL, setLureImageURL } = props
+  const [field, meta, helpers] = useField(props.field);
+  // 初期値表示
+  const defaultValue = field.value ? field.value : 0
+  useEffect(() => { // 初期値をフィールドにセット
+    helpers.setValue(defaultValue)
+  }, [])
+  const { lureTypeId, lureImageURL, setLureImageURL } = props
   // ルアーデータリスト
   const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + lureTypeId)
   if (error) return <p>Error: {error.message}</p>
@@ -30,17 +39,20 @@ export default function LureSelect(props: LureTypeProps) {
       return; // or throw new TypeError();
     }
     const targetLureId = target.value
+
+    helpers.setValue(targetLureId)
     lureList.map(function(val) {
       if (val.ID == targetLureId && val.LureImage.image_file) {
       setLureImageURL(val.LureImage.image_file)
       }
     })
   }
+  console.log(field)
   return (
     <>
       {
         lureTypeId !== '0' && lureTypeId ?
-          <Select mb='5' {...field} w='100wh' placeholder='Select Lure' onChange={(event) => handleSelectChange(event) }>
+          <Select {...field} w='100wh' mb='5' placeholder='Select Lure' onChange={(event) => handleSelectChange(event)} >
             {
               lureList.map((item, index) => {
                 return (
