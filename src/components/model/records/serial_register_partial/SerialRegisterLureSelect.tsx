@@ -47,7 +47,7 @@ export default function LureSelect(props: LureTypeProps) {
       }
     })
   }
-  console.log(field)
+  
   return (
     <>
       {
