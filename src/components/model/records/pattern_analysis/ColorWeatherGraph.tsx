@@ -44,8 +44,14 @@ type GraphData = {
   stack: string
 }
 
+type ParamProps = {
+  recordId: string | string[]
+  targetParam: string
+}
+
 // レンダリング
-export default function SingleTargetGraph(): JSX.Element {
+export default function ColorWeatherGraph(props: ParamProps): JSX.Element {
+  const { recordId, targetParam } = props
   // 雛形
   const dataForm = {
     label: '',
@@ -64,7 +70,7 @@ export default function SingleTargetGraph(): JSX.Element {
   let tempListForGraph: Array<GraphData> = []
   const weatherTypeList = ['sunny', 'rainy', 'cloudy'] // 条件リスト
   // APIからデータ取得
-  const { data, error } = useSWR<ColorWeatherAnalysisApiResponse, Error>('pattern/analysis/color_weather/2/all')
+  const { data, error } = useSWR<ColorWeatherAnalysisApiResponse, Error>('pattern/analysis/color_weather/' + recordId + '/' + targetParam)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   console.log(data)
