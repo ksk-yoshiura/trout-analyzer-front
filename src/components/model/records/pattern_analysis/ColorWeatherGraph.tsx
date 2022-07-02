@@ -73,7 +73,6 @@ export default function ColorWeatherGraph(props: ParamProps): JSX.Element {
   const { data, error } = useSWR<ColorWeatherAnalysisApiResponse, Error>('pattern/analysis/color_weather/' + recordId + '/' + targetParam)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-  console.log(data)
 
   const listDataForGraph = data.result ? data.result : []
   listDataForGraph.map((val, index) => { // APIから取得したデータ
