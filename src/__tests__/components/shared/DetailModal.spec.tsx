@@ -1,12 +1,13 @@
 /**
  * @jest-environment jsdom
  */
+import type { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import React from 'react';
+
+import DetailModal from '../../../components/shared/DetailModal';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../utils';
-import  { useSession } from "next-auth/react";
-import  { Session } from "next-auth";
-import DetailModal from '../../../components/shared/DetailModal';
 
 jest.mock("next-auth/react")
 
@@ -21,7 +22,6 @@ test('DetailModal', () => {
   const title = "title"
   const isOpen = true
   const onClose = ""
-  const mutate = ""
-  const { asFragment } = render(<DetailModal mutate={mutate} isOpen={isOpen} onClose={onClose} title={title} />);
+  const { asFragment } = render(<DetailModal isOpen={isOpen} onClose={onClose} title={title} />);
   expect(asFragment()).toMatchSnapshot();
 });

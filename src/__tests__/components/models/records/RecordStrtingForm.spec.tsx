@@ -1,12 +1,13 @@
 /**
  * @jest-environment jsdom
  */
+import type { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import React from 'react';
+
+import RecordStartingForm from '../../../../components/model/records/RecordStartingForm';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import { useSession } from "next-auth/react";
-import { Session } from "next-auth";
-import RecordStartingForm from '../../../../components/model/records/RecordStartingForm';
 
 jest.mock("next-auth/react")
 

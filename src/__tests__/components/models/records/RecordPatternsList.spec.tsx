@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import RecordPatternsList from '../../../../components/model/records/RecordPatternsList';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import RecordPatternsList from '../../../../components/model/records/RecordPatternsList';
 
 test('RecordPatternsList', () => {
   const { asFragment } = render(<RecordPatternsList />);

@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import SerialRegisterLureSelect from '../../../../../components/model/records/serial_register_partial/SerialRegisterLureSelect';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../../utils';
-import SerialRegisterLureSelect from '../../../../../components/model/records/serial_register_partial/SerialRegisterLureSelect';
 
 test('SerialRegisterLureSelect', () => {
   // ルアータイプID
