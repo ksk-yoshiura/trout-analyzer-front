@@ -5,10 +5,10 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
-  }, 
+  },
   parser: "@typescript-eslint/parser",
-  parserOptions: { 
-    project: "./tsconfig.json", 
+  parserOptions: {
+    project: "./tsconfig.json",
     ecmaFeatures: {
       jsx: true,
     },
@@ -34,9 +34,9 @@ module.exports = {
         selector: 'ForOfStatement',
         message: 'iterators/generators require regenerator-runtime, which is too heavyweight for this guide to allow them. Separately, loops should be avoided in favor of array iterations.',
       },
-      { 
-        selector: "TSEnumDeclaration", 
-        message: "Don't declare enums" 
+      {
+        selector: "TSEnumDeclaration",
+        message: "Don't declare enums"
       }
     ],
     "prefer-arrow-callback": "error", // arrow functionを許可
@@ -50,6 +50,7 @@ module.exports = {
     "react/no-unused-prop-types": "error", // 未使用propsはエラー
     "react-hooks/rules-of-hooks": "error", // hooksの基本的なlinter
     "react-hooks/exhaustive-deps": "warn", // effectやcallbackのdeps linter
+    "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-default-export": "error", // default-exportを禁止する
     "simple-import-sort/imports": "error", // import文の整列
@@ -68,6 +69,6 @@ module.exports = {
       files: ["**/*.tsx"], // componentの戻り値の型定義の記述は必須にしない
       rules: {
         "@typescript-eslint/explicit-module-boundary-types": "off"
-    }
-  }],
+      }
+    }],
 }
