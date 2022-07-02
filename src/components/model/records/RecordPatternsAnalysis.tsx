@@ -10,6 +10,7 @@ export default function RecordPatternAnalysis() {
   const router = useRouter();
   const { record_id } = router.query
 
+  // 釣果絞り込み用
   const [targetResult, setTargetResult] = useState('all')
 
   return (
