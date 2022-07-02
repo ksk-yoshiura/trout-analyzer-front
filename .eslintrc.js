@@ -1,4 +1,3 @@
-// 引用：https://zenn.dev/shin_k_2281/articles/how-to-make-next-template-repository
 module.exports = {
   root: true,
   env: {
@@ -43,19 +42,17 @@ module.exports = {
     "prefer-const": "error", // const推奨
     "func-style": ["error", "expression"], // 関数式を使わなければいけない
     "arrow-body-style": ["error", "always"], // 関数式の中身は必ず中括弧で囲む
-    "no-restricted-imports": ["error", { paths: [{ name: "react", importNames: ["default"] }] }], // reactの明示的なimportは不要なので禁止
+    // "no-restricted-imports": ["error", { paths: [{ name: "react", importNames: ["default"] }] }], // jestで必要になるのでコメントアウト
     "react/prop-types": "off", // ts使うので不要
     "react/react-in-jsx-scope": "off", // reactはグローバルなので不要
     "react/display-name": "error", // 無名関数を禁止する
     "react/no-unused-prop-types": "error", // 未使用propsはエラー
     "react-hooks/rules-of-hooks": "error", // hooksの基本的なlinter
     "react-hooks/exhaustive-deps": "warn", // effectやcallbackのdeps linter
-    "import/first": "error",
     "import/newline-after-import": "error",
-    "import/no-default-export": "error", // default-exportを禁止する
     "simple-import-sort/imports": "error", // import文の整列
     "simple-import-sort/exports": "error", // export文の整列
-    "@typescript-eslint/no-explicit-any": "error",
+    // "@typescript-eslint/no-explicit-any": "error", // any禁止
     "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
     "@typescript-eslint/no-unused-vars": ["error", { varsIgnorePattern: "^_", argsIgnorePattern: "^_", }], // 未使用変数はエラー
