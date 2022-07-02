@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import { useRouter } from "next/router";
+import React from 'react'
+import useSWR from 'swr'
+
+import type { RodsApiResponse } from "../../../pages/api/rods/[id]"
 import RodForm from '../../model/rods/RodForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
-import { useRouter } from "next/router";
-import useSWR from 'swr'
 import Loading from '../../shared/Loading'
-import { RodsApiResponse } from "../../../pages/api/rods/[id]"
 
 export default function RodEdit(): JSX.Element {
   // パラメータからロッドID取得

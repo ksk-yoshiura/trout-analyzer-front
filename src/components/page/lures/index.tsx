@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
 import {
-  Flex,
-  Button
+  Button,
+  Flex
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import React, { useState } from 'react'
+
 import LuresList from '../../model/lures/LuresList'
 import LureTypeSelect from '../../model/lures/LureTypeSelect'
 
@@ -15,7 +16,7 @@ export default function LureIndex(): JSX.Element {
       <Flex pb={5} justifyContent="space-between" w="90%">
         <LureTypeSelect setTypeId={setTypeId} />
         <NextLink href="/lures/create" passHref>
-          <Button  pl={10} pr={10} colorScheme='teal'>New Lures</Button>
+          <Button pl={10} pr={10} colorScheme='teal'>New Lures</Button>
         </NextLink>
       </Flex>
       <LuresList typeId={typeId} />

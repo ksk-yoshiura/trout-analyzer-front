@@ -1,7 +1,8 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import React from 'react'
+
 import LineForm from '../../model/lines/LineForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
@@ -15,12 +16,12 @@ type LineData = {
 
 export default function LineCreate(): JSX.Element {
   const chosenId = '0'
-  const vacantData: LineData = { 
+  const vacantData: LineData = {
     imageUrl: '',
     lineTypeId: '',
     name: '',
     companyName: '',
-    thickness: '', 
+    thickness: '',
   }
   return (
     <>

@@ -1,26 +1,27 @@
-import React, { ReactNode } from "react";
 import {
   Button,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
+  Modal,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
-  Modal,
   useToast
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { createAxiosInstance } from "../../pages/api/utils"
+import type { ReactNode } from "react";
+import React from "react";
 import { mutate } from 'swr';
+
+import { createAxiosInstance } from "../../pages/api/utils"
 
 type DetailProps = {
   chosenId?: number
   title: string
   isOpen: boolean
   onClose: any
-  mutate: any
   children?: ReactNode;
 }
 
@@ -47,10 +48,10 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   const axiosInstance = createAxiosInstance()
 
   // 削除ボタンクリック時の挙動
-  function handleDeleteButtonClick() {
+  const handleDeleteButtonClick = () => {
     // 削除完了後モーダルを閉じる
     axiosInstance.post(deleteAPIURL)
-      .then(function () { // 成功時
+      .then(() => { // 成功時
         // アラート代わりにトーストを使用
         toast({
           title: 'Deleted!',
@@ -61,7 +62,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
         })
         mutate(updateListURL)
       })
-      .catch(function (error) { // 失敗時
+      .catch((error) => { // 失敗時
         // アラート代わりにトーストを使用
         toast({
           title: 'Failed!',
@@ -70,7 +71,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
           duration: 9000,
           isClosable: true,
         })
-      }).finally(function () {
+      }).finally(() => {
         // モーダルを閉じる
         onConfirmClose()
         onClose()
@@ -94,7 +95,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
             <Button
               colorScheme='red'
               variant='solid'
-              onClick={() => handleDeleteButtonClick()}
+              onClick={() => { return handleDeleteButtonClick() }}
             >Confirm Delete</Button>
           </ModalBody>
           <ModalFooter>
@@ -115,7 +116,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'space-between'}>
-          <Button colorScheme='red' variant='solid' onClick={() => onConfirmOpen()}>Delete</Button>
+          <Button colorScheme='red' variant='solid' onClick={() => { return onConfirmOpen() }}>Delete</Button>
           <NextLink href={editURL} passHref>
             <Button colorScheme='blue' variant='solid'>Edit</Button>
           </NextLink>

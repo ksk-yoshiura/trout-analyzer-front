@@ -18,5 +18,7 @@ export default function ColorsApi(
   req: NextApiRequest,
   res: NextApiResponse<ColorsApiResponse>
 ): void {
-  // const Colors = fetchColorData()
+  if (req.body) {
+    res.status(200).json(req.body)
+  }
 }

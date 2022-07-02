@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import { useRouter } from "next/router";
+import React from 'react'
+import useSWR from 'swr'
+
+import type { LuresApiResponse } from "../../../pages/api/lures/[id]"
 import LureForm from '../../model/lures/LureForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
-import { useRouter } from "next/router";
-import useSWR from 'swr'
 import Loading from '../../shared/Loading'
-import { LuresApiResponse } from "../../../pages/api/lures/[id]"
 
 export default function LureEdit(): JSX.Element {
 

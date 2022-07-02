@@ -1,9 +1,12 @@
+import type {
+  FC
+} from "react";
 import React from 'react'
 import {
-  useState,
   useEffect,
-  FC
+  useState
 } from "react"
+
 import Loading from '../shared/Loading'
 
 
@@ -12,7 +15,7 @@ type ThumbProps = {
 };
 
 const Thumb: FC<ThumbProps> = ({ file }) => {
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [thumb, setThumb] = useState<string>();
 
   useEffect(() => {

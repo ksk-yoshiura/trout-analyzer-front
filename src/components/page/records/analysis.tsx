@@ -1,11 +1,12 @@
-import React from 'react'
+import { ArrowBackIcon } from '@chakra-ui/icons'
 import {
-  Link, 
-  Icon
+  Icon,
+  Link
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useRouter } from "next/router";
+import React from 'react'
+
 import RecordPatternsAnalysis from '../../model/records/RecordPatternsAnalysis'
 
 export default function PatternAnalysis() {

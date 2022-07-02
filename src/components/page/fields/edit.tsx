@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import { useRouter } from "next/router";
+import React from 'react'
+import useSWR from 'swr'
+
+import type { FieldsApiResponse } from "../../../pages/api/fields/[id]"
 import FieldForm from '../../model/fields/FieldForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
-import { useRouter } from "next/router";
-import useSWR from 'swr'
 import Loading from '../../shared/Loading'
-import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
 
 export default function FieldEdit(): JSX.Element {
   // パラメータからロッドID取得

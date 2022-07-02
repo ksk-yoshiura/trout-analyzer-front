@@ -1,4 +1,4 @@
-import { Heading, Text, VStack, Box } from '@chakra-ui/react'
+import { Box, Heading, Text, VStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -11,7 +11,7 @@ export default function CustomErrorPage() {
         Page not found
       </Heading>
       <Text fontSize="2xl">{router.asPath} Page does not exist</Text>
-      <Link href="/">
+      <Link href="/" passHref>
         <Box _hover={{ cursor: 'pointer', color: 'teal' }} color="teal">
           Go back to home
         </Box>

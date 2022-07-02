@@ -1,8 +1,9 @@
-import React from 'react'
-import { signOut } from "next-auth/react"
-import { Box, Flex, Button, Image, Link } from '@chakra-ui/react';
-import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
+import { Box, Button, Flex, Image, Link } from '@chakra-ui/react';
 import { useRouter } from "next/router"
+import { signOut } from "next-auth/react"
+import React from 'react'
+
+import SideMenuMobileBox from "./side_menu/SideMenuMobileBox";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
@@ -16,35 +17,35 @@ export default function Header(): JSX.Element {
 
   return (
     isHeaderNotNecessary ?
-      <Box 
-      display={{ base: "block", md: "none" }}  >
-      <Flex 
-        h={55} borderColor='gray.500' 
-        borderBottom={'1px'}
-      >
-        <Link href="/">
-          <Box
-            w={145}
-            pt={1}
-            px={1}
-          >
-            <Image src='/logo/logo_second.png' alt='TRANAZA Logo' />
-          </Box>
-        </Link>
-        <Box
-          w="100%"
-          align='right'
-          pr={5}
-          pt={3}
+      <Box
+        display={{ base: "block", md: "none" }}  >
+        <Flex
+          h={55} borderColor='gray.500'
+          borderBottom={'1px'}
         >
-          <Button colorScheme='teal' color='teal' variant='link' onClick={() => signOut()}>
-            Logout
-          </Button>
-        </Box>
-        <Box display={{ base: "block", md: "none" }}>
-          <SideMenuMobileBox />
-        </Box>
-      </Flex>
+          <Link href="/" passHref>
+            <Box
+              w={145}
+              pt={1}
+              px={1}
+            >
+              <Image src='/logo/logo_second.png' alt='TRANAZA Logo' />
+            </Box>
+          </Link>
+          <Box
+            w="100%"
+            align='right'
+            pr={5}
+            pt={3}
+          >
+            <Button colorScheme='teal' color='teal' variant='link' onClick={() => { return signOut() }}>
+              Logout
+            </Button>
+          </Box>
+          <Box display={{ base: "block", md: "none" }}>
+            <SideMenuMobileBox />
+          </Box>
+        </Flex>
       </Box>
       : <></>
   );

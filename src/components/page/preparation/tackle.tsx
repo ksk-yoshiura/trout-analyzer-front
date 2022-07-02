@@ -1,10 +1,10 @@
-import React from 'react'
 import {
-  Flex,
   Button,
+  Flex,
   Link
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import React from 'react'
 
 export default function IsTackleReady(): JSX.Element {
   return (

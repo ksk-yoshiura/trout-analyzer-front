@@ -1,9 +1,10 @@
-import React from 'react'
 import {
-  Flex,
-  Button
+  Button,
+  Flex
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import React from 'react'
+
 import FieldsList from '../../model/fields/FieldsList'
 
 export default function FieldIndex(): JSX.Element {
@@ -11,7 +12,7 @@ export default function FieldIndex(): JSX.Element {
     <>
       <Flex pb={5} w="100%">
         <NextLink href="/fields/create" passHref>
-          <Button  pl={10} pr={10} colorScheme='teal'>New Field</Button>
+          <Button pl={10} pr={10} colorScheme='teal'>New Field</Button>
         </NextLink>
       </Flex>
       <FieldsList />

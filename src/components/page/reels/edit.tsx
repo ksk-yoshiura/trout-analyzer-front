@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import { useRouter } from "next/router";
+import React from 'react'
+import useSWR from 'swr'
+
+import type { ReelsApiResponse } from "../../../pages/api/reels/[id]"
 import ReelForm from '../../model/reels/ReelForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
-import { useRouter } from "next/router";
-import useSWR from 'swr'
 import Loading from '../../shared/Loading'
-import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
 
 export default function ReelEdit(): JSX.Element {
   // パラメータからロッドID取得

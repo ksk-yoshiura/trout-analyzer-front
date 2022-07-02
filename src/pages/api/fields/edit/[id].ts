@@ -11,7 +11,6 @@ export default function FieldEditApi(
   res: NextApiResponse<FieldsApiResponse>
 ): void {
   if (req.method === "PUT") {
-    console.log(req.body)
     res.status(200).json(req.body)
   } else {
     res.status(400).json({ debugMessage: `Field not found` })

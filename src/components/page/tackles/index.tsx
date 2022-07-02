@@ -1,9 +1,10 @@
-import React from 'react'
 import {
-  Flex,
-  Button
+  Button,
+  Flex
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import React from 'react'
+
 import TacklesList from '../../model/tackles/TacklesList'
 
 export default function TackleIndex(): JSX.Element {
@@ -11,7 +12,7 @@ export default function TackleIndex(): JSX.Element {
     <>
       <Flex pb={5} w="100%">
         <NextLink href="/tackles/create" passHref>
-          <Button  pl={10} pr={10} colorScheme='teal'>New Tackle</Button>
+          <Button pl={10} pr={10} colorScheme='teal'>New Tackle</Button>
         </NextLink>
       </Flex>
       <TacklesList />

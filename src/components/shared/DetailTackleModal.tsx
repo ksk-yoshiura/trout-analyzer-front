@@ -1,14 +1,14 @@
-import React, { ReactNode } from 'react'
 import {
-  ModalOverlay,
+  Modal,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  Modal,
+  ModalOverlay,
 } from '@chakra-ui/react'
+import type { ReactNode } from 'react';
+import React from 'react'
 
 type DetailProps = {
-  chosenId?: number
   title: string
   isOpen: boolean
   onClose: any

@@ -1,10 +1,11 @@
-import SignUpForm from '../../model/auth/SignUpForm'
-import {
-  Link,
-  Icon
-} from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
+import {
+  Icon,
+  Link
+} from '@chakra-ui/react'
 import NextLink from "next/link"
+
+import SignUpForm from '../../model/auth/SignUpForm'
 
 export default function SignUpPage(): JSX.Element {
   return (

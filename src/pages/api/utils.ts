@@ -1,6 +1,8 @@
 
-import { useSession } from "next-auth/react"
+import type { AxiosInstance } from 'axios';
 import axios from 'axios'
+import { useSession } from "next-auth/react"
+
 const apiURL = process.env.NEXT_PUBLIC_BACK_URL
 
 // デフォルト
@@ -15,14 +17,14 @@ export const axiosDefaultAPIInstance = axios.create({
   timeout: 5000
 })
 
-export const createAxiosInstance = () => { 
+export const createAxiosInstance = (): AxiosInstance => {
   // セッションからアクセストークンを取得
   const { data: session } = useSession();
 
   // axiosにヘッダー情報付与
   axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   axiosDefaultAPIInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-  
+
   // jwtトークンをアクセストークンから取得
   // ヘッダーに仕込む
   axiosDefaultAPIInstance.interceptors.request.use(config => {

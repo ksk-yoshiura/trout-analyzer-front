@@ -1,9 +1,10 @@
-import React from 'react'
 import {
-  Flex,
-  Button
+  Button,
+  Flex
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import React from 'react'
+
 import RodsList from '../../model/rods/RodsList'
 
 export default function RodIndex(): JSX.Element {
@@ -11,7 +12,7 @@ export default function RodIndex(): JSX.Element {
     <>
       <Flex pb={5} w="100%">
         <NextLink href="/rods/create" passHref>
-          <Button  pl={10} pr={10} colorScheme='teal'>New Rod</Button>
+          <Button pl={10} pr={10} colorScheme='teal'>New Rod</Button>
         </NextLink>
       </Flex>
       <RodsList isTackle={false} />

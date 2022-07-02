@@ -1,24 +1,26 @@
-import { getCsrfToken, signIn } from "next-auth/react";
-import { useRouter } from "next/router";
-import { CtxOrReq } from "next-auth/client/_utils";
+import { ArrowForwardIcon } from '@chakra-ui/icons'
 import {
-  Formik,
-  Form,
-  Field,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Icon,
+  Input,
+  Link,
+  Stack
+} from "@chakra-ui/react";
+import type {
   FieldProps
 } from 'formik';
 import {
-  Input,
-  Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Stack,
-  Link,
-  Icon
-} from "@chakra-ui/react";
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+  Field,
+  Form,
+  Formik
+} from 'formik';
 import NextLink from "next/link"
+import { useRouter } from "next/router";
+import type { CtxOrReq } from "next-auth/client/_utils";
+import { getCsrfToken, signIn } from "next-auth/react";
 
 type LoginData = {
   mailaddress: string;
@@ -38,23 +40,24 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
   const router = useRouter();
   const signInUser = async (data: LoginData) => {
-      await signIn<any>("credentials", {
-        redirect: false,
-        mailaddress: data.mailaddress,
-        password: data.password,
-        callbackUrl: `${window.location.origin}`,
-      }).then((res) => {
-        if (res?.error) {
-          // TODO：エラーメッセージ出力
-          console.log("UserId,Passwordを正しく入力してください");
-        } else {
+    await signIn<any>("credentials", {
+      redirect: false,
+      mailaddress: data.mailaddress,
+      password: data.password,
+      callbackUrl: `${window.location.origin}`,
+    }).then((res) => {
+      if (res?.error) {
+        // TODO：エラーメッセージ出力
+        console.log("UserId,Passwordを正しく入力してください");
+      } else {
         // ログイン後に飛ぶページ
-          router.push("/");
-        }
-      });
-    };
+        router.push("/");
+      }
+    });
+  };
 
-  function validateData(value: LoginData) {
+  const validateData = (value: LoginData) => {
+    console.log(value)
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -66,68 +69,74 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
 
   return (
     <>
-    <Formik
-      initialValues={{
-        mailaddress: '',
-        password: '',
-      }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          signInUser(values)
-          actions.setSubmitting(false)
-        }, 1000)
-      }}
-    >
-      {(props) => (
-        <Form>
-          <Input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-          <Stack spacing={5}>
-            <Field name='mailaddress' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.mailaddress)
-                    && Boolean(form.touched.mailaddress)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='mailaddress'
-                    textTransform='uppercase'
-                  >mailaddress</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='mailaddress' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.mailaddress}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+      <Formik
+        initialValues={{
+          mailaddress: '',
+          password: '',
+        }}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            signInUser(values)
+            actions.setSubmitting(false)
+          }, 1000)
+        }}
+      >
+        {(props) => {
+          return (
+            <Form>
+              <Input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+              <Stack spacing={5}>
+                <Field name='mailaddress' validate={validateData}>
+                  {({ field, form }: FieldProps) => {
+                    return (
+                      <FormControl
+                        isInvalid={Boolean(form.errors.mailaddress)
+                          && Boolean(form.touched.mailaddress)}
+                      >
+                        <FormLabel
+                          fontSize="12px"
+                          htmlFor='mailaddress'
+                          textTransform='uppercase'
+                        >mailaddress</FormLabel>
+                        <Input {...field} width="100%" fontSize="1xl" id='mailaddress' variant='flushed' placeholder='Enter' />
+                        <FormErrorMessage>{form.errors.mailaddress}</FormErrorMessage>
+                      </FormControl>
+                    )
+                  }}
+                </Field>
 
-            <Field name='password' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.password)
-                    && Boolean(form.touched.password)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='password'
-                    textTransform='uppercase'
-                  >password</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.password}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+                <Field name='password' validate={validateData}>
+                  {({ field, form }: FieldProps) => {
+                    return (
+                      <FormControl
+                        isInvalid={Boolean(form.errors.password)
+                          && Boolean(form.touched.password)}
+                      >
+                        <FormLabel
+                          fontSize="12px"
+                          htmlFor='password'
+                          textTransform='uppercase'
+                        >password</FormLabel>
+                        <Input {...field} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
+                        <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                      </FormControl>
+                    )
+                  }}
+                </Field>
 
-          </Stack>
-          <Button
-            mt={4}
-            colorScheme='teal'
-            isLoading={props.isSubmitting}
-            type='submit'
-          >
-            Login
-          </Button>
-        </Form>
-      )}
-    </Formik>
+              </Stack>
+              <Button
+                mt={4}
+                colorScheme='teal'
+                isLoading={props.isSubmitting}
+                type='submit'
+              >
+                Login
+              </Button>
+            </Form>
+          )
+        }}
+      </Formik>
       <NextLink href="/sign_up" passHref>
         <Link py={5} as={'button'} color='teal'>
           sign_up

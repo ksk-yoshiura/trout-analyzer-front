@@ -10,7 +10,7 @@ export type Field = {
   address: string
   frequency: string
   FieldImage: {
-    ID: String
+    ID: string
     CreatedAt: string
     field_id: number
     image_file: string
@@ -29,44 +29,7 @@ export default function FieldsApi(
   req: NextApiRequest,
   res: NextApiResponse<FieldsApiResponse>
 ): void {
-  // const id = req.query.id as string
-  // // 空データ（タイプチェック用）
-  // const vacantData: Field = {
-  //   'id': '',
-  //   'imageUrl': '',
-  //   'imageAlt': '',
-  //   'createdAt': '',
-  //   'lastVisitedAt': '',
-  //   'name': '',
-  //   'address': '',
-  //   'frequency': '',
-  // } 
-
-  // cretaeとeditで同じフォームを使いまわしているため、
-  // idが存在しない場合undefinedになる
-  // これとは別にeditやdetailでもid取得のラグでbad requestエラーが出ていたので
-  // 下記記述で回避する
-  // const field = id !== 'undefined'? fetchFieldData(id) : vacantData
-  // if (field) {
-  //   res.status(200).json({ field })
-  // } else {
-  //   res.status(400).json({ debugMessage: `Field [id=${id}] not found` })
-  // }
+  if (req.body) {
+    res.status(200).json(req.body)
+  }
 }
-
-// 擬似的なデータフェッチ関数
-// function fetchFieldData(id: string): Field | undefined {
-//   const fields: Field[] = [
-//     {
-//       id: '1',
-//       imageUrl: 'https://bit.ly/2Z4KKcF',
-//       imageAlt: 'lure image',
-//       createdAt: '2021/12/28',
-//       lastVisitedAt: '2021/12/28',
-//       name: 'super good fishing park',
-//       address: 'shiga prefecture',
-//       frequency: '5'
-//     },
-//   ]
-//   return fields.find((field) => field.id === id)
-// }

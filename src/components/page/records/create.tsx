@@ -1,15 +1,16 @@
-import React from 'react'
+import { ArrowBackIcon } from '@chakra-ui/icons'
 import {
   Flex,
-  Link,
-  Icon
+  Icon,
+  Link
 } from '@chakra-ui/react'
-import { useRouter } from "next/router";
-import { ArrowBackIcon } from '@chakra-ui/icons'
 import NextLink from "next/link"
-import RecordPatternDetailForm from '../../model/records/RecordPatternDetailForm'
+import { useRouter } from "next/router";
+import React from 'react'
 import useSWR from 'swr'
-import { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
+
+import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
+import RecordPatternDetailForm from '../../model/records/RecordPatternDetailForm'
 import Loading from '../../shared/Loading'
 
 type recordFormData = {

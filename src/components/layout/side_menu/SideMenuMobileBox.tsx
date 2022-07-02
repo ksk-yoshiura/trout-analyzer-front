@@ -1,22 +1,23 @@
-import React from "react";
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Stack,
-  IconButton,
-  useDisclosure,
-  Link,
-  Divider
-} from '@chakra-ui/react'
 import {
   HamburgerIcon
 } from "@chakra-ui/icons";
+import {
+  Button,
+  Divider,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  IconButton,
+  Link,
+  Stack,
+  useDisclosure
+} from '@chakra-ui/react'
+import React from "react";
+
 import EquipmentMenuLinkList from './EquipmentMenuLinkList'
 import RecordsMenuLinkList from './RecordsMenuLinkList'
 import SNSLinkButton from './SNSLinkButton'
@@ -49,7 +50,7 @@ export default function SideMenuContents() {
         <DrawerContent style={{ width: "250px" }}>
           <DrawerCloseButton />
           <DrawerHeader>
-            <Link href="/" >
+            <Link href="/" passHref>
               <Button
                 colorScheme='teal'
                 variant='ghost'

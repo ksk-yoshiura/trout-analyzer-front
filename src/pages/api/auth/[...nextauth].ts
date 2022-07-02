@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+
 import { axiosDefaultInstance } from '../utils'
 
 export default NextAuth({
@@ -24,7 +25,7 @@ export default NextAuth({
           mailaddress: credentials?.mailaddress,
           password: credentials?.password,
         };
-        
+
         // ログインAPI
         const res = await axiosDefaultInstance.post('login', postData)
           .then((v) => {
@@ -32,12 +33,13 @@ export default NextAuth({
           })
           .catch((error) => {
             console.log(error)
+            console.log(req)
           })
 
         // If no error and we have user data, return it
         if (res) {
-          const data = { 
-            token: res, 
+          const data = {
+            token: res,
             user: {
               mailaddress: postData.mailaddress
 

@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
-import TackleForm from '../../model/tackles/TackleForm'
 import { useRouter } from "next/router";
+import React from 'react'
+import useSWR from 'swr'
+
+import type { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
+import TackleForm from '../../model/tackles/TackleForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 import Loading from '../../shared/Loading'
-import useSWR from 'swr'
-import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
 
 export default function TackleEdit(): JSX.Element {
   // パラメータからタックルID取得

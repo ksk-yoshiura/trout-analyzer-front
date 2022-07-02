@@ -1,10 +1,11 @@
-import React from 'react'
 import {
   Select,
 } from '@chakra-ui/react'
-import Loading from './Loading'
+import React from 'react'
 import useSWR from 'swr'
-import { ToolConditionApiResponse } from "../../pages/api/tool_conditions/type_num/[type_num]"
+
+import type { ToolConditionApiResponse } from "../../pages/api/tool_conditions/type_num/[type_num]"
+import Loading from './Loading'
 
 // タイプ
 type TypeProps = {
@@ -39,7 +40,7 @@ export default function TooConditionTypeSelect(props: TypeProps) {
   if (!data) return <Loading />
 
   return (
-    <Select {...field} w={200} placeholder={'Select '+title[typeNum - 1]} >
+    <Select {...field} w={200} placeholder={'Select ' + title[typeNum - 1]} >
       {
         data.result?.map((item, index) => {
           return (

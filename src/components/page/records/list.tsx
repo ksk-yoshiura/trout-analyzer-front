@@ -1,12 +1,13 @@
-import React from 'react'
+import { ArrowBackIcon } from '@chakra-ui/icons'
 import {
-  Flex,
-  Link,
-  Button, Icon
+  Button, Flex,
+  Icon,
+  Link
 } from '@chakra-ui/react'
 import NextLink from "next/link"
-import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useRouter } from "next/router";
+import React from 'react'
+
 import RecordPatternsList from '../../model/records/RecordPatternsList'
 
 export default function RecordsList(): JSX.Element {

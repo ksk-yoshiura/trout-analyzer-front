@@ -20,4 +20,7 @@ export default function ColorDepthAnalysisApi(
   req: NextApiRequest,
   res: NextApiResponse<ColorDepthAnalysisApiResponse>
 ): void {
+  if (req.body) {
+    res.status(200).json(req.body)
+  }
 }

@@ -20,4 +20,7 @@ export default function ColorWeatherAnalysisApi(
   req: NextApiRequest,
   res: NextApiResponse<ColorWeatherAnalysisApiResponse>
 ): void {
+  if (req.body) {
+    res.status(200).json(req.body)
+  }
 }

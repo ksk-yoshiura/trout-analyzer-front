@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import { useRouter } from "next/router";
+import React from 'react'
+import useSWR from 'swr'
+
+import type { LinesApiResponse } from "../../../pages/api/lines/[id]"
 import LineForm from '../../model/lines/LineForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
-import { useRouter } from "next/router";
-import useSWR from 'swr'
 import Loading from '../../shared/Loading'
-import { LinesApiResponse } from "../../../pages/api/lines/[id]"
 
 export default function LineEdit(): JSX.Element {
   // パラメータからロッドID取得

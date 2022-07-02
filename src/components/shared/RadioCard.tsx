@@ -1,12 +1,12 @@
-import React from "react"
-import { 
+import {
   Box,
-  useRadio,
-  Input
+  Input,
+  useRadio
 } from '@chakra-ui/react'
+import React from "react"
 
-export default function RadioCard(props:any) { // TODO：一旦anyで退避
-  const { getInputProps, getCheckboxProps }  = useRadio(props)
+export default function RadioCard(props: any) { // TODO：一旦anyで退避
+  const { getInputProps, getCheckboxProps } = useRadio(props)
 
   const input = getInputProps()
   const checkbox = getCheckboxProps()

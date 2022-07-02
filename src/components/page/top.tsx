@@ -1,9 +1,9 @@
-import React from 'react'
 import {
-  Stack,
-  Button
+  Button,
+  Stack
 } from '@chakra-ui/react';
 import NextLink from "next/link"
+import React from 'react'
 
 export default function TopPage(): JSX.Element {
   return (

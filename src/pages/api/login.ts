@@ -11,7 +11,6 @@ export default function LoginApi(
   res: NextApiResponse<LoginApiResponse>
 ): void {
   if (req.method === "POST") {
-    console.log(req.body)
     res.status(200).json(req.body)
   } else {
     res.status(400).json({ debugMessage: `User not found` })

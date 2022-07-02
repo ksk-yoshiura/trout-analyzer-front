@@ -1,7 +1,8 @@
-import React from 'react'
 import {
   Flex
 } from '@chakra-ui/react'
+import React from 'react'
+
 import LureForm from '../../model/lures/LureForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
@@ -22,14 +23,14 @@ type LureData = {
 
 export default function LureCreate(): JSX.Element {
   const chosenId = '0'
-  const vacantData: LureData = { 
+  const vacantData: LureData = {
     ID: '',
     LureType: { ID: '', typeName: '' },
     name: '',
     companyName: '',
     color: '',
     weight: '',
-    frequency: '', 
+    frequency: '',
   }
   return (
     <>
