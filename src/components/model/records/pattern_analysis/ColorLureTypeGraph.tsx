@@ -2,7 +2,7 @@ import { Bar } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import Loading from '../../../shared/Loading'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import { ColorLureTypeAnalysisApiResponse } from "../../../../pages/api/patterns/analysis/color_type/[record_id]/[result]"
 
 Chart.register(CategoryScale);
