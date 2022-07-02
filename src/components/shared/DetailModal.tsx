@@ -15,7 +15,7 @@ import type { ReactNode } from "react";
 import React from "react";
 import { mutate } from 'swr';
 
-import { createAxiosInstance } from "../../pages/api/utils"
+import { CreateAxiosInstance } from "../../pages/api/utils"
 
 type DetailProps = {
   chosenId?: number
@@ -45,7 +45,7 @@ export default function DetailModal(props: DetailProps): JSX.Element {
   // アラート
   const toast = useToast()
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // 削除ボタンクリック時の挙動
   const handleDeleteButtonClick = () => {

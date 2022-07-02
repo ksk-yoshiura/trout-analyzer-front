@@ -25,7 +25,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useState } from 'react'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import LineDetail from '../lines/LineDetail'
 import LinesList from '../lines/LinesList'
 import ReelDetail from '../reels/ReelDetail'
@@ -115,7 +115,7 @@ export default function TackleForm(props: DetailProps) {
   const [newLineId, setNewLineId] = useState(defaultLineId)
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // fieldにセットする方法がわからないので
   // ここでセットする

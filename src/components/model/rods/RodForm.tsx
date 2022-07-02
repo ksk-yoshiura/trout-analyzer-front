@@ -28,7 +28,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -110,7 +110,7 @@ export default function RodForm(props: DetailProps) {
   const initData = data ? data : vacantData
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
   const handleSendRodData = (values: RodData) => {// 画像データはbase64に変換

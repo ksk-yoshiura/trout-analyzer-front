@@ -23,7 +23,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useState } from 'react'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import PreparationFieldModal from '../../model/records/preparation/PreparationFieldModal'
 import PreparationFieldSelect from '../../model/records/preparation/PreparationFieldSelect'
 
@@ -48,7 +48,7 @@ export default function RecordStartingForm(): JSX.Element {
   const [fieldValue, setFieldValue] = useState("0")
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
   const handleSendRecordData = (values: RecordData) => {

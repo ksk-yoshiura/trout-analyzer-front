@@ -23,7 +23,7 @@ import {
 import { useRouter } from "next/router";
 import React from 'react'
 
-import { createAxiosInstance } from "../../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../../pages/api/utils"
 
 
 type DetailProp = {
@@ -41,7 +41,7 @@ export default function FinishButton(props: DetailProp) {
   const { recordId } = props
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // 釣果記録終了
   const handleFinishSerialRegister = (values: DetailProp) => {

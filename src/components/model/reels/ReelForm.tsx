@@ -24,7 +24,7 @@ import {
 import { useRouter } from "next/router";
 import React from 'react'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -59,7 +59,7 @@ export default function ReelForm(props: DetailProps) {
   const { chosenId, data } = props
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
   const handleSendReelData = (values: ReelData) => {

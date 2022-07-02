@@ -24,7 +24,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
@@ -76,7 +76,7 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   const { recordId } = prop
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // APIからデータ取得
   const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions')

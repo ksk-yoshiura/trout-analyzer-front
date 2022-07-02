@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { SWRConfig } from 'swr'
 
 import Layout from "../components/layout/Layout";
-import { createAxiosInstance } from "../pages/api/utils"
+import { CreateAxiosInstance } from "../pages/api/utils"
 
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
@@ -47,7 +47,7 @@ export default function App({
   */
   const SWRComponent = () => {
     // axiosの設定
-    const axiosInstance = createAxiosInstance()
+    const axiosInstance = CreateAxiosInstance()
     // axiosInstanceはuseSessionからアクセストークンを取得しているので
     // SessionProviderコンポーネントより内側で呼ぶ必要がある
     const fetcher = (url: string) => {

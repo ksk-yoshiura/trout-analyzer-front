@@ -28,7 +28,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 import LuresColorPalette from "./LuresColorPalette"
@@ -61,7 +61,7 @@ export default function LureForm(props: DetailProps) {
   const { chosenId, data } = props
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
 
   // ルアー重さ

@@ -28,7 +28,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
@@ -63,7 +63,7 @@ export default function LineForm(props: DetailProps) {
   const { chosenId, data } = props
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // ラインの太さ
   const InputThicknessNumber = (props: any) => {

@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import { mutate } from 'swr'
 
-import { createAxiosInstance } from "../../../pages/api/utils"
+import { CreateAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 
@@ -53,7 +53,7 @@ export default function FieldForm(props: DetailProps) {
   const { chosenId, data, onFieldModalClose } = props
 
   // axiosの設定
-  const axiosInstance = createAxiosInstance()
+  const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
   const handleSendFieldData = (values: FieldData) => {

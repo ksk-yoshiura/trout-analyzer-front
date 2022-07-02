@@ -17,7 +17,7 @@ export const axiosDefaultAPIInstance = axios.create({
   timeout: 5000
 })
 
-export const createAxiosInstance = (): AxiosInstance => {
+export const CreateAxiosInstance = (): AxiosInstance => {
   // セッションからアクセストークンを取得
   const { data: session } = useSession();
 
