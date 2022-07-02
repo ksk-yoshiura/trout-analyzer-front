@@ -1,30 +1,33 @@
-import React from 'react'
-import { useRouter } from "next/router";
 import {
-  Formik,
-  Form,
-  Field,
-  FieldProps,
-  useFormikContext
-} from 'formik';
-import {
-  Input,
   Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Stack,
-  useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerOverlay,
   DrawerContent,
+  DrawerOverlay,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Stack,
+  useDisclosure,
   useToast
 } from "@chakra-ui/react";
-import Thumb from "../../shared/ThumbImage"
-import ToolConditionSelect from '../../shared/ToolConditionSelect'
+import type {
+  FieldProps
+} from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  useFormikContext
+} from 'formik';
+import { useRouter } from "next/router";
+import React from 'react'
+
 import { createAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
+import Thumb from "../../shared/ThumbImage"
+import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
 type ReelData = {
   name?: string;
@@ -59,9 +62,9 @@ export default function ReelForm(props: DetailProps) {
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
-  async function handleSendReelData(values: ReelData) {
+  const handleSendReelData = (values: ReelData) => {
     // 画像データはbase64に変換
-    const imageBase64 = values.image? await convertFileIntoBase64(values.image): ''
+    const imageBase64 = values.image ? convertFileIntoBase64(values.image) : ''
     const fieldPostData = {
       name: values.name,
       companyName: values.companyName,
@@ -71,7 +74,7 @@ export default function ReelForm(props: DetailProps) {
     }
     if (chosenId && chosenId !== '0') { // リールIDがある場合は更新
       axiosInstance.put('reels/' + chosenId, fieldPostData)
-        .then(function () {
+        .then(() => {
           // リストページに遷移
           router.push('/reels')
           // アラート代わりにトーストを使用
@@ -83,7 +86,7 @@ export default function ReelForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.message,
@@ -94,7 +97,7 @@ export default function ReelForm(props: DetailProps) {
         })
     } else { // リールIDがない場合は登録
       axiosInstance.post('reels', fieldPostData)
-        .then(function () {
+        .then(() => {
           // リストページに遷移
           router.push('/reels')
           // アラート代わりにトーストを使用
@@ -106,7 +109,7 @@ export default function ReelForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.message,
@@ -118,7 +121,8 @@ export default function ReelForm(props: DetailProps) {
     }
   }
 
-  function validateData(value: ReelData) {
+  const validateData = (value: ReelData) => {
+    console.log(value)
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -145,7 +149,7 @@ export default function ReelForm(props: DetailProps) {
             >Cancel</Button>
             <Button
               type="submit"
-              onClick={() => submitForm()}
+              onClick={() => { return submitForm() }}
               colorScheme='teal'
               variant='solid'
             >Confirm</Button>
@@ -171,117 +175,129 @@ export default function ReelForm(props: DetailProps) {
         }, 1000)
       }}
     >
-      {(props) => (
-        <Form>
-          <Stack spacing={5}>
-            <Field name='name' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.name)
-                    && Boolean(form.touched.name)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='name'
-                    textTransform='uppercase'
-                  >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+      {(props) => {
+        return (
+          <Form>
+            <Stack spacing={5}>
+              <Field name='name' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.name)
+                        && Boolean(form.touched.name)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='name'
+                        textTransform='uppercase'
+                      >NAME</FormLabel>
+                      <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
 
-            <Field name='gearId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.gearId)
-                    && Boolean(form.touched.gearId)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='gearId'
-                    textTransform='uppercase'
-                  >GEAR</FormLabel>
-                  <ToolConditionSelect field={field} typeNum={gearType} />
-                  <FormErrorMessage>{form.errors.gearId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+              <Field name='gearId' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.gearId)
+                        && Boolean(form.touched.gearId)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='gearId'
+                        textTransform='uppercase'
+                      >GEAR</FormLabel>
+                      <ToolConditionSelect field={field} typeNum={gearType} />
+                      <FormErrorMessage>{form.errors.gearId}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
 
-            <Field name='typeNumberId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.typeNumberId)
-                    && Boolean(form.touched.typeNumberId)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='typeNumberId'
-                    textTransform='uppercase'
-                  >TYPE</FormLabel>
-                  <ToolConditionSelect field={field} typeNum={reelType} />
-                  <FormErrorMessage>{form.errors.typeNumberId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+              <Field name='typeNumberId' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.typeNumberId)
+                        && Boolean(form.touched.typeNumberId)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='typeNumberId'
+                        textTransform='uppercase'
+                      >TYPE</FormLabel>
+                      <ToolConditionSelect field={field} typeNum={reelType} />
+                      <FormErrorMessage>{form.errors.typeNumberId}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
 
-            <Field name='companyName' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.companyName)
-                    && Boolean(form.touched.companyName)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='companyName'
-                    textTransform='uppercase'
-                  >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='companyName' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+              <Field name='companyName' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.companyName)
+                        && Boolean(form.touched.companyName)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='companyName'
+                        textTransform='uppercase'
+                      >COMPANY</FormLabel>
+                      <Input {...field} width="100%" fontSize="1xl" id='companyName' variant='flushed' placeholder='Enter' />
+                      <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
 
-            <Field name='image' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.image)
-                    && Boolean(form.touched.image)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='image'
-                    textTransform='uppercase'
-                  >IMAGE</FormLabel>
-                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
-                    value={undefined}
-                    onChange={(event) => {
-                      props.setFieldValue(
-                        "image",
-                        event.currentTarget.files !== null
-                          ? event.currentTarget.files[0]
-                          : null
-                      );
-                    }}
-                  />
-                  <Thumb file={field.value} />
+              <Field name='image' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.image)
+                        && Boolean(form.touched.image)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='image'
+                        textTransform='uppercase'
+                      >IMAGE</FormLabel>
+                      <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                        value={undefined}
+                        onChange={(event) => {
+                          props.setFieldValue(
+                            "image",
+                            event.currentTarget.files !== null
+                              ? event.currentTarget.files[0]
+                              : null
+                          );
+                        }}
+                      />
+                      <Thumb file={field.value} />
 
-                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-          </Stack>
-          <Button
-            mt={4}
-            colorScheme='teal'
-            type='button'
-            onClick={onOpen}
-          >
-            Register
-          </Button>
-          <ConfirmDrawer />
-        </Form>
-      )}
+                      <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+            </Stack>
+            <Button
+              mt={4}
+              colorScheme='teal'
+              type='button'
+              onClick={onOpen}
+            >
+              Register
+            </Button>
+            <ConfirmDrawer />
+          </Form>
+        )
+      }}
     </Formik>
   )
 }

@@ -1,20 +1,21 @@
-import React from 'react'
-import { useState } from 'react'
 import {
+  Badge,
   Box,
   Image,
-  Badge,
+  useDisclosure,
   Wrap,
   WrapItem,
-  useDisclosure,
 } from '@chakra-ui/react'
-import FieldDetail from './FieldDetail'
-import DetailModal from '../../shared/DetailModal'
-import NoDataAlert from '../../shared/NoDataAlert'
-import Loading from '../../shared/Loading'
-import useSWR, { mutate } from 'swr'
-import { FieldsApiResponse } from "../../../pages/api/fields/index"
+import React from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
+
+import type { FieldsApiResponse } from "../../../pages/api/fields/index"
 import { getDateFormatted } from "../../../utils/dateFormat"
+import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
+import NoDataAlert from '../../shared/NoDataAlert'
+import FieldDetail from './FieldDetail'
 
 export default function FieldsList(): JSX.Element {
   // モーダル
@@ -32,7 +33,7 @@ export default function FieldsList(): JSX.Element {
   // 画像拡張子
   const image_ext = '.png'
 
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
 
@@ -44,7 +45,7 @@ export default function FieldsList(): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const FieldDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'field'} mutate={mutate} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'field'} >
         <FieldDetail chosenId={chosenId} />
       </DetailModal>
     )

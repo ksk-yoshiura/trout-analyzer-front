@@ -1,9 +1,9 @@
-import React from 'react'
 import {
   Button,
   Link,
   VStack
 } from "@chakra-ui/react";
+import React from 'react'
 import * as FaIcons from "react-icons/fa";
 
 

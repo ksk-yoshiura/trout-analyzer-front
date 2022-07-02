@@ -1,30 +1,33 @@
-import React from 'react'
-import { useRouter } from "next/router";
 import {
-  Formik,
-  Form,
-  Field,
-  FieldProps,
-  useFormikContext
-} from 'formik';
-import {
-  Input,
   Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Stack,
-  useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerOverlay,
   DrawerContent,
+  DrawerOverlay,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Stack,
+  useDisclosure,
   useToast
 } from "@chakra-ui/react";
+import type {
+  FieldProps
+} from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  useFormikContext
+} from 'formik';
+import { useRouter } from "next/router";
+import React from 'react'
 import { mutate } from 'swr'
-import Thumb from "../../shared/ThumbImage"
+
 import { createAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
+import Thumb from "../../shared/ThumbImage"
 
 type FieldData = {
   name?: string;
@@ -53,9 +56,9 @@ export default function FieldForm(props: DetailProps) {
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
-  async function handleSendFieldData(values: FieldData) {
+  const handleSendFieldData = (values: FieldData) => {
     // 画像データはbase64に変換
-    const imageBase64 = values.image? await convertFileIntoBase64(values.image): ''
+    const imageBase64 = values.image ? convertFileIntoBase64(values.image) : ''
     const fieldPostData = {
       name: values.name,
       address: values.address,
@@ -64,7 +67,7 @@ export default function FieldForm(props: DetailProps) {
 
     if (chosenId && chosenId !== '0') { // フィールドIDがある場合は更新
       axiosInstance.put('fields/' + chosenId, fieldPostData)
-        .then(function (res) {
+        .then(() => {
           // リストページに遷移
           router.push('/fields')
           // アラート代わりにトーストを使用
@@ -76,7 +79,7 @@ export default function FieldForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.message,
@@ -87,7 +90,7 @@ export default function FieldForm(props: DetailProps) {
         })
     } else { // フィールドIDがない場合は登録
       axiosInstance.post('fields', fieldPostData)
-        .then(function () {
+        .then(() => {
           if (router.route === '/preparation/field') {
             // モーダル閉じる
             onFieldModalClose?.(null)
@@ -106,7 +109,7 @@ export default function FieldForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.messsage,
@@ -119,7 +122,9 @@ export default function FieldForm(props: DetailProps) {
   }
 
   // バリデーション
-  function validateData(value: FieldData) {
+  const validateData = (value: FieldData) => {
+    console.log(value)
+
     // console.log(value)
     // let error
     // if (!value) {
@@ -147,7 +152,7 @@ export default function FieldForm(props: DetailProps) {
               type="submit"
               onClick={() => {
                 submitForm(),
-                  setTimeout(() => onClose(), 1000)
+                  setTimeout(() => { return onClose() }, 1000)
               }}
               colorScheme='teal'
               variant='solid'
@@ -174,70 +179,76 @@ export default function FieldForm(props: DetailProps) {
         }, 1000)
       }}
     >
-      {(props) =>
-        <Form>
+      {(props) => {
+        return <Form>
           <Stack spacing={5}>
             <Field name='name' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.name)
-                    && Boolean(form.touched.name)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='name'
-                    textTransform='uppercase'
-                  >NAME</FormLabel>
-                  <Input {...field} fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                </FormControl>
-              )}
+              {({ field, form }: FieldProps) => {
+                return (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.name)
+                      && Boolean(form.touched.name)}
+                  >
+                    <FormLabel
+                      fontSize="12px"
+                      htmlFor='name'
+                      textTransform='uppercase'
+                    >NAME</FormLabel>
+                    <Input {...field} fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
+                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                  </FormControl>
+                )
+              }}
             </Field>
 
             <Field name='address' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.address)
-                    && Boolean(form.touched.address)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='address'
-                    textTransform='uppercase'
-                  >ADDRESS</FormLabel>
-                  <Input {...field} fontSize="1xl" id='address' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.address}</FormErrorMessage>
-                </FormControl>
-              )}
+              {({ field, form }: FieldProps) => {
+                return (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.address)
+                      && Boolean(form.touched.address)}
+                  >
+                    <FormLabel
+                      fontSize="12px"
+                      htmlFor='address'
+                      textTransform='uppercase'
+                    >ADDRESS</FormLabel>
+                    <Input {...field} fontSize="1xl" id='address' variant='flushed' placeholder='Enter' />
+                    <FormErrorMessage>{form.errors.address}</FormErrorMessage>
+                  </FormControl>
+                )
+              }}
             </Field>
 
             <Field name='image' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.image)
-                    && Boolean(form.touched.image)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='image'
-                    textTransform='uppercase'
-                  >IMAGE</FormLabel>
-                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
-                    value={undefined}
-                    onChange={(event) => {
-                      props.setFieldValue(
-                        "image",
-                        event.currentTarget.files !== null
-                          ? event.currentTarget.files[0]
-                          : null
-                      );
-                    }}
-                  />
-                  <Thumb file={field.value} />
+              {({ field, form }: FieldProps) => {
+                return (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.image)
+                      && Boolean(form.touched.image)}
+                  >
+                    <FormLabel
+                      fontSize="12px"
+                      htmlFor='image'
+                      textTransform='uppercase'
+                    >IMAGE</FormLabel>
+                    <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                      value={undefined}
+                      onChange={(event) => {
+                        props.setFieldValue(
+                          "image",
+                          event.currentTarget.files !== null
+                            ? event.currentTarget.files[0]
+                            : null
+                        );
+                      }}
+                    />
+                    <Thumb file={field.value} />
 
-                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
-                </FormControl>
-              )}
+                    <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                  </FormControl>
+                )
+              }}
             </Field>
           </Stack>
           <Button
@@ -250,6 +261,7 @@ export default function FieldForm(props: DetailProps) {
           </Button>
           <ConfirmDrawer />
         </Form>
+      }
       }
     </Formik>
   )

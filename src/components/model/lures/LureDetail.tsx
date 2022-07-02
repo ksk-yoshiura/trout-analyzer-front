@@ -1,14 +1,15 @@
-import React from 'react'
-import Image from "next/image"
 import {
-  Box,
   Badge,
+  Box,
   Stack
 } from '@chakra-ui/react'
-import Loading from '../../shared/Loading'
+import Image from "next/image"
+import React from 'react'
 import useSWR from 'swr'
-import { LuresApiResponse } from "../../../pages/api/lures/[id]"
+
+import type { LuresApiResponse } from "../../../pages/api/lures/[id]"
 import { getDateFormatted } from "../../../utils/dateFormat"
+import Loading from '../../shared/Loading'
 
 type DetailProps = {
   chosenId: number
@@ -22,13 +23,13 @@ export default function LuresList(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // ルアーデータ
-  const lureDetailData = data.result? data.result : null
+  const lureDetailData = data.result ? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = lureDetailData?.LureImage? s3DomainPath + lureDetailData.LureImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = lureDetailData?.LureImage ? s3DomainPath + lureDetailData.LureImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = lureDetailData?.LureImage? lureDetailData.name : 'No Image'
+  const imageAlt = lureDetailData?.LureImage ? lureDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -73,7 +74,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             COMPANY {lureDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {lureDetailData? getDateFormatted(lureDetailData.CreatedAt) : null}
+            ADDED {lureDetailData ? getDateFormatted(lureDetailData.CreatedAt) : null}
           </Box>
         </Stack>
 

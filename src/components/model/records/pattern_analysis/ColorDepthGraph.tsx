@@ -1,9 +1,10 @@
-import { Bar } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
-import Loading from '../../../shared/Loading'
+import { Bar } from 'react-chartjs-2';
 import useSWR from 'swr'
-import { ColorDepthAnalysisApiResponse } from "../../../../pages/api/patterns/analysis/color_depth/[record_id]/[result]"
+
+import type { ColorDepthAnalysisApiResponse } from "../../../../pages/api/patterns/analysis/color_depth/[record_id]/[result]"
+import Loading from '../../../shared/Loading'
 
 Chart.register(CategoryScale);
 
@@ -13,7 +14,7 @@ const dataFrame = {
   datasets: [
     {
       label: '',
-      data: [0,0,0,0,0], // 初期値は0
+      data: [0, 0, 0, 0, 0], // 初期値は0
       backgroundColor: '',
       stack: '',
     }
@@ -55,19 +56,19 @@ export default function ColorDepthGraph(props: ParamProps): JSX.Element {
   // 雛形
   const dataForm = {
     label: '',
-    data: [0,0,0,0,0], // 初期値は0
+    data: [0, 0, 0, 0, 0], // 初期値は0
     backgroundColor: '',
     stack: '',
   }
 
-  let tempDataForm = {
+  const tempDataForm = {
     label: '',
-    data: [0,0,0,0,0], // 初期値は0
+    data: [0, 0, 0, 0, 0], // 初期値は0
     backgroundColor: '',
     stack: '',
   }
   // グラフで表示するデータセット
-  let tempListForGraph: Array<GraphData> = []
+  const tempListForGraph: Array<GraphData> = []
   const depthTypeList = ['top', 'shallow', 'midle', 'deep', 'bottom'] // 条件リスト
   // APIからデータ取得
   const { data, error } = useSWR<ColorDepthAnalysisApiResponse, Error>('pattern/analysis/color_depth/' + recordId + '/' + targetParam)
@@ -84,7 +85,7 @@ export default function ColorDepthGraph(props: ParamProps): JSX.Element {
       tempDataForm.backgroundColor = paraentVal.ColorCode
       tempDataForm.stack = paraentVal.ResultType
       // 初期化することで参照を切る
-      tempDataForm.data = [0,0,0]
+      tempDataForm.data = [0, 0, 0]
       const indexDepthList = depthTypeList.indexOf(paraentVal.DepthType)
       if (indexDepthList !== -1) tempDataForm.data[indexDepthList] = paraentVal.Sum
       // データ加工用配列
@@ -104,7 +105,7 @@ export default function ColorDepthGraph(props: ParamProps): JSX.Element {
       // 条件リストに該当があれば合計値を格納
       const indexDepthList = depthTypeList.indexOf(paraentVal.DepthType)
       // 初期化することで参照を切る
-      newData.data = [0,0,0]
+      newData.data = [0, 0, 0]
       if (indexDepthList !== -1) newData.data[indexDepthList] = paraentVal.Sum
       newData.backgroundColor = paraentVal.ColorCode
       newData.label = paraentVal.ColorName + '-' + paraentVal.ResultType

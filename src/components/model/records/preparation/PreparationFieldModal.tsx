@@ -1,14 +1,15 @@
-import React from 'react'
 import {
-  useDisclosure,
   Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
 } from '@chakra-ui/react'
+import React from 'react'
+
 import FieldForm from '../../fields/FieldForm'
 
 type FieldData = {
@@ -24,17 +25,17 @@ export default function PreparationFieldModal() {
   const { isOpen, onOpen, onClose: onFieldModalClose } = useDisclosure()
   return (
     <>
-    <Button onClick={onOpen} mr={5} pl={10} pr={10} colorScheme='teal'>New Field</Button>
-    <Modal isOpen={isOpen} onClose={onFieldModalClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Register New Field</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <FieldForm chosenId={chosenId} data={vacantData} onFieldModalClose={onFieldModalClose} />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+      <Button onClick={onOpen} mr={5} pl={10} pr={10} colorScheme='teal'>New Field</Button>
+      <Modal isOpen={isOpen} onClose={onFieldModalClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Register New Field</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FieldForm chosenId={chosenId} data={vacantData} onFieldModalClose={onFieldModalClose} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

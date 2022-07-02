@@ -1,12 +1,12 @@
-import React from 'react'
 import {
   Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
   StatArrow,
   StatGroup,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
 } from '@chakra-ui/react';
+import React from 'react'
 
 export default function TopStatistic(): JSX.Element {
   return (

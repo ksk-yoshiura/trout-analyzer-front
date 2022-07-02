@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import {
+  Circle, Input, Tooltip,
+  Wrap, WrapItem,
+} from "@chakra-ui/react";
 import {
   useField
 } from 'formik';
-import {
-  Circle, Wrap, WrapItem, Input, Tooltip, 
-} from "@chakra-ui/react";
-import Loading from '../../shared/Loading'
+import React, { useEffect, useState } from 'react'
 import useSWR from 'swr'
-import { ColorsApiResponse } from "../../../pages/api/colors/index"
+
+import type { ColorsApiResponse } from "../../../pages/api/colors/index"
+import Loading from '../../shared/Loading'
 
 // ルアーカラー用
 export default function LuresColorPalette(props: any) {
-  const [field, meta, helpers] = useField(props.field);
+  const [field, , helpers] = useField(props.field);
   // 初期値表示
   const defaultValue = field.value ? field.value : null
   useEffect(() => { // 初期値をフィールドにセット
@@ -27,13 +29,13 @@ export default function LuresColorPalette(props: any) {
   // カラーデータ
   const colorList = data.result ? data.result : []
   // カラーパレットの色クリック
-  function handleClickColor(value: string) {
+  const handleClickColor = (value: string) => {
     helpers.setValue(value)
     // カラー名（表示用）
     getColorName(value)
   }
 
-  function getColorName(value: string) {
+  const getColorName = (value: string) => {
     const selectedColorId = value
     const colorName = colorList.filter((val) => {
       return selectedColorId === val.ID
@@ -49,7 +51,7 @@ export default function LuresColorPalette(props: any) {
             return (
               <WrapItem key={index} >
                 <Tooltip label={item.name} aria-label='A tooltip'>
-                  <Circle boxShadow='dark-lg' onClick={() => handleClickColor(item.ID)} mr='5px' size='30px' bg={item.code}>
+                  <Circle boxShadow='dark-lg' onClick={() => { return handleClickColor(item.ID) }} mr='5px' size='30px' bg={item.code}>
                   </Circle>
                 </Tooltip>
               </WrapItem>

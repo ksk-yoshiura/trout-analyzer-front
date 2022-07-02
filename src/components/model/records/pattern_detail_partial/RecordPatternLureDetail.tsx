@@ -1,11 +1,10 @@
-import React from 'react';
 import {
   Box,
   Stack
 } from '@chakra-ui/react'
+import React from 'react';
 
 type LureProps = {
-  lureType: string;
   lureName: string;
   lureCompany: string;
   lureColor: string;

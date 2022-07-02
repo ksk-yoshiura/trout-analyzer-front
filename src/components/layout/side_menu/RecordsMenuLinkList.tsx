@@ -1,15 +1,16 @@
-import React from 'react'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
 import {
   Button,
+  Divider,
   Link,
   List,
-  ListItem,
   ListIcon,
+  ListItem,
   Stack,
-  useDisclosure,
-  Divider
+  useDisclosure
 } from '@chakra-ui/react'
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+import React from 'react'
+
 import { RecordsMenuData } from './records_menu_data'
 
 export default function SnipeMenuLinkList() {

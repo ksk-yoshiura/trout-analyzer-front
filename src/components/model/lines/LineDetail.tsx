@@ -1,14 +1,15 @@
-import React from 'react'
-import Image from "next/image"
 import {
-  Box,
   Badge,
+  Box,
   Stack
 } from '@chakra-ui/react'
+import Image from "next/image"
+import React from 'react'
 import useSWR from 'swr'
-import { LinesApiResponse } from "../../../pages/api/lines/[id]"
-import Loading from '../../shared/Loading'
+
+import type { LinesApiResponse } from "../../../pages/api/lines/[id]"
 import { getDateFormatted } from "../../../utils/dateFormat"
+import Loading from '../../shared/Loading'
 
 type DetailProps = {
   chosenId: number
@@ -23,11 +24,11 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // ラインデータ
-  const lineDetailData = data.result? data.result : null
+  const lineDetailData = data.result ? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = lineDetailData?.LineImage ? s3DomainPath + lineDetailData.LineImage.image_file + '.png'  : '/no_image.png'
+  const imageUrl = lineDetailData?.LineImage ? s3DomainPath + lineDetailData.LineImage.image_file + '.png' : '/no_image.png'
   // 画像alt
   const imageAlt = lineDetailData?.LineImage ? lineDetailData.name : 'No Image'
 
@@ -71,7 +72,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
             COMPANY {lineDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {lineDetailData? getDateFormatted(lineDetailData.CreatedAt) : null}
+            ADDED {lineDetailData ? getDateFormatted(lineDetailData.CreatedAt) : null}
           </Box>
         </Stack>
       </Box>

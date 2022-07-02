@@ -1,25 +1,28 @@
-import React, { useState } from 'react'
-import { useRouter } from "next/router";
-import {
-  Formik,
-  Form,
-  Field,
-  FieldProps,
-  useFormikContext
-} from 'formik';
 import {
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
   FormControl,
   FormErrorMessage,
   Stack,
   useDisclosure,
-  Drawer,
-  DrawerBody,
-  DrawerOverlay,
-  DrawerContent,
   useToast,
-  Flex,
 } from "@chakra-ui/react";
+import type {
+  FieldProps
+} from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  useFormikContext
+} from 'formik';
+import { useRouter } from "next/router";
+import React, { useState } from 'react'
+
 import { createAxiosInstance } from "../../../pages/api/utils"
 import PreparationFieldModal from '../../model/records/preparation/PreparationFieldModal'
 import PreparationFieldSelect from '../../model/records/preparation/PreparationFieldSelect'
@@ -48,18 +51,18 @@ export default function RecordStartingForm(): JSX.Element {
   const axiosInstance = createAxiosInstance()
 
   // API登録・更新
-  function handleSendRecordData(values: RecordData) {
+  const handleSendRecordData = (values: RecordData) => {
 
     // idはnumber
-    const convertedValue: RecordFormData = {fieldId: 0}
+    const convertedValue: RecordFormData = { fieldId: 0 }
     convertedValue.fieldId = Number(values.fieldId)
     axiosInstance.post('records', convertedValue)
-      .then(function (response) {
+      .then((response) => {
         const newRecordID = response.data.result.ID
         // リストページに遷移
         router.push('/records/serial_register/' + newRecordID)
       })
-      .catch(function (error) {
+      .catch((error) => {
         toast({
           title: 'Failed!',
           description: error.message,
@@ -89,7 +92,7 @@ export default function RecordStartingForm(): JSX.Element {
               type="submit"
               onClick={() => {
                 submitForm(),
-                setTimeout(() => onClose(), 1000)
+                  setTimeout(() => { return onClose() }, 1000)
               }}
               colorScheme='teal'
               variant='solid'
@@ -102,7 +105,8 @@ export default function RecordStartingForm(): JSX.Element {
 
 
   // バリデーション
-  function validateData(value: RecordData) {
+  const validateData = (value: RecordData) => {
+    console.log(value)
     // console.log(value)
     // let error
     // if (!value) {
@@ -125,22 +129,24 @@ export default function RecordStartingForm(): JSX.Element {
           }, 1000)
         }}
       >
-        {(props) =>
-          <Form>
+        {() => {
+          return <Form>
             <Stack spacing={5}>
               <Field name='fieldId' validate={validateData}>
-                {({ field, form }: FieldProps) => (
-                  <FormControl
-                    isInvalid={Boolean(form.errors.fieldId)
-                      && Boolean(form.touched.fieldId)}
-                  >
-                    <Flex py={50} w="100wh" justifyContent={'center'}>
-                      <PreparationFieldSelect field={field} fieldValue={fieldValue} setFieldValue={setFieldValue} />
-                      <PreparationFieldModal />
-                    </Flex>
-                    <FormErrorMessage>{form.errors.fieldId}</FormErrorMessage>
-                  </FormControl>
-                )}
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.fieldId)
+                        && Boolean(form.touched.fieldId)}
+                    >
+                      <Flex py={50} w="100wh" justifyContent={'center'}>
+                        <PreparationFieldSelect field={field} fieldValue={fieldValue} setFieldValue={setFieldValue} />
+                        <PreparationFieldModal />
+                      </Flex>
+                      <FormErrorMessage>{form.errors.fieldId}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
               </Field>
 
             </Stack>
@@ -155,6 +161,7 @@ export default function RecordStartingForm(): JSX.Element {
             </Button>
             <ConfirmDrawer />
           </Form>
+        }
         }
       </Formik>
     </>

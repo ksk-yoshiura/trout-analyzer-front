@@ -1,5 +1,5 @@
+import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import React from 'react'
-import { Radio, RadioGroup,  Stack } from '@chakra-ui/react'
 
 type DetailProps = {
   setTargetResult: any
@@ -7,11 +7,11 @@ type DetailProps = {
 
 export default function ResultRadioGroup(props: DetailProps) {
   const { setTargetResult } = props
-  function handleSelectRadio(value: string) {
+  const handleSelectRadio = (value: string) => {
     setTargetResult(value)
   }
   return (
-    <RadioGroup pb={5} onChange={(val) => handleSelectRadio(val)}>
+    <RadioGroup pb={5} onChange={(val) => { return handleSelectRadio(val) }}>
       <Stack direction='row'>
         <Radio value='all'>All</Radio>
         <Radio value='caught'>Caught</Radio>

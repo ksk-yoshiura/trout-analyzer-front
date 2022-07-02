@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
-import { useRouter } from "next/router";
 import {
-  Box,
   Badge,
-  Stack,
-  useDisclosure,
+  Box,
   Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  useDisclosure,
 } from '@chakra-ui/react'
+import NextLink from "next/link"
+import { useRouter } from "next/router";
+import React, { useState } from 'react'
+import useSWR from 'swr'
+
+import type { PatternsApiResponse } from "../../../pages/api/patterns/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
-import NextLink from "next/link"
 import RecordPatternDetail from './RecordPatternDetail'
-import useSWR from 'swr'
-import { PatternsApiResponse } from "../../../pages/api/patterns/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
 
 
 export default function RecordsAllList(): JSX.Element {
@@ -38,7 +39,7 @@ export default function RecordsAllList(): JSX.Element {
   // パターンデータ
   const patternsListData = data.result ? data.result : []
 
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
 
@@ -78,7 +79,7 @@ export default function RecordsAllList(): JSX.Element {
                 key={index}
                 onClick={() => {
                   onOpen(),
-                  clickHandler(item.ID)
+                    clickHandler(item.ID)
                 }}
                 type='button' as={"button"}
                 display="flex"
@@ -94,7 +95,7 @@ export default function RecordsAllList(): JSX.Element {
                       {item.ResultCondition.typeName}
                     </Badge>
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
-                      { item.Lure.LureType.typeName }
+                      {item.Lure.LureType.typeName}
                     </Badge>
                     <Badge borderRadius='full' px='2' mr={1} color='gray.500'>
                       {item.WeatherCondition.typeName}
@@ -120,7 +121,7 @@ export default function RecordsAllList(): JSX.Element {
               </Box>
             )
           }) :
-          <NoDataAlert title={'patterns'} />
+            <NoDataAlert title={'patterns'} />
         }
 
         <RecordPatternDetailModal />

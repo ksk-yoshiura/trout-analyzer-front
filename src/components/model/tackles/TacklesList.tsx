@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
 import {
+  Badge,
   Box,
   Image,
-  Wrap,
-  WrapItem,
   useDisclosure,
-  Badge
+  Wrap,
+  WrapItem
 } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import useSWR from 'swr'
+
+import type { TacklesApiResponse } from "../../../pages/api/tackles/index"
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import TackleDetail from './TackleDetail'
-import useSWR, { mutate } from 'swr'
-import { TacklesApiResponse } from "../../../pages/api/tackles/index"
 
 export default function TacklesList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -24,7 +25,7 @@ export default function TacklesList(): JSX.Element {
   // タックルデータ
   const tacklesListData = data.result ? data.result : []
 
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const tackleIdNumber = Number(value)
     // クリックされたカードから得たIDを更新
@@ -34,7 +35,7 @@ export default function TacklesList(): JSX.Element {
   // モーダルを部分的に移行し共通化
   const TackleDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'tackle'} mutate={mutate}>
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'tackle'} >
         <TackleDetail chosenId={chosenId} />
       </DetailModal>
     )

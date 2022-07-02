@@ -1,35 +1,38 @@
-import React, { useEffect } from 'react'
-import { useRouter } from "next/router";
 import {
-  Formik,
-  Form,
-  Field,
-  FieldProps,
-  useFormikContext,
-  useField
-} from 'formik';
-import {
-  Input,
+  Box,
   Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Stack,
-  useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerOverlay,
   DrawerContent,
-  useToast,
+  DrawerOverlay,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
   HStack,
+  Input,
+  Stack,
+  useDisclosure,
   useNumberInput,
-  Box
+  useToast
 } from "@chakra-ui/react";
-import Thumb from "../../shared/ThumbImage"
-import LureTypeSelect from "./LureTypeSelect"
-import LuresColorPalette from "./LuresColorPalette"
+import type {
+  FieldProps
+} from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  useField,
+  useFormikContext
+} from 'formik';
+import { useRouter } from "next/router";
+import React, { useEffect } from 'react'
+
 import { createAxiosInstance } from "../../../pages/api/utils"
 import { convertFileIntoBase64 } from "../../../utils/base64Convert"
+import Thumb from "../../shared/ThumbImage"
+import LuresColorPalette from "./LuresColorPalette"
+import LureTypeSelect from "./LureTypeSelect"
 
 type LureData = {
   ID?: string
@@ -63,7 +66,7 @@ export default function LureForm(props: DetailProps) {
 
   // ルアー重さ
   const InputWightNumber = (props: any) => {
-    const [field, meta, helpers] = useField(props);
+    const [field, , helpers] = useField(props);
 
     // 初期値表示
     const defaultValue = field.value !== '' ? field.value : '2.0'
@@ -79,7 +82,7 @@ export default function LureForm(props: DetailProps) {
         precision: 1,
         name: field.name,
         value: defaultValue,
-        onChange: (valueAsString, valueAsNumber) => helpers.setValue(valueAsString)
+        onChange: (valueAsString,) => { return helpers.setValue(valueAsString) }
       })
 
     const inc = getIncrementButtonProps()
@@ -98,9 +101,9 @@ export default function LureForm(props: DetailProps) {
 
 
   // API登録・更新
-  async function handleSendLureData(values: LureData) {
+  const handleSendLureData = (values: LureData) => {
     // 画像データはbase64に変換
-    const imageBase64 = values.image? await convertFileIntoBase64(values.image) : ''
+    const imageBase64 = values.image ? convertFileIntoBase64(values.image) : ''
     const lurePostData = {
       lureTypeId: values.lureTypeId,
       name: values.name,
@@ -112,7 +115,7 @@ export default function LureForm(props: DetailProps) {
 
     if (chosenId !== '0') { // ルアーIDがある場合は更新
       axiosInstance.put('lures/' + chosenId, lurePostData)
-        .then(function () {
+        .then(() => {
           // リストページに遷移
           router.push('/lures')
           // アラート代わりにトーストを使用
@@ -124,7 +127,7 @@ export default function LureForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.message,
@@ -135,7 +138,7 @@ export default function LureForm(props: DetailProps) {
         })
     } else { // ルアーIDがない場合は登録
       axiosInstance.post('lures', lurePostData)
-        .then(function () {
+        .then(() => {
           // リストページに遷移
           router.push('/lures')
           // アラート代わりにトーストを使用
@@ -147,7 +150,7 @@ export default function LureForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.message,
@@ -159,7 +162,8 @@ export default function LureForm(props: DetailProps) {
     }
   }
 
-  function validateData(value: LureData) {
+  const validateData = (value: LureData) => {
+    console.log(value)
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -186,7 +190,7 @@ export default function LureForm(props: DetailProps) {
             >Cancel</Button>
             <Button
               type="submit"
-              onClick={() => submitForm()}
+              onClick={() => { return submitForm() }}
               colorScheme='teal'
               variant='solid'
             >Confirm</Button>
@@ -213,132 +217,146 @@ export default function LureForm(props: DetailProps) {
         }, 1000)
       }}
     >
-      {(props) => (
-        <Form>
-          <Stack spacing={5}>
-            <Field name='name' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.name)
-                    && Boolean(form.touched.name)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='name'
-                    textTransform='uppercase'
-                  >NAME</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field name='lureTypeId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.lureTypeId)
-                    && Boolean(form.touched.lureTypeId)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='lureTypeId'
-                    textTransform='uppercase'
-                  >LURE TYPE</FormLabel>
-                  <LureTypeSelect field={field} />
-                  <FormErrorMessage>{form.errors.type}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field name='color' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.color)
-                    && Boolean(form.touched.color)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='color'
-                    textTransform='uppercase'
-                  >COLOR</FormLabel>
-                  <LuresColorPalette field={field} />
-                  <FormErrorMessage>{form.errors.color}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field name='weight' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.weight)
-                    && Boolean(form.touched.weight)}
-                  textAlign='left'
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='weight'
-                    textTransform='uppercase'
-                  >WEIGHT</FormLabel>
-                  <InputWightNumber {...field} />
-                  <FormErrorMessage>{form.errors.weight}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field name='companyName' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.companyName)
-                    && Boolean(form.touched.companyName)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='companyName'
-                    textTransform='uppercase'
-                  >COMPANY</FormLabel>
-                  <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field name='image' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.image)
-                    && Boolean(form.touched.image)}
-                >
-                  <FormLabel
-                    fontSize="12px"
-                    htmlFor='image'
-                    textTransform='uppercase'
-                  >IMAGE</FormLabel>
-                  <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
-                    value={undefined}
-                    onChange={(event) => {
-                      props.setFieldValue(
-                        "image",
-                        event.currentTarget.files !== null
-                          ? event.currentTarget.files[0]
-                          : null
-                      );
-                    }}
-                  />
-                  <Thumb file={field.value} />
+      {(props) => {
+        return (
+          <Form>
+            <Stack spacing={5}>
+              <Field name='name' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.name)
+                        && Boolean(form.touched.name)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='name'
+                        textTransform='uppercase'
+                      >NAME</FormLabel>
+                      <Input {...field} width="100%" fontSize="1xl" id='name' variant='flushed' placeholder='Enter' />
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Field name='lureTypeId' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.lureTypeId)
+                        && Boolean(form.touched.lureTypeId)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='lureTypeId'
+                        textTransform='uppercase'
+                      >LURE TYPE</FormLabel>
+                      <LureTypeSelect field={field} />
+                      <FormErrorMessage>{form.errors.type}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Field name='color' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.color)
+                        && Boolean(form.touched.color)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='color'
+                        textTransform='uppercase'
+                      >COLOR</FormLabel>
+                      <LuresColorPalette field={field} />
+                      <FormErrorMessage>{form.errors.color}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Field name='weight' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.weight)
+                        && Boolean(form.touched.weight)}
+                      textAlign='left'
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='weight'
+                        textTransform='uppercase'
+                      >WEIGHT</FormLabel>
+                      <InputWightNumber {...field} />
+                      <FormErrorMessage>{form.errors.weight}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Field name='companyName' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.companyName)
+                        && Boolean(form.touched.companyName)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='companyName'
+                        textTransform='uppercase'
+                      >COMPANY</FormLabel>
+                      <Input {...field} width="100%" fontSize="1xl" id='company' variant='flushed' placeholder='Enter' />
+                      <FormErrorMessage>{form.errors.companyName}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Field name='image' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.image)
+                        && Boolean(form.touched.image)}
+                    >
+                      <FormLabel
+                        fontSize="12px"
+                        htmlFor='image'
+                        textTransform='uppercase'
+                      >IMAGE</FormLabel>
+                      <Input type="file" {...field} fontSize="1xl" id='image' variant='flushed' placeholder='Enter'
+                        value={undefined}
+                        onChange={(event) => {
+                          props.setFieldValue(
+                            "image",
+                            event.currentTarget.files !== null
+                              ? event.currentTarget.files[0]
+                              : null
+                          );
+                        }}
+                      />
+                      <Thumb file={field.value} />
 
-                  <FormErrorMessage>{form.errors.image}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+                      <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
 
-          </Stack>
-          <Button
-            mt={4}
-            mb='50px'
-            colorScheme='teal'
-            type='button'
-            onClick={onOpen}
-          >
-            Register
-          </Button>
-          <ConfirmDrawer />
-        </Form>
-      )}
+            </Stack>
+            <Button
+              mt={4}
+              mb='50px'
+              colorScheme='teal'
+              type='button'
+              onClick={onOpen}
+            >
+              Register
+            </Button>
+            <ConfirmDrawer />
+          </Form>
+        )
+      }}
     </Formik>
   )
 }

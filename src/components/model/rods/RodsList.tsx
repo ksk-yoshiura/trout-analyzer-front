@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
 import {
-  Box,
-  Image,
   Badge,
+  Box,
+  Button,
+  Image,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
   Wrap,
   WrapItem,
-  useDisclosure,
-  Button,
-  ModalFooter,
-  ModalBody,
 } from '@chakra-ui/react'
-import RodDetail from './RodDetail'
+import React, { useState } from 'react'
+import useSWR from 'swr'
+
+import type { RodsApiResponse } from "../../../pages/api/rods/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
-import NoDataAlert from '../../shared/NoDataAlert'
 import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
-import useSWR, { mutate } from 'swr'
-import { RodsApiResponse } from "../../../pages/api/rods/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import NoDataAlert from '../../shared/NoDataAlert'
+import RodDetail from './RodDetail'
 
 type ListProps = {
   isTackle: boolean
@@ -43,7 +44,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   // 画像拡張子
   const image_ext = '.png'
 
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
     // クリックされたカードから得たIDを更新
@@ -51,7 +52,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   }
 
   // タックル用ロッド選択
-  function selectRodForTackleHandler(event: any) {
+  const selectRodForTackleHandler = (event: any) => {
     const { target } = event
     const selectId = target.value
     console.log(selectId)
@@ -61,7 +62,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   // モーダルを部分的に移行し共通化
   const RodDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} mutate={mutate} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} >
         <RodDetail chosenId={chosenId} />
       </DetailModal>
     )
@@ -70,13 +71,13 @@ export default function RodsList(props: ListProps): JSX.Element {
   // タックル用モーダル
   const RodDetailForTackleModal = () => {
     return (
-      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'rod'} >
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} title={'rod'} >
         <ModalBody>
           <RodDetail chosenId={chosenId} />
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'space-between'}>
-          <Button variant='solid' onClick={() => onClose()}>Cancel</Button>
+          <Button variant='solid' onClick={() => { return onClose() }}>Cancel</Button>
           <Button
             colorScheme='blue'
             value={chosenId}
@@ -100,7 +101,7 @@ export default function RodsList(props: ListProps): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.RodImage.image_file? s3DomainPath + item.RodImage.image_file + image_ext: '/no_image.png'} alt={item.name ?? 'No Image'}/>
+                  <Image src={item.RodImage.image_file ? s3DomainPath + item.RodImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>

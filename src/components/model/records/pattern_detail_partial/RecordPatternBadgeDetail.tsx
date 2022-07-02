@@ -1,10 +1,10 @@
-import React from 'react';
 import {
-  Box,
-  Badge
+  Badge,
+  Box
 } from '@chakra-ui/react'
+import React from 'react';
 
-type BadgeProps = { 
+type BadgeProps = {
   result: string;
   lureType: string;
   weather: string;

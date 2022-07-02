@@ -1,14 +1,15 @@
-import React from 'react'
-import Image from "next/image";
-import { 
-  Box, 
+import {
   Badge,
-  Stack 
+  Box,
+  Stack
 } from '@chakra-ui/react'
-import Loading from '../../shared/Loading'
+import Image from "next/image";
+import React from 'react'
 import useSWR from 'swr'
-import { ReelsApiResponse } from "../../../pages/api/reels/[id]"
+
+import type { ReelsApiResponse } from "../../../pages/api/reels/[id]"
 import { getDateFormatted } from "../../../utils/dateFormat"
+import Loading from '../../shared/Loading'
 
 type DetailProps = {
   chosenId: number
@@ -22,17 +23,17 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // リールデータ
-  const reelDetailData = data.result? data.result : null
+  const reelDetailData = data.result ? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
   const imageUrl = reelDetailData?.ReelImage ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = reelDetailData?.ReelImage? reelDetailData.name : 'No Image'
+  const imageAlt = reelDetailData?.ReelImage ? reelDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
-    <Image src={imageUrl} alt={imageAlt} width={366} height={366} />
+      <Image src={imageUrl} alt={imageAlt} width={366} height={366} />
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
@@ -70,7 +71,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             COMPANY {reelDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {reelDetailData? getDateFormatted(reelDetailData.CreatedAt) : null}
+            ADDED {reelDetailData ? getDateFormatted(reelDetailData.CreatedAt) : null}
           </Box>
         </Stack>
 

@@ -1,14 +1,15 @@
-import React from 'react'
-import Image from "next/image"
 import {
-  Box,
   Badge,
+  Box,
   Stack
 } from '@chakra-ui/react'
-import Loading from '../../shared/Loading'
+import Image from "next/image"
+import React from 'react'
 import useSWR from 'swr'
-import { FieldsApiResponse } from "../../../pages/api/fields/[id]"
+
+import type { FieldsApiResponse } from "../../../pages/api/fields/[id]"
 import { getDateFormatted } from "../../../utils/dateFormat"
+import Loading from '../../shared/Loading'
 
 type DetailProps = {
   chosenId: number
@@ -23,13 +24,13 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // フィールドデータ
-  const fieldDetailData = data.result? data.result : null
+  const fieldDetailData = data.result ? data.result : null
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = fieldDetailData?.FieldImage? s3DomainPath + fieldDetailData.FieldImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = fieldDetailData?.FieldImage ? s3DomainPath + fieldDetailData.FieldImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = fieldDetailData?.FieldImage? fieldDetailData.name : 'No Image'
+  const imageAlt = fieldDetailData?.FieldImage ? fieldDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden' textAlign='center'>
@@ -65,10 +66,10 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
             ADDRESS {fieldDetailData?.address}
           </Box>
           <Box>
-            ADDED {fieldDetailData? getDateFormatted(fieldDetailData.CreatedAt) : null}
+            ADDED {fieldDetailData ? getDateFormatted(fieldDetailData.CreatedAt) : null}
           </Box>
           <Box>
-            LAST VISITED {fieldDetailData? getDateFormatted(fieldDetailData.lastVisitedAt) : null}
+            LAST VISITED {fieldDetailData ? getDateFormatted(fieldDetailData.lastVisitedAt) : null}
           </Box>
         </Stack>
 

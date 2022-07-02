@@ -1,15 +1,16 @@
-import React from 'react';
 import {
   Box
 } from '@chakra-ui/react'
+import React from 'react';
+import useSWR from 'swr'
+
+import type { PatternApiResponse } from "../../../pages/api/patterns/[id]"
 import Loading from '../../shared/Loading'
 import RecordPatternBadgeDetail from './pattern_detail_partial/RecordPatternBadgeDetail'
+import RecordPatternLineDetail from './pattern_detail_partial/RecordPatternLineDetail'
 import RecordPatternLureDetail from './pattern_detail_partial/RecordPatternLureDetail'
 import RecordPatternReelDetail from './pattern_detail_partial/RecordPatternReelDetail'
 import RecordPatternRodDetail from './pattern_detail_partial/RecordPatternRodDetail'
-import RecordPatternLineDetail from './pattern_detail_partial/RecordPatternLineDetail'
-import useSWR from 'swr'
-import { PatternApiResponse } from "../../../pages/api/patterns/[id]"
 
 type DetailProps = {
   chosenId: number
@@ -37,7 +38,6 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
             />
 
             <RecordPatternLureDetail
-              lureType={data.result.Lure.LureType.typeName}
               lureName={data.result.Lure.name}
               lureCompany={data.result.Lure.companyName}
               lureColor={data.result.Lure.color}

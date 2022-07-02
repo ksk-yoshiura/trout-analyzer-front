@@ -1,11 +1,12 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { SessionProvider } from "next-auth/react";
-import { AppProps } from 'next/app';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
-import Layout from "../components/layout/Layout";
+import type { AppProps } from 'next/app';
+import { SessionProvider } from "next-auth/react";
+import { useEffect, useState } from 'react'
 import { SWRConfig } from 'swr'
+
+import Layout from "../components/layout/Layout";
 import { createAxiosInstance } from "../pages/api/utils"
-import { useState, useEffect } from 'react'
 
 // デフォルトの breakpoints
 // https://chakra-ui.com/docs/theming/theme#breakpoints
@@ -49,10 +50,12 @@ export default function App({
     const axiosInstance = createAxiosInstance()
     // axiosInstanceはuseSessionからアクセストークンを取得しているので
     // SessionProviderコンポーネントより内側で呼ぶ必要がある
-    const fetcher = (url: string) => axiosInstance.get(url)
-      .then((res) => {
-        return res.data
-      })
+    const fetcher = (url: string) => {
+      return axiosInstance.get(url)
+        .then((res) => {
+          return res.data
+        })
+    }
 
     return (
       <SWRConfig value={{ fetcher }}>

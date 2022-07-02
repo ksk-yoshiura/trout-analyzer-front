@@ -1,15 +1,16 @@
-import React from 'react';
 import {
   Box,
   Image,
   Stack
 } from '@chakra-ui/react'
 import NextLink from "next/link"
+import React from 'react';
+import useSWR from 'swr'
+
+import type { RecordsApiResponse } from "../../../pages/api/records/all"
+import { getDateFormatted } from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
-import useSWR from 'swr'
-import { RecordsApiResponse } from "../../../pages/api/records/all"
-import { getDateFormatted } from "../../../utils/dateFormat"
 
 export default function RecordsAllList(): JSX.Element {
 
@@ -19,7 +20,7 @@ export default function RecordsAllList(): JSX.Element {
   if (!data) return <Loading />
   // レコードデータ
   const recordListData = data.result ? data.result : []
-  
+
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像拡張子
@@ -39,8 +40,8 @@ export default function RecordsAllList(): JSX.Element {
                   borderRadius='lg'
                   type='button' as={"button"}
                   overflow='hidden'
-                > 
-                  <Image p='2' w='40%' src={s3DomainPath + item.Field.FieldImage.image_file + image_ext?? '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
+                >
+                  <Image p='2' w='40%' src={s3DomainPath + item.Field.FieldImage.image_file + image_ext ?? '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
 
                   <Box p='2' w='60%'>
                     <Box
@@ -68,7 +69,7 @@ export default function RecordsAllList(): JSX.Element {
               </NextLink>
             )
           }) :
-          <NoDataAlert title={'records'} />
+            <NoDataAlert title={'records'} />
         }
 
       </Stack>

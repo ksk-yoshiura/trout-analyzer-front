@@ -1,13 +1,14 @@
-import React from 'react'
 import {
+  Badge,
   Box,
   Image,
-  Badge,
   Stack
 } from '@chakra-ui/react'
-import Loading from '../../shared/Loading'
+import React from 'react'
 import useSWR from 'swr'
-import { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
+
+import type { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
+import Loading from '../../shared/Loading'
 
 type DetailProps = {
   chosenId: number
@@ -29,11 +30,10 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const rodImageUrl = data.result ? s3DomainPath + data.result.Rod.RodImage.image_file + '.png'  : '/no_image.png'
-  const reelImageUrl = data.result ? s3DomainPath + data.result.Reel.ReelImage.image_file + '.png'  : '/no_image.png'
-  const lineImageUrl = data.result ? s3DomainPath + data.result.Line.LineImage.image_file + '.png'  : '/no_image.png'
-  // 画像alt
-  const imageAlt = data.result?.Rod.imageAlt ? data.result.Rod.imageAlt : 'No Image'
+  const rodImageUrl = data.result ? s3DomainPath + data.result.Rod.RodImage.image_file + '.png' : '/no_image.png'
+  const reelImageUrl = data.result ? s3DomainPath + data.result.Reel.ReelImage.image_file + '.png' : '/no_image.png'
+  const lineImageUrl = data.result ? s3DomainPath + data.result.Line.LineImage.image_file + '.png' : '/no_image.png'
+
   return (
     <Box maxW='sm' overflow='hidden'>
       {

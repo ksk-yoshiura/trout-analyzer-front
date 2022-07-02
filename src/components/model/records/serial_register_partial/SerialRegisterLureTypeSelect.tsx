@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
 import {
   Select
 } from "@chakra-ui/react";
-import LureSelect from './SerialRegisterLureSelect'
-import Loading from '../../../shared/Loading'
+import React, { useState } from 'react'
 import useSWR from 'swr'
-import { LureTypesApiResponse } from "../../../../pages/api/lure_types/index"
+
+import type { LureTypesApiResponse } from "../../../../pages/api/lure_types/index"
+import Loading from '../../../shared/Loading'
+import LureSelect from './SerialRegisterLureSelect'
 
 export default function LureTypeSelect(props: any) {
   const { field } = props
@@ -18,8 +19,8 @@ export default function LureTypeSelect(props: any) {
   const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
-  
-  function changeHandler(event: React.FormEvent<HTMLSelectElement>) {
+
+  const changeHandler = (event: React.FormEvent<HTMLSelectElement>) => {
     const { target } = event;
     if (!(target instanceof HTMLSelectElement)) {
       return; // or throw new TypeError();
@@ -27,12 +28,12 @@ export default function LureTypeSelect(props: any) {
     const targetLureTypeId = target.value
     setLureTypeId(targetLureTypeId)
     // 画像URLを一旦無効化
-    setLureImageURL('') 
+    setLureImageURL('')
   }
 
   return (
     <>
-      <Select mb={2} w={130} onChange={event => changeHandler(event)} placeholder='Lure Type'>
+      <Select mb={2} w={130} onChange={event => { return changeHandler(event) }} placeholder='Lure Type'>
         {
           data.result?.map((item, index) => {
             return (
@@ -45,8 +46,8 @@ export default function LureTypeSelect(props: any) {
       </Select>
       {
         lureTypeId !== '0'
-        ?<LureSelect lureImageURL={lureImageURL} setLureImageURL={setLureImageURL} lureTypeId={lureTypeId} field={field} />
-        : <></>
+          ? <LureSelect lureImageURL={lureImageURL} setLureImageURL={setLureImageURL} lureTypeId={lureTypeId} field={field} />
+          : <></>
       }
     </>
   )

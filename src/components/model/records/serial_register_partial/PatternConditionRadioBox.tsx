@@ -1,13 +1,14 @@
-import React from 'react';
 import {
   useRadioGroup,
   Wrap,
   WrapItem
 } from "@chakra-ui/react";
-import RadioCard from '../../../shared/RadioCard';
-import Loading from '../../../shared/Loading'
+import React from 'react';
 import useSWR from 'swr'
-import { PatternConditionsApiResponse } from "../../../../pages/api/pattern_conditions/type_num/[type_num]"
+
+import type { PatternConditionsApiResponse } from "../../../../pages/api/pattern_conditions/type_num/[type_num]"
+import Loading from '../../../shared/Loading'
+import RadioCard from '../../../shared/RadioCard';
 
 type PatternTypeProp = {
   typeNum: number
@@ -35,7 +36,7 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   const { typeNum, field } = props
 
   // 初期データセット
-  const fieldDefaultValue = patternData[typeNum - 1 ].default
+  const fieldDefaultValue = patternData[typeNum - 1].default
 
   // ラジオボタンデータ
   const { getRadioProps } = useRadioGroup({
@@ -49,13 +50,13 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   if (!data) return <Loading />
 
   // 釣果の名称配列作成
-  const resultData = data.result?.map(function (value) {
+  const resultData = data.result?.map((value) => {
     return value.typeName
   })
 
   return (
     <Wrap {...field}>
-      { resultData?.map((value) => {
+      {resultData?.map((value) => {
         const radio = getRadioProps({ value })
         return (
           <WrapItem key={value}>

@@ -1,10 +1,11 @@
-import React from 'react';
 import {
   Select
 } from "@chakra-ui/react";
+import React from 'react';
 import useSWR from 'swr'
+
+import type { TacklesApiResponse } from "../../../../pages/api/tackles/index"
 import Loading from '../../../shared/Loading'
-import { TacklesApiResponse } from "../../../../pages/api/tackles/index"
 
 export default function TackleSelect(props: any) {
   const { field } = props

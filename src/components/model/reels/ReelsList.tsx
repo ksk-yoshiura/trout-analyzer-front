@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
 import {
-  Box,
-  Image,
   Badge,
+  Box,
+  Button,
+  Image,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
   Wrap,
   WrapItem,
-  useDisclosure,
-  Button,
-  ModalFooter,
-  ModalBody,
 } from '@chakra-ui/react'
-import ReelDetail from './ReelDetail'
+import React, { useState } from 'react'
+import useSWR from 'swr'
+
+import type { ReelsApiResponse } from "../../../pages/api/reels/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
-import NoDataAlert from '../../shared/NoDataAlert'
 import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
-import useSWR, { mutate } from 'swr'
-import { ReelsApiResponse } from "../../../pages/api/reels/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import NoDataAlert from '../../shared/NoDataAlert'
+import ReelDetail from './ReelDetail'
 
 type ListProps = {
   isTackle: boolean
@@ -35,13 +36,13 @@ export default function ReelsList(props: ListProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // リールデータ
-  const reelsListData = data.result? data.result : []
+  const reelsListData = data.result ? data.result : []
 
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像拡張子
   const image_ext = '.png'
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
 
@@ -50,7 +51,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   }
 
   // タックル用リール選択
-  function selectReelForTackleHandler(event: any) {
+  const selectReelForTackleHandler = (event: any) => {
     const { target } = event
     const selectId = target.value
     setNewReelId ? setNewReelId(selectId) : null
@@ -59,7 +60,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   // モーダルを部分的に移行し共通化
   const ReelDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} mutate={mutate} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} >
         <ReelDetail chosenId={chosenId} />
       </DetailModal>
     )
@@ -68,13 +69,13 @@ export default function ReelsList(props: ListProps): JSX.Element {
   // タックル用モーダル
   const ReelDetailForTackleModal = () => {
     return (
-      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'reel'} >
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} title={'reel'} >
         <ModalBody>
           <ReelDetail chosenId={chosenId} />
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'space-between'}>
-          <Button variant='solid' onClick={() => onClose()}>Cancel</Button>
+          <Button variant='solid' onClick={() => { return onClose() }}>Cancel</Button>
           <Button
             colorScheme='blue'
             value={chosenId}
@@ -98,7 +99,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.ReelImage.image_file? s3DomainPath + item.ReelImage.image_file + image_ext: '/no_image.png'} alt={item.name ?? 'No Image'} />
+                  <Image src={item.ReelImage.image_file ? s3DomainPath + item.ReelImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
@@ -126,7 +127,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added { getDateFormatted(item.CreatedAt)} 
+                      added {getDateFormatted(item.CreatedAt)}
                     </Box>
 
                   </Box>

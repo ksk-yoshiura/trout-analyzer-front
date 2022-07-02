@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
 import {
-  Box,
-  Image,
   Badge,
-  Wrap,
-  WrapItem,
-  useDisclosure,
+  Box,
   Button,
+  Image,
+  ModalBody,
   ModalFooter,
-  ModalBody
+  useDisclosure,
+  Wrap,
+  WrapItem
 } from '@chakra-ui/react'
-import LineDetail from './LineDetail'
+import React, { useState } from 'react'
+import useSWR from 'swr'
+
+import type { LinesApiResponse } from "../../../pages/api/lines/index"
+import { getDateFormatted } from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
-import NoDataAlert from '../../shared/NoDataAlert'
 import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
-import useSWR, { mutate } from 'swr'
-import { LinesApiResponse } from "../../../pages/api/lines/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import NoDataAlert from '../../shared/NoDataAlert'
+import LineDetail from './LineDetail'
 
 type ListProps = {
   isTackle: boolean
@@ -42,7 +43,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像拡張子
   const image_ext = '.png'
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
 
@@ -51,7 +52,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   }
 
   // タックル用ライン選択
-  function selectLineForTackleHandler(event: any) {
+  const selectLineForTackleHandler = (event: any) => {
     const { target } = event
     const selectId = target.value
     setNewLineId ? setNewLineId(selectId) : null
@@ -61,7 +62,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const LineDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} mutate={mutate} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} >
         <LineDetail chosenId={chosenId} />
       </DetailModal>
     )
@@ -70,13 +71,13 @@ export default function LinesList(props: ListProps): JSX.Element {
   // タックル用モーダル
   const LineDetailForTackleModal = () => {
     return (
-      <DetailTackleModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'line'} >
+      <DetailTackleModal isOpen={isOpen} onClose={onClose} title={'line'} >
         <ModalBody>
           <LineDetail chosenId={chosenId} />
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'space-between'}>
-          <Button variant='solid' onClick={() => onClose()}>Cancel</Button>
+          <Button variant='solid' onClick={() => { return onClose() }}>Cancel</Button>
           <Button
             colorScheme='blue'
             value={chosenId}
@@ -99,7 +100,7 @@ export default function LinesList(props: ListProps): JSX.Element {
           return (
             <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
               <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                <Image src={item.LineImage.image_file? s3DomainPath + item.LineImage.image_file + image_ext: '/no_image.png'} alt={item.name ?? 'No Image'}  />
+                <Image src={item.LineImage.image_file ? s3DomainPath + item.LineImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                 <Box p='2'>
                   <Box display='flex' alignItems='baseline'>

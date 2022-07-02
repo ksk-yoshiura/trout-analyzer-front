@@ -1,9 +1,10 @@
-import { Bar } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
-import Loading from '../../../shared/Loading'
+import { Bar } from 'react-chartjs-2';
 import useSWR from 'swr'
-import { ColorLureTypeAnalysisApiResponse } from "../../../../pages/api/patterns/analysis/color_type/[record_id]/[result]"
+
+import type { ColorLureTypeAnalysisApiResponse } from "../../../../pages/api/patterns/analysis/color_type/[record_id]/[result]"
+import Loading from '../../../shared/Loading'
 
 Chart.register(CategoryScale);
 
@@ -13,7 +14,7 @@ const dataFrame = {
   datasets: [
     {
       label: '',
-      data: [0,0,0,0,0], // 初期値は0
+      data: [0, 0, 0, 0, 0], // 初期値は0
       backgroundColor: '',
       stack: '',
     }
@@ -45,7 +46,7 @@ type GraphData = {
 }
 
 type ParamProps = {
-  recordId:  string | string[]
+  recordId: string | string[]
   targetParam: string
 }
 
@@ -55,19 +56,19 @@ export default function ColorLureTypeGraph(props: ParamProps): JSX.Element {
   // 雛形
   const dataForm = {
     label: '',
-    data: [0,0,0,0,0], // 初期値は0
+    data: [0, 0, 0, 0, 0], // 初期値は0
     backgroundColor: '',
     stack: '',
   }
 
-  let tempDataForm = {
+  const tempDataForm = {
     label: '',
-    data: [0,0,0,0,0], // 初期値は0
+    data: [0, 0, 0, 0, 0], // 初期値は0
     backgroundColor: '',
     stack: '',
   }
   // グラフで表示するデータセット
-  let tempListForGraph: Array<GraphData> = []
+  const tempListForGraph: Array<GraphData> = []
   const lureTypeList = ['spoon', 'crank-bait', 'minor', 'viberation', 'new type'] // 条件リスト
   // APIからデータ取得
   const { data, error } = useSWR<ColorLureTypeAnalysisApiResponse, Error>('pattern/analysis/color_type/' + recordId + '/' + targetParam)
@@ -83,7 +84,7 @@ export default function ColorLureTypeGraph(props: ParamProps): JSX.Element {
       tempDataForm.backgroundColor = paraentVal.ColorCode
       tempDataForm.stack = paraentVal.ResultType
       // 初期化することで参照を切る
-      tempDataForm.data = [0,0,0,0,0]
+      tempDataForm.data = [0, 0, 0, 0, 0]
       const indexLureTypeList = lureTypeList.indexOf(paraentVal.LureType)
       if (indexLureTypeList !== -1) tempDataForm.data[indexLureTypeList] = paraentVal.Sum
       // データ加工用配列
@@ -103,7 +104,7 @@ export default function ColorLureTypeGraph(props: ParamProps): JSX.Element {
       // 条件リストに該当があれば合計値を格納
       const indexLureTypeList = lureTypeList.indexOf(paraentVal.LureType)
       // 初期化することで参照を切る
-      newData.data = [0,0,0,0,0]
+      newData.data = [0, 0, 0, 0, 0]
       if (indexLureTypeList !== -1) newData.data[indexLureTypeList] = paraentVal.Sum
       newData.backgroundColor = paraentVal.ColorCode
       newData.label = paraentVal.ColorName + '-' + paraentVal.ResultType

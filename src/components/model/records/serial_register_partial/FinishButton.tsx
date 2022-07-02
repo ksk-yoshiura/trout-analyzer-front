@@ -1,25 +1,28 @@
-import React from 'react'
 import {
   Button,
-  FormControl,
-  FormErrorMessage,
-  Stack,
-  Input,
-  useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerOverlay,
   DrawerContent,
+  DrawerOverlay,
+  FormControl,
+  FormErrorMessage,
+  Input,
+  Stack,
+  useDisclosure,
   useToast
 } from "@chakra-ui/react"
+import type {
+  FieldProps
+} from 'formik';
 import {
-  Formik,
-  Form,
   Field,
-  FieldProps,
+  Form,
+  Formik,
   useFormikContext
 } from 'formik';
 import { useRouter } from "next/router";
+import React from 'react'
+
 import { createAxiosInstance } from "../../../../pages/api/utils"
 
 
@@ -41,29 +44,29 @@ export default function FinishButton(props: DetailProp) {
   const axiosInstance = createAxiosInstance()
 
   // 釣果記録終了
-  function handleFinishSerialRegister(values: DetailProp) {
+  const handleFinishSerialRegister = (values: DetailProp) => {
     axiosInstance.post('records/finish', values)
-        .then(function () {
-          // トップページに遷移
-          router.push('/')
-          // アラート代わりにトーストを使用
-          toast({
-            title: 'Finished register!',
-            description: "We've finished recording data.",
-            status: 'success',
-            duration: 9000,
-            isClosable: true,
-          })
+      .then(() => {
+        // トップページに遷移
+        router.push('/')
+        // アラート代わりにトーストを使用
+        toast({
+          title: 'Finished register!',
+          description: "We've finished recording data.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
         })
-        .catch(function (error) {
-          toast({
-            title: 'Failed!',
-            description: error.message,
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          })
+      })
+      .catch((error) => {
+        toast({
+          title: 'Failed!',
+          description: error.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
         })
+      })
   }
 
   // 確認ドロワー
@@ -85,7 +88,7 @@ export default function FinishButton(props: DetailProp) {
               type="submit"
               onClick={() => {
                 submitForm(),
-                  setTimeout(() => onClose(), 1000)
+                  setTimeout(() => { return onClose() }, 1000)
               }}
               colorScheme='teal'
               variant='solid'
@@ -97,8 +100,8 @@ export default function FinishButton(props: DetailProp) {
   }
 
   // バリデーション
-  function validateData(value: any) {
-    // console.log(value)
+  const validateData = (value: any) => {
+    console.log(value)
     // let error
     // if (!value) {
     //   error = 'required'
@@ -119,19 +122,21 @@ export default function FinishButton(props: DetailProp) {
         }, 1000)
       }}
     >
-      {(props) =>
-        <Form>
+      {() => {
+        return <Form>
           <Stack spacing={5}>
             <Field name='recordId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.recordId)
-                    && Boolean(form.touched.recordId)}
-                >
-                  <Input type={'hidden'} {...field} fontSize="1xl" id='recordId' variant='flushed' placeholder='Enter' />
-                  <FormErrorMessage>{form.errors.recordId}</FormErrorMessage>
-                </FormControl>
-              )}
+              {({ field, form }: FieldProps) => {
+                return (
+                  <FormControl
+                    isInvalid={Boolean(form.errors.recordId)
+                      && Boolean(form.touched.recordId)}
+                  >
+                    <Input type={'hidden'} {...field} fontSize="1xl" id='recordId' variant='flushed' placeholder='Enter' />
+                    <FormErrorMessage>{form.errors.recordId}</FormErrorMessage>
+                  </FormControl>
+                )
+              }}
             </Field>
           </Stack>
           <Button
@@ -146,6 +151,7 @@ export default function FinishButton(props: DetailProp) {
           </Button>
           <ConfirmDrawer />
         </Form>
+      }
       }
     </Formik>
   )

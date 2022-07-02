@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
 import React, { useState } from 'react'
-import ResultRadioGroup from '../records/pattern_analysis/ResultRadioGroup'
-import ColorWeatherGraph from '../records/pattern_analysis/ColorWeatherGraph'
+
 import ColorDepthGraph from '../records/pattern_analysis/ColorDepthGraph'
 import ColorLureTypeGraph from '../records/pattern_analysis/ColorLureTypeGraph'
-import { useRouter } from "next/router";
+import ColorWeatherGraph from '../records/pattern_analysis/ColorWeatherGraph'
+import ResultRadioGroup from '../records/pattern_analysis/ResultRadioGroup'
 
 export default function RecordPatternAnalysis() {
   // パラメータからレコードID取得
@@ -15,15 +16,15 @@ export default function RecordPatternAnalysis() {
 
   return (
     <>
-      <ResultRadioGroup setTargetResult={setTargetResult}  />
-    {
-      record_id? <>
-      <ColorWeatherGraph recordId={record_id} targetParam={targetResult} />
-      <ColorDepthGraph recordId={record_id} targetParam={targetResult} />
-      <ColorLureTypeGraph recordId={record_id} targetParam={targetResult} />
-      </>
-      :<></>
-    }
+      <ResultRadioGroup setTargetResult={setTargetResult} />
+      {
+        record_id ? <>
+          <ColorWeatherGraph recordId={record_id} targetParam={targetResult} />
+          <ColorDepthGraph recordId={record_id} targetParam={targetResult} />
+          <ColorLureTypeGraph recordId={record_id} targetParam={targetResult} />
+        </>
+          : <></>
+      }
     </>
   )
 }

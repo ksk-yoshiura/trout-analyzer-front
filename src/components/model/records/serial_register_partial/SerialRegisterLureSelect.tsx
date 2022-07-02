@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import {
+  Image,
+  Select
+} from "@chakra-ui/react";
 import {
   useField
 } from 'formik';
-import {
-  Select, Image
-} from "@chakra-ui/react";
+import React, { useEffect } from 'react';
 import useSWR from 'swr'
-import { LuresApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
+
+import type { LuresApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
 
 type LureTypeProps = {
   lureTypeId: string
@@ -16,7 +18,7 @@ type LureTypeProps = {
 }
 
 export default function LureSelect(props: LureTypeProps) {
-  const [field, meta, helpers] = useField(props.field);
+  const [field, , helpers] = useField(props.field);
   // 初期値表示
   const defaultValue = field.value ? field.value : 0
   useEffect(() => { // 初期値をフィールドにセット
@@ -32,8 +34,8 @@ export default function LureSelect(props: LureTypeProps) {
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像拡張子
   const image_ext = '.png'
-  
-  function handleSelectChange(event: React.FormEvent<HTMLSelectElement>) {
+
+  const handleSelectChange = (event: React.FormEvent<HTMLSelectElement>) => {
     const { target } = event;
     if (!(target instanceof HTMLSelectElement)) {
       return; // or throw new TypeError();
@@ -41,18 +43,18 @@ export default function LureSelect(props: LureTypeProps) {
     const targetLureId = target.value
 
     helpers.setValue(targetLureId)
-    lureList.map(function(val) {
+    lureList.map((val) => {
       if (val.ID == targetLureId && val.LureImage.image_file) {
-      setLureImageURL(val.LureImage.image_file)
+        setLureImageURL(val.LureImage.image_file)
       }
     })
   }
-  
+
   return (
     <>
       {
         lureTypeId !== '0' && lureTypeId ?
-          <Select {...field} w='100wh' mb='5' placeholder='Select Lure' onChange={(event) => handleSelectChange(event)} >
+          <Select {...field} w='100wh' mb='5' placeholder='Select Lure' onChange={(event) => { return handleSelectChange(event) }} >
             {
               lureList.map((item, index) => {
                 return (
@@ -62,13 +64,13 @@ export default function LureSelect(props: LureTypeProps) {
                 )
               })
             }
-          </Select> 
-        : <></>
+          </Select>
+          : <></>
       }
       {
         lureImageURL && lureTypeId ?
-        <Image src={s3DomainPath + lureImageURL + image_ext} alt={'Lure Image'} />
-        : <></>
+          <Image src={s3DomainPath + lureImageURL + image_ext} alt={'Lure Image'} />
+          : <></>
       }
     </>
   )

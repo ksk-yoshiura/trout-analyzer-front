@@ -1,33 +1,23 @@
-import React from 'react'
 import {
   Select
 } from '@chakra-ui/react'
-import Loading from '../../../shared/Loading'
+import React from 'react'
 import useSWR from 'swr'
-import { FieldsApiResponse } from "../../../../pages/api/fields/index"
+
+import type { FieldsApiResponse } from "../../../../pages/api/fields/index"
+import Loading from '../../../shared/Loading'
 
 export default function FieldSelect(props: any) {
-  const { field, fieldValue, setFieldValue, selectProps } = props
+  const { field } = props
   // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('fields')
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
-  // ルアータイプセレクト
-  // TODO：{...field}とonChangeが互いに干渉してうまく動作しない
-  function changeHandler(event: React.FormEvent<HTMLSelectElement>) {
-    const { target } = event;
-    if (!(target instanceof HTMLSelectElement)) {
-      return; // or throw new TypeError();
-    }
-    const targetFieldTypeId = target.value
-    setFieldValue?.(targetFieldTypeId)
-  }
-
   return (
     <>
       <Select
-      {...field}
+        {...field}
         mr={5}
         w="100%"
         placeholder='Select Field'

@@ -1,20 +1,21 @@
-import React from 'react'
-import { useState } from 'react'
 import {
+  Badge,
   Box,
   Image,
-  Badge,
+  useDisclosure,
   Wrap,
   WrapItem,
-  useDisclosure,
 } from '@chakra-ui/react'
-import LureDetail from './LureDetail'
-import DetailModal from '../../shared/DetailModal'
-import NoDataAlert from '../../shared/NoDataAlert'
-import Loading from '../../shared/Loading'
-import useSWR, { mutate } from 'swr'
-import { LuresApiResponse } from "../../../pages/api/lures/index"
+import React from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
+
+import type { LuresApiResponse } from "../../../pages/api/lures/index"
 import { getDateFormatted } from "../../../utils/dateFormat"
+import DetailModal from '../../shared/DetailModal'
+import Loading from '../../shared/Loading'
+import NoDataAlert from '../../shared/NoDataAlert'
+import LureDetail from './LureDetail'
 
 type ListProps = {
   typeId?: string;
@@ -38,7 +39,7 @@ export default function LuresList(props: ListProps): JSX.Element {
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像拡張子
   const image_ext = '.png'
-  function clickHandler(value: string) {
+  const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
 
@@ -50,7 +51,7 @@ export default function LuresList(props: ListProps): JSX.Element {
   // 完全移行はonOpen()が動作しなくなるので断念
   const LureDetailModal = () => {
     return (
-      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'lure'} mutate={mutate} >
+      <DetailModal isOpen={isOpen} onClose={onClose} chosenId={chosenId} title={'lure'} >
         <LureDetail chosenId={chosenId} />
       </DetailModal>
     )
@@ -64,7 +65,7 @@ export default function LuresList(props: ListProps): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.LureImage.image_file? s3DomainPath + item.LureImage.image_file + image_ext: '/no_image.png'} alt={item.name ?? 'No Image'} />
+                  <Image src={item.LureImage.image_file ? s3DomainPath + item.LureImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>

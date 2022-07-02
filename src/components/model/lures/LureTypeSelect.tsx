@@ -1,10 +1,11 @@
-import React from 'react'
 import {
   Select,
 } from '@chakra-ui/react'
-import Loading from '../../shared/Loading'
+import React from 'react'
 import useSWR from 'swr'
-import { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
+
+import type { LureTypesApiResponse } from "../../../pages/api/lure_types/index"
+import Loading from '../../shared/Loading'
 
 type TypeProp = {
   field?: any
@@ -20,7 +21,7 @@ export default function LureTypeSelect(props: TypeProp) {
   if (!data) return <Loading />
 
   // ルアータイプセレクト（一覧表示時のみ機能）
-  function changeHandler(event: React.FormEvent<HTMLSelectElement>) {
+  const changeHandler = (event: React.FormEvent<HTMLSelectElement>) => {
     const { target } = event;
     if (!(target instanceof HTMLSelectElement)) {
       return; // or throw new TypeError();
@@ -32,7 +33,7 @@ export default function LureTypeSelect(props: TypeProp) {
   return (
     setTypeId ?
       <>
-        <Select {...field} w={150} placeholder='Lure Type' onChange={(event) => changeHandler(event)}>
+        <Select {...field} w={150} placeholder='Lure Type' onChange={(event) => { return changeHandler(event) }}>
           {
             data.result?.map((item, index) => {
               return (

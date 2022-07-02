@@ -1,34 +1,37 @@
-import React, { useState } from 'react'
-import { useRouter } from "next/router";
 import {
-  Formik,
-  Form,
-  Field,
-  FieldProps,
-  useFormikContext
-} from 'formik';
-import {
-  Input,
-  Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Stack,
-  useDisclosure,
   Box,
+  Button,
   Drawer,
   DrawerBody,
-  DrawerOverlay,
   DrawerContent,
+  DrawerOverlay,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Stack,
+  useDisclosure,
   useToast
 } from "@chakra-ui/react";
-import RodDetail from '../rods/RodDetail'
-import RodsList from '../rods/RodsList'
-import ReelDetail from '../reels/ReelDetail'
-import ReelsList from '../reels/ReelsList'
+import type {
+  FieldProps
+} from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  useFormikContext
+} from 'formik';
+import { useRouter } from "next/router";
+import React, { useState } from 'react'
+
+import { createAxiosInstance } from "../../../pages/api/utils"
 import LineDetail from '../lines/LineDetail'
 import LinesList from '../lines/LinesList'
-import { createAxiosInstance } from "../../../pages/api/utils"
+import ReelDetail from '../reels/ReelDetail'
+import ReelsList from '../reels/ReelsList'
+import RodDetail from '../rods/RodDetail'
+import RodsList from '../rods/RodsList'
 
 type Tackle = {
   ID: string
@@ -100,9 +103,9 @@ export default function TackleForm(props: DetailProps) {
   const { tackleData, chosenId } = props
 
   // 初期値
-  const defaultRodId = tackleData? Number(tackleData.Rod.ID) : 0;
-  const defaultReelId = tackleData? Number(tackleData.Reel.ID) : 0;
-  const defaultLineId = tackleData? Number(tackleData.Line.ID) : 0;
+  const defaultRodId = tackleData ? Number(tackleData.Rod.ID) : 0;
+  const defaultReelId = tackleData ? Number(tackleData.Reel.ID) : 0;
+  const defaultLineId = tackleData ? Number(tackleData.Line.ID) : 0;
 
   // ロッドID
   const [newRodId, setNewRodId] = useState(defaultRodId)
@@ -116,7 +119,7 @@ export default function TackleForm(props: DetailProps) {
 
   // fieldにセットする方法がわからないので
   // ここでセットする
-  function setSendingData(values: TackleForm) {
+  const setSendingData = (values: TackleForm) => {
     values.rodId = Number(newRodId)
     values.reelId = Number(newReelId)
     values.lineId = Number(newLineId)
@@ -125,12 +128,12 @@ export default function TackleForm(props: DetailProps) {
   }
 
   // API登録・更新
-  function handleSendTackleData(values: TackleForm) {
+  const handleSendTackleData = (values: TackleForm) => {
     const sendingData = setSendingData(values)
 
     if (chosenId && chosenId !== '0') { // タックルIDがある場合は更新
       axiosInstance.put('tackles/' + chosenId, sendingData)
-        .then(function () {
+        .then(() => {
           // リストページに遷移
           router.push('/tackles')
           // アラート代わりにトーストを使用
@@ -142,7 +145,7 @@ export default function TackleForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.messages,
@@ -153,7 +156,7 @@ export default function TackleForm(props: DetailProps) {
         })
     } else { // タックルIDがない場合は登録
       axiosInstance.post('tackles', sendingData)
-        .then(function () {
+        .then(() => {
           // リストページに遷移
           router.push('/tackles')
           // アラート代わりにトーストを使用
@@ -165,7 +168,7 @@ export default function TackleForm(props: DetailProps) {
             isClosable: true,
           })
         })
-        .catch(function (error) {
+        .catch((error) => {
           toast({
             title: 'Failed!',
             description: error.messages,
@@ -177,7 +180,8 @@ export default function TackleForm(props: DetailProps) {
     }
   }
 
-  function validateData(value: TackleForm) {
+  const validateData = (value: TackleForm) => {
+    console.log(value)
     // let error
     // if (!value) {
     //   error = 'Name is required'
@@ -204,7 +208,7 @@ export default function TackleForm(props: DetailProps) {
             >Cancel</Button>
             <Button
               type="submit"
-              onClick={() => submitForm()}
+              onClick={() => { return submitForm() }}
               colorScheme='teal'
               variant='solid'
             >Confirm</Button>
@@ -217,7 +221,7 @@ export default function TackleForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        rodId: defaultRodId ,
+        rodId: defaultRodId,
         reelId: defaultReelId,
         lineId: defaultLineId,
       }}
@@ -228,117 +232,125 @@ export default function TackleForm(props: DetailProps) {
         }, 1000)
       }}
     >
-      {(props) => (
-        <Form>
-          <Stack spacing={5}>
-            <Field name='rodId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.rodId)
-                    && Boolean(form.touched.rodId)}
-                >
-                  <FormLabel
-                    fontSize="20px"
-                    htmlFor='rodId'
-                    textTransform='uppercase'
-                  >rod</FormLabel>
-                  <Input {...field} type="hidden" id='rodId' />
-                  {
-                    newRodId && newRodId > 0
-                    ?<Box type='button' as='button'>
-                      <RodDetail chosenId={Number(newRodId)} />
-                    </Box>
-                    :<></>
-                  }
-                  <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Button w={300} onClick={() => setRodChange(!rodChange)}>
+      {() => {
+        return (
+          <Form>
+            <Stack spacing={5}>
+              <Field name='rodId' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.rodId)
+                        && Boolean(form.touched.rodId)}
+                    >
+                      <FormLabel
+                        fontSize="20px"
+                        htmlFor='rodId'
+                        textTransform='uppercase'
+                      >rod</FormLabel>
+                      <Input {...field} type="hidden" id='rodId' />
+                      {
+                        newRodId && newRodId > 0
+                          ? <Box type='button' as='button'>
+                            <RodDetail chosenId={Number(newRodId)} />
+                          </Box>
+                          : <></>
+                      }
+                      <FormErrorMessage>{form.errors.rodId}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Button w={300} onClick={() => { return setRodChange(!rodChange) }}>
+                {
+                  rodChange ? <>Close</> : <>Select</>
+                }
+              </Button>
               {
-                rodChange ? <>Close</> : <>Select</>
+                rodChange ? <RodsList isTackle={true} setNewRodId={setNewRodId} /> : <></>
               }
-            </Button>
-            {
-              rodChange ? <RodsList isTackle={true} setNewRodId={setNewRodId} /> : <></>
-            }
 
-            <Field name='reelId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.reelId)
-                    && Boolean(form.touched.reelId)}
-                >
-                  <FormLabel
-                    fontSize="20px"
-                    htmlFor='reelId'
-                    textTransform='uppercase'
-                  >reel</FormLabel>
-                  <Input {...field} type="hidden" id='reelId' />
-                  {
-                    newReelId && newReelId > 0
-                    ?<Box type='button' as='button'>
-                      <ReelDetail chosenId={Number(newReelId)} />
-                    </Box>
-                    :<></>
-                  }
-                  <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Button w={300} onClick={() => setReelChange(!reelChange)}>
+              <Field name='reelId' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.reelId)
+                        && Boolean(form.touched.reelId)}
+                    >
+                      <FormLabel
+                        fontSize="20px"
+                        htmlFor='reelId'
+                        textTransform='uppercase'
+                      >reel</FormLabel>
+                      <Input {...field} type="hidden" id='reelId' />
+                      {
+                        newReelId && newReelId > 0
+                          ? <Box type='button' as='button'>
+                            <ReelDetail chosenId={Number(newReelId)} />
+                          </Box>
+                          : <></>
+                      }
+                      <FormErrorMessage>{form.errors.reelId}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Button w={300} onClick={() => { return setReelChange(!reelChange) }}>
+                {
+                  reelChange ? <>Close</> : <>Select</>
+                }
+              </Button>
               {
-                reelChange ? <>Close</> : <>Select</>
+                reelChange ? <ReelsList isTackle={true} setNewReelId={setNewReelId} /> : <></>
               }
-            </Button>
-            {
-              reelChange ? <ReelsList isTackle={true} setNewReelId={setNewReelId} /> : <></>
-            }
 
-            <Field name='lineId' validate={validateData}>
-              {({ field, form }: FieldProps) => (
-                <FormControl
-                  isInvalid={Boolean(form.errors.lineId)
-                    && Boolean(form.touched.lineId)}
-                >
-                  <FormLabel
-                    fontSize="20px"
-                    htmlFor='lineId'
-                    textTransform='uppercase'
-                  >line</FormLabel>
-                  <Input {...field} type="hidden" id='lineId' />
-                  {
-                    newLineId && newLineId > 0
-                    ?<Box type='button' as='button'>
-                      <LineDetail chosenId={Number(newLineId)} />
-                    </Box>
-                    :<></>
-                  }
-                  <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Button w={300} onClick={() => setLineChange(!lineChange)}>
+              <Field name='lineId' validate={validateData}>
+                {({ field, form }: FieldProps) => {
+                  return (
+                    <FormControl
+                      isInvalid={Boolean(form.errors.lineId)
+                        && Boolean(form.touched.lineId)}
+                    >
+                      <FormLabel
+                        fontSize="20px"
+                        htmlFor='lineId'
+                        textTransform='uppercase'
+                      >line</FormLabel>
+                      <Input {...field} type="hidden" id='lineId' />
+                      {
+                        newLineId && newLineId > 0
+                          ? <Box type='button' as='button'>
+                            <LineDetail chosenId={Number(newLineId)} />
+                          </Box>
+                          : <></>
+                      }
+                      <FormErrorMessage>{form.errors.lineId}</FormErrorMessage>
+                    </FormControl>
+                  )
+                }}
+              </Field>
+              <Button w={300} onClick={() => { return setLineChange(!lineChange) }}>
+                {
+                  lineChange ? <>Close</> : <>Select</>
+                }
+              </Button>
               {
-                lineChange ? <>Close</> : <>Select</>
+                lineChange ? <LinesList isTackle={true} setNewLineId={setNewLineId} /> : <></>
               }
-            </Button>
-            {
-              lineChange ? <LinesList isTackle={true} setNewLineId={setNewLineId} /> : <></>
-            }
 
-          </Stack>
-          <Button
-            my={10}
-            colorScheme='teal'
-            type='button'
-            onClick={onOpenConfirmDrawer}
-          >
-            Register
-          </Button>
-          <ConfirmDrawer />
-        </Form>
-      )}
+            </Stack>
+            <Button
+              my={10}
+              colorScheme='teal'
+              type='button'
+              onClick={onOpenConfirmDrawer}
+            >
+              Register
+            </Button>
+            <ConfirmDrawer />
+          </Form>
+        )
+      }}
     </Formik>
   )
 }
