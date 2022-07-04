@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import ReelsList from '../../../../components/model/reels/ReelsList';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import ReelsList from '../../../../components/model/reels/ReelsList';
 
 test('ReelsList', () => {
   const isTackle = true

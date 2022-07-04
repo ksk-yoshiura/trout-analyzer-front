@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import BackToListPageLink from '../../../components/shared/BackToListPageLink';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../utils';
-import BackToListPageLink from '../../../components/shared/BackToListPageLink';
 
 test('BackToListPageLink', () => {
   const name = "field"

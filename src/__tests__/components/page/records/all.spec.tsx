@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import RecordsAll from '../../../../components/page/records/all';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import RecordsAll from '../../../../components/page/records/all';
 
 test('RecordsAll', () => {
 

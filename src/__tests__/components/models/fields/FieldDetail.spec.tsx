@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import FieldDetail from '../../../../components/model/fields/FieldDetail';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import FieldDetail from '../../../../components/model/fields/FieldDetail';
 
 test('FieldDetail', () => {
   // ID

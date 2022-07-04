@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import RecordCreate from '../../../../components/page/records/create';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import RecordCreate from '../../../../components/page/records/create';
 
 test('RecordCreate', () => {
 

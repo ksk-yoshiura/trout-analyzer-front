@@ -1,12 +1,13 @@
 /**
  * @jest-environment jsdom
  */
+import type { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import React from 'react';
+
+import LureCreate from '../../../../components/page/lures/create';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import  { useSession } from "next-auth/react";
-import  { Session } from "next-auth";
-import LureCreate from '../../../../components/page/lures/create';
 
 jest.mock("next-auth/react")
 

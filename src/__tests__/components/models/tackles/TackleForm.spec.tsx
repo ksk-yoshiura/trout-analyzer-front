@@ -1,12 +1,13 @@
 /**
  * @jest-environment jsdom
  */
+import type { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import React from 'react';
+
+import TackleForm from '../../../../components/model/tackles/TackleForm';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import  { useSession } from "next-auth/react";
-import  { Session } from "next-auth";
-import TackleForm from '../../../../components/model/tackles/TackleForm';
 
 jest.mock("next-auth/react")
 

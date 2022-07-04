@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import NoDataAlert from '../../../components/shared/NoDataAlert';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../utils';
-import NoDataAlert from '../../../components/shared/NoDataAlert';
 
 test('NoDataAlert', () => {
   const title = 'lures'

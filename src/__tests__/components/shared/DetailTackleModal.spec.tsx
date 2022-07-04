@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import DetailTackleModal from '../../../components/shared/DetailTackleModal';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../utils';
-import DetailTackleModal from '../../../components/shared/DetailTackleModal';
 
 test('DetailTackleModal', () => {
   const title = "title"

@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import ToolConditionSelect from '../../../components/shared/ToolConditionSelect';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../utils';
-import ToolConditionSelect from '../../../components/shared/ToolConditionSelect';
 
 test('ToolConditionSelect', () => {
   const typeNum = 1

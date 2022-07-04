@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import SideMenuMobileBox from '../../../../components/layout/side_menu/SideMenuMobileBox';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import SideMenuMobileBox from '../../../../components/layout/side_menu/SideMenuMobileBox';
 
 test('SideMenuMobileBox', () => {
   const { asFragment } = render(<SideMenuMobileBox />);

@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import Header from '../../../components/layout/Header';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../utils';
-import Header from '../../../components/layout/Header';
 
 jest.mock("next-auth/react")
 

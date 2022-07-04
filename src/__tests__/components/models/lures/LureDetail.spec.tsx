@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import LureDetail from '../../../../components/model/lures/LureDetail';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import LureDetail from '../../../../components/model/lures/LureDetail';
 
 test('LureDetail', () => {
   // ID

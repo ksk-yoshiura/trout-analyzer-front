@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react';
+
+import TackleDetail from '../../../../components/model/tackles/TackleDetail';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '../../../utils';
-import TackleDetail from '../../../../components/model/tackles/TackleDetail';
 
 test('TackleDetail', () => {
   // ID
