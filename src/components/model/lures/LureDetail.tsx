@@ -37,9 +37,6 @@ export default function LuresList(props: DetailProps): JSX.Element {
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
-          <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-            New
-          </Badge>
           <Badge borderRadius='full' px='2' color='gray.500'>
             {lureDetailData?.LureType.typeName}
           </Badge>
