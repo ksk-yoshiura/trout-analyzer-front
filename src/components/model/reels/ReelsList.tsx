@@ -103,11 +103,8 @@ export default function ReelsList(props: ListProps): JSX.Element {
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
-                      <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-                        New
-                      </Badge>
                       <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.gear}
+                        {item.GearCondition.typeName}
                       </Badge>
                     </Box>
                     <Box
