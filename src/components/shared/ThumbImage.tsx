@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type {
   FC
 } from "react";
@@ -16,7 +17,8 @@ type ThumbProps = {
 
 const Thumb: FC<ThumbProps> = ({ file }) => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [thumb, setThumb] = useState<string>();
+  // FIX ME: Type 'undefined' is not assignable to type 'string | StaticImport'
+  const [thumb, setThumb] = useState<string | any>();
 
   useEffect(() => {
     const reader = new FileReader();
@@ -38,7 +40,7 @@ const Thumb: FC<ThumbProps> = ({ file }) => {
   }
 
   return (
-    <img
+    <Image
       src={thumb}
       alt={file.name}
       className="img-thumbnail mt-2"
