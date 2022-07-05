@@ -12,10 +12,10 @@ import {
   DrawerHeader,
   DrawerOverlay,
   IconButton,
-  Link,
   Stack,
   useDisclosure
 } from '@chakra-ui/react'
+import NextLink from "next/link"
 import React from "react";
 
 import EquipmentMenuLinkList from './EquipmentMenuLinkList'
@@ -50,7 +50,7 @@ export default function SideMenuContents() {
         <DrawerContent style={{ width: "250px" }}>
           <DrawerCloseButton />
           <DrawerHeader>
-            <Link href="/" passHref>
+            <NextLink href="/" passHref>
               <Button
                 colorScheme='teal'
                 variant='ghost'
@@ -61,7 +61,7 @@ export default function SideMenuContents() {
               >
                 Trout Analyzer
               </Button>
-            </Link>
+            </NextLink>
             <Divider />
 
           </DrawerHeader>

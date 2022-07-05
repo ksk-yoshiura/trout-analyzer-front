@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Image, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Image } from '@chakra-ui/react';
+import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { signOut } from "next-auth/react"
 import React from 'react'
@@ -20,18 +21,19 @@ export default function Header(): JSX.Element {
       <Box
         display={{ base: "block", md: "none" }}  >
         <Flex
-          h={55} borderColor='gray.500'
+          h={55}
+          borderColor='gray.500'
           borderBottom={'1px'}
         >
-          <Link href="/" passHref>
+          <NextLink href="/" passHref>
             <Box
-              w={145}
+              w={320}
               pt={1}
               px={1}
             >
               <Image src='/logo/logo_second.png' alt='TRANAZA Logo' />
             </Box>
-          </Link>
+          </NextLink>
           <Box
             w="100%"
             align='right'
