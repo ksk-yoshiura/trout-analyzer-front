@@ -44,8 +44,8 @@ yarn-error.log*
 .env.local
 
 # service worker
-./public/sw.js.map
-./public/workbox*
+workbox-*
+sw.js.map
 
 # eslint
 .eslintcache
