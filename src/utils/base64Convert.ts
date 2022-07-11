@@ -1,9 +1,11 @@
 // Base64に変換
-export function convertFileIntoBase64(file: File) {
+const convertFileIntoBase64 = (file: File): any => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onload = () => { return resolve(reader.result) };
+    reader.onerror = error => { return reject(error) };
   });
 }
+
+export default convertFileIntoBase64
