@@ -8,7 +8,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { LinesApiResponse } from "../../../pages/api/lines/[id]"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
 type DetailProps = {

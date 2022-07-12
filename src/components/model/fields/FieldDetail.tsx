@@ -8,7 +8,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { FieldsApiResponse } from "../../../pages/api/fields/[id]"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
 type DetailProps = {
@@ -38,9 +38,14 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
 
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
-          <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
-            New
-          </Badge>
+          {
+            fieldDetailData?.lastVisitedAt ?
+              <></>
+              :
+              <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
+                New
+              </Badge>
+          }
         </Box>
 
         <Box

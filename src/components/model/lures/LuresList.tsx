@@ -11,7 +11,7 @@ import { useState } from 'react'
 import useSWR from 'swr'
 
 import type { LuresApiResponse } from "../../../pages/api/lures/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'

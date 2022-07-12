@@ -8,7 +8,7 @@ import React from 'react';
 import useSWR from 'swr'
 
 import type { RecordsApiResponse } from "../../../pages/api/records/all"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 

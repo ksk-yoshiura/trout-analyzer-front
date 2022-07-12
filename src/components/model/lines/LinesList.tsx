@@ -13,7 +13,7 @@ import React, { useState } from 'react'
 import useSWR from 'swr'
 
 import type { LinesApiResponse } from "../../../pages/api/lines/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'

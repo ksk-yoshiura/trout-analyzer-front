@@ -18,7 +18,7 @@ import React, { useState } from 'react'
 import useSWR from 'swr'
 
 import type { PatternsApiResponse } from "../../../pages/api/patterns/index"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import RecordPatternDetail from './RecordPatternDetail'

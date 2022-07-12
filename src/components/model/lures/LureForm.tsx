@@ -29,7 +29,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
-import { convertFileIntoBase64 } from "../../../utils/base64Convert"
+import convertFileIntoBase64 from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 import LuresColorPalette from "./LuresColorPalette"
 import LureTypeSelect from "./LureTypeSelect"

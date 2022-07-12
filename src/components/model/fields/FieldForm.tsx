@@ -26,7 +26,7 @@ import React from 'react'
 import { mutate } from 'swr'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
-import { convertFileIntoBase64 } from "../../../utils/base64Convert"
+import convertFileIntoBase64 from "../../../utils/base64Convert"
 import Thumb from "../../shared/ThumbImage"
 
 type FieldData = {

@@ -8,7 +8,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { RodsApiResponse } from "../../../pages/api/rods/[id]"
-import { getDateFormatted } from "../../../utils/dateFormat"
+import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
 type DetailProps = {
