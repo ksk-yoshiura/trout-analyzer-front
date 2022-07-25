@@ -44,6 +44,7 @@ yarn-error.log*
 .env.local
 
 # service worker
+public/sw.js
 workbox-*
 sw.js.map
 
