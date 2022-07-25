@@ -45,7 +45,6 @@ export default function RecordsAllList(): JSX.Element {
   // パターンデータ
   const patternsListData = data.result ? data.result : []
 
-  console.log(patternsListData)
   const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
