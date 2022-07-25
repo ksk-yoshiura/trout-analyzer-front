@@ -19,7 +19,7 @@ import React, { useState } from 'react'
 import useSWR from 'swr'
 
 import type { PatternsApiResponse } from "../../../pages/api/patterns/index"
-import getDateFormatted from "../../../utils/dateFormat"
+import getTimeFormatted from "../../../utils/timeFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import RecordPatternDetail from './RecordPatternDetail'
@@ -122,7 +122,7 @@ export default function RecordsAllList(): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    time {getDateFormatted(item.CreatedAt)}
+                    time {getTimeFormatted(item.CreatedAt)}
                   </Box>
                 </Box>
               </Box>
