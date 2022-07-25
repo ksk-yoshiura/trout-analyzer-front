@@ -26,7 +26,11 @@ export type Pattern = {
     name: string
     companyName: string
     color: string
-    weight: string
+    weight: string,
+    LureImage: {
+      ID: string
+      image_file: string
+    }
   },
 }
 
