@@ -24,6 +24,7 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
+  console.log(data.result)
   return (
     <Box maxW='sm' overflow='hidden'>
       {
@@ -40,30 +41,36 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
             <RecordPatternLureDetail
               lureName={data.result.Lure.name}
               lureCompany={data.result.Lure.companyName}
-              lureColor={data.result.Lure.color}
+              lureColor={data.result.Lure.Color.name}
               lureWeight={data.result.Lure.weight}
+              lureImage={data.result.Lure.LureImage}
             />
 
-            <RecordPatternReelDetail
-              reelName={data.result.Tackle.Reel.name}
-              reelType={data.result.Tackle.Reel.TypeNumberCondition.typeName}
-              reelCompany={data.result.Tackle.Reel.companyName}
-              reelGear={data.result.Tackle.Reel.GearCondition.typeName}
-            />
+            {
+              data.result.Tackle.ID ? <>
+                <RecordPatternReelDetail
+                  reelName={data.result.Tackle.Reel.name}
+                  reelType={data.result.Tackle.Reel.TypeNumberCondition.typeName}
+                  reelCompany={data.result.Tackle.Reel.companyName}
+                  reelGear={data.result.Tackle.Reel.GearCondition.typeName}
+                />
 
-            <RecordPatternRodDetail
-              rodName={data.result.Tackle.Rod.name}
-              rodHardness={data.result.Tackle.Rod.RodHardnessCondition.typeName}
-              rodCompany={data.result.Tackle.Rod.companyName}
-              rodLength={data.result.Tackle.Rod.length}
-            />
+                <RecordPatternRodDetail
+                  rodName={data.result.Tackle.Rod.name}
+                  rodHardness={data.result.Tackle.Rod.RodHardnessCondition.typeName}
+                  rodCompany={data.result.Tackle.Rod.companyName}
+                  rodLength={data.result.Tackle.Rod.length}
+                />
 
-            <RecordPatternLineDetail
-              lineName={data.result.Tackle.Line.name}
-              lineThickness={data.result.Tackle.Line.thickness}
-              lineCompany={data.result.Tackle.Line.companyName}
-              lineType={data.result.Tackle.Line.LineCondition.typeName}
-            />
+                <RecordPatternLineDetail
+                  lineName={data.result.Tackle.Line.name}
+                  lineThickness={data.result.Tackle.Line.thickness}
+                  lineCompany={data.result.Tackle.Line.companyName}
+                  lineType={data.result.Tackle.Line.LineCondition.typeName}
+                /></>
+                : <></>
+            }
+
           </Box>
 
           : <></>
