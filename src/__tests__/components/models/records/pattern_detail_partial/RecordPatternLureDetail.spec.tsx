@@ -14,12 +14,16 @@ test('RecordPatternLureDetail', () => {
     'lureCompany': 'daiwa',
     'lureColor': 'red',
     'lureWeight': '7',
+    'lureImage': {
+      'image_file': 'url'
+    }
   }
   const { asFragment } = render(<RecordPatternLureDetail
     lureName={lureProps.lureName}
     lureCompany={lureProps.lureCompany}
     lureColor={lureProps.lureColor}
     lureWeight={lureProps.lureWeight}
+    lureImage={lureProps.lureImage}
   />);
   expect(asFragment()).toMatchSnapshot();
 });
