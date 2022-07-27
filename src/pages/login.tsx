@@ -7,7 +7,8 @@ import {
   Icon,
   Input,
   Link,
-  Stack
+  Stack,
+  useToast
 } from "@chakra-ui/react";
 import type {
   FieldProps
@@ -38,7 +39,8 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 };
 
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
-  const router = useRouter();
+  const router = useRouter()
+  const toast = useToast()
   const signInUser = async (data: LoginData) => {
     await signIn<any>("credentials", {
       redirect: false,
@@ -47,8 +49,13 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
       callbackUrl: `${window.location.origin}`,
     }).then((res) => {
       if (res?.error) {
-        // TODO：エラーメッセージ出力
-        console.log("UserId,Passwordを正しく入力してください");
+        toast({
+          title: 'Login failed!',
+          description: "Enter right mailaddress and password",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
       } else {
         // ログイン後に飛ぶページ
         router.push("/");
