@@ -32,7 +32,11 @@ export default function ResetPasswordForm() {
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
   const handleSendResetPasswordData = (values: ResetPasswordData) => {
-    axiosInstance.post('reset_password', values)
+    const sendValue = { // 調整
+      password: values.currentPassword,
+      new_password: values.newPassword
+    }
+    axiosInstance.post('reset_password', sendValue)
       .then(() => {
         // アラート代わりにトーストを使用
         toast({
