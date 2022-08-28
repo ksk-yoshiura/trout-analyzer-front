@@ -25,12 +25,12 @@ export default function RecordsList(): JSX.Element {
           Back to records all
         </Link>
       </NextLink>
-      <Flex pb={5} w="100%">
+      <Flex pb={5} w="100%" px={'auto'}>
         <NextLink href={"/records/" + record_id + "/patterns/create"} passHref>
-          <Button pl={10} pr={10} colorScheme='teal'>Add Pattern</Button>
+          <Button px={10} colorScheme='teal'>Add Pattern</Button>
         </NextLink>
         <NextLink href={"/records/" + record_id + "/patterns/analysis"} passHref>
-          <Button pl={10} ml={10} pr={10} colorScheme='teal'>Analyze Patterns</Button>
+          <Button ml={10} px={10} colorScheme='teal'>Analyze Patterns</Button>
         </NextLink>
       </Flex>
       <RecordPatternsList />
