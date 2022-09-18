@@ -19,7 +19,6 @@ export const axiosDefaultAPIInstance = axios.create({
 
 export const CreateAxiosInstance = (): AxiosInstance => {
 
-  console.log(apiURL)
   // セッションからアクセストークンを取得
   const { data: session } = useSession();
 
