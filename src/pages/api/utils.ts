@@ -17,13 +17,30 @@ export const axiosDefaultAPIInstance = axios.create({
   timeout: 5000
 })
 
+/**
+ * API非経由
+ * ログイン、サインアップ
+ */
+export const CreateAxiosDefaultInstance = (): AxiosInstance => {
+
+  // axiosにヘッダー情報付与
+  axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.NEXTAUTH_URL ?? false;
+  axiosDefaultInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+
+  // axiosインスタンス返却
+  return axiosDefaultInstance
+}
+
+/**
+ * API
+ */
 export const CreateAxiosInstance = (): AxiosInstance => {
 
   // セッションからアクセストークンを取得
   const { data: session } = useSession();
 
   // axiosにヘッダー情報付与
-  axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.NEXTAUTH_URL ?? false;
   axiosDefaultAPIInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
   // jwtトークンをアクセストークンから取得

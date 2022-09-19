@@ -18,7 +18,7 @@ import {
 import { useRouter } from "next/router";
 import React from 'react'
 
-import { axiosDefaultInstance } from '../../../pages/api/utils'
+import { CreateAxiosDefaultInstance } from '../../../pages/api/utils'
 
 type SignUpData = {
   email: string;
@@ -32,12 +32,11 @@ export default function SignUpForm() {
   // ページ遷移
   const router = useRouter();
 
+  // axiosの設定
+  const axiosInstance = CreateAxiosDefaultInstance()
   const handleSendSignUpData = (values: SignUpData) => {
     // axiosにヘッダー情報付与
-    axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = 'https://trout-analyzer.com';
-    axiosDefaultInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-    console.log(axiosDefaultInstance.defaults.headers)
-    axiosDefaultInstance.post('sign_up', values)
+    axiosInstance.post('sign_up', values)
       .then(() => {
         // ログインページに遷移
         router.push('/login')
