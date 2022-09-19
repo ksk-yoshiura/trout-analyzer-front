@@ -36,7 +36,7 @@ export default function SignUpForm() {
     // axiosにヘッダー情報付与
     axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axiosDefaultInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-    console.log(axiosDefaultInstance)
+    console.log(axiosDefaultInstance.defaults.headers)
     axiosDefaultInstance.post('sign_up', values)
       .then(() => {
         // ログインページに遷移
