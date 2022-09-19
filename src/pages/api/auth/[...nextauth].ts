@@ -26,9 +26,6 @@ export default NextAuth({
           password: credentials?.password,
         };
 
-        // axiosにヘッダー情報付与
-        axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        axiosDefaultInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
         // ログインAPI
         const res = await axiosDefaultInstance.post('login', postData)
           .then((v) => {
