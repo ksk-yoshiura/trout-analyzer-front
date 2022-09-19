@@ -24,7 +24,7 @@ export const axiosDefaultAPIInstance = axios.create({
 export const CreateAxiosDefaultInstance = (): AxiosInstance => {
 
   // axiosにヘッダー情報付与
-  axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.NEXTAUTH_URL ?? false;
+  axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = apiURL ?? false;
   axiosDefaultInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
   // axiosインスタンス返却
@@ -40,7 +40,7 @@ export const CreateAxiosInstance = (): AxiosInstance => {
   const { data: session } = useSession();
 
   // axiosにヘッダー情報付与
-  axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.NEXTAUTH_URL ?? false;
+  axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = apiURL ?? false;
   axiosDefaultAPIInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
   // jwtトークンをアクセストークンから取得
