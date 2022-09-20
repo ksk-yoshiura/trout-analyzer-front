@@ -39,6 +39,7 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 };
 
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
+  console.log("csrfToken")
   console.log(csrfToken)
   const router = useRouter()
   const toast = useToast()
