@@ -21,7 +21,7 @@ export default NextAuth({
         },
       },
       authorize: async (credentials, req) => {
-        const postData = {
+        const postData: any = { // TODO：any
           mailaddress: credentials?.mailaddress,
           password: credentials?.password,
         };
@@ -58,9 +58,6 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user, account }) {
-      console.log(token)
-      console.log(user)
-      console.log(account)
       // 最初のサインイン
       if (account && user) {
         return {
