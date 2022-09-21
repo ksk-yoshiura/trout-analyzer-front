@@ -52,6 +52,7 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
       password: data.password,
       callbackUrl: `${window.location.origin}`,
     }).then((res) => {
+      console.log(res)
       if (res?.error) {
         toast({
           title: 'Login failed!',
