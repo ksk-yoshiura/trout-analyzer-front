@@ -29,7 +29,6 @@ export default NextAuth({
         // axiosの設定
         const axiosInstance = CreateAxiosDefaultInstance()
 
-        console.log(postData)
         // ログインAPI
         const res = await axiosInstance.post('login', postData)
           .then((v) => {
@@ -39,7 +38,6 @@ export default NextAuth({
             console.log(error)
             console.log(req)
           })
-        console.log(res)
 
         // If no error and we have user data, return it
         if (res) {
@@ -47,7 +45,6 @@ export default NextAuth({
             token: res,
             user: {
               mailaddress: postData.mailaddress
-
             }
           }
           return data;

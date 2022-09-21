@@ -19,7 +19,7 @@
     "axios": "^0.25.0",
     "formik": "^2.2.9",
     "jest-fetch-mock": "^3.0.3",
-    "next": "12.0.7",
+    "next": "12.2.5",
     "next-auth": "^4.2.1",
     "next-pwa": "^5.4.6",
     "react": "17.0.2",
