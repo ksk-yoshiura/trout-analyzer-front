@@ -31,6 +31,7 @@ type LoginData = {
 // POSTリクエスト（サインイン・サインアウトなど）に必要なCSRFトークンを返却する
 export const getServerSideProps = async (context: CtxOrReq | undefined) => {
   const res = await getCsrfToken(context)
+  console.log(res)
   return {
     props: {
       title: "login",
