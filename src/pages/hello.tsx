@@ -11,7 +11,7 @@ export default function Hello() {
   }
   axiosInstance.post('login', postData)
     .then((v) => {
-      return v.data.token
+      console.log(v.data.token)
     })
     .catch((error) => {
       console.log(error)
