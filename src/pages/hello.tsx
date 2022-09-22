@@ -11,7 +11,7 @@ export default function Hello() {
 
   // アラート
   const toast = useToast()
-  axiosInstance.get('hello')
+  axiosInstance.get('/')
     .then((res) => {
       console.log(res)
       // アラート代わりにトーストを使用
