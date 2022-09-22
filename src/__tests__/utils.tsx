@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { render } from '@testing-library/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { NextRouter } from 'next/router';
+import type { NextRouter } from 'next/router';
 import React from 'react'
 
 // Chakra UI対応
@@ -37,8 +37,9 @@ const AllTheProviders = ({ children }: { children: JSX.Element }) => {
   )
 }
 
-const customRender = (ui: JSX.Element, options?: any) =>
+const customRender = (ui: JSX.Element, options?: any) => {
   render(ui, { wrapper: AllTheProviders, ...options })
+}
 
 export * from '@testing-library/react'
 export { customRender as render }
