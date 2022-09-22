@@ -4,14 +4,14 @@ export default function Hello() {
   // APIからデータ取得
   const axiosInstance = CreateAxiosDefaultInstance()
 
-  const postData = {
-    mailaddress: "gogo123@example.com",
-    password: "testpass",
+  // const postData = {
+  //   mailaddress: "gogo123@example.com",
+  //   password: "testpass",
 
-  }
-  axiosInstance.post('login', postData)
+  // }
+  axiosInstance.get('users')
     .then((v) => {
-      console.log(v.data.token)
+      console.log(v.data)
     })
     .catch((error) => {
       console.log(error)
