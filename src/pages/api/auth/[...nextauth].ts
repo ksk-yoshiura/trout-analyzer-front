@@ -48,7 +48,9 @@ export default NextAuth({
             }
           }
           return data;
-        } else {
+        }
+
+        if (postData.mailaddress || postData.password) {
           const data = {
             token: res,
             user: {
@@ -58,7 +60,6 @@ export default NextAuth({
           return data;
 
         }
-
         // Return null if user data could not be retrieved
         return null;
       },
