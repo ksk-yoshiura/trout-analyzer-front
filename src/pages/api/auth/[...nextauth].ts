@@ -48,6 +48,15 @@ export default NextAuth({
             }
           }
           return data;
+        } else {
+          const data = {
+            token: res,
+            user: {
+              mailaddress: postData.mailaddress
+            }
+          }
+          return data;
+
         }
 
         // Return null if user data could not be retrieved
