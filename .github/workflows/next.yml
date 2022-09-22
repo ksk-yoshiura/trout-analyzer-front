@@ -22,8 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
-      - name: Run test
-        run: yarn test -u
+      # - name: Run test
+      #   run: yarn test -u
 
   deploy:
     runs-on: ubuntu-latest
