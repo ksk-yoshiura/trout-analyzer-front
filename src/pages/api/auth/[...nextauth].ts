@@ -50,7 +50,7 @@ export default NextAuth({
           return data;
         }
 
-        if (postData.mailaddress || postData.password) {
+        if (postData.mailaddress && postData.password) {
           const data = {
             token: res,
             user: {
