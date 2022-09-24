@@ -50,16 +50,6 @@ export default NextAuth({
           return data;
         }
 
-        if (postData.mailaddress && postData.password) {
-          const data = {
-            token: res,
-            user: {
-              mailaddress: postData.mailaddress
-            }
-          }
-          return data;
-
-        }
         // Return null if user data could not be retrieved
         return null;
       },
