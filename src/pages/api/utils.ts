@@ -14,7 +14,7 @@ export const axiosDefaultInstance = axios.create({
 // デフォルトAPI
 export const axiosDefaultAPIInstance = axios.create({
   baseURL: apiURL + '/api/',
-  timeout: 5000
+  timeout: 50000 // 時間がかかりすぎ？
 })
 
 /**
