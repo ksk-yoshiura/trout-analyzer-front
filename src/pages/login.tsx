@@ -31,7 +31,6 @@ type LoginData = {
 // POSTリクエスト（サインイン・サインアウトなど）に必要なCSRFトークンを返却する
 export const getServerSideProps = async (context: CtxOrReq | undefined) => {
   const res = await getCsrfToken(context)
-  console.log(res)
   return {
     props: {
       title: "login",
@@ -41,8 +40,6 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 };
 
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
-  console.log("csrfToken")
-  console.log(csrfToken)
   const router = useRouter()
   const toast = useToast()
   const signInUser = async (data: LoginData) => {
@@ -52,7 +49,6 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
       password: data.password,
       callbackUrl: `${window.location.origin}`,
     }).then((res) => {
-      console.log(res)
       if (res?.error) {
         toast({
           title: 'Login failed!',

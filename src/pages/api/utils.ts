@@ -8,7 +8,7 @@ const apiURL = process.env.NEXT_PUBLIC_BACK_URL
 // デフォルト
 export const axiosDefaultInstance = axios.create({
   baseURL: apiURL,
-  timeout: 50000
+  timeout: 50000 // 時間がかかりすぎ？
 })
 
 // デフォルトAPI
@@ -24,7 +24,7 @@ export const axiosDefaultAPIInstance = axios.create({
 export const CreateAxiosDefaultInstance = (): AxiosInstance => {
 
   // axiosにヘッダー情報付与
-  axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
+  axiosDefaultInstance.defaults.headers.post['Access-Control-Allow-Origin'] = apiURL ?? "*";
   axiosDefaultInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
   // axiosインスタンス返却
@@ -40,7 +40,7 @@ export const CreateAxiosInstance = (): AxiosInstance => {
   const { data: session } = useSession();
 
   // axiosにヘッダー情報付与
-  axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
+  axiosDefaultAPIInstance.defaults.headers.post['Access-Control-Allow-Origin'] = apiURL ?? "*";
   axiosDefaultAPIInstance.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
   // jwtトークンをアクセストークンから取得
