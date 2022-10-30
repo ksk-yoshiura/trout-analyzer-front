@@ -41,7 +41,7 @@ export default function RecordsAllList(): JSX.Element {
                   type='button' as={"button"}
                   overflow='hidden'
                 >
-                  <Image p='2' w='40%' src={s3DomainPath + item.Field.FieldImage.image_file + image_ext ?? '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
+                  <Image p='2' w='40%' src={item.Field.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.Field.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
 
                   <Box p='2' w='60%'>
                     <Box

@@ -27,7 +27,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = rodDetailData?.RodImage ? s3DomainPath + rodDetailData.RodImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = rodDetailData?.RodImage && s3DomainPath ? s3DomainPath + rodDetailData.RodImage.image_file + '.png' : '/no_image.png'
   // 画像alt
   const imageAlt = rodDetailData?.RodImage ? rodDetailData.name : 'No Image'
 

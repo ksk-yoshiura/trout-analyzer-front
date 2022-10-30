@@ -27,7 +27,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = reelDetailData?.ReelImage ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = reelDetailData?.ReelImage && s3DomainPath ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
   // 画像alt
   const imageAlt = reelDetailData?.ReelImage ? reelDetailData.name : 'No Image'
 

@@ -28,7 +28,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = fieldDetailData?.FieldImage ? s3DomainPath + fieldDetailData.FieldImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = fieldDetailData?.FieldImage && s3DomainPath ? s3DomainPath + fieldDetailData.FieldImage.image_file + '.png' : '/no_image.png'
   // 画像alt
   const imageAlt = fieldDetailData?.FieldImage ? fieldDetailData.name : 'No Image'
 
