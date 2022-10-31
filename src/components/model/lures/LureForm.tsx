@@ -101,9 +101,9 @@ export default function LureForm(props: DetailProps) {
 
 
   // API登録・更新
-  const handleSendLureData = (values: LureData) => {
+  const handleSendLureData = async (values: LureData) => {
     // 画像データはbase64に変換
-    const imageBase64 = values.image ? convertFileIntoBase64(values.image) : ''
+    const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const lurePostData = {
       lureTypeId: values.lureTypeId,
       name: values.name,

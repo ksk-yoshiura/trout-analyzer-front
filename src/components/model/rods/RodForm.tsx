@@ -113,8 +113,8 @@ export default function RodForm(props: DetailProps) {
   const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
-  const handleSendRodData = (values: RodData) => {// 画像データはbase64に変換
-    const imageBase64 = values.image ? convertFileIntoBase64(values.image) : ''
+  const handleSendRodData = async (values: RodData) => {// 画像データはbase64に変換
+    const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const rodPostData = {
       name: values.name,
       companyName: values.companyName,
