@@ -9,6 +9,7 @@ import React, { useEffect } from 'react';
 import useSWR from 'swr'
 
 import type { LuresApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
+import Loading from '../../../shared/Loading'
 
 type LureTypeProps = {
   lureTypeId: string
@@ -26,8 +27,8 @@ export default function LureSelect(props: LureTypeProps) {
   }, [])
   const { lureTypeId, lureImageURL, setLureImageURL } = props
   // ルアーデータリスト
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + lureTypeId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<LuresApiResponse, Error>('lures?type_id=' + lureTypeId)
+  if (!data) return <Loading />
   // ルアーデータ
   const lureList = data?.result ? data.result : []
   // S3パス

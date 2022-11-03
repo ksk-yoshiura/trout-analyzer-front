@@ -16,8 +16,7 @@ export default function LureTypeSelect(props: TypeProp) {
   // LureFormのeditで選択されたタイプ
   const { field, setTypeId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types')
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<LureTypesApiResponse, Error>('lure_types')
   if (!data) return <Loading />
 
   // ルアータイプセレクト（一覧表示時のみ機能）

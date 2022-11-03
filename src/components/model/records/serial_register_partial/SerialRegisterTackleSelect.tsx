@@ -10,8 +10,7 @@ import Loading from '../../../shared/Loading'
 export default function TackleSelect(props: any) {
   const { field } = props
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles')
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<TacklesApiResponse, Error>('tackles')
   if (!data) return <Loading />
 
   return (

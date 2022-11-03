@@ -45,8 +45,7 @@ export default function PatternConditionRadio(props: PatternTypeProp) {
   })
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions/' + typeURL[typeNum])
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<PatternConditionsApiResponse, Error>('pattern_conditions/' + typeURL[typeNum])
   if (!data) return <Loading />
 
   // 釣果の名称配列作成

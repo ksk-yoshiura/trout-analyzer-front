@@ -15,8 +15,7 @@ import NoDataAlert from '../../shared/NoDataAlert'
 export default function RecordsAllList(): JSX.Element {
 
   // APIからデータ取得
-  const { data, error } = useSWR<RecordsApiResponse, Error>('records/all')
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<RecordsApiResponse, Error>('records/all')
   if (!data) return <Loading />
   // レコードデータ
   const recordListData = data.result ? data.result : []

@@ -23,8 +23,7 @@ export default function LuresColorPalette(props: any) {
   const [colorName, setColorName] = useState('')
 
   // APIからデータ取得
-  const { data, error } = useSWR<ColorsApiResponse, Error>('colors')
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<ColorsApiResponse, Error>('colors')
   if (!data) return <Loading />
   // カラーデータ
   const colorList = data.result ? data.result : []

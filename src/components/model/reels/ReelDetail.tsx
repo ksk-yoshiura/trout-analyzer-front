@@ -19,8 +19,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<ReelsApiResponse, Error>('reels/' + chosenId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<ReelsApiResponse, Error>('reels/' + chosenId)
   if (!data) return <Loading />
   // リールデータ
   const reelDetailData = data.result ? data.result : null

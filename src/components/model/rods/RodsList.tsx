@@ -33,8 +33,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('rods')
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<RodsApiResponse, Error>('rods')
   if (!data) return <Loading />
   // ロッドデータ
   const rodsListData = data.result ? data.result : []
@@ -55,7 +54,6 @@ export default function RodsList(props: ListProps): JSX.Element {
   const selectRodForTackleHandler = (event: any) => {
     const { target } = event
     const selectId = target.value
-    console.log(selectId)
     setNewRodId ? setNewRodId(selectId) : null
   }
 

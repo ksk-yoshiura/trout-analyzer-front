@@ -20,8 +20,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('fields/' + chosenId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<FieldsApiResponse, Error>('fields/' + chosenId)
   if (!data) return <Loading />
   // フィールドデータ
   const fieldDetailData = data.result ? data.result : null

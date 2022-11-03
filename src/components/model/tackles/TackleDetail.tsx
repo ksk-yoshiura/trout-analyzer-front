@@ -18,8 +18,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + chosenId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<TacklesApiResponse, Error>('tackles/' + chosenId)
   if (!data) return <Loading />
 
   // 登録データが削除されていた場合非表示

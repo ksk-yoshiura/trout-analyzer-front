@@ -19,8 +19,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + chosenId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<LuresApiResponse, Error>('lures/' + chosenId)
   if (!data) return <Loading />
   // ルアーデータ
   const lureDetailData = data.result ? data.result : null

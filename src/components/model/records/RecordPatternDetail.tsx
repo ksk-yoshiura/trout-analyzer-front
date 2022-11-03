@@ -20,11 +20,9 @@ export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<PatternApiResponse, Error>('patterns/' + chosenId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<PatternApiResponse, Error>('patterns/' + chosenId)
   if (!data) return <Loading />
 
-  console.log(data.result)
   return (
     <Box maxW='sm' overflow='hidden'>
       {

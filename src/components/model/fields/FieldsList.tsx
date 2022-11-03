@@ -22,7 +22,6 @@ export default function FieldsList(): JSX.Element {
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
   const { data } = useSWR<FieldsApiResponse, Error>('fields')
-  // if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   // フィールドデータ
   const fieldsListData = data.result ? data.result : []

@@ -32,8 +32,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error } = useSWR<ReelsApiResponse, Error>('reels')
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<ReelsApiResponse, Error>('reels')
   if (!data) return <Loading />
   // リールデータ
   const reelsListData = data.result ? data.result : []

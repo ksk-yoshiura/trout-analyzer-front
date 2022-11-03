@@ -19,8 +19,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('rods/' + chosenId)
-  if (error) return <p>Error: {error.message}</p>
+  const { data } = useSWR<RodsApiResponse, Error>('rods/' + chosenId)
   if (!data) return <Loading />
   // ロッドデータ
   const rodDetailData = data.result ? data.result : null
