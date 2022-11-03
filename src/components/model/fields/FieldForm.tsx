@@ -59,8 +59,6 @@ export default function FieldForm(props: DetailProps) {
   const handleSendFieldData = async (values: FieldData) => {
     // 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
-    console.log(values.image)
-    console.log(imageBase64)
     const fieldPostData = {
       name: values.name,
       address: values.address,
