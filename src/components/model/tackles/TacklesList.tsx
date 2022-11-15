@@ -6,6 +6,7 @@ import {
   Wrap,
   WrapItem
 } from '@chakra-ui/react'
+import axios from 'axios'
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
@@ -15,15 +16,23 @@ import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import TackleDetail from './TackleDetail'
 
+const fetcher = (url: string) => {
+  return axios(url)
+    .then((res) => {
+      return res.data
+    })
+};
 export default function TacklesList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+  const options = {
+    revalidateOnFocus: true,
+    refreshInterval: 100,
+  };
   // APIからデータ取得
-  const { data, error, mutate } = useSWR<TacklesApiResponse, Error>('tackles')
-
-  if (error) return <div>failed to load</div>
+  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles', fetcher, options)
   if (!data) return <Loading />
-  mutate({ ...data }, false)
+  if (error) return <div>An error has occurred.</div>
   // タックルデータ
   const tacklesListData = data.result ? data.result : []
 
