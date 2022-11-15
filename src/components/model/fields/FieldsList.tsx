@@ -7,7 +7,7 @@ import {
   WrapItem,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 
 import type { FieldsApiResponse } from "../../../pages/api/fields/index"
 import getDateFormatted from "../../../utils/dateFormat"
@@ -17,14 +17,15 @@ import NoDataAlert from '../../shared/NoDataAlert'
 import FieldDetail from './FieldDetail'
 
 export default function FieldsList(): JSX.Element {
+  const { mutate } = useSWRConfig();
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data, error, mutate } = useSWR<FieldsApiResponse, Error>('fields')
+  const { data, error } = useSWR<FieldsApiResponse, Error>('fields')
   if (error) return <div>failed to load</div>
   if (!data) return <Loading />
-  mutate({ ...data }, false)
+  mutate('fields')
   // フィールドデータ
   const fieldsListData = data.result ? data.result : []
 
