@@ -6,6 +6,7 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react'
+import axios from 'axios'
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
@@ -16,19 +17,24 @@ import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import FieldDetail from './FieldDetail'
 
+const fetcher = (url: string) => {
+  return axios(url)
+    .then((res) => {
+      return res.data
+    })
+};
 export default function FieldsList(): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+  const options = {
+    revalidateOnFocus: true,
+    refreshInterval: 100,
+  };
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('fields', {
-    // pollingの期間
-    refreshInterval: 0,
-    // windowのフォーカス時にRevalidateする
-    revalidateOnFocus: true
-  })
-  if (error) return <div>An error has occurred.</div>
+  const { data, error } = useSWR<FieldsApiResponse, Error>('fields', fetcher, options)
   if (!data) return <Loading />
+  if (error) return <div>An error has occurred.</div>
   // フィールドデータ
   const fieldsListData = data.result ? data.result : []
 
