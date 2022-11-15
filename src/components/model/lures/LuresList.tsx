@@ -6,8 +6,8 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react'
-import React from 'react'
-import { useState } from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import useSWR from 'swr'
 
 import type { LuresApiResponse } from "../../../pages/api/lures/index"
@@ -17,6 +17,12 @@ import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import LureDetail from './LureDetail'
 
+const fetcher = (url: string) => {
+  return axios(url)
+    .then((res) => {
+      return res.data
+    })
+};
 type ListProps = {
   typeId?: string;
 }
@@ -25,12 +31,17 @@ export default function LuresList(props: ListProps): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+  const options = {
+    revalidateOnFocus: true,
+    refreshInterval: 100,
+  };
 
   // ルアータイプID
   const { typeId } = props
   // APIからデータ取得
-  const { data } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId)
+  const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId, fetcher, options)
   if (!data) return <Loading />
+  if (error) return <div>An error has occurred.</div>
   // ルアーデータ
   const luresListData = data.result ? data.result : []
 
