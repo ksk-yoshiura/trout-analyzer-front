@@ -19,8 +19,11 @@ export default function TacklesList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data } = useSWR<TacklesApiResponse, Error>('tackles')
+  const { data, error, mutate } = useSWR<TacklesApiResponse, Error>('tackles')
+
+  if (error) return <div>failed to load</div>
   if (!data) return <Loading />
+  mutate({ ...data }, false)
   // タックルデータ
   const tacklesListData = data.result ? data.result : []
 

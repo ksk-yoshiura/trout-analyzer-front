@@ -21,8 +21,10 @@ export default function FieldsList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
   // APIからデータ取得
-  const { data } = useSWR<FieldsApiResponse, Error>('fields')
+  const { data, error, mutate } = useSWR<FieldsApiResponse, Error>('fields')
+  if (error) return <div>failed to load</div>
   if (!data) return <Loading />
+  mutate({ ...data }, false)
   // フィールドデータ
   const fieldsListData = data.result ? data.result : []
 
