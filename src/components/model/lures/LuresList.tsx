@@ -18,11 +18,13 @@ import NoDataAlert from '../../shared/NoDataAlert'
 import LureDetail from './LureDetail'
 
 const fetcher = (url: string) => {
-  return axios(url)
+  const response = axios(url)
     .then((res) => {
       return res.data
     })
+  return response
 };
+
 type ListProps = {
   typeId?: string;
 }
@@ -31,14 +33,14 @@ export default function LuresList(props: ListProps): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
-  const options = {
-    revalidateOnFocus: true,
-    refreshInterval: 100,
-  };
 
   // ルアータイプID
   const { typeId } = props
   // APIからデータ取得
+  const options = {
+    revalidateOnFocus: true,
+    refreshInterval: 100,
+  };
   const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId, fetcher, options)
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>

@@ -13,8 +13,9 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react'
+import axios from 'axios'
 import NextLink from "next/link"
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
@@ -24,6 +25,13 @@ import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import RecordPatternDetail from './RecordPatternDetail'
 
+const fetcher = (url: string) => {
+  const response = axios(url)
+    .then((res) => {
+      return res.data
+    })
+  return response
+};
 
 export default function RecordsAllList(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -39,7 +47,11 @@ export default function RecordsAllList(): JSX.Element {
   const image_ext = '.png'
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId)
+  const options = {
+    revalidateOnFocus: true,
+    refreshInterval: 100,
+  };
+  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId, fetcher, options)
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // パターンデータ

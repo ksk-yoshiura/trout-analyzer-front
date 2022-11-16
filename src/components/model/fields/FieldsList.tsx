@@ -18,20 +18,23 @@ import NoDataAlert from '../../shared/NoDataAlert'
 import FieldDetail from './FieldDetail'
 
 const fetcher = (url: string) => {
-  return axios(url)
+  const response = axios(url)
     .then((res) => {
       return res.data
     })
+  return response
 };
+
 export default function FieldsList(): JSX.Element {
   // モーダル
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [chosenId, idState] = useState(0)
+
+  // APIからデータ取得
   const options = {
     revalidateOnFocus: true,
     refreshInterval: 100,
   };
-  // APIからデータ取得
   const { data, error } = useSWR<FieldsApiResponse, Error>('fields', fetcher, options)
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>

@@ -9,6 +9,7 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react'
+import axios from 'axios'
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
@@ -19,6 +20,14 @@ import DetailTackleModal from '../../shared/DetailTackleModal'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import RodDetail from './RodDetail'
+
+const fetcher = (url: string) => {
+  const response = axios(url)
+    .then((res) => {
+      return res.data
+    })
+  return response
+};
 
 type ListProps = {
   isTackle: boolean
@@ -33,7 +42,11 @@ export default function RodsList(props: ListProps): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const { data, error } = useSWR<RodsApiResponse, Error>('rods')
+  const options = {
+    revalidateOnFocus: true,
+    refreshInterval: 100,
+  };
+  const { data, error } = useSWR<RodsApiResponse, Error>('rods', fetcher, options)
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // ロッドデータ
