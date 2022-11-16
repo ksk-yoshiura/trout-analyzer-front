@@ -33,8 +33,9 @@ export default function RodsList(props: ListProps): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const { data } = useSWR<RodsApiResponse, Error>('rods')
+  const { data, error } = useSWR<RodsApiResponse, Error>('rods')
   if (!data) return <Loading />
+  if (error) return <div>An error has occurred.</div>
   // ロッドデータ
   const rodsListData = data.result ? data.result : []
 

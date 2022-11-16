@@ -39,8 +39,9 @@ export default function RecordsAllList(): JSX.Element {
   const image_ext = '.png'
 
   // APIからデータ取得
-  const { data } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId)
+  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId)
   if (!data) return <Loading />
+  if (error) return <div>An error has occurred.</div>
   // パターンデータ
   const patternsListData = data.result ? data.result : []
 

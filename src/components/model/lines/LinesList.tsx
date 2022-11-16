@@ -33,8 +33,9 @@ export default function LinesList(props: ListProps): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const { data } = useSWR<LinesApiResponse, Error>('lines')
+  const { data, error } = useSWR<LinesApiResponse, Error>('lines')
   if (!data) return <Loading />
+  if (error) return <div>An error has occurred.</div>
   // ラインデータ
   const linesListData = data.result ? data.result : []
 
