@@ -42,6 +42,7 @@ type LureData = {
   color?: string
   weight?: string
   image?: any; // 一旦anyで回避
+  size?: number
 }
 
 // 編集データ
@@ -162,15 +163,12 @@ export default function LureForm(props: DetailProps) {
     }
   }
 
-  const validateData = (value: LureData) => {
-    console.log(value)
-    // let error
-    // if (!value) {
-    //   error = 'Name is required'
-    // } else if (value.toLowerCase() !== 'naruto') {
-    //   error = "Jeez! You're not a fan 😱"
-    // }
-    // return error
+  const validateData = (value: LureData) => { // TODO：image専用のバリで
+    let error
+    if (value && value.size && value.size > 300000) {
+      error = 'Image size should be less than 300K'
+    }
+    return error
   }
 
   // 確認ドロワー
