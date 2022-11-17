@@ -8,13 +8,13 @@ const apiURL = process.env.NEXT_PUBLIC_BACK_URL
 // デフォルト
 export const axiosDefaultInstance = axios.create({
   baseURL: apiURL,
-  timeout: 5000 // 時間がかかりすぎ？
+  timeout: 50000 // 時間がかかりすぎ？
 })
 
 // デフォルトAPI
 export const axiosDefaultAPIInstance = axios.create({
   baseURL: apiURL + '/api/',
-  timeout: 5000 // 時間がかかりすぎ？
+  timeout: 50000 // 時間がかかりすぎ？
 })
 
 /**
