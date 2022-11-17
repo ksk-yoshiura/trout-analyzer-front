@@ -29,8 +29,8 @@ export default function LureTypeSelect(props: TypeProp) {
     revalidateOnFocus: true,
     refreshInterval: 100,
   };
-  const { data, error, mutate } = useSWR<LureTypesApiResponse, Error>('lure_types', fetcher, options)
-  if (!data) { mutate(); return <Loading /> }
+  const { data, error } = useSWR<LureTypesApiResponse, Error>('lure_types', fetcher, options)
+  if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
 
   // ルアータイプセレクト（一覧表示時のみ機能）
