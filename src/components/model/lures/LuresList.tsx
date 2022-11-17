@@ -29,8 +29,8 @@ export default function LuresList(props: ListProps): JSX.Element {
   // ルアータイプID
   const { typeId } = props
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId)
-  if (!data) return <Loading />
+  const { data, error, mutate } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId)
+  if (!data) { mutate(); return <Loading /> }
   if (error) return <div>An error has occurred.</div>
   // ルアーデータ
   const luresListData = data.result ? data.result : []
