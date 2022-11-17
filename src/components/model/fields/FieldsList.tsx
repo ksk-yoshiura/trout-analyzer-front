@@ -6,7 +6,6 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react'
-import axios from 'axios'
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
@@ -17,13 +16,6 @@ import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import FieldDetail from './FieldDetail'
 
-const fetcher = (url: string) => {
-  const response = axios(url)
-    .then((res) => {
-      return res.data
-    })
-  return response
-};
 
 export default function FieldsList(): JSX.Element {
   // モーダル
@@ -31,11 +23,7 @@ export default function FieldsList(): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const options = {
-    revalidateOnFocus: true,
-    refreshInterval: 100,
-  };
-  const { data, error } = useSWR<FieldsApiResponse, Error>('fields', fetcher, options)
+  const { data, error } = useSWR<FieldsApiResponse, Error>('fields')
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // フィールドデータ

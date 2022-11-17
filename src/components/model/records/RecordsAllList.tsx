@@ -3,7 +3,6 @@ import {
   Image,
   Stack
 } from '@chakra-ui/react'
-import axios from 'axios'
 import NextLink from "next/link"
 import React from 'react';
 import useSWR from 'swr'
@@ -13,22 +12,11 @@ import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 
-const fetcher = (url: string) => {
-  const response = axios(url)
-    .then((res) => {
-      return res.data
-    })
-  return response
-};
 
 export default function RecordsAllList(): JSX.Element {
 
   // APIからデータ取得
-  const options = {
-    revalidateOnFocus: true,
-    refreshInterval: 100,
-  };
-  const { data, error } = useSWR<RecordsApiResponse, Error>('records/all', fetcher, options)
+  const { data, error } = useSWR<RecordsApiResponse, Error>('records/all')
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // レコードデータ
