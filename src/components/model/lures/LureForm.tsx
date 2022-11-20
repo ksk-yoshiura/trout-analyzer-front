@@ -30,6 +30,7 @@ import React, { useEffect } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
+import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import LuresColorPalette from "./LuresColorPalette"
 import LureTypeSelect from "./LureTypeSelect"
@@ -63,7 +64,6 @@ export default function LureForm(props: DetailProps) {
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
-
 
   // ルアー重さ
   const InputWightNumber = (props: any) => {
@@ -163,12 +163,8 @@ export default function LureForm(props: DetailProps) {
     }
   }
 
-  const validateData = (value: LureData) => { // TODO：image専用のバリで
-    let error
-    if (value && value.size && value.size > 300000) {
-      error = 'Image size should be less than 300K'
-    }
-    return error
+  const validateData = () => {
+    return
   }
 
   // 確認ドロワー
@@ -310,7 +306,7 @@ export default function LureForm(props: DetailProps) {
                   )
                 }}
               </Field>
-              <Field name='image' validate={validateData}>
+              <Field name='image' validate={validateImage}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl

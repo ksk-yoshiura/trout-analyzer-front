@@ -30,6 +30,7 @@ import React, { useEffect } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
+import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
@@ -198,15 +199,8 @@ export default function RodForm(props: DetailProps) {
     )
   }
 
-  const validateData = (value: RodData) => {
-    console.log(value)
-    // let error
-    // if (!value) {
-    //   error = 'Name is required'
-    // } else if (value.toLowerCase() !== 'naruto') {
-    //   error = "Jeez! You're not a fan 😱"
-    // }
-    // return error
+  const validateData = () => {
+    return
   }
 
   return (
@@ -305,7 +299,7 @@ export default function RodForm(props: DetailProps) {
                 }}
               </Field>
 
-              <Field name='image' validate={validateData}>
+              <Field name='image' validate={validateImage}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl

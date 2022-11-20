@@ -30,6 +30,7 @@ import React, { useEffect } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
+import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
@@ -100,7 +101,6 @@ export default function LineForm(props: DetailProps) {
     )
   }
 
-
   // API登録・更新
   const handleSendLineData = async (values: LineData) => {// 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
@@ -160,15 +160,8 @@ export default function LineForm(props: DetailProps) {
     }
   }
 
-  const validateData = (value: LineData) => {
-    console.log(value)
-    // let error
-    // if (!value) {
-    //   error = 'Name is required'
-    // } else if (value.toLowerCase() !== 'naruto') {
-    //   error = "Jeez! You're not a fan 😱"
-    // }
-    // return error
+  const validateData = () => {
+    return
   }
 
   // 確認ドロワー
@@ -293,7 +286,7 @@ export default function LineForm(props: DetailProps) {
                 }}
               </Field>
 
-              <Field name='image' validate={validateData}>
+              <Field name='image' validate={validateImage}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl

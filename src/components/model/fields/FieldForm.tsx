@@ -27,6 +27,7 @@ import { mutate } from 'swr'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
+import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 
 type FieldData = {
@@ -122,15 +123,8 @@ export default function FieldForm(props: DetailProps) {
   }
 
   // バリデーション
-  const validateData = (value: FieldData) => {
-    console.log(value)
-
-    // console.log(value)
-    // let error
-    // if (!value) {
-    //   error = 'required'
-    // }
-    // return error
+  const validateData = () => {
+    return
   }
 
   // 確認ドロワー
@@ -220,7 +214,7 @@ export default function FieldForm(props: DetailProps) {
               }}
             </Field>
 
-            <Field name='image' validate={validateData}>
+            <Field name='image' validate={validateImage}>
               {({ field, form }: FieldProps) => {
                 return (
                   <FormControl
