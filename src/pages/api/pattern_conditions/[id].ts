@@ -1,10 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type PatternCondition = {
-  id: string
-  type_num: string
-  type_name: string
-}
+import type { PatternCondition } from '../../../types/pattern_condition'
+
 
 // API のレスポンス型
 export type PatternConditionApiResponse = {
