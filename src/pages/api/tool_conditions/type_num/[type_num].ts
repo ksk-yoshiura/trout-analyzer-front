@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type ToolCondition = {
-  ID: string
-  typeNum: string
-  typeName: string
-}
+import type { ToolCondition } from '../../../../types/tool_condition'
 
 // API のレスポンス型
 export type ToolConditionApiResponse = {
