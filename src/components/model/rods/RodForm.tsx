@@ -28,6 +28,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
+import { ROD_HARDNESS_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
@@ -56,9 +57,6 @@ type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
   data?: RodData;
 }
-
-// ToolConditionのタイプ：ロッド硬さ
-const rodHardnessType = 1
 
 export default function RodForm(props: DetailProps) {
   // 確認ドロワー
@@ -273,7 +271,7 @@ export default function RodForm(props: DetailProps) {
                         htmlFor='hardness'
                         textTransform='uppercase'
                       >HARDNESS</FormLabel>
-                      <ToolConditionSelect field={field} typeNum={rodHardnessType} />
+                      <ToolConditionSelect field={field} typeNum={ROD_HARDNESS_TYPE} />
                       <FormErrorMessage>{form.errors.hardness}</FormErrorMessage>
                     </FormControl>
                   )

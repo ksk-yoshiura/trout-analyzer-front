@@ -24,6 +24,7 @@ import {
 import { useRouter } from "next/router";
 import React from 'react'
 
+import { GEAR_TYPE, REEL_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
@@ -43,11 +44,6 @@ type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
   data?: ReelData;
 }
-
-// リールギア比
-const gearType = 2
-// リール型番
-const reelType = 3
 
 export default function ReelForm(props: DetailProps) {
   // 確認ドロワー
@@ -204,7 +200,7 @@ export default function ReelForm(props: DetailProps) {
                         htmlFor='gearId'
                         textTransform='uppercase'
                       >GEAR</FormLabel>
-                      <ToolConditionSelect field={field} typeNum={gearType} />
+                      <ToolConditionSelect field={field} typeNum={GEAR_TYPE} />
                       <FormErrorMessage>{form.errors.gearId}</FormErrorMessage>
                     </FormControl>
                   )
@@ -223,7 +219,7 @@ export default function ReelForm(props: DetailProps) {
                         htmlFor='typeNumberId'
                         textTransform='uppercase'
                       >TYPE</FormLabel>
-                      <ToolConditionSelect field={field} typeNum={reelType} />
+                      <ToolConditionSelect field={field} typeNum={REEL_TYPE} />
                       <FormErrorMessage>{form.errors.typeNumberId}</FormErrorMessage>
                     </FormControl>
                   )

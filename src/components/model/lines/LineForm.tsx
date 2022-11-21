@@ -28,6 +28,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
+import { LINE_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
@@ -49,9 +50,6 @@ type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
   data?: LineData;
 }
-
-// ライン種類
-const lineType = 4
 
 export default function LineForm(props: DetailProps) {
   // 確認ドロワー
@@ -261,7 +259,7 @@ export default function LineForm(props: DetailProps) {
                         htmlFor='lineTypeId'
                         textTransform='uppercase'
                       >TYPE</FormLabel>
-                      <ToolConditionSelect field={field} typeNum={lineType} /><FormErrorMessage>{form.errors.lineTypeId}</FormErrorMessage>
+                      <ToolConditionSelect field={field} typeNum={LINE_TYPE} /><FormErrorMessage>{form.errors.lineTypeId}</FormErrorMessage>
                     </FormControl>
                   )
                 }}
