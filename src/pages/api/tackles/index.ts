@@ -1,31 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Tackle = {
-  ID: string
-  CreatedAt: string
-  Rod: {
-    name: string
-    imageUrl: string
-    imageAlt: string
-    length: string
-    RodHardnessCondition: { typeName: string }
-  },
-  Reel: {
-    name: string
-    imageUrl: string
-    imageAlt: string
-    TypeNumberCondition: { typeName: string }
-    GearCondition: { typeName: string }
-  },
-  Line: {
-    name: string
-    imageUrl: string
-    imageAlt: string
-    thickness: string
-    lineType: string
-    LineCondition: { typeName: string }
-  }
-}
+import type { Tackle } from '../../../types/tackle'
+
 
 // API のレスポンス型
 export type TacklesApiResponse = {
