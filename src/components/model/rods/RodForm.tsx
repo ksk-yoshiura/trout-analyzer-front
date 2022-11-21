@@ -57,7 +57,7 @@ type DetailProps = {
   data?: RodData;
 }
 
-// ロッド硬さ
+// ToolConditionのタイプ：ロッド硬さ
 const rodHardnessType = 1
 
 export default function RodForm(props: DetailProps) {
@@ -105,7 +105,7 @@ export default function RodForm(props: DetailProps) {
     )
   }
 
-  // 初期値がない場合はからデータをセット
+  // 初期値がない場合はからデータをセット TODO：他と揃える
   // 下記エラーを解消するため
   // Warning: A component is changing an uncontrolled input to be controlled.
   const initData = data ? data : vacantData
