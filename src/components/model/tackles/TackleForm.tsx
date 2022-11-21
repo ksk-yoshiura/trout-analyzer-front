@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 import React, { useState } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { Tackle } from "../../../types/tackle"
 import LineDetail from '../lines/LineDetail'
 import LinesList from '../lines/LinesList'
 import ReelDetail from '../reels/ReelDetail'
@@ -33,40 +34,6 @@ import ReelsList from '../reels/ReelsList'
 import RodDetail from '../rods/RodDetail'
 import RodsList from '../rods/RodsList'
 
-type Tackle = {
-  ID: string
-  CreatedAt: string
-  Rod: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    length: string
-    RodHardnessCondition: { typeName: string }
-    companyName: string
-    CreatedAt: string
-  },
-  Reel: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    TypeNumberCondition: { typeName: string }
-    GearCondition: { typeName: string }
-    companyName: string
-    CreatedAt: string
-  },
-  Line: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    thickness: string
-    lineType: string
-    companyName: string
-    CreatedAt: string
-  }
-}
 
 type DetailProps = {
   tackleData?: Tackle
