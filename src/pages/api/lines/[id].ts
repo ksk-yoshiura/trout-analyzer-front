@@ -1,22 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Line = {
-  ID: string
-  imageUrl: string
-  imageAlt: string
-  CreatedAt: string
-  LineCondition: {
-    typeName: string
-  }
-  lineTypeId: string
-  name: string
-  companyName: string
-  thickness: string
-  LineImage: {
-    ID: string
-    image_file: string
-  }
-}
+import type { Line } from '../../../types/line'
 
 // API のレスポンス型
 export type LinesApiResponse = {
