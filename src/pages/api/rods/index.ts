@@ -1,17 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Rod = {
-  ID: string
-  CreatedAt: string
-  RodHardnessCondition: { typeName: string }
-  hardnessa: string
-  length: string
-  name: string
-  RodImage: {
-    ID: string
-    image_file: string
-  }
-}
+import type { Rod } from '../../../types/rod'
 
 // API のレスポンス型
 export type RodsApiResponse = {
