@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Color = {
-  ID: string
-  code: string
-  name: string
-}
+import type { Color } from '../../../types/color'
 
 // API のレスポンス型
 export type ColorsApiResponse = {
