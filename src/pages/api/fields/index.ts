@@ -1,16 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Field = {
-  ID: string
-  CreatedAt: string
-  lastVisitedAt: string
-  name: string
-  address: string
-  FieldImage: {
-    ID: string
-    image_file: string
-  }
-}
+import type { Field } from '../../../types/field'
 
 // API のレスポンス型
 export type FieldsApiResponse = {
