@@ -1,5 +1,5 @@
 export type ToolCondition = {
-  id: string
+  ID: string
   typeNum: string
   typeName: string
 }
