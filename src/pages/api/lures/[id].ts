@@ -1,32 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type LureType = {
-  ID: string
-  typeName: string
-}
-
-export type Lure = {
-  id: string
-  imageUrl: string
-  imageAlt: string
-  CreatedAt: string
-  lastUsedAt: string
-  LureType: LureType
-  name: string
-  companyName: string
-  color: string
-  weight: string
-  frequency: string
-  Color: {
-    ID: string
-    code: string
-    name: string
-  }
-  LureImage: {
-    ID: string
-    image_file: string
-  }
-}
+import type { Lure } from '../../../types/lure'
 
 // API のレスポンス型
 export type LuresApiResponse = {
