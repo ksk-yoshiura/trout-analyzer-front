@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { LureType } from '../../../types/lure_types'
+import type { LureType } from '../../../types/lure_type'
 
 // API のレスポンス型
 export type LureTypesApiResponse = {
