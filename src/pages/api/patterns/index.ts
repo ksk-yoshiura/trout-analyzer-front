@@ -1,38 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export type Pattern = {
-  ID: string
-  CreatedAt: string
-  // バッジ情報
-  // 釣果
-  ResultCondition: {
-    typeName: string
-  },
-  SpeedCondition: {
-    typeName: string
-  },
-  DepthCondition: {
-    typeName: string
-  },
-  WeatherCondition: {
-    typeName: string
-  },
-  // ルアー情報
-  Lure: {
-    ID: string
-    LureType: {
-      typeName: string
-    }
-    name: string
-    companyName: string
-    color: string
-    weight: string,
-    LureImage: {
-      ID: string
-      image_file: string
-    }
-  },
-}
+import type { Pattern } from "../../../types/pattern"
 
 // API のレスポンス型
 export type PatternsApiResponse = {
