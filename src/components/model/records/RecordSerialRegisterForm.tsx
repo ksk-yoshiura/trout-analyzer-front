@@ -23,13 +23,13 @@ import {
 import React from 'react'
 import useSWR from 'swr'
 
+import { defaultValueList, depthType, resultType, speedType, weatherType } from "../../../const/pattern_condition_type"
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
-
 
 type SerialRecordData = {
   result?: string;
@@ -52,19 +52,6 @@ type recordFormData = {
 
 type RecordDetailProp = {
   recordId: string | string[] | undefined
-}
-
-const resultType = 1
-const speedType = 2
-const depthType = 3
-const weatherType = 4
-
-// 初期値
-const defaultValueList = {
-  result: 1,
-  speed: 4,
-  depth: 9,
-  weather: 14
 }
 
 export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
