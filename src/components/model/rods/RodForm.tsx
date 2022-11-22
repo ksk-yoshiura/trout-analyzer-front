@@ -44,14 +44,6 @@ type RodData = {
   image?: any;
 }
 
-// 空データ
-const vacantData: RodData = {
-  hardness: '',
-  length: '',
-  name: '',
-  companyName: '',
-}
-
 // 編集データ
 type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
@@ -102,11 +94,6 @@ export default function RodForm(props: DetailProps) {
       </HStack>
     )
   }
-
-  // 初期値がない場合はからデータをセット TODO：他と揃える
-  // 下記エラーを解消するため
-  // Warning: A component is changing an uncontrolled input to be controlled.
-  const initData = data ? data : vacantData
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
@@ -204,10 +191,10 @@ export default function RodForm(props: DetailProps) {
   return (
     <Formik
       initialValues={{
-        name: initData.name,
-        companyName: initData.companyName,
-        hardness: initData.hardness,
-        length: initData.length,
+        name: data?.name,
+        companyName: data?.companyName,
+        hardness: data?.hardness,
+        length: data?.length,
         image: '' // TODO ：適切な形式で
       }}
       onSubmit={(values, actions) => {
