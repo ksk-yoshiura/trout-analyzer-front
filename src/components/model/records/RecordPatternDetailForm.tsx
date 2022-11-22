@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import useSWR from 'swr'
 
+import { defaultValueList, depthType, resultType, speedType, weatherType } from "../../../const/pattern_condition_type"
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import Loading from '../../shared/Loading'
@@ -53,19 +54,6 @@ type patternFormData = {
 type DetailDataProps = {
   patternData?: patternFormData
   backLinkToPatternListPage: string
-}
-
-const resultType = 1
-const speedType = 2
-const depthType = 3
-const weatherType = 4
-
-// 初期値
-const defaultValueList = {
-  result: 1,
-  speed: 4,
-  depth: 9,
-  weather: 14
 }
 
 export default function RecordSerialRegisterForm(props: DetailDataProps) {
