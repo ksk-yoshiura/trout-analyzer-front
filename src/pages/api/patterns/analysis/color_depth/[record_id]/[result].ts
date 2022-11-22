@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { PatternAnalysis } from '../../../../../../types/analysis/color'
+import type { PatternColorDepthAnalysis } from '../../../../../../types/analysis/color'
 
 // API のレスポンス型
 export type ColorDepthAnalysisApiResponse = {
-  result?: PatternAnalysis[]
+  result?: PatternColorDepthAnalysis[]
   status: number
   message?: string
 }
