@@ -1,7 +1,7 @@
 import type { LureType } from "./lure_type"
 
 export type Lure = {
-  id: string
+  ID: string
   imageUrl: string
   imageAlt: string
   CreatedAt: string
