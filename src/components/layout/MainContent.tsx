@@ -28,7 +28,7 @@ export default function MainContent({ children }: Props) {
   return (
     <Flex
       flexDirection="column"
-      alignItems="center"
+      alignItems="left"
       w="100%"
       h="100%"
       // bg="gray.800"
