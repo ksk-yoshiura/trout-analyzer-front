@@ -1,10 +1,12 @@
 import {
-  Badge,
-  Box,
-  Image,
-  useDisclosure,
-  Wrap,
-  WrapItem
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import useSWR from 'swr'
@@ -44,109 +46,35 @@ export default function TacklesList(): JSX.Element {
 
   return (
     <>
-      <Wrap spacing={5}>
+      <TableContainer>
         {
-          tacklesListData.length > 0 ? tacklesListData.map((item, index) => {
-            return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
-                <Box w={450} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' display='flex'>
-                  <Box w={150} maxW='sm' borderWidth='1px' pb='1' borderRadius='lg' overflow='hidden'>
-                    <Box
-                      mt='1'
-                      ml='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      textAlign={'left'}
-                      lineHeight='tight'
-                      color='gray.500'
-                      isTruncated
-                    >
-                      Rod
-                    </Box>
-                    <Image src={item.Rod.imageUrl} alt={item.Rod.imageAlt} />
-                    <Box
-                      mt='1'
-                      fontWeight='semibold'
-                      as='h3'
-                      lineHeight='tight'
-                    >
-                      {item.Rod.name}
-                    </Box>
-
-                    <Box display='inline-block' alignItems='baseline'>
-                      <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.Rod.RodHardnessCondition.typeName}
-                      </Badge>
-                    </Box>
-                  </Box>
-                  <Box w={150} maxW='sm' borderWidth='1px' pb='1' borderRadius='lg' overflow='hidden'>
-                    <Image src={item.Reel.imageUrl} alt={item.Reel.imageAlt} />
-
-                    <Box
-                      mt='1'
-                      ml='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      textAlign={'left'}
-                      lineHeight='tight'
-                      color='gray.500'
-                      isTruncated
-                    >
-                      Reel
-                    </Box>
-                    <Box
-                      mt='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      lineHeight='tight'
-                    >
-                      {item.Reel.name}
-                    </Box>
-                    <Box display='inline-block' alignItems='baseline'>
-                      <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.Reel.TypeNumberCondition.typeName}
-                      </Badge>
-                    </Box>
-                  </Box>
-
-                  <Box w={150} maxW='sm' borderWidth='1px' pb='1' borderRadius='lg' overflow='hidden'>
-                    <Image src={item.Line.imageUrl} alt={item.Line.imageAlt} />
-                    <Box
-                      mt='1'
-                      ml='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      textAlign={'left'}
-                      lineHeight='tight'
-                      color='gray.500'
-                      isTruncated
-                    >
-                      Line
-                    </Box>
-                    <Box
-                      mt='1'
-                      fontWeight='semibold'
-                      as='h4'
-                      lineHeight='tight'
-                    >
-                      {item.Line.name}
-                    </Box>
-
-                    <Box display='inline-block' alignItems='baseline'>
-                      <Badge borderRadius='full' px='2' color='gray.500'>
-                        {item.Line.LineCondition.typeName}
-                      </Badge>
-                    </Box>
-                  </Box>
-                </Box>
-              </WrapItem>
-            )
-          }) :
-            <NoDataAlert title={'tackles'} />
+          tacklesListData.length > 0 ?
+            <Table>
+              <Thead>
+                <Tr>
+                  <Th>ROD</Th>
+                  <Th>REEL</Th>
+                  <Th>LINE</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {
+                  tacklesListData.map((item, index) => {
+                    return (
+                      <Tr key={index} onClick={() => { onOpen(), clickHandler(item.ID) }}>
+                        <Td>{item.Rod.name}</Td>
+                        <Td>{item.Reel.name}</Td>
+                        <Td>{item.Line.name}</Td>
+                      </Tr>
+                    )
+                  })
+                }
+              </Tbody>
+            </Table>
+            : <NoDataAlert title={'tackles'} />
         }
-        <TackleDetailModal />
-
-      </Wrap>
+      </TableContainer>
+      <TackleDetailModal />
     </>
   )
 }
