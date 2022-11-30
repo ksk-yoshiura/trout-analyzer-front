@@ -162,6 +162,19 @@ export default function LineForm(props: DetailProps) {
     return
   }
 
+
+  const validateCompanyName = (): string => {
+    // 文字数
+
+    // 
+    return ''
+  }
+
+
+  const validateItemName = (): string => {
+    return ''
+  }
+
   // 確認ドロワー
   const ConfirmDrawer = () => {
 
@@ -209,7 +222,7 @@ export default function LineForm(props: DetailProps) {
         return (
           <Form>
             <Stack spacing={5}>
-              <Field name='name' validate={validateData}>
+              <Field name='name' validate={validateItemName}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl
@@ -228,7 +241,7 @@ export default function LineForm(props: DetailProps) {
                 }}
               </Field>
 
-              <Field name='thickness' validate={validateData}>
+              <Field name='thickness'>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl
@@ -265,7 +278,7 @@ export default function LineForm(props: DetailProps) {
                 }}
               </Field>
 
-              <Field name='companyName' validate={validateData}>
+              <Field name='companyName' validate={validateCompanyName}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl
