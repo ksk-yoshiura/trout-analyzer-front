@@ -27,3 +27,9 @@ export type LineImage = { // 画像
 export type LineCondition = { // オプション
   typeName: string
 }
+
+// タックル一覧用
+export type LineForTackle = {
+  ID: string
+  name: string
+}

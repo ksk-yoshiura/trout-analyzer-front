@@ -28,3 +28,9 @@ export type RodImage = { // 画像
 
 // オプション
 export type RodHardnessCondition = { typeName: string }
+
+// タックル一覧用
+export type RodForTackle = {
+  ID: string
+  name: string
+}

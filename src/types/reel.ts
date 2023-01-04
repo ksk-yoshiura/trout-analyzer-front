@@ -1,18 +1,3 @@
-export type Reel = {
-  ID: string
-  imageUrl: string
-  imageAlt: string
-  CreatedAt: string
-  name: string
-  companyName: string
-  TypeNumberCondition: { typeName: string }
-  GearCondition: { typeName: string }
-  ReelImage: {
-    ID: string
-    image_file: string
-  }
-}
-
 export type ReelBasic = { // 共通項目
   ID: string
   name: string
@@ -41,3 +26,9 @@ export type ReelImage = { // 画像
 // オプション
 export type TypeNumberCondition = { typeName: string }
 export type GearCondition = { typeName: string }
+
+// タックル一覧用
+export type ReelForTackle = {
+  ID: string
+  name: string
+}
