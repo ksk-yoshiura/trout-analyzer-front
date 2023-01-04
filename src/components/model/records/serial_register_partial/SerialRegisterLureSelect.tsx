@@ -8,7 +8,7 @@ import {
 import React, { useEffect } from 'react';
 import useSWR from 'swr'
 
-import type { LuresApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
+import type { LuresListByTypeApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
 import Loading from '../../../shared/Loading'
 
 type LureTypeProps = {
@@ -27,7 +27,7 @@ export default function LureSelect(props: LureTypeProps) {
   }, [])
   const { lureTypeId, lureImageURL, setLureImageURL } = props
   // ルアーデータリスト
-  const { data } = useSWR<LuresApiResponse, Error>('lures?type_id=' + lureTypeId)
+  const { data } = useSWR<LuresListByTypeApiResponse, Error>('lures?type_id=' + lureTypeId)
   if (!data) return <Loading />
   // ルアーデータ
   const lureList = data?.result ? data.result : []
@@ -45,7 +45,7 @@ export default function LureSelect(props: LureTypeProps) {
 
     helpers.setValue(targetLureId)
     lureList.map((val) => {
-      if (val.ID == targetLureId && val.LureImage.image_file) {
+      if (val.LureBasic.ID == targetLureId && val.LureImage.image_file) {
         setLureImageURL(val.LureImage.image_file)
       }
     })
@@ -59,7 +59,7 @@ export default function LureSelect(props: LureTypeProps) {
             {
               lureList.map((item, index) => {
                 return (
-                  <option key={index} value={item.ID}>
+                  <option key={index} value={item.LureBasic.ID}>
                     {item.name} {item.Color.name} {item.weight} g
                   </option>
                 )
