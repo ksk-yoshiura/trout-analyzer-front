@@ -7,7 +7,7 @@ import Image from "next/image"
 import React from 'react'
 import useSWR from 'swr'
 
-import type { LinesApiResponse } from "../../../pages/api/lines/[id]"
+import type { LinesDetailApiResponse } from "../../../pages/api/lines/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -20,7 +20,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data } = useSWR<LinesApiResponse, Error>('lines/' + chosenId)
+  const { data } = useSWR<LinesDetailApiResponse, Error>('lines/' + chosenId)
   if (!data) return <Loading />
   // ラインデータ
   const lineDetailData = data.result ? data.result : null
@@ -29,7 +29,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = lineDetailData?.LineImage && s3DomainPath ? s3DomainPath + lineDetailData.LineImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = lineDetailData?.LineImage ? lineDetailData.name : 'No Image'
+  const imageAlt = lineDetailData?.LineImage ? lineDetailData.LineBasic.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -53,7 +53,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {lineDetailData?.name}
+          {lineDetailData?.LineBasic.name}
         </Box>
 
         <Stack
