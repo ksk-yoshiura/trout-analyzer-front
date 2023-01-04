@@ -7,7 +7,7 @@ import {
 import React from 'react'
 import useSWR from 'swr'
 
-import type { FieldsApiResponse } from "../../../pages/api/fields/[id]"
+import type { FieldsDetailApiResponse } from "../../../pages/api/fields/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -20,7 +20,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data } = useSWR<FieldsApiResponse, Error>('fields/' + chosenId)
+  const { data } = useSWR<FieldsDetailApiResponse, Error>('fields/' + chosenId)
   if (!data) return <Loading />
   // フィールドデータ
   const fieldDetailData = data.result ? data.result : null
@@ -38,7 +38,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           {
-            fieldDetailData?.lastVisitedAt ?
+            fieldDetailData?.FieldBasic.lastVisitedAt ?
               <></>
               :
               <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
@@ -73,7 +73,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
             ADDED {fieldDetailData ? getDateFormatted(fieldDetailData.CreatedAt) : null}
           </Box>
           <Box>
-            LAST VISITED {fieldDetailData ? getDateFormatted(fieldDetailData.lastVisitedAt) : null}
+            LAST VISITED {fieldDetailData ? getDateFormatted(fieldDetailData.FieldBasic.lastVisitedAt) : null}
           </Box>
         </Stack>
 

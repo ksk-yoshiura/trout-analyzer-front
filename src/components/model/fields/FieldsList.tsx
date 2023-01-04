@@ -9,7 +9,7 @@ import {
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-import type { FieldsApiResponse } from "../../../pages/api/fields/index"
+import type { FieldsListApiResponse } from "../../../pages/api/fields/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
@@ -23,7 +23,7 @@ export default function FieldsList(): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const { data, error } = useSWR<FieldsApiResponse, Error>('fields')
+  const { data, error } = useSWR<FieldsListApiResponse, Error>('fields')
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // フィールドデータ
@@ -59,14 +59,14 @@ export default function FieldsList(): JSX.Element {
         {
           fieldsListData.length > 0 ? fieldsListData.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.FieldBasic.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
+                  <Image src={item.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.FieldBasic.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
                       {
-                        item.lastVisitedAt ?
+                        item.FieldBasic.lastVisitedAt ?
                           <></>
                           :
                           <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
@@ -81,7 +81,7 @@ export default function FieldsList(): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.name}
+                      {item.FieldBasic.name}
                     </Box>
                     <Box
                       color='gray.500'
@@ -91,7 +91,7 @@ export default function FieldsList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      last visited {item.lastVisitedAt ? getDateFormatted(item.lastVisitedAt) : null}
+                      last visited {item.FieldBasic.lastVisitedAt ? getDateFormatted(item.FieldBasic.lastVisitedAt) : null}
                     </Box>
 
                   </Box>
