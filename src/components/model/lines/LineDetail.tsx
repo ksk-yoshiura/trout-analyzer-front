@@ -65,13 +65,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {lineDetailData?.thickness} lb
+            THICKNESS {lineDetailData?.LineBasic.thickness} lb
           </Box>
           <Box textTransform='uppercase'>
             COMPANY {lineDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {lineDetailData ? getDateFormatted(lineDetailData.CreatedAt) : null}
+            ADDED {lineDetailData ? getDateFormatted(lineDetailData.LineBasic.CreatedAt) : null}
           </Box>
         </Stack>
       </Box>
