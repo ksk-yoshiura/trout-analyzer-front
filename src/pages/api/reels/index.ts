@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { Reel } from '../../../types/reel'
+import type { GearCondition, ReelBasic, ReelImage, ReelsList } from '../../../types/reel'
 
 // API のレスポンス型
 export type ReelsApiResponse = {
-  result?: Reel[]
+  result?: ReelsList<ReelBasic, ReelImage, GearCondition>[]
   status: number
   message?: string
 }

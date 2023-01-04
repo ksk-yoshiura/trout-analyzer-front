@@ -7,7 +7,7 @@ import Image from "next/image";
 import React from 'react'
 import useSWR from 'swr'
 
-import type { ReelsApiResponse } from "../../../pages/api/reels/[id]"
+import type { ReelDetailApiResponse } from "../../../pages/api/reels/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -19,7 +19,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data } = useSWR<ReelsApiResponse, Error>('reels/' + chosenId)
+  const { data } = useSWR<ReelDetailApiResponse, Error>('reels/' + chosenId)
   if (!data) return <Loading />
   // リールデータ
   const reelDetailData = data.result ? data.result : null
@@ -28,7 +28,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = reelDetailData?.ReelImage && s3DomainPath ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = reelDetailData?.ReelImage ? reelDetailData.name : 'No Image'
+  const imageAlt = reelDetailData?.ReelImage ? reelDetailData.ReelBasic.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -52,7 +52,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {reelDetailData?.name}
+          {reelDetailData?.ReelBasic.name}
         </Box>
 
         <Stack
@@ -67,7 +67,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             COMPANY {reelDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {reelDetailData ? getDateFormatted(reelDetailData.CreatedAt) : null}
+            ADDED {reelDetailData ? getDateFormatted(reelDetailData.ReelBasic.CreatedAt) : null}
           </Box>
         </Stack>
 
