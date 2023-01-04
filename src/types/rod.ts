@@ -1,15 +1,30 @@
-export type Rod = {
+export type RodBasic = {// 共通項目
   ID: string
-  imageUrl: string
-  imageAlt: string
-  CreatedAt: string
-  RodHardnessCondition: { typeName: string }
-  hardnessa: string
-  length: string
   name: string
-  companyName: string
-  RodImage: {
-    ID: string
-    image_file: string
-  }
+  length: string
+  thickness: string
+  CreatedAt: string
 }
+
+export type RodsList<RodBasic, RodImage, RodHardnessCondition> = { // 一覧
+  RodBasic: RodBasic
+  RodImage: RodImage
+  RodHardnessCondition: RodHardnessCondition
+}
+
+export type RodDetail<RodBasic, RodImage, RodHardnessCondition> = { // 詳細
+  RodHardnessCondition: RodHardnessCondition
+  RodTypeId: string
+  companyName: string
+  hardness: string
+  RodBasic: RodBasic
+  RodImage: RodImage
+}
+
+export type RodImage = { // 画像
+  ID: string
+  image_file: string
+}
+
+// オプション
+export type RodHardnessCondition = { typeName: string }

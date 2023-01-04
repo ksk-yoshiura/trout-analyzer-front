@@ -7,7 +7,7 @@ import Image from "next/image";
 import React from 'react'
 import useSWR from 'swr'
 
-import type { RodsApiResponse } from "../../../pages/api/rods/[id]"
+import type { RodDetailApiResponse } from "../../../pages/api/rods/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -19,7 +19,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data } = useSWR<RodsApiResponse, Error>('rods/' + chosenId)
+  const { data } = useSWR<RodDetailApiResponse, Error>('rods/' + chosenId)
   if (!data) return <Loading />
   // ロッドデータ
   const rodDetailData = data.result ? data.result : null
@@ -28,7 +28,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = rodDetailData?.RodImage && s3DomainPath ? s3DomainPath + rodDetailData.RodImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = rodDetailData?.RodImage ? rodDetailData.name : 'No Image'
+  const imageAlt = rodDetailData?.RodImage ? rodDetailData.RodBasic.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -49,7 +49,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {rodDetailData?.name}
+          {rodDetailData?.RodBasic.name}
         </Box>
 
         <Stack
@@ -61,13 +61,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            LENGTH {rodDetailData?.length} ft
+            LENGTH {rodDetailData?.RodBasic.length} ft
           </Box>
           <Box textTransform='uppercase'>
             COMPANY {rodDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {rodDetailData ? getDateFormatted(rodDetailData.CreatedAt) : null}
+            ADDED {rodDetailData ? getDateFormatted(rodDetailData.RodBasic.CreatedAt) : null}
           </Box>
         </Stack>
 
