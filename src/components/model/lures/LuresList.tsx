@@ -9,13 +9,12 @@ import {
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-import type { LuresApiResponse } from "../../../pages/api/lures/index"
+import type { LuresListApiResponse } from "../../../pages/api/lures/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import LureDetail from './LureDetail'
-
 
 type ListProps = {
   typeId?: string;
@@ -29,7 +28,7 @@ export default function LuresList(props: ListProps): JSX.Element {
   // ルアータイプID
   const { typeId } = props
   // APIからデータ取得
-  const { data, error, mutate } = useSWR<LuresApiResponse, Error>('lures?type_id=' + typeId)
+  const { data, error, mutate } = useSWR<LuresListApiResponse, Error>('lures?type_id=' + typeId)
   if (!data) { mutate(); return <Loading /> }
   if (error) return <div>An error has occurred.</div>
   // ルアーデータ
@@ -63,9 +62,9 @@ export default function LuresList(props: ListProps): JSX.Element {
         {
           luresListData.length > 0 ? luresListData.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.LureBasic.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.LureImage.image_file && s3DomainPath ? s3DomainPath + item.LureImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
+                  <Image src={item.LureImage.image_file && s3DomainPath ? s3DomainPath + item.LureImage.image_file + image_ext : '/no_image.png'} alt={item.LureBasic.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
@@ -80,7 +79,7 @@ export default function LuresList(props: ListProps): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.name}
+                      {item.LureBasic.name}
                     </Box>
                     <Box
                       color='gray.500'
@@ -90,7 +89,7 @@ export default function LuresList(props: ListProps): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {getDateFormatted(item.CreatedAt)}
+                      added {getDateFormatted(item.LureBasic.CreatedAt)}
                     </Box>
 
                   </Box>
