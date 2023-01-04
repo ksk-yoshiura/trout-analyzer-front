@@ -5,7 +5,7 @@ export type LineBasic = {// 共通項目
   CreatedAt: string
 }
 
-export type LineList<LineBasic, LineImage, LineCondition> = { // 一覧
+export type LinesList<LineBasic, LineImage, LineCondition> = { // 一覧
   LineBasic: LineBasic
   LineImage: LineImage
   LineCondition: LineCondition
