@@ -4,13 +4,13 @@ import {
 import React from 'react'
 import useSWR from 'swr'
 
-import type { FieldsApiResponse } from "../../../../pages/api/fields/index"
+import type { FieldsListApiResponse } from "../../../../pages/api/fields/index"
 import Loading from '../../../shared/Loading'
 
 export default function FieldSelect(props: any) {
   const { field } = props
   // APIからデータ取得
-  const { data } = useSWR<FieldsApiResponse, Error>('fields')
+  const { data } = useSWR<FieldsListApiResponse, Error>('fields')
   if (!data) return <Loading />
 
   return (
@@ -24,8 +24,8 @@ export default function FieldSelect(props: any) {
         {
           data.result?.map((item, index) => {
             return (
-              <option key={index} value={item.ID}>
-                {item.name}
+              <option key={index} value={item.FieldBasic.ID}>
+                {item.FieldBasic.name}
               </option>
             )
           })
