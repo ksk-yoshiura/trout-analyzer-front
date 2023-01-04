@@ -4,7 +4,7 @@ export type FieldBasic = { // 共通項目
   name: string
 }
 
-export type FieldList<FieldBasic, FieldImage> = { // 一覧
+export type FieldsList<FieldBasic, FieldImage> = { // 一覧
   FieldBasic: FieldBasic
   FieldImage: FieldImage
 }
