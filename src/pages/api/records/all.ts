@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { Record } from '../../../types/record'
+import type { FieldBasic, FieldImage, FieldsList } from '../../../types/field'
+import type { RecordBasic, RecordsAllList } from '../../../types/record'
 
 // API のレスポンス型
 export type RecordsApiResponse = {
-  result?: Record[]
+  result?: RecordsAllList<RecordBasic, FieldsList<FieldBasic, FieldImage>>[]
   status: number
   message?: string
 }

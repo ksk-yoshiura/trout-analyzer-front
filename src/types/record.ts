@@ -1,14 +1,9 @@
-export type Record = {
+export type RecordBasic = {// 共通項目
   ID: string
   CreatedAt: string
-  Field: {
-    ID: string
-    CreatedAt: string
-    name: string
+}
 
-    FieldImage: {
-      ID: string
-      image_file: string
-    }
-  }
+export type RecordsAllList<RecordBasic, Field> = { // 一覧
+  RecordBasic: RecordBasic
+  Field: Field
 }

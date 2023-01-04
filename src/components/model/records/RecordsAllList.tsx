@@ -32,7 +32,7 @@ export default function RecordsAllList(): JSX.Element {
         {
           recordListData.length > 0 ? recordListData.map((item, index) => {
             return (
-              <NextLink key={index} href={"/records/" + item.ID + "/patterns/list"} passHref>
+              <NextLink key={index} href={"/records/" + item.RecordBasic.ID + "/patterns/list"} passHref>
                 <Box
                   display="flex"
                   w='100wh'
@@ -42,7 +42,7 @@ export default function RecordsAllList(): JSX.Element {
                   type='button' as={"button"}
                   overflow='hidden'
                 >
-                  <Image p='2' w='40%' src={item.Field.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.Field.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
+                  <Image p='2' w='40%' src={item.Field.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.Field.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.Field.FieldBasic.name ?? 'No Image'} />
 
                   <Box p='2' w='60%'>
                     <Box
@@ -52,7 +52,7 @@ export default function RecordsAllList(): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.Field.name}
+                      {item.Field.FieldBasic.name}
                     </Box>
                     <Box
                       color='gray.500'
@@ -62,7 +62,7 @@ export default function RecordsAllList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      visited {getDateFormatted(item.CreatedAt)}
+                      visited {getDateFormatted(item.RecordBasic.CreatedAt)}
                     </Box>
 
                   </Box>
