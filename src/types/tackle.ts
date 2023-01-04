@@ -1,46 +1,15 @@
-export type Tackle = {
+export type TacklesList<RodForTackle, ReelForTackle, LineForTackle> = { // 一覧
   ID: string
   CreatedAt: string
-  Rod: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    length: string
-    RodHardnessCondition: { typeName: string }
-    companyName: string
-    CreatedAt: string
-    RodImage: {
-      ID: string
-      image_file: string
-    }
-  },
-  Reel: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    TypeNumberCondition: { typeName: string }
-    GearCondition: { typeName: string }
-    companyName: string
-    CreatedAt: string
-    ReelImage: {
-      ID: string
-      image_file: string
-    }
-  },
-  Line: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    thickness: string
-    lineType: string
-    companyName: string
-    CreatedAt: string
-    LineImage: {
-      ID: string
-      image_file: string
-    }
-  }
+  RodForTackle: RodForTackle,
+  ReelForTackle: ReelForTackle,
+  LineForTackle: LineForTackle
+}
+
+export type TackleDetail<RodDetail, ReelDetail, LineDetail> = { // 詳細
+  ID: string
+  CreatedAt: string
+  RodDetail: RodDetail,
+  ReelDetail: ReelDetail,
+  LineDetail: LineDetail
 }

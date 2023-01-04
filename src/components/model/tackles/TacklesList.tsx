@@ -11,7 +11,7 @@ import {
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-import type { TacklesApiResponse } from "../../../pages/api/tackles/index"
+import type { TacklesListApiResponse } from "../../../pages/api/tackles/index"
 import DetailModal from '../../shared/DetailModal'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
@@ -22,7 +22,7 @@ export default function TacklesList(): JSX.Element {
   const [chosenId, idState] = useState(0)
 
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles')
+  const { data, error } = useSWR<TacklesListApiResponse, Error>('tackles')
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // タックルデータ
@@ -62,9 +62,9 @@ export default function TacklesList(): JSX.Element {
                   tacklesListData.map((item, index) => {
                     return (
                       <Tr key={index} onClick={() => { onOpen(), clickHandler(item.ID) }}>
-                        <Td>{item.Rod.name}</Td>
-                        <Td>{item.Reel.name}</Td>
-                        <Td>{item.Line.name}</Td>
+                        <Td>{item.RodForTackle.name}</Td>
+                        <Td>{item.ReelForTackle.name}</Td>
+                        <Td>{item.LineForTackle.name}</Td>
                       </Tr>
                     )
                   })
