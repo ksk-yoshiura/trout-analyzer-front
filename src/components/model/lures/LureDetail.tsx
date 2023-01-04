@@ -7,7 +7,7 @@ import Image from "next/image"
 import React from 'react'
 import useSWR from 'swr'
 
-import type { LuresApiResponse } from "../../../pages/api/lures/[id]"
+import type { LureDetailApiResponse } from "../../../pages/api/lures/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -19,7 +19,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // ID取得
   const { chosenId } = props
   // APIからデータ取得
-  const { data } = useSWR<LuresApiResponse, Error>('lures/' + chosenId)
+  const { data } = useSWR<LureDetailApiResponse, Error>('lures/' + chosenId)
   if (!data) return <Loading />
   // ルアーデータ
   const lureDetailData = data.result ? data.result : null
@@ -28,7 +28,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = lureDetailData?.LureImage && s3DomainPath ? s3DomainPath + lureDetailData.LureImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = lureDetailData?.LureImage ? lureDetailData.name : 'No Image'
+  const imageAlt = lureDetailData?.LureImage ? lureDetailData.LureBasic.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -49,7 +49,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {lureDetailData?.name}
+          {lureDetailData?.LureBasic.name}
         </Box>
 
         <Stack
@@ -70,7 +70,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             COMPANY {lureDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {lureDetailData ? getDateFormatted(lureDetailData.CreatedAt) : null}
+            ADDED {lureDetailData ? getDateFormatted(lureDetailData.LureBasic.CreatedAt) : null}
           </Box>
         </Stack>
 
