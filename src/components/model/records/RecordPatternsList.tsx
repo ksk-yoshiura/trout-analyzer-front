@@ -18,7 +18,7 @@ import { useRouter } from "next/router"
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-import type { PatternsApiResponse } from "../../../pages/api/patterns/index"
+import type { PatternsListApiResponse } from "../../../pages/api/patterns/index"
 import getTimeFormatted from "../../../utils/timeFormat"
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
@@ -38,7 +38,7 @@ export default function RecordsAllList(): JSX.Element {
   const image_ext = '.png'
 
   // APIからデータ取得
-  const { data, error } = useSWR<PatternsApiResponse, Error>('patterns/list/' + recordId)
+  const { data, error } = useSWR<PatternsListApiResponse, Error>('patterns/list/' + recordId)
   if (!data) return <Loading />
   if (error) return <div>An error has occurred.</div>
   // パターンデータ
