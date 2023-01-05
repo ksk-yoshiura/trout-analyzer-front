@@ -1,81 +1,43 @@
-export type Pattern = {
+export type PatternList<ResultCondition, SpeedCondition, DepthCondition, WeatherCondition, Lure> = { // 一覧
   ID: string
   CreatedAt: string
   // バッジ情報
   // 釣果
-  ResultCondition: {
-    typeName: string
-  },
-  SpeedCondition: {
-    typeName: string
-  },
-  DepthCondition: {
-    typeName: string
-  },
-  WeatherCondition: {
-    typeName: string
-  },
+  ResultCondition: ResultCondition
+  SpeedCondition: SpeedCondition
+  DepthCondition: DepthCondition
+  WeatherCondition: WeatherCondition
   // ルアー情報
-  Lure: {
-    ID: string
-    LureType: {
-      typeName: string
-    }
-    name: string
-    companyName: string
-    color: string
-    weight: string,
-    Color: {
-      name: string
-    },
-    LureImage: {
-      ID: string
-      image_file: string
-    }
-  },
+  Lure: Lure
+}
+
+export type PatternDetail<Tackle, ResultCondition, SpeedCondition, DepthCondition, WeatherCondition, Lure> = { // 詳細
+  ID: string
+  CreatedAt: string
+  // バッジ情報
+  // 釣果
+  ResultCondition: ResultCondition
+  SpeedCondition: SpeedCondition
+  DepthCondition: DepthCondition
+  WeatherCondition: WeatherCondition
+  // ルアー情報
+  Lure: Lure
   // タックル
-  Tackle: {
-    ID: string
-    // ロッド
-    Rod: {
-      ID: string
-      name: string
-      hardness: string
-      length: string
-      companyName: string
-      RodHardnessCondition: {
-        typeName: string
-      }
-    },
-    // リール
-    Reel: {
-      ID: string
-      name: string
-      gear: string
-      companyName: string
-      TypeNumberCondition: {
-        typeName: string
-      }
-      GearCondition: {
-        typeName: string
-      }
-    },
-    // ライン
-    Line: {
-      ID: string
-      name: string
-      thickness: string
-      companyName: string
-      LineCondition: {
-        typeName: string
-      }
-    }
-  },
-  depth: number
-  lureId: number
-  recordId: number
-  result: number
-  speed: number
-  tackleId: number
-  weather: number
+  Tackle: Tackle
+}
+
+export type ResultCondition = {
+  typeName: string
+}
+
+export type SpeedCondition = {
+  typeName: string
+}
+
+export type DepthCondition = {
+  typeName: string
+}
+
+export type WeatherCondition = {
+  typeName: string
 }

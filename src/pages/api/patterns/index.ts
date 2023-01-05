@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { Pattern } from "../../../types/pattern"
+import type { LureImage, LuresList } from "../../../types/lure"
+import type { LureType } from "../../../types/lure_type"
+import type { DepthCondition, PatternList, ResultCondition, SpeedCondition, WeatherCondition } from "../../../types/pattern"
 
 // API のレスポンス型
-export type PatternsApiResponse = {
-  result?: Pattern[]
+export type PatternsListApiResponse = {
+  result?: PatternList<ResultCondition, SpeedCondition, DepthCondition, WeatherCondition, LuresList<LureType, LureImage>>[]
   status: number
   message?: string
 }
@@ -12,7 +14,7 @@ export type PatternsApiResponse = {
 // API のエントリポイント
 export default function PatternsApi(
   req: NextApiRequest,
-  res: NextApiResponse<PatternsApiResponse>
+  res: NextApiResponse<PatternsListApiResponse>
 ): void {
   if (req.body) {
     res.status(200).json(req.body)
