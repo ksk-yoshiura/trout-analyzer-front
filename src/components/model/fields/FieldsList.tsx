@@ -59,14 +59,14 @@ export default function FieldsList(): JSX.Element {
         {
           fieldsListData.length > 0 ? fieldsListData.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.FieldBasic.ID) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.FieldBasic.name ?? 'No Image'} />
+                  <Image src={item.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
                       {
-                        item.FieldBasic.lastVisitedAt ?
+                        item.lastVisitedAt ?
                           <></>
                           :
                           <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
@@ -81,7 +81,7 @@ export default function FieldsList(): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.FieldBasic.name}
+                      {item.name}
                     </Box>
                     <Box
                       color='gray.500'
@@ -91,7 +91,7 @@ export default function FieldsList(): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      last visited {item.FieldBasic.lastVisitedAt ? getDateFormatted(item.FieldBasic.lastVisitedAt) : null}
+                      last visited {item.lastVisitedAt ? getDateFormatted(item.lastVisitedAt) : null}
                     </Box>
 
                   </Box>

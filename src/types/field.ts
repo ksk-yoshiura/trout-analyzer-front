@@ -1,20 +1,17 @@
-export type FieldBasic = { // 共通項目
+export type FieldsList<FieldImage> = { // 一覧
   ID: string
   lastVisitedAt: string
   name: string
-}
-
-export type FieldsList<FieldBasic, FieldImage> = { // 一覧
-  FieldBasic: FieldBasic
   FieldImage: FieldImage
 }
 
-export type FieldDetail<FieldBasic, FieldImage> = { // 詳細
+export type FieldDetail<FieldImage> = { // 詳細
+  ID: string
+  lastVisitedAt: string
   name: string
   address: string
   frequency: string
   CreatedAt: string
-  FieldBasic: FieldBasic
   FieldImage: FieldImage
 }
 
