@@ -97,9 +97,9 @@ export default function ReelsList(props: ListProps): JSX.Element {
         {
           reelsListData.length > 0 ? reelsListData.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ReelBasic.ID) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.ReelImage.image_file && s3DomainPath ? s3DomainPath + item.ReelImage.image_file + image_ext : '/no_image.png'} alt={item.ReelBasic.name ?? 'No Image'} />
+                  <Image src={item.ReelImage.image_file && s3DomainPath ? s3DomainPath + item.ReelImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
@@ -114,7 +114,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.ReelBasic.name}
+                      {item.name}
                     </Box>
                     <Box
                       color='gray.500'
@@ -124,7 +124,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {getDateFormatted(item.ReelBasic.CreatedAt)}
+                      added {getDateFormatted(item.CreatedAt)}
                     </Box>
 
                   </Box>

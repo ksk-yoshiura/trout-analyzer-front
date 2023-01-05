@@ -1,18 +1,16 @@
-export type ReelBasic = { // 共通項目
+export type ReelsList<ReelImage, GearCondition> = { // 一覧
   ID: string
   name: string
   CreatedAt: string
-}
-
-export type ReelsList<ReelBasic, ReelImage, GearCondition> = { // 一覧
-  ReelBasic: ReelBasic
   ReelImage: ReelImage
   GearCondition: GearCondition
 }
 
-export type ReelDetail<ReelBasic, ReelImage, GearCondition, TypeNumberCondition> = { // 詳細
+export type ReelDetail<ReelImage, GearCondition, TypeNumberCondition> = { // 詳細
+  ID: string
+  name: string
+  CreatedAt: string
   companyName: string
-  ReelBasic: ReelBasic
   ReelImage: ReelImage
   GearCondition: GearCondition
   TypeNumberCondition: TypeNumberCondition

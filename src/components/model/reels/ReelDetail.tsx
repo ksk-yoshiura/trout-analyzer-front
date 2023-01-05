@@ -28,7 +28,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = reelDetailData?.ReelImage && s3DomainPath ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = reelDetailData?.ReelImage ? reelDetailData.ReelBasic.name : 'No Image'
+  const imageAlt = reelDetailData?.ReelImage ? reelDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -52,7 +52,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {reelDetailData?.ReelBasic.name}
+          {reelDetailData?.name}
         </Box>
 
         <Stack
@@ -67,7 +67,7 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
             COMPANY {reelDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {reelDetailData ? getDateFormatted(reelDetailData.ReelBasic.CreatedAt) : null}
+            ADDED {reelDetailData ? getDateFormatted(reelDetailData.CreatedAt) : null}
           </Box>
         </Stack>
 
