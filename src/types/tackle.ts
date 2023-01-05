@@ -1,15 +1,15 @@
 export type TacklesList<RodForTackle, ReelForTackle, LineForTackle> = { // 一覧
   ID: string
   CreatedAt: string
-  RodForTackle: RodForTackle,
-  ReelForTackle: ReelForTackle,
-  LineForTackle: LineForTackle
+  Rod: RodForTackle,
+  Reel: ReelForTackle,
+  Line: LineForTackle
 }
 
 export type TackleDetail<RodDetail, ReelDetail, LineDetail> = { // 詳細
   ID: string
   CreatedAt: string
-  RodDetail: RodDetail,
-  ReelDetail: ReelDetail,
-  LineDetail: LineDetail
+  Rod: RodDetail,
+  Reel: ReelDetail,
+  Line: LineDetail
 }

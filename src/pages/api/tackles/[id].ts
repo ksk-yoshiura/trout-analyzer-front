@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { LineBasic, LineCondition, LineDetail, LineImage } from '../../../types/line'
-import type { GearCondition, ReelBasic, ReelDetail, ReelImage, TypeNumberCondition } from '../../../types/reel'
-import type { RodBasic, RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
+import type { LineCondition, LineDetail, LineImage } from '../../../types/line'
+import type { GearCondition, ReelDetail, ReelImage, TypeNumberCondition } from '../../../types/reel'
+import type { RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
 import type { TackleDetail } from '../../../types/tackle'
 
 // API のレスポンス型
 export type TackleDetailApiResponse = {
-  result?: TackleDetail<RodDetail<RodBasic, RodImage, RodHardnessCondition>, ReelDetail<ReelBasic, ReelImage, GearCondition, TypeNumberCondition>, LineDetail<LineBasic, LineImage, LineCondition>>
+  result?: TackleDetail<RodDetail<RodImage, RodHardnessCondition>, ReelDetail<ReelImage, GearCondition, TypeNumberCondition>, LineDetail<LineImage, LineCondition>>
   status: number
   message?: string
 }

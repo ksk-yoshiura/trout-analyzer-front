@@ -5,7 +5,6 @@ import type { ReelForTackle } from '../../../types/reel'
 import type { RodForTackle } from '../../../types/rod'
 import type { TacklesList } from '../../../types/tackle'
 
-
 // API のレスポンス型
 export type TacklesListApiResponse = {
   result?: TacklesList<RodForTackle, ReelForTackle, LineForTackle>[]

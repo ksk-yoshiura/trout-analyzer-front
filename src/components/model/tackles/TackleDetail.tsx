@@ -22,20 +22,20 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
   if (!data) return <Loading />
 
   // 登録データが削除されていた場合非表示
-  const rodData = data.result?.RodDetail.RodBasic?.ID != '0' ? data.result?.RodDetail : null
-  const reelData = data.result?.ReelDetail.ReelBasic?.ID != '0' ? data.result?.ReelDetail : null
-  const lineData = data.result?.LineDetail.LineBasic?.ID != '0' ? data.result?.LineDetail : null
+  const rodData = data.result?.Rod?.ID != '0' ? data.result?.Rod : null
+  const reelData = data.result?.Reel?.ID != '0' ? data.result?.Reel : null
+  const lineData = data.result?.Line?.ID != '0' ? data.result?.Line : null
 
   // S3パス
   const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const rodImageUrl = data.result ? s3DomainPath + data.result.RodDetail.RodImage.image_file + '.png' : '/no_image.png'
-  const reelImageUrl = data.result ? s3DomainPath + data.result.ReelDetail.ReelImage.image_file + '.png' : '/no_image.png'
-  const lineImageUrl = data.result ? s3DomainPath + data.result.LineDetail.LineImage.image_file + '.png' : '/no_image.png'
+  const rodImageUrl = data.result ? s3DomainPath + data.result.Rod.RodImage.image_file + '.png' : '/no_image.png'
+  const reelImageUrl = data.result ? s3DomainPath + data.result.Reel.ReelImage.image_file + '.png' : '/no_image.png'
+  const lineImageUrl = data.result ? s3DomainPath + data.result.Line.LineImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const rodImageAlt = data.result?.RodDetail.RodBasic ? data.result?.RodDetail.RodBasic.name : 'No Image'
-  const reelImageAlt = data.result?.ReelDetail.ReelBasic ? data.result?.ReelDetail.ReelBasic.name : 'No Image'
-  const lineImageAlt = data.result?.LineDetail.LineBasic ? data.result?.LineDetail.LineBasic.name : 'No Image'
+  const rodImageAlt = data.result?.Rod ? data.result?.Rod.name : 'No Image'
+  const reelImageAlt = data.result?.Reel ? data.result?.Reel.name : 'No Image'
+  const lineImageAlt = data.result?.Line ? data.result?.Line.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -58,7 +58,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
                 lineHeight='tight'
                 isTruncated
               >
-                {rodData.RodBasic.name}
+                {rodData.name}
               </Box>
 
               <Stack
@@ -70,13 +70,13 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
                 spacing={1}
               >
                 <Box>
-                  LENGTH {rodData.RodBasic.length} ft
+                  LENGTH {rodData.length} ft
                 </Box>
                 <Box textTransform='uppercase'>
                   COMPANY {rodData.companyName}
                 </Box>
                 <Box>
-                  ADDED {rodData.RodBasic.CreatedAt}
+                  ADDED {rodData.CreatedAt}
                 </Box>
               </Stack>
             </Box></>
@@ -90,10 +90,10 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
             <Box p='2'>
               <Box display='flex' alignItems='baseline'>
                 <Badge borderRadius='full' px='2' color='gray.500'>
-                  {data.result?.ReelDetail.TypeNumberCondition.typeName}
+                  {data.result?.Reel.TypeNumberCondition.typeName}
                 </Badge>
                 <Badge borderRadius='full' px='2' color='gray.500'>
-                  {data.result?.ReelDetail.GearCondition.typeName}
+                  {data.result?.Reel.GearCondition.typeName}
                 </Badge>
               </Box>
 
@@ -105,7 +105,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
                 lineHeight='tight'
                 isTruncated
               >
-                {data.result?.ReelDetail.ReelBasic.name}
+                {data.result?.Reel.name}
               </Box>
 
               <Stack
@@ -117,10 +117,10 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
                 spacing={1}
               >
                 <Box textTransform='uppercase'>
-                  COMPANY {data.result?.ReelDetail.companyName}
+                  COMPANY {data.result?.Reel.companyName}
                 </Box>
                 <Box>
-                  ADDED {data.result?.ReelDetail.ReelBasic.CreatedAt}
+                  ADDED {data.result?.Reel.CreatedAt}
                 </Box>
               </Stack>
             </Box>
@@ -135,7 +135,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
             <Box p='2'>
               <Box display='flex' alignItems='baseline'>
                 <Badge borderRadius='full' px='2' color='gray.500'>
-                  {data.result?.LineDetail.LineCondition.typeName}
+                  {data.result?.Line.LineCondition.typeName}
                 </Badge>
               </Box>
 
@@ -147,7 +147,7 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
                 lineHeight='tight'
                 isTruncated
               >
-                {data.result?.LineDetail.LineBasic.name}
+                {data.result?.Line.name}
               </Box>
 
               <Stack
@@ -159,13 +159,13 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
                 spacing={1}
               >
                 <Box>
-                  THICKNESS {data.result?.LineDetail.LineBasic.thickness} lb
+                  THICKNESS {data.result?.Line.thickness} lb
                 </Box>
                 <Box textTransform='uppercase'>
-                  COMPANY {data.result?.LineDetail.companyName}
+                  COMPANY {data.result?.Line.companyName}
                 </Box>
                 <Box>
-                  ADDED {data.result?.LineDetail.LineBasic.CreatedAt}
+                  ADDED {data.result?.Line.CreatedAt}
                 </Box>
               </Stack>
             </Box>

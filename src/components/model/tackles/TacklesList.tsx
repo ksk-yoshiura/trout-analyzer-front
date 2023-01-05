@@ -62,9 +62,9 @@ export default function TacklesList(): JSX.Element {
                   tacklesListData.map((item, index) => {
                     return (
                       <Tr key={index} onClick={() => { onOpen(), clickHandler(item.ID) }}>
-                        <Td>{item.RodForTackle.name}</Td>
-                        <Td>{item.ReelForTackle.name}</Td>
-                        <Td>{item.LineForTackle.name}</Td>
+                        <Td>{item.Rod.name}</Td>
+                        <Td>{item.Reel.name}</Td>
+                        <Td>{item.Line.name}</Td>
                       </Tr>
                     )
                   })
