@@ -1,23 +1,23 @@
-export type RodBasic = {// 共通項目
+export type RodsList<RodImage, RodHardnessCondition> = { // 一覧
   ID: string
   name: string
   length: string
   thickness: string
   CreatedAt: string
-}
-
-export type RodsList<RodBasic, RodImage, RodHardnessCondition> = { // 一覧
-  RodBasic: RodBasic
   RodImage: RodImage
   RodHardnessCondition: RodHardnessCondition
 }
 
-export type RodDetail<RodBasic, RodImage, RodHardnessCondition> = { // 詳細
+export type RodDetail<RodImage, RodHardnessCondition> = { // 詳細
+  ID: string
+  name: string
+  length: string
+  thickness: string
+  CreatedAt: string
   RodHardnessCondition: RodHardnessCondition
   RodTypeId: string
   companyName: string
   hardness: string
-  RodBasic: RodBasic
   RodImage: RodImage
 }
 

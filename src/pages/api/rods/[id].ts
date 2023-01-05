@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { RodBasic, RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
+import type { RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
 
 // API のレスポンス型
 export type RodDetailApiResponse = {
-  result?: RodDetail<RodBasic, RodImage, RodHardnessCondition>
+  result?: RodDetail<RodImage, RodHardnessCondition>
   status: number
   message?: string
 }
