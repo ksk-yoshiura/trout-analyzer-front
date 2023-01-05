@@ -28,7 +28,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = lureDetailData?.LureImage && s3DomainPath ? s3DomainPath + lureDetailData.LureImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = lureDetailData?.LureImage ? lureDetailData.LureBasic.name : 'No Image'
+  const imageAlt = lureDetailData?.LureImage ? lureDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -49,7 +49,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {lureDetailData?.LureBasic.name}
+          {lureDetailData?.name}
         </Box>
 
         <Stack
@@ -70,7 +70,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
             COMPANY {lureDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {lureDetailData ? getDateFormatted(lureDetailData.LureBasic.CreatedAt) : null}
+            ADDED {lureDetailData ? getDateFormatted(lureDetailData.CreatedAt) : null}
           </Box>
         </Stack>
 

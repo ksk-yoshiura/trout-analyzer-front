@@ -1,18 +1,15 @@
-export type LureBasic = { // 共通
+export type LuresList<LureType, LureImage> = { // 一覧
   ID: string
   name: string
   CreatedAt: string
-  // lastUsedAt: string
-}
-
-export type LuresList<LureBasic, LureType, LureImage> = { // 一覧
-  LureBasic: LureBasic
   LureType: LureType
   LureImage: LureImage
 }
 
-export type LureDetail<LureBasic, LureType, LureImage, Color> = { // 詳細
-  LureBasic: LureBasic
+export type LureDetail<LureType, LureImage, Color> = { // 詳細
+  ID: string
+  name: string
+  CreatedAt: string
   companyName: string
   // color: string
   weight: string
@@ -27,8 +24,10 @@ export type LureImage = { // 画像
   image_file: string
 }
 
-export type LuresListByType<LureBasic, Color, LureImage> = { // 登録画面中ルアーセレクト
-  LureBasic: LureBasic
+export type LuresListByType<Color, LureImage> = { // 登録画面中ルアーセレクト
+  ID: string
+  CreatedAt: string
+  companyName: string
   Color: Color
   LureImage: LureImage
   weight: string

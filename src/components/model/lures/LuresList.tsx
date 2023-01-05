@@ -62,9 +62,9 @@ export default function LuresList(props: ListProps): JSX.Element {
         {
           luresListData.length > 0 ? luresListData.map((item, index) => {
             return (
-              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.LureBasic.ID) }} type='button' as={"button"}>
+              <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.LureImage.image_file && s3DomainPath ? s3DomainPath + item.LureImage.image_file + image_ext : '/no_image.png'} alt={item.LureBasic.name ?? 'No Image'} />
+                  <Image src={item.LureImage.image_file && s3DomainPath ? s3DomainPath + item.LureImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
@@ -79,7 +79,7 @@ export default function LuresList(props: ListProps): JSX.Element {
                       lineHeight='tight'
                       isTruncated
                     >
-                      {item.LureBasic.name}
+                      {item.name}
                     </Box>
                     <Box
                       color='gray.500'
@@ -89,7 +89,7 @@ export default function LuresList(props: ListProps): JSX.Element {
                       textTransform='uppercase'
                       ml='2'
                     >
-                      added {getDateFormatted(item.LureBasic.CreatedAt)}
+                      added {getDateFormatted(item.CreatedAt)}
                     </Box>
 
                   </Box>
