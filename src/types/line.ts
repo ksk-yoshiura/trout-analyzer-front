@@ -1,21 +1,20 @@
-export type LineBasic = {// 共通項目
+export type LinesList<LineImage, LineCondition> = { // 一覧
   ID: string
   name: string
   thickness: string
   CreatedAt: string
-}
-
-export type LinesList<LineBasic, LineImage, LineCondition> = { // 一覧
-  LineBasic: LineBasic
   LineImage: LineImage
   LineCondition: LineCondition
 }
 
-export type LineDetail<LineBasic, LineImage, LineCondition> = { // 詳細
+export type LineDetail<LineImage, LineCondition> = { // 詳細
+  ID: string
+  name: string
+  thickness: string
+  CreatedAt: string
   LineCondition: LineCondition
   lineTypeId: string
   companyName: string
-  LineBasic: LineBasic
   LineImage: LineImage
 }
 

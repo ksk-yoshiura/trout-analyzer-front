@@ -98,9 +98,9 @@ export default function LinesList(props: ListProps): JSX.Element {
       {
         linesListData.length > 0 ? linesListData.map((item, index) => {
           return (
-            <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.LineBasic.ID) }} type='button' as={"button"}>
+            <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
               <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                <Image src={item.LineImage.image_file && s3DomainPath ? s3DomainPath + item.LineImage.image_file + image_ext : '/no_image.png'} alt={item.LineBasic.name ?? 'No Image'} />
+                <Image src={item.LineImage.image_file && s3DomainPath ? s3DomainPath + item.LineImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                 <Box p='2'>
                   <Box display='flex' alignItems='baseline'>
@@ -115,7 +115,7 @@ export default function LinesList(props: ListProps): JSX.Element {
                     lineHeight='tight'
                     isTruncated
                   >
-                    {item.LineBasic.name}
+                    {item.name}
                   </Box>
                   <Box
                     color='gray.500'
@@ -125,7 +125,7 @@ export default function LinesList(props: ListProps): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    thickness {item.LineBasic.thickness} lb
+                    thickness {item.thickness} lb
                   </Box>
                   <Box
                     color='gray.500'
@@ -135,7 +135,7 @@ export default function LinesList(props: ListProps): JSX.Element {
                     textTransform='uppercase'
                     ml='2'
                   >
-                    added {getDateFormatted(item.LineBasic.CreatedAt)}
+                    added {getDateFormatted(item.CreatedAt)}
                   </Box>
 
                 </Box>

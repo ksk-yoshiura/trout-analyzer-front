@@ -29,7 +29,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // 画像URL
   const imageUrl = lineDetailData?.LineImage && s3DomainPath ? s3DomainPath + lineDetailData.LineImage.image_file + '.png' : '/no_image.png'
   // 画像alt
-  const imageAlt = lineDetailData?.LineImage ? lineDetailData.LineBasic.name : 'No Image'
+  const imageAlt = lineDetailData?.LineImage ? lineDetailData.name : 'No Image'
 
   return (
     <Box maxW='sm' overflow='hidden'>
@@ -53,7 +53,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           lineHeight='tight'
           isTruncated
         >
-          {lineDetailData?.LineBasic.name}
+          {lineDetailData?.name}
         </Box>
 
         <Stack
@@ -65,13 +65,13 @@ export default function RodDetail(props: DetailProps): JSX.Element {
           spacing={1}
         >
           <Box>
-            THICKNESS {lineDetailData?.LineBasic.thickness} lb
+            THICKNESS {lineDetailData?.thickness} lb
           </Box>
           <Box textTransform='uppercase'>
             COMPANY {lineDetailData?.companyName}
           </Box>
           <Box>
-            ADDED {lineDetailData ? getDateFormatted(lineDetailData.LineBasic.CreatedAt) : null}
+            ADDED {lineDetailData ? getDateFormatted(lineDetailData.CreatedAt) : null}
           </Box>
         </Stack>
       </Box>

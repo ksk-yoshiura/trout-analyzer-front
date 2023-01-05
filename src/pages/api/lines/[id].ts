@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { LineBasic, LineCondition, LineDetail, LineImage } from '../../../types/line'
+import type { LineCondition, LineDetail, LineImage } from '../../../types/line'
 
 // API のレスポンス型
 export type LinesDetailApiResponse = {
-  result?: LineDetail<LineBasic, LineImage, LineCondition>
+  result?: LineDetail<LineImage, LineCondition>
   status: number
   message?: string
 }
