@@ -16,7 +16,7 @@ export default function RecordPatternAnalysis() {
 
   return (
     <>
-      <ResultRadioGroup setTargetResult={setTargetResult} />
+      <ResultRadioGroup targetResult={targetResult} setTargetResult={setTargetResult} />
       {
         record_id ? <>
           <ColorWeatherGraph recordId={record_id} targetParam={targetResult} />

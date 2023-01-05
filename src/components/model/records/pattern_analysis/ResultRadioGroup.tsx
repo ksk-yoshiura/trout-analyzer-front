@@ -3,15 +3,16 @@ import React from 'react'
 
 type DetailProps = {
   setTargetResult: any
+  targetResult: string
 }
 
 export default function ResultRadioGroup(props: DetailProps) {
-  const { setTargetResult } = props
+  const { targetResult, setTargetResult } = props
   const handleSelectRadio = (value: string) => {
     setTargetResult(value)
   }
   return (
-    <RadioGroup pb={5} onChange={(val) => { return handleSelectRadio(val) }}>
+    <RadioGroup pb={5} val={targetResult} onChange={(val) => { return handleSelectRadio(val) }}>
       <Stack direction='row'>
         <Radio value='all'>All</Radio>
         <Radio value='caught'>Caught</Radio>
