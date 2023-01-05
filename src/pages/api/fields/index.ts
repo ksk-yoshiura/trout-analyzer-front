@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import type { FieldBasic, FieldImage, FieldsList } from '../../../types/field'
+import type { FieldImage, FieldsList } from '../../../types/field'
 
 // API のレスポンス型
 export type FieldsListApiResponse = {
-  result?: FieldsList<FieldBasic, FieldImage>[]
+  result?: FieldsList<FieldImage>[]
   status: number
   message?: string
 }
