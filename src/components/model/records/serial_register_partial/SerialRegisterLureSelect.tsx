@@ -9,6 +9,7 @@ import React, { useEffect } from 'react';
 import useSWR from 'swr'
 
 import type { LuresListByTypeApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
+import { image_ext, s3DomainPath } from "../../../const/image"
 import Loading from '../../../shared/Loading'
 
 type LureTypeProps = {
@@ -31,10 +32,6 @@ export default function LureSelect(props: LureTypeProps) {
   if (!data) return <Loading />
   // ルアーデータ
   const lureList = data?.result ? data.result : []
-  // S3パス
-  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
-  // 画像拡張子
-  const image_ext = '.png'
 
   const handleSelectChange = (event: React.FormEvent<HTMLSelectElement>) => {
     const { target } = event;

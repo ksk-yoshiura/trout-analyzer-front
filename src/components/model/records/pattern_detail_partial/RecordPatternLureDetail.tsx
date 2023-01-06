@@ -5,6 +5,8 @@ import {
 } from '@chakra-ui/react'
 import React from 'react';
 
+import { image_ext, s3DomainPath } from "../../../../const/image"
+
 type LureImage = {
   image_file: string
 }
@@ -18,10 +20,6 @@ type LureProps = {
 
 export default function RecordPatternLureDetail(props: LureProps) {
 
-  // S3パス
-  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
-  // 画像拡張子
-  const image_ext = '.png'
   return (
     <>
       <Image p='2' width={366} height={366} src={s3DomainPath + props.lureImage.image_file + image_ext ?? '/no_image.png'} alt={props.lureName ?? 'No Image'} />

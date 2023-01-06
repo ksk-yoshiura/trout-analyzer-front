@@ -7,6 +7,7 @@ import NextLink from "next/link"
 import React from 'react';
 import useSWR from 'swr'
 
+import { image_ext, s3DomainPath } from "../../../const/image"
 import type { RecordsApiResponse } from "../../../pages/api/records/all"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
@@ -22,10 +23,6 @@ export default function RecordsAllList(): JSX.Element {
   // レコードデータ
   const recordListData = data.result ? data.result : []
 
-  // S3パス
-  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
-  // 画像拡張子
-  const image_ext = '.png'
   return (
     <>
       <Stack spacing={5} mr={5}>

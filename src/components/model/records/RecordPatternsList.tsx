@@ -18,6 +18,7 @@ import { useRouter } from "next/router"
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
+import { image_ext, s3DomainPath } from "../../../const/image"
 import type { PatternsListApiResponse } from "../../../pages/api/patterns/index"
 import getTimeFormatted from "../../../utils/timeFormat"
 import Loading from '../../shared/Loading'
@@ -31,11 +32,6 @@ export default function RecordsAllList(): JSX.Element {
   // クエリからレコードID取得
   const route = useRouter();
   const recordId = route.query.record_id
-
-  // S3パス
-  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
-  // 画像拡張子
-  const image_ext = '.png'
 
   // APIからデータ取得
   const { data, error } = useSWR<PatternsListApiResponse, Error>('patterns/list/' + recordId)
