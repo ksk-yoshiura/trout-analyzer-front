@@ -1,5 +1,5 @@
 import {
-  Flex
+  Container
 } from "@chakra-ui/react";
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
@@ -26,16 +26,16 @@ export default function MainContent({ children }: Props) {
   }, [session])
 
   return (
-    <Flex
-      flexDirection="column"
+    <Container
+      ContainerDirection="column"
       alignItems="center"
       w="100%"
       h="100%"
       pt={5}
       pb={100}
-      px={4}
+      px={20}
     >
       {children}
-    </Flex>
+    </Container>
   );
 }
