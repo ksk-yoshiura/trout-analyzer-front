@@ -12,6 +12,7 @@ import {
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
+import { image_ext, s3DomainPath } from "../../../const/image"
 import type { LinesListApiResponse } from "../../../pages/api/lines/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
@@ -39,10 +40,6 @@ export default function LinesList(props: ListProps): JSX.Element {
   // ラインデータ
   const linesListData = data.result ? data.result : []
 
-  // S3パス
-  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
-  // 画像拡張子
-  const image_ext = '.png'
   const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
