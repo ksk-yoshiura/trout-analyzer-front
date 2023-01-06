@@ -26,17 +26,20 @@ import { useRouter } from "next/router";
 import React, { useState } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
-import type { Tackle } from "../../../types/tackle"
-import LineDetail from '../lines/LineDetail'
-import LinesList from '../lines/LinesList'
-import ReelDetail from '../reels/ReelDetail'
-import ReelsList from '../reels/ReelsList'
-import RodDetail from '../rods/RodDetail'
-import RodsList from '../rods/RodsList'
+import type { LineCondition, LineDetail, LineImage } from '../../../types/line'
+import type { GearCondition, ReelDetail, ReelImage, TypeNumberCondition } from '../../../types/reel'
+import type { RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
+import type { TackleDetail } from "../../../types/tackle"
+import LineDetailComponent from '../lines/LineDetail'
+import LinesListComponent from '../lines/LinesList'
+import ReelDetailComponent from '../reels/ReelDetail'
+import ReelsListComponent from '../reels/ReelsList'
+import RodDetailComponent from '../rods/RodDetail'
+import RodsListComponent from '../rods/RodsList'
 
 
 type DetailProps = {
-  tackleData?: Tackle
+  tackleData?: TackleDetail<RodDetail<RodImage, RodHardnessCondition>, ReelDetail<ReelImage, GearCondition, TypeNumberCondition>, LineDetail<LineImage, LineCondition>>
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
 }
 
@@ -219,7 +222,7 @@ export default function TackleForm(props: DetailProps) {
                       {
                         newRodId && newRodId > 0
                           ? <Box type='button' as='button'>
-                            <RodDetail chosenId={Number(newRodId)} />
+                            <RodDetailComponent chosenId={Number(newRodId)} />
                           </Box>
                           : <></>
                       }
@@ -234,7 +237,7 @@ export default function TackleForm(props: DetailProps) {
                 }
               </Button>
               {
-                rodChange ? <RodsList isTackle={true} setNewRodId={setNewRodId} /> : <></>
+                rodChange ? <RodsListComponent isTackle={true} setNewRodId={setNewRodId} /> : <></>
               }
 
               <Field name='reelId' validate={validateData}>
@@ -253,7 +256,7 @@ export default function TackleForm(props: DetailProps) {
                       {
                         newReelId && newReelId > 0
                           ? <Box type='button' as='button'>
-                            <ReelDetail chosenId={Number(newReelId)} />
+                            <ReelDetailComponent chosenId={Number(newReelId)} />
                           </Box>
                           : <></>
                       }
@@ -268,7 +271,7 @@ export default function TackleForm(props: DetailProps) {
                 }
               </Button>
               {
-                reelChange ? <ReelsList isTackle={true} setNewReelId={setNewReelId} /> : <></>
+                reelChange ? <ReelsListComponent isTackle={true} setNewReelId={setNewReelId} /> : <></>
               }
 
               <Field name='lineId' validate={validateData}>
@@ -287,7 +290,7 @@ export default function TackleForm(props: DetailProps) {
                       {
                         newLineId && newLineId > 0
                           ? <Box type='button' as='button'>
-                            <LineDetail chosenId={Number(newLineId)} />
+                            <LineDetailComponent chosenId={Number(newLineId)} />
                           </Box>
                           : <></>
                       }
@@ -302,7 +305,7 @@ export default function TackleForm(props: DetailProps) {
                 }
               </Button>
               {
-                lineChange ? <LinesList isTackle={true} setNewLineId={setNewLineId} /> : <></>
+                lineChange ? <LinesListComponent isTackle={true} setNewLineId={setNewLineId} /> : <></>
               }
 
             </Stack>
