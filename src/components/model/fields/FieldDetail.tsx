@@ -8,7 +8,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import { image_ext, s3DomainPath } from "../../../const/image"
-import type { FieldsDetailApiResponse } from "../../../pages/api/fields/[id]"
+import type { FieldDetailApiResponse } from "../../../pages/api/fields/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -21,7 +21,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data } = useSWR<FieldsDetailApiResponse, Error>('fields/' + chosenId)
+  const { data } = useSWR<FieldDetailApiResponse, Error>('fields/' + chosenId)
   if (!data) return <Loading />
   // フィールドデータ
   const fieldDetailData = data.result ? data.result : null

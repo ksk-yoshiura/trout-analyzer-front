@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import type { FieldDetail, FieldImage } from '../../../types/field'
 
 // API のレスポンス型
-export type FieldsDetailApiResponse = {
+export type FieldDetailApiResponse = {
   result?: FieldDetail<FieldImage>
   status: number
   message?: string
@@ -12,7 +12,7 @@ export type FieldsDetailApiResponse = {
 // API のエントリポイント
 export default function FieldsApi(
   req: NextApiRequest,
-  res: NextApiResponse<FieldsDetailApiResponse>
+  res: NextApiResponse<FieldDetailApiResponse>
 ): void {
   if (req.body) {
     res.status(200).json(req.body)
