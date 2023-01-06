@@ -7,6 +7,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  // Image,
   Input,
   Stack,
   useDisclosure,
@@ -25,21 +26,17 @@ import { useRouter } from "next/router";
 import React from 'react'
 import { mutate } from 'swr'
 
+// import { image_ext, s3DomainPath } from "../../../const/image"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { FieldDetail, FieldForm, FieldImage } from '../../../types/field'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 
-type FieldData = {
-  name?: string;
-  address?: string;
-  image?: any; // 一旦anyで回避
-}
-
 // 編集データ
 type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
-  data?: FieldData;
+  data?: FieldDetail<FieldImage>;
   onFieldModalClose?: React.Dispatch<React.SetStateAction<null>>
 }
 
@@ -52,12 +49,17 @@ export default function FieldForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data, onFieldModalClose } = props
+  console.log(data)
+  console.log(data?.FieldImage)
+
+  // 画像URL
+  // const imageUrl = data?.FieldImage.image_file ?
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
-  const handleSendFieldData = async (values: FieldData) => {
+  const handleSendFieldData = async (values: FieldForm) => {
     // 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const fieldPostData = {
@@ -163,7 +165,7 @@ export default function FieldForm(props: DetailProps) {
       initialValues={{
         name: data?.name,
         address: data?.address,
-        image: '' // TODO ：適切な形式で
+        image: undefined // TODO ：適切な形式で
       }}
       validateOnChange
       onSubmit={(values, actions) => {
@@ -238,6 +240,7 @@ export default function FieldForm(props: DetailProps) {
                       }}
                     />
                     <Thumb file={field.value} />
+                    {/* <Image src={field.image_file} /> */}
 
                     <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                   </FormControl>

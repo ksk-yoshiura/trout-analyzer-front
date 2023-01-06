@@ -10,7 +10,7 @@ export type FieldDetail<FieldImage> = { // 詳細
   lastVisitedAt: string
   name: string
   address: string
-  frequency: string
+  // frequency: string
   CreatedAt: string
   FieldImage: FieldImage
 }
@@ -20,4 +20,10 @@ export type FieldImage = { // 画像
   CreatedAt: string
   field_id: number
   image_file: string
+}
+
+export type FieldForm = { // 登録フォーム
+  name?: string
+  address?: string
+  image?: File
 }
