@@ -13,3 +13,9 @@ export type TackleDetail<RodDetail, ReelDetail, LineDetail> = { // 詳細
   Reel: ReelDetail,
   Line: LineDetail
 }
+
+export type TackleForm = { // 登録フォーム
+  rodId?: string | number
+  reelId?: string | number
+  lineId?: string | number
+}

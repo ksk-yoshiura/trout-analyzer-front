@@ -3,77 +3,60 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
+import type { LineCondition, LineDetail, LineImage } from '../../../types/line'
+import type { GearCondition, ReelDetail, ReelImage, TypeNumberCondition } from '../../../types/reel'
+import type { RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
+import type { TackleDetail } from '../../../types/tackle'
 import TackleForm from '../../model/tackles/TackleForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
-type TackleData = {
-  ID: string
-  CreatedAt: string
-  Rod: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    length: string
-    RodHardnessCondition: { typeName: string }
-    companyName: string
-    CreatedAt: string
-  },
-  Reel: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    TypeNumberCondition: { typeName: string }
-    GearCondition: { typeName: string }
-    companyName: string
-    CreatedAt: string
-  },
-  Line: {
-    ID: string
-    name: string
-    imageUrl: string
-    imageAlt: string
-    thickness: string
-    lineType: string
-    companyName: string
-    CreatedAt: string
-  }
-}
-
 export default function TackleCreate(): JSX.Element {
-  const vacantData: TackleData = {
+  const vacantData: TackleDetail<RodDetail<RodImage, RodHardnessCondition>, ReelDetail<ReelImage, GearCondition, TypeNumberCondition>, LineDetail<LineImage, LineCondition>> = {
     ID: '',
     CreatedAt: '',
     Rod: {
       ID: '',
       name: '',
-      imageUrl: '',
-      imageAlt: '',
       length: '',
-      RodHardnessCondition: { typeName: '' },
-      companyName: '',
+      thickness: '',
       CreatedAt: '',
+      RodHardnessCondition: { typeName: '' },
+      RodTypeId: '',
+      companyName: '',
+      hardness: '',
+      RodImage: {
+        ID: '',
+        image_file: ''
+      }
     },
     Reel: {
       ID: '',
       name: '',
-      imageUrl: '',
-      imageAlt: '',
-      TypeNumberCondition: { typeName: '' },
-      GearCondition: { typeName: '' },
-      companyName: '',
       CreatedAt: '',
+      companyName: '',
+      gearId: '',
+      typeNumberId: '',
+      ReelImage: {
+        ID: '',
+        image_file: ''
+      },
+      GearCondition: { typeName: '' },
+      TypeNumberCondition: { typeName: '' }
     },
     Line: {
       ID: '',
       name: '',
-      imageUrl: '',
-      imageAlt: '',
       thickness: '',
-      lineType: '',
-      companyName: '',
       CreatedAt: '',
+      LineCondition: {
+        typeName: ''
+      },
+      lineTypeId: '',
+      companyName: '',
+      LineImage: {
+        ID: '',
+        image_file: '',
+      }
     }
   }
   return (

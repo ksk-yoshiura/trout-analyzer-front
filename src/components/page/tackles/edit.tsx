@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import useSWR from 'swr'
 
-import type { TacklesApiResponse } from "../../../pages/api/tackles/[id]"
+import type { TackleDetailApiResponse } from "../../../pages/api/tackles/[id]"
 import TackleForm from '../../model/tackles/TackleForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 import Loading from '../../shared/Loading'
@@ -15,7 +15,7 @@ export default function TackleEdit(): JSX.Element {
   const router = useRouter();
   const { id } = router.query
   // APIからデータ取得
-  const { data, error } = useSWR<TacklesApiResponse, Error>('tackles/' + id)
+  const { data, error } = useSWR<TackleDetailApiResponse, Error>('tackles/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   return (

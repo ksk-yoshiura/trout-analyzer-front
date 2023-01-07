@@ -29,7 +29,7 @@ import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { LineCondition, LineDetail, LineImage } from '../../../types/line'
 import type { GearCondition, ReelDetail, ReelImage, TypeNumberCondition } from '../../../types/reel'
 import type { RodDetail, RodHardnessCondition, RodImage } from '../../../types/rod'
-import type { TackleDetail } from "../../../types/tackle"
+import type { TackleDetail, TackleForm } from "../../../types/tackle"
 import LineDetailComponent from '../lines/LineDetail'
 import LinesListComponent from '../lines/LinesList'
 import ReelDetailComponent from '../reels/ReelDetail'
@@ -41,12 +41,6 @@ import RodsListComponent from '../rods/RodsList'
 type DetailProps = {
   tackleData?: TackleDetail<RodDetail<RodImage, RodHardnessCondition>, ReelDetail<ReelImage, GearCondition, TypeNumberCondition>, LineDetail<LineImage, LineCondition>>
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
-}
-
-type TackleForm = {
-  rodId?: string | number
-  reelId?: string | number
-  lineId?: string | number
 }
 
 export default function TackleForm(props: DetailProps) {
@@ -152,13 +146,6 @@ export default function TackleForm(props: DetailProps) {
 
   const validateData = (value: TackleForm) => {
     console.log(value)
-    // let error
-    // if (!value) {
-    //   error = 'Name is required'
-    // } else if (value.toLowerCase() !== 'naruto') {
-    //   error = "Jeez! You're not a fan 😱"
-    // }
-    // return error
   }
 
   // 確認ドロワー
