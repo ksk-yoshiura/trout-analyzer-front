@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import useSWR from 'swr'
 
-import type { LuresApiResponse } from "../../../pages/api/lures/[id]"
+import type { LureDetailApiResponse } from "../../../pages/api/lures/[id]"
 import LureForm from '../../model/lures/LureForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 import Loading from '../../shared/Loading'
@@ -17,7 +17,7 @@ export default function LureEdit(): JSX.Element {
   const { id } = router.query
 
   // APIからデータ取得
-  const { data, error } = useSWR<LuresApiResponse, Error>('lures/' + id)
+  const { data, error } = useSWR<LureDetailApiResponse, Error>('lures/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   return (

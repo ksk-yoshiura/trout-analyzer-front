@@ -11,7 +11,8 @@ export type LureDetail<LureType, LureImage, Color> = { // 詳細
   name: string
   CreatedAt: string
   companyName: string
-  // color: string
+  lureTypeId?: string
+  color: string
   weight: string
   frequency: string
   LureType: LureType
@@ -32,4 +33,15 @@ export type LuresListByType<Color, LureImage> = { // 登録画面中ルアーセ
   LureImage: LureImage
   weight: string
   name: string
+}
+
+export type LureForm = { // 登録フォーム
+  ID?: string
+  lureTypeId?: string
+  name?: string
+  companyName?: string
+  color?: string
+  weight?: string
+  image?: File
+  size?: number
 }

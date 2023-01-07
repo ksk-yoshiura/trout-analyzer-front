@@ -3,34 +3,36 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
+import type { Color } from '../../../types/color'
+import type { LureDetail, LureImage } from '../../../types/lure'
+import type { LureType } from '../../../types/lure_type'
 import LureForm from '../../model/lures/LureForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
-type LureType = {
-  ID: string
-  typeName: string
-}
-
-type LureData = {
-  ID: string
-  LureType: LureType
-  name: string
-  companyName: string
-  color: string
-  weight: string
-  frequency: string
-}
-
 export default function LureCreate(): JSX.Element {
   const chosenId = '0'
-  const vacantData: LureData = {
+  const vacantData: LureDetail<LureType, LureImage, Color> = {
     ID: '',
-    LureType: { ID: '', typeName: '' },
     name: '',
+    CreatedAt: '',
     companyName: '',
+    lureTypeId: '',
     color: '',
     weight: '',
     frequency: '',
+    LureType: {
+      ID: '',
+      typeName: ''
+    },
+    LureImage: {
+      ID: '',
+      image_file: ''
+    },
+    Color: {
+      ID: '',
+      code: '',
+      name: ''
+    }
   }
   return (
     <>

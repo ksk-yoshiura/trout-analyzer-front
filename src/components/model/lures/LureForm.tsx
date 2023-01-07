@@ -29,27 +29,20 @@ import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { Color } from '../../../types/color'
+import type { LureDetail, LureForm, LureImage } from '../../../types/lure'
+import type { LureType } from '../../../types/lure_type'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import LuresColorPalette from "./LuresColorPalette"
 import LureTypeSelect from "./LureTypeSelect"
 
-type LureData = {
-  ID?: string
-  lureTypeId?: string
-  name?: string
-  companyName?: string
-  color?: string
-  weight?: string
-  image?: any; // 一旦anyで回避
-  size?: number
-}
 
 // 編集データ
 type DetailProps = {
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
-  data?: LureData
+  data?: LureDetail<LureType, LureImage, Color>
 }
 
 export default function LureForm(props: DetailProps) {
@@ -102,7 +95,7 @@ export default function LureForm(props: DetailProps) {
 
 
   // API登録・更新
-  const handleSendLureData = async (values: LureData) => {
+  const handleSendLureData = async (values: LureForm) => {
     // 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const lurePostData = {
@@ -202,7 +195,7 @@ export default function LureForm(props: DetailProps) {
         color: data?.color,
         weight: data?.weight,
         lureTypeId: data?.lureTypeId,
-        image: ''
+        image: undefined
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
