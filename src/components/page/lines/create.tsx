@@ -3,25 +3,27 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
+import type { LineCondition, LineDetail, LineImage } from '../../../types/line'
 import LineForm from '../../model/lines/LineForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
-type LineData = {
-  imageUrl: string
-  lineTypeId: string
-  name: string
-  companyName: string
-  thickness: string
-}
 
 export default function LineCreate(): JSX.Element {
   const chosenId = '0'
-  const vacantData: LineData = {
-    imageUrl: '',
-    lineTypeId: '',
+  const vacantData: LineDetail<LineImage, LineCondition> = {
+    ID: '',
     name: '',
-    companyName: '',
     thickness: '',
+    CreatedAt: '',
+    LineCondition: {
+      typeName: ''
+    },
+    lineTypeId: '',
+    companyName: '',
+    LineImage: {
+      ID: '',
+      image_file: '',
+    }
   }
   return (
     <>

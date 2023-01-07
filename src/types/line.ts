@@ -32,3 +32,12 @@ export type LineForTackle = {
   ID: string
   name: string
 }
+
+export type LineForm = { // 登録フォーム
+  name?: string
+  companyName?: string
+  lineTypeId?: string
+  thickness?: string
+  CreatedAt?: string
+  image?: File
+}

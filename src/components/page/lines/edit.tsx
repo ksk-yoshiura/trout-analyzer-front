@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import useSWR from 'swr'
 
-import type { LinesApiResponse } from "../../../pages/api/lines/[id]"
+import type { LineDetailApiResponse } from "../../../pages/api/lines/[id]"
 import LineForm from '../../model/lines/LineForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 import Loading from '../../shared/Loading'
@@ -16,7 +16,7 @@ export default function LineEdit(): JSX.Element {
   const { id } = router.query
 
   // APIからデータ取得
-  const { data, error } = useSWR<LinesApiResponse, Error>('lines/' + id)
+  const { data, error } = useSWR<LineDetailApiResponse, Error>('lines/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   return (

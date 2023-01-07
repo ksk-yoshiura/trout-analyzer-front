@@ -30,25 +30,16 @@ import React, { useEffect } from 'react'
 
 import { LINE_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { LineCondition, LineDetail, LineForm, LineImage } from '../../../types/line'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
-type LineData = {
-  name?: string;
-  companyName?: string;
-  lineTypeId?: string;
-  thickness?: string;
-  imageUrl?: string;
-  CreatedAt?: string;
-  image?: any;
-}
-
 // 編集データ
 type DetailProps = {
-  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
-  data?: LineData;
+  chosenId?: string | string[] // useRouterを使用するとstring | string[] | undefinedになる
+  data?: LineDetail<LineImage, LineCondition>
 }
 
 export default function LineForm(props: DetailProps) {
@@ -100,7 +91,7 @@ export default function LineForm(props: DetailProps) {
   }
 
   // API登録・更新
-  const handleSendLineData = async (values: LineData) => {// 画像データはbase64に変換
+  const handleSendLineData = async (values: LineForm) => {// 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const linePostData = {
       name: values.name,
@@ -209,7 +200,7 @@ export default function LineForm(props: DetailProps) {
         companyName: data?.companyName,
         thickness: data?.thickness,
         lineTypeId: data?.lineTypeId,
-        image: '' // TODO ：適切な形式で
+        image: undefined
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
