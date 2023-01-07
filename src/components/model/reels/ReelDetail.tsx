@@ -8,12 +8,10 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { ReelDetailApiResponse } from "../../../pages/api/reels/[id]"
+import type { DetailProps } from "../../../types/shared/detail"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
-type DetailProps = {
-  chosenId: number
-}
 
 export default function ReelDetail(props: DetailProps): JSX.Element {
   // ID取得

@@ -9,12 +9,9 @@ import useSWR from 'swr'
 
 import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { LineDetailApiResponse } from "../../../pages/api/lines/[id]"
+import type { DetailProps } from "../../../types/shared/detail"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
-
-type DetailProps = {
-  chosenId: number
-}
 
 export default function RodDetail(props: DetailProps): JSX.Element {
   // ID取得

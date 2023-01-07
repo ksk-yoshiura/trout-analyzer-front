@@ -9,12 +9,9 @@ import useSWR from 'swr'
 
 import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { LureDetailApiResponse } from "../../../pages/api/lures/[id]"
+import type { DetailProps } from "../../../types/shared/detail"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
-
-type DetailProps = {
-  chosenId: number
-}
 
 export default function LuresList(props: DetailProps): JSX.Element {
   // ID取得

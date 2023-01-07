@@ -8,12 +8,9 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { RodDetailApiResponse } from "../../../pages/api/rods/[id]"
+import type { DetailProps } from "../../../types/shared/detail"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
-
-type DetailProps = {
-  chosenId: number
-}
 
 export default function RodDetail(props: DetailProps): JSX.Element {
   // ID取得

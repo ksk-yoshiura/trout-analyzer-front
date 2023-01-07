@@ -9,11 +9,8 @@ import useSWR from 'swr'
 
 import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { TackleDetailApiResponse } from "../../../pages/api/tackles/[id]"
+import type { DetailProps } from "../../../types/shared/detail"
 import Loading from '../../shared/Loading'
-
-type DetailProps = {
-  chosenId: number
-}
 
 export default function TackleDetail(props: DetailProps): JSX.Element {
   // ID取得

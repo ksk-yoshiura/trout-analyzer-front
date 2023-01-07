@@ -5,16 +5,13 @@ import React from 'react';
 import useSWR from 'swr'
 
 import type { PatternApiResponse } from "../../../pages/api/patterns/[id]"
+import type { DetailProps } from "../../../types/shared/detail"
 import Loading from '../../shared/Loading'
 import RecordPatternBadgeDetail from './pattern_detail_partial/RecordPatternBadgeDetail'
 import RecordPatternLineDetail from './pattern_detail_partial/RecordPatternLineDetail'
 import RecordPatternLureDetail from './pattern_detail_partial/RecordPatternLureDetail'
 import RecordPatternReelDetail from './pattern_detail_partial/RecordPatternReelDetail'
 import RecordPatternRodDetail from './pattern_detail_partial/RecordPatternRodDetail'
-
-type DetailProps = {
-  chosenId: number
-}
 
 export default function RecordPatternDetail(props: DetailProps): JSX.Element {
   // ID取得
