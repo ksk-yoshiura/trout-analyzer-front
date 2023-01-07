@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import type { Color } from '../../../../types/color'
-import type { LureBasic, LureImage, LuresListByType } from '../../../../types/lure'
+import type { LureImage, LuresListByType } from '../../../../types/lure'
 
 // API のレスポンス型
 export type LuresListByTypeApiResponse = {
-  result?: LuresListByType<LureBasic, Color, LureImage>[]
+  result?: LuresListByType<Color, LureImage>[]
   status: number
   message?: string
 }

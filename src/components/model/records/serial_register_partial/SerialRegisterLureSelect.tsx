@@ -8,8 +8,8 @@ import {
 import React, { useEffect } from 'react';
 import useSWR from 'swr'
 
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../../const/image"
 import type { LuresListByTypeApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
-import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import Loading from '../../../shared/Loading'
 
 type LureTypeProps = {
@@ -42,7 +42,7 @@ export default function LureSelect(props: LureTypeProps) {
 
     helpers.setValue(targetLureId)
     lureList.map((val) => {
-      if (val.LureBasic.ID == targetLureId && val.LureImage.image_file) {
+      if (val.ID == targetLureId && val.LureImage.image_file) {
         setLureImageURL(val.LureImage.image_file)
       }
     })
@@ -56,7 +56,7 @@ export default function LureSelect(props: LureTypeProps) {
             {
               lureList.map((item, index) => {
                 return (
-                  <option key={index} value={item.LureBasic.ID}>
+                  <option key={index} value={item.ID}>
                     {item.name} {item.Color.name} {item.weight} g
                   </option>
                 )
