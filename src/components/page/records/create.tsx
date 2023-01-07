@@ -10,18 +10,10 @@ import React from 'react'
 import useSWR from 'swr'
 
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
+import type { RecordForm } from '../../../types/record'
 import RecordPatternDetailForm from '../../model/records/RecordPatternDetailForm'
 import Loading from '../../shared/Loading'
 
-type recordFormData = {
-  result?: number;
-  speed?: number;
-  depth?: number;
-  weather?: number;
-  lureId: number;
-  tackleId: number;
-  recordId: number;
-}
 
 export default function RecordCreate(): JSX.Element {
   // パラメータからレコードID取得
@@ -34,7 +26,7 @@ export default function RecordCreate(): JSX.Element {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
-  const vacantData: recordFormData = {
+  const vacantData: RecordForm = {
     result: 0,
     speed: 0,
     depth: 0,
