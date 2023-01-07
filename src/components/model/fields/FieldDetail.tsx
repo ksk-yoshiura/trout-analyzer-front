@@ -7,7 +7,7 @@ import {
 import React from 'react'
 import useSWR from 'swr'
 
-import { image_ext, s3DomainPath } from "../../../const/image"
+import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
 import type { FieldDetailApiResponse } from "../../../pages/api/fields/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
@@ -26,7 +26,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
   // フィールドデータ
   const fieldDetailData = data.result ? data.result : null
   // 画像URL
-  const imageUrl = fieldDetailData?.FieldImage && s3DomainPath ? s3DomainPath + fieldDetailData.FieldImage.image_file + image_ext : '/no_image.png'
+  const imageUrl = fieldDetailData?.FieldImage && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + fieldDetailData.FieldImage.image_file + image_ext : '/no_image.png'
   // 画像alt
   const imageAlt = fieldDetailData?.FieldImage ? fieldDetailData.name : 'No Image'
 

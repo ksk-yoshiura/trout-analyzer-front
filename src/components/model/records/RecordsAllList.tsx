@@ -7,7 +7,7 @@ import NextLink from "next/link"
 import React from 'react';
 import useSWR from 'swr'
 
-import { image_ext, s3DomainPath } from "../../../const/image"
+import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
 import type { RecordsApiResponse } from "../../../pages/api/records/all"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
@@ -39,7 +39,7 @@ export default function RecordsAllList(): JSX.Element {
                   type='button' as={"button"}
                   overflow='hidden'
                 >
-                  <Image p='2' w='40%' src={item.Field.FieldImage.image_file && s3DomainPath ? s3DomainPath + item.Field.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
+                  <Image p='2' w='40%' src={item.Field.FieldImage.image_file && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + item.Field.FieldImage.image_file + image_ext : '/no_image.png'} alt={item.Field.name ?? 'No Image'} />
 
                   <Box p='2' w='60%'>
                     <Box

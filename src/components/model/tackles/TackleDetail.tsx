@@ -7,7 +7,7 @@ import {
 import React from 'react'
 import useSWR from 'swr'
 
-import { image_ext, s3DomainPath } from "../../../const/image"
+import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
 import type { TackleDetailApiResponse } from "../../../pages/api/tackles/[id]"
 import Loading from '../../shared/Loading'
 
@@ -28,9 +28,9 @@ export default function TackleDetail(props: DetailProps): JSX.Element {
   const lineData = data.result?.Line?.ID != '0' ? data.result?.Line : null
 
   // 画像URL
-  const rodImageUrl = data.result ? s3DomainPath + data.result.Rod.RodImage.image_file + image_ext : '/no_image.png'
-  const reelImageUrl = data.result ? s3DomainPath + data.result.Reel.ReelImage.image_file + image_ext : '/no_image.png'
-  const lineImageUrl = data.result ? s3DomainPath + data.result.Line.LineImage.image_file + image_ext : '/no_image.png'
+  const rodImageUrl = data.result ? S3_DOMAIN_PATH + data.result.Rod.RodImage.image_file + image_ext : '/no_image.png'
+  const reelImageUrl = data.result ? S3_DOMAIN_PATH + data.result.Reel.ReelImage.image_file + image_ext : '/no_image.png'
+  const lineImageUrl = data.result ? S3_DOMAIN_PATH + data.result.Line.LineImage.image_file + image_ext : '/no_image.png'
   // 画像alt
   const rodImageAlt = data.result?.Rod ? data.result?.Rod.name : 'No Image'
   const reelImageAlt = data.result?.Reel ? data.result?.Reel.name : 'No Image'

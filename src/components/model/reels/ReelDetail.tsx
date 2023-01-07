@@ -24,9 +24,9 @@ export default function ReelDetail(props: DetailProps): JSX.Element {
   // リールデータ
   const reelDetailData = data.result ? data.result : null
   // S3パス
-  const s3DomainPath = process.env.NEXT_PUBLIC_S3_DOMAIN
+  const S3_DOMAIN_PATH = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像URL
-  const imageUrl = reelDetailData?.ReelImage && s3DomainPath ? s3DomainPath + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
+  const imageUrl = reelDetailData?.ReelImage && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + reelDetailData.ReelImage.image_file + '.png' : '/no_image.png'
   // 画像alt
   const imageAlt = reelDetailData?.ReelImage ? reelDetailData.name : 'No Image'
 
