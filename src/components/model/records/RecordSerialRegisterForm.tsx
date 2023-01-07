@@ -26,29 +26,11 @@ import useSWR from 'swr'
 import { defaultValueList, depthType, resultType, speedType, weatherType } from "../../../const/pattern_condition_type"
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { RecordForm, SerialRecord } from '../../../types/record'
 import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
-
-type SerialRecordData = {
-  result?: string;
-  speed?: string;
-  depth?: string;
-  weather?: string;
-  lure?: string;
-  tackle?: string;
-}
-
-type recordFormData = {
-  result?: number;
-  speed?: number;
-  depth?: number;
-  weather?: number;
-  lureId?: number;
-  tackleId?: number;
-  recordId?: number;
-}
 
 type RecordDetailProp = {
   recordId: string | string[] | undefined
@@ -78,12 +60,12 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   })
 
   // ラジオボタンの値を名前からIDに変換
-  const radioValueConvert = (values: SerialRecordData) => {
+  const radioValueConvert = (values: SerialRecord) => {
     // 整形前
     const valuesBeforeConvert = values
 
     // 入力データ
-    const serialRecordData: recordFormData = {
+    const serialRecordData: RecordForm = {
       result: defaultValueList.result,
       speed: defaultValueList.speed,
       depth: defaultValueList.depth,
@@ -119,7 +101,7 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   }
 
   // 釣果記録
-  const handleSendSerialRecordData = (values: SerialRecordData) => {
+  const handleSendSerialRecordData = (values: SerialRecord) => {
     const convertValues = radioValueConvert(values)
     axiosInstance.post('patterns', convertValues)
       .then(() => {
@@ -143,7 +125,7 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
       })
   }
 
-  const validateData = (value: SerialRecordData) => {
+  const validateData = (value: SerialRecord) => {
     console.log(value)
     // let error
     // if (!value) {

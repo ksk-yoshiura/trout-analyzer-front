@@ -27,32 +27,15 @@ import useSWR from 'swr'
 import { defaultValueList, depthType, resultType, speedType, weatherType } from "../../../const/pattern_condition_type"
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { PatternForm } from '../../../types/pattern'
+import type { SerialRecord } from '../../../types/record'
 import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
 import LureSelect from './serial_register_partial/SerialRegisterLureTypeSelect'
 import TackleSelect from './serial_register_partial/SerialRegisterTackleSelect'
 
-type SerialRecordData = { // TODO：応急処置的に対応
-  result?: string | number;
-  speed?: string | number;
-  depth?: string | number;
-  weather?: string | number;
-  lure?: string | number;
-  tackle?: string | number;
-}
-
-type patternFormData = {
-  result?: number;
-  speed?: number;
-  depth?: number;
-  weather?: number;
-  lureId?: number;
-  tackleId?: number;
-  recordId?: number;
-}
-
 type DetailDataProps = {
-  patternData?: patternFormData
+  patternData?: PatternForm
   backLinkToPatternListPage: string
 }
 
@@ -85,12 +68,12 @@ export default function RecordSerialRegisterForm(props: DetailDataProps) {
 
 
   // ラジオボタンの値を名前からIDに変換
-  const radioValueConvert = (values: SerialRecordData) => {
+  const radioValueConvert = (values: SerialRecord) => {
     // 整形前
     const valuesBeforeConvert = values
 
     // 入力データ
-    const serialRecordData: patternFormData = {
+    const serialRecordData: PatternForm = {
       result: defaultValueList.result,
       speed: defaultValueList.speed,
       depth: defaultValueList.depth,
@@ -126,7 +109,7 @@ export default function RecordSerialRegisterForm(props: DetailDataProps) {
   }
 
   // API登録・更新
-  const handleSendSerialRecordData = (values: SerialRecordData) => {
+  const handleSendSerialRecordData = (values: SerialRecord) => {
     const convertValues = radioValueConvert(values)
     if (id) { // パターンIDがある場合は更新
       axiosInstance.put('patterns/' + id, convertValues)
@@ -177,15 +160,8 @@ export default function RecordSerialRegisterForm(props: DetailDataProps) {
     }
   }
 
-  const validateData = (value: SerialRecordData) => {
+  const validateData = (value: SerialRecord) => {
     console.log(value)
-    // let error
-    // if (!value) {
-    //   error = 'Name is required'
-    // } else if (value.toLowerCase() !== 'naruto') {
-    //   error = "Jeez! You're not a fan 😱"
-    // }
-    // return error
   }
 
   // 確認ドロワー
