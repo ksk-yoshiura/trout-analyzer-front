@@ -10,17 +10,24 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
+import type { FieldDetail, FieldImage } from '../../../../types/field'
 import FieldForm from '../../fields/FieldForm'
 
-type FieldData = {
-  name?: string;
-  address?: string;
-  image?: string;
-}
-
-export default function PreparationFieldModal() {
+export default function PreparationFieldModal(): JSX.Element {
   const chosenId = '0'
-  const vacantData: FieldData = { name: '', address: '' }
+  const vacantData: FieldDetail<FieldImage> = {
+    ID: '',
+    lastVisitedAt: '',
+    name: '',
+    address: '',
+    CreatedAt: '',
+    FieldImage: {
+      ID: '',
+      CreatedAt: '',
+      field_id: 0,
+      image_file: '',
+    }
+  }
 
   const { isOpen, onOpen, onClose: onFieldModalClose } = useDisclosure()
   return (
