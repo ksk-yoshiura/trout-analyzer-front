@@ -29,6 +29,7 @@ export default function FieldsList(): JSX.Element {
   if (error) return <div>An error has occurred.</div>
   // フィールドデータ
   const fieldsListData = data.result ? data.result : []
+  console.log(data.result)
 
   const clickHandler = (value: string) => {
     // 型変換
@@ -61,7 +62,7 @@ export default function FieldsList(): JSX.Element {
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>
                       {
-                        item.lastVisitedAt ?
+                        item.lastVisitedAt && item.lastVisitedAt !== "0001-01-01T00:00:00Z" ?
                           <></>
                           :
                           <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
@@ -78,16 +79,21 @@ export default function FieldsList(): JSX.Element {
                     >
                       {item.name}
                     </Box>
-                    <Box
-                      color='gray.500'
-                      fontWeight='semibold'
-                      letterSpacing='wide'
-                      fontSize='xs'
-                      textTransform='uppercase'
-                      ml='2'
-                    >
-                      last visited {item.lastVisitedAt ? getDateFormatted(item.lastVisitedAt) : null}
-                    </Box>
+                    {
+                      item.lastVisitedAt && item.lastVisitedAt !== "0001-01-01T00:00:00Z"
+                        ?
+                        <Box
+                          color='gray.500'
+                          fontWeight='semibold'
+                          letterSpacing='wide'
+                          fontSize='xs'
+                          textTransform='uppercase'
+                          ml='2'
+                        >
+                          last visited {item.lastVisitedAt && item.lastVisitedAt !== "0001-01-01T00:00:00Z" ? getDateFormatted(item.lastVisitedAt) : null}
+                        </Box>
+                        : <></>
+                    }
 
                   </Box>
                 </Box>

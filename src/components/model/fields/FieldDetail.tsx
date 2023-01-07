@@ -37,7 +37,7 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
       <Box p='2'>
         <Box display='flex' alignItems='baseline'>
           {
-            fieldDetailData?.lastVisitedAt ?
+            fieldDetailData?.lastVisitedAt && fieldDetailData.lastVisitedAt !== "0001-01-01T00:00:00Z" ?
               <></>
               :
               <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>
@@ -71,9 +71,14 @@ export default function FieldDetail(props: DetailProps): JSX.Element {
           <Box>
             ADDED {fieldDetailData ? getDateFormatted(fieldDetailData.CreatedAt) : null}
           </Box>
-          <Box>
-            LAST VISITED {fieldDetailData ? getDateFormatted(fieldDetailData.lastVisitedAt) : null}
-          </Box>
+          {
+            fieldDetailData?.lastVisitedAt && fieldDetailData?.lastVisitedAt !== "0001-01-01T00:00:00Z"
+              ?
+              <Box>
+                LAST VISITED {fieldDetailData?.lastVisitedAt && fieldDetailData?.lastVisitedAt !== "0001-01-01T00:00:00Z" ? getDateFormatted(fieldDetailData?.lastVisitedAt) : null}
+              </Box>
+              : <></>
+          }
         </Stack>
 
       </Box>
