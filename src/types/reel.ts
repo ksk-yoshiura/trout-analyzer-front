@@ -11,6 +11,8 @@ export type ReelDetail<ReelImage, GearCondition, TypeNumberCondition> = { // 詳
   name: string
   CreatedAt: string
   companyName: string
+  gearId: string
+  typeNumberId: string
   ReelImage: ReelImage
   GearCondition: GearCondition
   TypeNumberCondition: TypeNumberCondition
@@ -29,4 +31,12 @@ export type GearCondition = { typeName: string }
 export type ReelForTackle = {
   ID: string
   name: string
+}
+
+export type ReelForm = { // 登録フォーム
+  name?: string
+  companyName?: string
+  typeNumberId?: string
+  gearId?: string
+  image?: File
 }

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import useSWR from 'swr'
 
-import type { ReelsApiResponse } from "../../../pages/api/reels/[id]"
+import type { ReelDetailApiResponse } from "../../../pages/api/reels/[id]"
 import ReelForm from '../../model/reels/ReelForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 import Loading from '../../shared/Loading'
@@ -16,7 +16,7 @@ export default function ReelEdit(): JSX.Element {
   const { id } = router.query
 
   // APIからデータ取得
-  const { data, error } = useSWR<ReelsApiResponse, Error>('reels/' + id)
+  const { data, error } = useSWR<ReelDetailApiResponse, Error>('reels/' + id)
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
   return (

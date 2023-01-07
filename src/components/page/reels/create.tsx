@@ -3,24 +3,27 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
+import type { GearCondition, ReelDetail, ReelImage, TypeNumberCondition } from '../../../types/reel'
 import ReelForm from '../../model/reels/ReelForm'
 import BackToListPageLink from '../../shared/BackToListPageLink'
 
-type ReelData = {
-  name?: string;
-  companyName?: string;
-  type?: string;
-  gear?: string;
-  image?: string;
-}
+
 
 export default function ReelCreate(): JSX.Element {
   const chosenId = '0'
-  const vacantData: ReelData = {
+  const vacantData: ReelDetail<ReelImage, GearCondition, TypeNumberCondition> = {
+    ID: '',
     name: '',
+    CreatedAt: '',
     companyName: '',
-    type: '',
-    gear: '',
+    gearId: '',
+    typeNumberId: '',
+    ReelImage: {
+      ID: '',
+      image_file: ''
+    },
+    GearCondition: { typeName: '' },
+    TypeNumberCondition: { typeName: '' }
   }
   return (
     <>

@@ -26,23 +26,16 @@ import React from 'react'
 
 import { GEAR_TYPE, REEL_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { GearCondition, ReelDetail, ReelForm, ReelImage, TypeNumberCondition } from '../../../types/reel'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
-type ReelData = {
-  name?: string;
-  companyName?: string;
-  typeNumberId?: string;
-  gearId?: string;
-  image?: any;
-}
-
 // 編集データ
 type DetailProps = {
-  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
-  data?: ReelData;
+  chosenId?: string | string[] // useRouterを使用するとstring | string[] | undefinedになる
+  data?: ReelDetail<ReelImage, GearCondition, TypeNumberCondition>
 }
 
 export default function ReelForm(props: DetailProps) {
@@ -59,7 +52,7 @@ export default function ReelForm(props: DetailProps) {
   const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
-  const handleSendReelData = async (values: ReelData) => {
+  const handleSendReelData = async (values: ReelForm) => {
     // 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const fieldPostData = {
@@ -156,7 +149,7 @@ export default function ReelForm(props: DetailProps) {
         companyName: data?.companyName,
         gearId: data?.gearId,
         typeNumberId: data?.typeNumberId,
-        image: '' // TODO ：適切な形式で
+        image: undefined
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
