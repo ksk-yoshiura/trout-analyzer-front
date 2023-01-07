@@ -13,6 +13,7 @@ import useSWR from 'swr'
 
 import type { TacklesListApiResponse } from "../../../pages/api/tackles/index"
 import DetailModal from '../../shared/DetailModal'
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import TackleDetail from './TackleDetail'
@@ -24,7 +25,7 @@ export default function TacklesList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<TacklesListApiResponse, Error>('tackles')
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // タックルデータ
   const tacklesListData = data.result ? data.result : []
 

@@ -16,6 +16,7 @@ import type { ReelsApiResponse } from "../../../pages/api/reels/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import DetailTackleModal from '../../shared/DetailTackleModal'
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import ReelDetail from './ReelDetail'
@@ -34,7 +35,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<ReelsApiResponse, Error>('reels')
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // リールデータ
   const reelsListData = data.result ? data.result : []
 

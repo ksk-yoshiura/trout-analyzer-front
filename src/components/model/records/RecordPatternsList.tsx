@@ -21,6 +21,7 @@ import useSWR from 'swr'
 import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { PatternsListApiResponse } from "../../../pages/api/patterns/index"
 import getTimeFormatted from "../../../utils/timeFormat"
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import RecordPatternDetail from './RecordPatternDetail'
@@ -36,7 +37,7 @@ export default function RecordsAllList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<PatternsListApiResponse, Error>('patterns/list/' + recordId)
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // パターンデータ
   const patternsListData = data.result ? data.result : []
 

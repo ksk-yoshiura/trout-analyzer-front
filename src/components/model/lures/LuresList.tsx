@@ -13,6 +13,7 @@ import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { LuresListApiResponse } from "../../../pages/api/lures/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import LureDetail from './LureDetail'
@@ -31,7 +32,7 @@ export default function LuresList(props: ListProps): JSX.Element {
   // APIからデータ取得
   const { data, error, mutate } = useSWR<LuresListApiResponse, Error>('lures?type_id=' + typeId)
   if (!data) { mutate(); return <Loading /> }
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // ルアーデータ
   const luresListData = data.result ? data.result : []
 

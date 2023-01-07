@@ -10,6 +10,7 @@ import useSWR from 'swr'
 import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { RecordsApiResponse } from "../../../pages/api/records/all"
 import getDateFormatted from "../../../utils/dateFormat"
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 
@@ -19,7 +20,7 @@ export default function RecordsAllList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<RecordsApiResponse, Error>('records/all')
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // レコードデータ
   const recordListData = data.result ? data.result : []
 

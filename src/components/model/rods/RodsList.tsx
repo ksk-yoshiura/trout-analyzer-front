@@ -16,6 +16,7 @@ import type { RodsListApiResponse } from "../../../pages/api/rods/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import DetailTackleModal from '../../shared/DetailTackleModal'
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import RodDetail from './RodDetail'
@@ -36,7 +37,7 @@ export default function RodsList(props: ListProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<RodsListApiResponse, Error>('rods')
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // ロッドデータ
   const rodsListData = data.result ? data.result : []
 

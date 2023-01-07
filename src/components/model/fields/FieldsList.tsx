@@ -13,6 +13,7 @@ import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { FieldsListApiResponse } from "../../../pages/api/fields/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import FieldDetail from './FieldDetail'
@@ -26,7 +27,7 @@ export default function FieldsList(): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<FieldsListApiResponse, Error>('fields')
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // フィールドデータ
   const fieldsListData = data.result ? data.result : []
   console.log(data.result)

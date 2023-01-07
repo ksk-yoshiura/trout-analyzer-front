@@ -17,6 +17,7 @@ import type { LinesListApiResponse } from "../../../pages/api/lines/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
 import DetailTackleModal from '../../shared/DetailTackleModal'
+import ErrorMessage from '../../shared/ErrorMessage'
 import Loading from '../../shared/Loading'
 import NoDataAlert from '../../shared/NoDataAlert'
 import LineDetail from './LineDetail'
@@ -36,7 +37,7 @@ export default function LinesList(props: ListProps): JSX.Element {
   // APIからデータ取得
   const { data, error } = useSWR<LinesListApiResponse, Error>('lines')
   if (!data) return <Loading />
-  if (error) return <div>An error has occurred.</div>
+  if (error) return <ErrorMessage />
   // ラインデータ
   const linesListData = data.result ? data.result : []
 
