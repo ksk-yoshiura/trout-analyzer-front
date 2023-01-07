@@ -37,7 +37,6 @@ import ReelsListComponent from '../reels/ReelsList'
 import RodDetailComponent from '../rods/RodDetail'
 import RodsListComponent from '../rods/RodsList'
 
-
 type DetailProps = {
   tackleData?: TackleDetail<RodDetail<RodImage, RodHardnessCondition>, ReelDetail<ReelImage, GearCondition, TypeNumberCondition>, LineDetail<LineImage, LineCondition>>
   chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
