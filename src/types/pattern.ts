@@ -41,3 +41,13 @@ export type DepthCondition = {
 export type WeatherCondition = {
   typeName: string
 }
+
+export type PatternForm = { // 登録フォーム
+  result?: number
+  speed?: number
+  depth?: number
+  weather?: number
+  lureId?: number
+  tackleId?: number
+  recordId?: number
+}
