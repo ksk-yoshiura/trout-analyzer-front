@@ -34,3 +34,12 @@ export type RodForTackle = {
   ID: string
   name: string
 }
+
+export type RodForm = { // 登録フォーム
+  ID?: string
+  name?: string
+  companyName?: string
+  hardness?: string
+  length?: string
+  image?: File
+}

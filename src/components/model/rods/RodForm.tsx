@@ -30,24 +30,16 @@ import React, { useEffect } from 'react'
 
 import { ROD_HARDNESS_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { RodDetail, RodForm, RodHardnessCondition, RodImage } from '../../../types/rod'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
-type RodData = {
-  ID?: string
-  name?: string;
-  companyName?: string;
-  hardness?: string;
-  length?: string;
-  image?: any;
-}
-
 // 編集データ
 type DetailProps = {
-  chosenId?: string | string[]; // useRouterを使用するとstring | string[] | undefinedになる
-  data?: RodData;
+  chosenId?: string | string[] // useRouterを使用するとstring | string[] | undefinedになる
+  data?: RodDetail<RodImage, RodHardnessCondition>
 }
 
 export default function RodForm(props: DetailProps) {
@@ -99,7 +91,7 @@ export default function RodForm(props: DetailProps) {
   const axiosInstance = CreateAxiosInstance()
 
   // API登録・更新
-  const handleSendRodData = async (values: RodData) => {// 画像データはbase64に変換
+  const handleSendRodData = async (values: RodForm) => {// 画像データはbase64に変換
     const imageBase64 = values.image ? await convertFileIntoBase64(values.image) : ''
     const rodPostData = {
       name: values.name,
@@ -195,7 +187,7 @@ export default function RodForm(props: DetailProps) {
         companyName: data?.companyName,
         hardness: data?.hardness,
         length: data?.length,
-        image: '' // TODO ：適切な形式で
+        image: undefined
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
