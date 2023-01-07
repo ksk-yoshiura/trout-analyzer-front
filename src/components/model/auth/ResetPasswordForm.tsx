@@ -18,12 +18,7 @@ import {
 import React from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
-
-type ResetPasswordData = {
-  currentPassword: string;
-  newPassword: string;
-  passwordConfirm: string;
-}
+import type { ResetPasswordForm } from '../../../types/auth'
 
 export default function ResetPasswordForm() {
   // アラート
@@ -31,7 +26,7 @@ export default function ResetPasswordForm() {
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
-  const handleSendResetPasswordData = (values: ResetPasswordData) => {
+  const handleSendResetPasswordData = (values: ResetPasswordForm) => {
     const sendValue = { // 調整
       password: values.currentPassword,
       new_password: values.newPassword
@@ -59,7 +54,7 @@ export default function ResetPasswordForm() {
   }
 
 
-  const validateData = (value: ResetPasswordData) => {
+  const validateData = (value: ResetPasswordForm) => {
     console.log(value)
     // let error
     // if (!value) {

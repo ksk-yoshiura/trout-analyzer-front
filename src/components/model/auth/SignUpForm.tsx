@@ -19,12 +19,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 
 import { CreateAxiosDefaultInstance } from '../../../pages/api/utils'
-
-type SignUpData = {
-  email: string;
-  password: string;
-  passwordConfirm: string;
-}
+import type { SignUpForm } from '../../../types/auth'
 
 export default function SignUpForm() {
   // アラート
@@ -34,7 +29,7 @@ export default function SignUpForm() {
 
   // axiosの設定
   const axiosInstance = CreateAxiosDefaultInstance()
-  const handleSendSignUpData = (values: SignUpData) => {
+  const handleSendSignUpData = (values: SignUpForm) => {
     // axiosにヘッダー情報付与
     axiosInstance.post('sign_up', values)
       .then(() => {
@@ -61,7 +56,7 @@ export default function SignUpForm() {
   }
 
 
-  const validateData = (value: SignUpData) => {
+  const validateData = (value: SignUpForm) => {
     console.log(value)
     // let error
     // if (!value) {

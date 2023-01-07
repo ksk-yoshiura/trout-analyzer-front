@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import type { Credentials } from '../../../types/auth'
 import { CreateAxiosDefaultInstance } from '../utils'
 
 export default NextAuth({
@@ -21,7 +22,7 @@ export default NextAuth({
         },
       },
       authorize: async (credentials, req) => {
-        const postData: any = { // TODO：any
+        const postData: Credentials = { // ログイン情報
           mailaddress: credentials?.mailaddress,
           password: credentials?.password,
         };
