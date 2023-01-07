@@ -41,7 +41,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
   // S3パス
   const S3_DOMAIN_PATH = process.env.NEXT_PUBLIC_S3_DOMAIN
   // 画像拡張子
-  const image_ext = '.png'
+  const IMAGE_EXT = '.png'
   const clickHandler = (value: string) => {
     // 型変換
     const lureIdNumber = Number(value)
@@ -99,7 +99,7 @@ export default function ReelsList(props: ListProps): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.ReelImage.image_file && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + item.ReelImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
+                  <Image src={item.ReelImage.image_file && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + item.ReelImage.image_file + IMAGE_EXT : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>

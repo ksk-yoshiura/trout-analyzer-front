@@ -7,7 +7,7 @@ import Image from "next/image"
 import React from 'react'
 import useSWR from 'swr'
 
-import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { LureDetailApiResponse } from "../../../pages/api/lures/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
@@ -25,7 +25,7 @@ export default function LuresList(props: DetailProps): JSX.Element {
   // ルアーデータ
   const lureDetailData = data.result ? data.result : null
   // 画像URL
-  const imageUrl = lureDetailData?.LureImage && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + lureDetailData.LureImage.image_file + image_ext : '/no_image.png'
+  const imageUrl = lureDetailData?.LureImage && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + lureDetailData.LureImage.image_file + IMAGE_EXT : '/no_image.png'
   // 画像alt
   const imageAlt = lureDetailData?.LureImage ? lureDetailData.name : 'No Image'
 

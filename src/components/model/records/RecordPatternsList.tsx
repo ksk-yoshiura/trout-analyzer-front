@@ -18,7 +18,7 @@ import { useRouter } from "next/router"
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { PatternsListApiResponse } from "../../../pages/api/patterns/index"
 import getTimeFormatted from "../../../utils/timeFormat"
 import Loading from '../../shared/Loading'
@@ -90,7 +90,7 @@ export default function RecordsAllList(): JSX.Element {
                 borderRadius='lg'
                 overflow='hidden'
               >
-                <Image p='2' w='40%' src={S3_DOMAIN_PATH + item.Lure.LureImage.image_file + image_ext ?? '/no_image.png'} alt={item.Lure.name ?? 'No Image'} />
+                <Image p='2' w='40%' src={S3_DOMAIN_PATH + item.Lure.LureImage.image_file + IMAGE_EXT ?? '/no_image.png'} alt={item.Lure.name ?? 'No Image'} />
                 <Box pt='2'>
                   <Box display='inline-block' alignItems='baseline'>
                     <Badge borderRadius='full' px='2' mr={1} colorScheme='teal'>

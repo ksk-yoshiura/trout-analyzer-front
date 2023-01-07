@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react';
 
-import { image_ext, S3_DOMAIN_PATH } from "../../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../../const/image"
 
 type LureImage = {
   image_file: string
@@ -22,7 +22,7 @@ export default function RecordPatternLureDetail(props: LureProps) {
 
   return (
     <>
-      <Image p='2' width={366} height={366} src={S3_DOMAIN_PATH + props.lureImage.image_file + image_ext ?? '/no_image.png'} alt={props.lureName ?? 'No Image'} />
+      <Image p='2' width={366} height={366} src={S3_DOMAIN_PATH + props.lureImage.image_file + IMAGE_EXT ?? '/no_image.png'} alt={props.lureName ?? 'No Image'} />
       <Box
         my='2'
         fontWeight='semibold'

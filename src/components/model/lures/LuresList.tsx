@@ -9,7 +9,7 @@ import {
 import React, { useState } from 'react'
 import useSWR from 'swr'
 
-import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { LuresListApiResponse } from "../../../pages/api/lures/index"
 import getDateFormatted from "../../../utils/dateFormat"
 import DetailModal from '../../shared/DetailModal'
@@ -61,7 +61,7 @@ export default function LuresList(props: ListProps): JSX.Element {
             return (
               <WrapItem key={index} onClick={() => { onOpen(), clickHandler(item.ID) }} type='button' as={"button"}>
                 <Box w={160} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Image src={item.LureImage.image_file && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + item.LureImage.image_file + image_ext : '/no_image.png'} alt={item.name ?? 'No Image'} />
+                  <Image src={item.LureImage.image_file && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + item.LureImage.image_file + IMAGE_EXT : '/no_image.png'} alt={item.name ?? 'No Image'} />
 
                   <Box p='2'>
                     <Box display='flex' alignItems='baseline'>

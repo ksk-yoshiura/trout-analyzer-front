@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import { mutate } from 'swr'
 
-// import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
+// import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { FieldDetail, FieldForm, FieldImage } from '../../../types/field'
 import convertFileIntoBase64 from "../../../utils/base64Convert"

@@ -9,7 +9,7 @@ import React, { useEffect } from 'react';
 import useSWR from 'swr'
 
 import type { LuresListByTypeApiResponse } from "../../../../pages/api/lures/type_num/[type_num]"
-import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import Loading from '../../../shared/Loading'
 
 type LureTypeProps = {
@@ -67,7 +67,7 @@ export default function LureSelect(props: LureTypeProps) {
       }
       {
         lureImageURL && lureTypeId ?
-          <Image src={S3_DOMAIN_PATH + lureImageURL + image_ext} alt={'Lure Image'} />
+          <Image src={S3_DOMAIN_PATH + lureImageURL + IMAGE_EXT} alt={'Lure Image'} />
           : <></>
       }
     </>

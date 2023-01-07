@@ -7,7 +7,7 @@ import Image from "next/image"
 import React from 'react'
 import useSWR from 'swr'
 
-import { image_ext, S3_DOMAIN_PATH } from "../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import type { LineDetailApiResponse } from "../../../pages/api/lines/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
@@ -26,7 +26,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   // ラインデータ
   const lineDetailData = data.result ? data.result : null
   // 画像URL
-  const imageUrl = lineDetailData?.LineImage && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + lineDetailData.LineImage.image_file + image_ext : '/no_image.png'
+  const imageUrl = lineDetailData?.LineImage && S3_DOMAIN_PATH ? S3_DOMAIN_PATH + lineDetailData.LineImage.image_file + IMAGE_EXT : '/no_image.png'
   // 画像alt
   const imageAlt = lineDetailData?.LineImage ? lineDetailData.name : 'No Image'
 
