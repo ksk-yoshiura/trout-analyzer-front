@@ -8,7 +8,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import { image_ext, s3DomainPath } from "../../../const/image"
-import type { LinesDetailApiResponse } from "../../../pages/api/lines/[id]"
+import type { LineDetailApiResponse } from "../../../pages/api/lines/[id]"
 import getDateFormatted from "../../../utils/dateFormat"
 import Loading from '../../shared/Loading'
 
@@ -21,7 +21,7 @@ export default function RodDetail(props: DetailProps): JSX.Element {
   const { chosenId } = props
 
   // APIからデータ取得
-  const { data } = useSWR<LinesDetailApiResponse, Error>('lines/' + chosenId)
+  const { data } = useSWR<LineDetailApiResponse, Error>('lines/' + chosenId)
   if (!data) return <Loading />
   // ラインデータ
   const lineDetailData = data.result ? data.result : null
