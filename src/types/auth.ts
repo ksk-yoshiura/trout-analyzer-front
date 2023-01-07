@@ -9,6 +9,11 @@ export type Credentials = { // 認証
   password?: string
 }
 
+export type Login = { // ログイン
+  mailaddress: string
+  password: string
+}
+
 export type ResetPasswordForm = { // パスワード再設定
   currentPassword: string
   newPassword: string

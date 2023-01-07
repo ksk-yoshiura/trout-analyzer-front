@@ -23,10 +23,7 @@ import { useRouter } from "next/router";
 import type { CtxOrReq } from "next-auth/client/_utils";
 import { getCsrfToken, signIn } from "next-auth/react";
 
-type LoginData = {
-  mailaddress: string;
-  password: string;
-}
+import type { Login } from '../types/auth'
 
 // POSTリクエスト（サインイン・サインアウトなど）に必要なCSRFトークンを返却する
 export const getServerSideProps = async (context: CtxOrReq | undefined) => {
@@ -42,7 +39,7 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
   const router = useRouter()
   const toast = useToast()
-  const signInUser = async (data: LoginData) => {
+  const signInUser = async (data: Login) => {
     await signIn<any>("credentials", {
       redirect: false,
       mailaddress: data.mailaddress,
@@ -64,7 +61,7 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
     });
   };
 
-  const validateData = (value: LoginData) => {
+  const validateData = (value: Login) => {
     console.log(value)
     // let error
     // if (!value) {
