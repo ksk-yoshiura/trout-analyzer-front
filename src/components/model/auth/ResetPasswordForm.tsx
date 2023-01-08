@@ -15,6 +15,7 @@ import {
   Form,
   Formik
 } from 'formik';
+import { useRouter } from "next/router";
 import React from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
@@ -23,16 +24,21 @@ import type { ResetPasswordForm } from '../../../types/auth'
 export default function ResetPasswordForm() {
   // アラート
   const toast = useToast()
+  // ページ遷移
+  const router = useRouter();
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
   const handleSendResetPasswordData = (values: ResetPasswordForm) => {
     const sendValue = { // 調整
       password: values.currentPassword,
-      new_password: values.newPassword
+      new_password: values.newPassword,
+      confirm_password: values.passwordConfirm,
     }
     axiosInstance.post('reset_password', sendValue)
       .then(() => {
+        // トップページに遷移
+        router.push('/')
         // アラート代わりにトーストを使用
         toast({
           title: 'Your password updated!',
@@ -53,8 +59,11 @@ export default function ResetPasswordForm() {
       })
   }
 
-
   const validateData = (value: ResetPasswordForm) => {
+    console.log(value)
+  }
+
+  const validateConfirmPassword = (value: ResetPasswordForm) => {
     console.log(value)
     // let error
     // if (!value) {
@@ -103,7 +112,7 @@ export default function ResetPasswordForm() {
                 }}
               </Field>
 
-              <Field name='newPassword' validate={validateData}>
+              <Field name='newPassword' validate={validateConfirmPassword}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl
@@ -122,7 +131,7 @@ export default function ResetPasswordForm() {
                 }}
               </Field>
 
-              <Field name='passwordConfirm' validate={validateData}>
+              <Field name='passwordConfirm' validate={validateConfirmPassword}>
                 {({ field, form }: FieldProps) => {
                   return (
                     <FormControl
@@ -153,6 +162,6 @@ export default function ResetPasswordForm() {
           </Form>
         )
       }}
-    </Formik>
+    </Formik >
   )
 }
