@@ -4,6 +4,8 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Stack,
   useToast
 } from "@chakra-ui/react";
@@ -16,7 +18,7 @@ import {
   Formik
 } from 'formik';
 import { useRouter } from "next/router";
-import React from 'react'
+import React, { useState } from 'react'
 
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { ResetPasswordForm } from '../../../types/auth'
@@ -25,7 +27,17 @@ export default function ResetPasswordForm() {
   // アラート
   const toast = useToast()
   // ページ遷移
-  const router = useRouter();
+  const router = useRouter()
+
+  // 現在のパスワード
+  const [showPassword, setPasswordShow] = useState(false)
+  const handlePasswordClick = () => { return setPasswordShow(!showPassword) }
+  // 新パスワード
+  const [showNewPassword, setNewPasswordShow] = useState(false)
+  const handleNewPasswordClick = () => { return setNewPasswordShow(!showNewPassword) }
+  // 確認パスワード
+  const [showConfirmPassword, setConfirmPasswordShow] = useState(false)
+  const handleConfirmPasswordClick = () => { return setConfirmPasswordShow(!showConfirmPassword) }
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
@@ -105,7 +117,14 @@ export default function ResetPasswordForm() {
                         htmlFor='currentPassword'
                         textTransform='uppercase'
                       >Current Password</FormLabel>
-                      <Input {...field} width="100%" fontSize="1xl" id='currentPassword' variant='flushed' placeholder='Enter' />
+                      <InputGroup size='md'>
+                        <Input {...field} type={showPassword ? 'text' : 'password'} width="100%" fontSize="1xl" id='currentPassword' variant='flushed' placeholder='Enter' />
+                        <InputRightElement width='4.5rem'>
+                          <Button h='1.75rem' size='sm' onClick={handlePasswordClick}>
+                            {showPassword ? 'Hide' : 'Show'}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>{form.errors.currentPassword}</FormErrorMessage>
                     </FormControl>
                   )
@@ -124,7 +143,14 @@ export default function ResetPasswordForm() {
                         htmlFor='newPassword'
                         textTransform='uppercase'
                       >new password</FormLabel>
-                      <Input {...field} width="100%" fontSize="1xl" id='newPassword' variant='flushed' placeholder='Enter' />
+                      <InputGroup size='md'>
+                        <Input {...field} type={showNewPassword ? 'text' : 'password'} width="100%" fontSize="1xl" id='newPassword' variant='flushed' placeholder='Enter' />
+                        <InputRightElement width='4.5rem'>
+                          <Button h='1.75rem' size='sm' onClick={handleNewPasswordClick}>
+                            {showNewPassword ? 'Hide' : 'Show'}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>{form.errors.newPassword}</FormErrorMessage>
                     </FormControl>
                   )
@@ -143,7 +169,14 @@ export default function ResetPasswordForm() {
                         htmlFor='passwordConfirm'
                         textTransform='uppercase'
                       >password confirm</FormLabel>
-                      <Input {...field} width="100%" fontSize="1xl" id='passwordConfirm' variant='flushed' placeholder='Enter' />
+                      <InputGroup size='md'>
+                        <Input {...field} type={showConfirmPassword ? 'text' : 'password'} width="100%" fontSize="1xl" id='passwordConfirm' variant='flushed' placeholder='Enter' />
+                        <InputRightElement width='4.5rem'>
+                          <Button h='1.75rem' size='sm' onClick={handleConfirmPasswordClick}>
+                            {showConfirmPassword ? 'Hide' : 'Show'}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>{form.errors.passwordConfirm}</FormErrorMessage>
                     </FormControl>
                   )
