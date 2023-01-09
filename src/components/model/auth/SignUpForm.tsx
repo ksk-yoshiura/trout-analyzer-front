@@ -4,6 +4,8 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Stack,
   useToast
 } from "@chakra-ui/react";
@@ -15,8 +17,8 @@ import {
   Form,
   Formik
 } from 'formik';
-import { useRouter } from "next/router";
-import React from 'react'
+import { useRouter } from "next/router"
+import React, { useState } from 'react'
 
 import { CreateAxiosDefaultInstance } from '../../../pages/api/utils'
 import type { SignUpForm } from '../../../types/auth'
@@ -25,7 +27,15 @@ export default function SignUpForm() {
   // アラート
   const toast = useToast()
   // ページ遷移
-  const router = useRouter();
+  const router = useRouter()
+
+  // 現在のパスワード
+  const [showPassword, setPasswordShow] = useState(false)
+  const handlePasswordClick = () => { return setPasswordShow(!showPassword) }
+
+  // 確認パスワード
+  const [showConfirmPassword, setConfirmPasswordShow] = useState(false)
+  const handleConfirmPasswordClick = () => { return setConfirmPasswordShow(!showConfirmPassword) }
 
   // axiosの設定
   const axiosInstance = CreateAxiosDefaultInstance()
@@ -116,7 +126,14 @@ export default function SignUpForm() {
                         htmlFor='password'
                         textTransform='uppercase'
                       >password</FormLabel>
-                      <Input {...field} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
+                      <InputGroup size='md'>
+                        <Input {...field} type={showPassword ? 'text' : 'password'} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
+                        <InputRightElement width='4.5rem'>
+                          <Button h='1.75rem' size='sm' onClick={handlePasswordClick}>
+                            {showPassword ? 'Hide' : 'Show'}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                     </FormControl>
                   )
@@ -135,7 +152,14 @@ export default function SignUpForm() {
                         htmlFor='passwordConfirm'
                         textTransform='uppercase'
                       >password Confirm</FormLabel>
-                      <Input {...field} width="100%" fontSize="1xl" id='passwordConfirm' variant='flushed' placeholder='Enter' />
+                      <InputGroup size='md'>
+                        <Input {...field} type={showConfirmPassword ? 'text' : 'password'} width="100%" fontSize="1xl" id='passwordConfirm' variant='flushed' placeholder='Enter' />
+                        <InputRightElement width='4.5rem'>
+                          <Button h='1.75rem' size='sm' onClick={handleConfirmPasswordClick}>
+                            {showConfirmPassword ? 'Hide' : 'Show'}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>{form.errors.passwordConfirm}</FormErrorMessage>
                     </FormControl>
                   )
@@ -154,6 +178,6 @@ export default function SignUpForm() {
           </Form>
         )
       }}
-    </Formik>
+    </Formik >
   )
 }
