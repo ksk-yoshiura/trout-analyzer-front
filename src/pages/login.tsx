@@ -6,6 +6,8 @@ import {
   FormLabel,
   Icon,
   Input,
+  InputGroup,
+  InputRightElement,
   Link,
   Stack,
   useToast
@@ -22,6 +24,7 @@ import NextLink from "next/link"
 import { useRouter } from "next/router";
 import type { CtxOrReq } from "next-auth/client/_utils";
 import { getCsrfToken, signIn } from "next-auth/react";
+import React, { useState } from 'react'
 
 import type { Login } from '../types/auth'
 
@@ -37,8 +40,11 @@ export const getServerSideProps = async (context: CtxOrReq | undefined) => {
 };
 
 export default function Login({ csrfToken }: { csrfToken: string | undefined }) {
-  const router = useRouter()
+  // アラート
   const toast = useToast()
+  // ページ遷移
+  const router = useRouter()
+
   const signInUser = async (data: Login) => {
     await signIn<any>("credentials", {
       redirect: false,
@@ -60,6 +66,10 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
       }
     });
   };
+
+  // 現在のパスワード
+  const [showPassword, setPasswordShow] = useState(false)
+  const handlePasswordClick = () => { return setPasswordShow(!showPassword) }
 
   const validateData = (value: Login) => {
     console.log(value)
@@ -122,7 +132,14 @@ export default function Login({ csrfToken }: { csrfToken: string | undefined }) 
                           htmlFor='password'
                           textTransform='uppercase'
                         >password</FormLabel>
-                        <Input {...field} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
+                        <InputGroup size='md'>
+                          <Input {...field} type={showPassword ? 'text' : 'password'} width="100%" fontSize="1xl" id='password' variant='flushed' placeholder='Enter' />
+                          <InputRightElement width='4.5rem'>
+                            <Button h='1.75rem' size='sm' onClick={handlePasswordClick}>
+                              {showPassword ? 'Hide' : 'Show'}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                       </FormControl>
                     )
