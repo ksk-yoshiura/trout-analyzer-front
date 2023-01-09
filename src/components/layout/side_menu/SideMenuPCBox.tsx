@@ -9,6 +9,7 @@ import React from 'react'
 
 import EquipmentMenuLinkList from './EquipmentMenuLinkList'
 import RecordsMenuLinkList from './RecordsMenuLinkList'
+import SettingMenuLinkList from './SettingMenuLinkList'
 import SNSLinkButton from './SNSLinkButton'
 
 export default function SideMenuContentsPC() {
@@ -22,6 +23,7 @@ export default function SideMenuContentsPC() {
         <Stack spacing='23px' pt={4} display="flex">
           <EquipmentMenuLinkList />
           <RecordsMenuLinkList />
+          <SettingMenuLinkList />
 
           <Button colorScheme='teal' color='teal' variant='link' onClick={() => { return signOut() }}>
             Logout

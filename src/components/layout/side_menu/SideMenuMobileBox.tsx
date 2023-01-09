@@ -20,6 +20,7 @@ import React from "react";
 
 import EquipmentMenuLinkList from './EquipmentMenuLinkList'
 import RecordsMenuLinkList from './RecordsMenuLinkList'
+import SettingMenuLinkList from './SettingMenuLinkList'
 import SNSLinkButton from './SNSLinkButton'
 
 export default function SideMenuContents() {
@@ -70,6 +71,7 @@ export default function SideMenuContents() {
             <Stack spacing='10px'>
               <EquipmentMenuLinkList />
               <RecordsMenuLinkList />
+              <SettingMenuLinkList />
             </Stack>
           </DrawerBody>
 
