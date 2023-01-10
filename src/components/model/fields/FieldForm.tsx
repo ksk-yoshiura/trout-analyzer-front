@@ -7,7 +7,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  // Image,
+  Image,
   Input,
   Stack,
   useDisclosure,
@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import { mutate } from 'swr'
 
-// import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { FieldDetail, FieldForm, FieldImage } from '../../../types/field'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
@@ -49,11 +49,8 @@ export default function FieldForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data, onFieldModalClose } = props
-  console.log(data)
-  console.log(data?.FieldImage)
-
   // 画像URL
-  // const imageUrl = data?.FieldImage.image_file ?
+  const imageUrl = data?.FieldImage.image_file ? S3_DOMAIN_PATH + data?.FieldImage.image_file + IMAGE_EXT : ''
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
@@ -240,7 +237,18 @@ export default function FieldForm(props: DetailProps) {
                       }}
                     />
                     <Thumb file={field.value} />
-                    {/* <Image src={field.image_file} /> */}
+
+                    {
+                      imageUrl && !field.value ?
+                        <Image
+                          src={imageUrl}
+                          className="img-thumbnail mt-2"
+                          alt={''}
+                          width={200}
+                          height={200}
+                        />
+                        : <></>
+                    }
 
                     <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                   </FormControl>

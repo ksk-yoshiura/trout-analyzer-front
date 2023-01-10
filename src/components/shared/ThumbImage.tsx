@@ -2,17 +2,15 @@ import Image from "next/image";
 import type {
   FC
 } from "react";
-import React from 'react'
-import {
+import React, {
   useEffect,
   useState
 } from "react"
 
 import Loading from '../shared/Loading'
 
-
 type ThumbProps = {
-  file: File | null;
+  file: File | null
 };
 
 const Thumb: FC<ThumbProps> = ({ file }) => {
