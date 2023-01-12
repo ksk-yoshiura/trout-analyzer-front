@@ -243,7 +243,7 @@ export default function FieldForm(props: DetailProps) {
                         <Image
                           src={imageUrl}
                           className="img-thumbnail mt-2"
-                          alt={''}
+                          alt={'current field image'}
                           width={200}
                           height={200}
                         />
