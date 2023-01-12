@@ -28,12 +28,14 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { Color } from '../../../types/color'
 import type { LureDetail, LureForm, LureImage } from '../../../types/lure'
 import type { LureType } from '../../../types/lure_type'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
+import CurrentThumbImage from "../../shared/CurrentThumbImage"
 import Thumb from "../../shared/ThumbImage"
 import LuresColorPalette from "./LuresColorPalette"
 import LureTypeSelect from "./LureTypeSelect"
@@ -54,6 +56,9 @@ export default function LureForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
+  // 画像URL
+  const imageUrl = data?.LureImage.image_file ? S3_DOMAIN_PATH + data?.LureImage.image_file + IMAGE_EXT : ''
+
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
@@ -323,6 +328,7 @@ export default function LureForm(props: DetailProps) {
                         }}
                       />
                       <Thumb file={field.value} />
+                      <CurrentThumbImage file={field.value} imageUrl={imageUrl} />
 
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
