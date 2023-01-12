@@ -28,11 +28,13 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import { ROD_HARDNESS_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { RodDetail, RodForm, RodHardnessCondition, RodImage } from '../../../types/rod'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
+import CurrentThumbImage from "../../shared/CurrentThumbImage"
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
@@ -51,6 +53,9 @@ export default function RodForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
+  // 画像URL
+  const imageUrl = data?.RodImage.image_file ? S3_DOMAIN_PATH + data?.RodImage.image_file + IMAGE_EXT : ''
+
 
   // ロッド長さ
   const InputLengthNumber = (props: any) => {
@@ -300,6 +305,7 @@ export default function RodForm(props: DetailProps) {
                         }}
                       />
                       <Thumb file={field.value} />
+                      <CurrentThumbImage file={field.value} imageUrl={imageUrl} />
 
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
