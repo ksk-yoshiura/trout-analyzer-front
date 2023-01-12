@@ -28,11 +28,13 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react'
 
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import { LINE_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { LineCondition, LineDetail, LineForm, LineImage } from '../../../types/line'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
+import CurrentThumbImage from "../../shared/CurrentThumbImage"
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
@@ -51,6 +53,9 @@ export default function LineForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
+  // 画像URL
+  const imageUrl = data?.LineImage.image_file ? S3_DOMAIN_PATH + data?.LineImage.image_file + IMAGE_EXT : ''
+
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
@@ -312,6 +317,8 @@ export default function LineForm(props: DetailProps) {
                         }}
                       />
                       <Thumb file={field.value} />
+
+                      <CurrentThumbImage file={field.value} imageUrl={imageUrl} />
 
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
