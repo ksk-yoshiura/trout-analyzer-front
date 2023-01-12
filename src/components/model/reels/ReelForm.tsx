@@ -24,11 +24,13 @@ import {
 import { useRouter } from "next/router";
 import React from 'react'
 
+import { IMAGE_EXT, S3_DOMAIN_PATH } from "../../../const/image"
 import { GEAR_TYPE, REEL_TYPE } from "../../../const/tool_condition_type"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { GearCondition, ReelDetail, ReelForm, ReelImage, TypeNumberCondition } from '../../../types/reel'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
+import CurrentThumbImage from "../../shared/CurrentThumbImage"
 import Thumb from "../../shared/ThumbImage"
 import ToolConditionSelect from '../../shared/ToolConditionSelect'
 
@@ -47,6 +49,8 @@ export default function ReelForm(props: DetailProps) {
   const router = useRouter();
   // データ各種取得
   const { chosenId, data } = props
+  // 画像URL
+  const imageUrl = data?.ReelImage.image_file ? S3_DOMAIN_PATH + data?.ReelImage.image_file + IMAGE_EXT : ''
 
   // axiosの設定
   const axiosInstance = CreateAxiosInstance()
@@ -262,6 +266,7 @@ export default function ReelForm(props: DetailProps) {
                         }}
                       />
                       <Thumb file={field.value} />
+                      <CurrentThumbImage file={field.value} imageUrl={imageUrl} />
 
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
