@@ -7,7 +7,6 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Image,
   Input,
   Stack,
   useDisclosure,
@@ -31,6 +30,7 @@ import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { FieldDetail, FieldForm, FieldImage } from '../../../types/field'
 import convertFileIntoBase64 from "../../../utils/base64Convert"
 import validateImage from '../../../validate/common/image'
+import CurrentThumbImage from "../../shared/CurrentThumbImage"
 import Thumb from "../../shared/ThumbImage"
 
 // 編集データ
@@ -238,17 +238,7 @@ export default function FieldForm(props: DetailProps) {
                     />
                     <Thumb file={field.value} />
 
-                    {
-                      imageUrl && !field.value ?
-                        <Image
-                          src={imageUrl}
-                          className="img-thumbnail mt-2"
-                          alt={'current field image'}
-                          width={200}
-                          height={200}
-                        />
-                        : <></>
-                    }
+                    <CurrentThumbImage file={field.value} imageUrl={imageUrl} />
 
                     <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                   </FormControl>
