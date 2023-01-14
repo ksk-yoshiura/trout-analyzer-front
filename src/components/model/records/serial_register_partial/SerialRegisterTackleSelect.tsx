@@ -4,13 +4,13 @@ import {
 import React from 'react';
 import useSWR from 'swr'
 
-import type { TacklesApiResponse } from "../../../../pages/api/tackles/index"
+import type { TacklesListApiResponse } from "../../../../pages/api/tackles/index"
 import Loading from '../../../shared/Loading'
 
 export default function TackleSelect(props: any) {
   const { field } = props
   // APIからデータ取得
-  const { data } = useSWR<TacklesApiResponse, Error>('tackles')
+  const { data } = useSWR<TacklesListApiResponse, Error>('tackles')
   if (!data) return <Loading />
 
   return (
