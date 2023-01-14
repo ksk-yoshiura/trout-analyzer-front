@@ -71,7 +71,7 @@ export default function ColorLureTypeGraph(props: ParamProps): JSX.Element {
   const tempListForGraph: Array<GraphData> = []
   const lureTypeList = ['spoon', 'crank-bait', 'minor', 'viberation', 'new type'] // 条件リスト
   // APIからデータ取得
-  const { data } = useSWR<ColorLureTypeAnalysisApiResponse, Error>('pattern/analysis/color_type/' + recordId + '/' + targetParam)
+  const { data } = useSWR<ColorLureTypeAnalysisApiResponse, Error>('pattern/' + recordId + '/analysis/color_type/' + targetParam)
   if (!data) return <Loading />
 
   const listDataForGraph = data.result ? data.result : []

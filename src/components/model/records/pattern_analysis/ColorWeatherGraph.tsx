@@ -71,7 +71,7 @@ export default function ColorWeatherGraph(props: ParamProps): JSX.Element {
   const tempListForGraph: Array<GraphData> = []
   const weatherTypeList = ['sunny', 'rainy', 'cloudy'] // 条件リスト
   // APIからデータ取得
-  const { data } = useSWR<ColorWeatherAnalysisApiResponse, Error>('pattern/analysis/color_weather/' + recordId + '/' + targetParam)
+  const { data } = useSWR<ColorWeatherAnalysisApiResponse, Error>('pattern/' + recordId + '/analysis/color_weather/' + targetParam)
   if (!data) return <Loading />
 
   const listDataForGraph = data.result ? data.result : []

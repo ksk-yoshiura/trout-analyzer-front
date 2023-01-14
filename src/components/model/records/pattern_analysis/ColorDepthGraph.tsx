@@ -71,7 +71,7 @@ export default function ColorDepthGraph(props: ParamProps): JSX.Element {
   const tempListForGraph: Array<GraphData> = []
   const depthTypeList = ['top', 'shallow', 'midle', 'deep', 'bottom'] // 条件リスト
   // APIからデータ取得
-  const { data } = useSWR<ColorDepthAnalysisApiResponse, Error>('pattern/analysis/color_depth/' + recordId + '/' + targetParam)
+  const { data } = useSWR<ColorDepthAnalysisApiResponse, Error>('pattern/' + recordId + '/analysis/color_depth/' + targetParam)
   if (!data) return <Loading />
 
   const listDataForGraph = data.result ? data.result : []
