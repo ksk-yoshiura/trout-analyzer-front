@@ -1,5 +1,5 @@
 export type PatternCondition = { // 一覧
-  ID: string
+  ID: number
   typeNum: string
   typeName: string
 }

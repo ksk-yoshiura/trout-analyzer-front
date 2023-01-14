@@ -28,6 +28,7 @@ import { defaultValueList, depthType, resultType, speedType, weatherType } from 
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
 import type { PatternForm } from '../../../types/pattern'
+import type { PatternCondition } from '../../../types/pattern_condition'
 import type { SerialRecord } from '../../../types/record'
 import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
@@ -59,8 +60,8 @@ export default function RecordSerialRegisterForm(props: DetailDataProps) {
   if (!data) return <Loading />
 
   // パターンリスト
-  const patternDataSet = data.result?.map((value: any) => { // TODO：any退避
-    const dataSet = { ID: undefined, typeName: '' }
+  const patternDataSet = data.result?.map((value: PatternCondition) => {
+    const dataSet = { ID: 0, typeName: '' }
     dataSet.ID = value.ID
     dataSet.typeName = value.typeName
     return dataSet

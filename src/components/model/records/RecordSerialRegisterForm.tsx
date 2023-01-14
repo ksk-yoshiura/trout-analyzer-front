@@ -26,6 +26,7 @@ import useSWR from 'swr'
 import { defaultValueList, depthType, resultType, speedType, weatherType } from "../../../const/pattern_condition_type"
 import type { PatternConditionsApiResponse } from "../../../pages/api/pattern_conditions/index"
 import { CreateAxiosInstance } from "../../../pages/api/utils"
+import type { PatternCondition } from '../../../types/pattern_condition'
 import type { RecordForm, SerialRecord } from '../../../types/record'
 import Loading from '../../shared/Loading'
 import PatternConditionRadio from './serial_register_partial/PatternConditionRadioBox'
@@ -52,8 +53,8 @@ export default function RecordSerialRegisterForm(prop: RecordDetailProp) {
   if (error) return <p>Error: {error.message}</p>
   if (!data) return <Loading />
 
-  const patternDataSet = data.result?.map((value: any) => { // TODO：any退避
-    const dataSet = { 'ID': undefined, 'typeName': '' }
+  const patternDataSet = data.result?.map((value: PatternCondition) => {
+    const dataSet = { 'ID': 0, 'typeName': '' }
     dataSet.ID = value.ID
     dataSet.typeName = value.typeName
     return dataSet
