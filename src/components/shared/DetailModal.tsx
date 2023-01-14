@@ -21,7 +21,7 @@ type DetailProps = {
   chosenId?: number
   title: string
   isOpen: boolean
-  onClose: any
+  onClose: VoidFunction
   children?: ReactNode;
 }
 

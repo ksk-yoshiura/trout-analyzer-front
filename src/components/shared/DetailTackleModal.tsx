@@ -11,7 +11,7 @@ import React from 'react'
 type DetailProps = {
   title: string
   isOpen: boolean
-  onClose: any
+  onClose: VoidFunction
   children?: ReactNode;
 }
 
