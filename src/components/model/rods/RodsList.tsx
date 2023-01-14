@@ -54,10 +54,10 @@ export default function RodsList(props: ListProps): JSX.Element {
   }
 
   // タックル用ロッド選択
-  const selectRodForTackleHandler = (event: any) => {
+  const selectRodForTackleHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { target } = event
-    const selectId = target.value
-    setNewRodId ? setNewRodId(selectId) : null
+    const selectId = (target as HTMLButtonElement).value
+    setNewRodId ? setNewRodId(Number(selectId)) : null
   }
 
   // モーダルを部分的に移行し共通化

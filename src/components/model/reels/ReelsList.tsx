@@ -52,10 +52,10 @@ export default function ReelsList(props: ListProps): JSX.Element {
   }
 
   // タックル用リール選択
-  const selectReelForTackleHandler = (event: any) => {
+  const selectReelForTackleHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { target } = event
-    const selectId = target.value
-    setNewReelId ? setNewReelId(selectId) : null
+    const selectId = (target as HTMLButtonElement).value
+    setNewReelId ? setNewReelId(Number(selectId)) : null
   }
 
   // モーダルを部分的に移行し共通化

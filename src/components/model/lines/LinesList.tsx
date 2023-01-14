@@ -50,10 +50,10 @@ export default function LinesList(props: ListProps): JSX.Element {
   }
 
   // タックル用ライン選択
-  const selectLineForTackleHandler = (event: any) => {
+  const selectLineForTackleHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { target } = event
-    const selectId = target.value
-    setNewLineId ? setNewLineId(selectId) : null
+    const selectId = (target as HTMLButtonElement).value
+    setNewLineId ? setNewLineId(Number(selectId)) : null
   }
 
   // モーダルを部分的に移行し共通化
