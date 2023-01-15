@@ -16,6 +16,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import type {
+  FieldHookConfig,
   FieldProps
 } from 'formik';
 import {
@@ -61,7 +62,7 @@ export default function LineForm(props: DetailProps) {
   const axiosInstance = CreateAxiosInstance()
 
   // ラインの太さ
-  const InputThicknessNumber = (props: any) => {
+  const InputThicknessNumber = (props: FieldHookConfig<string> & { name: string; }) => {
     const [field, , helpers] = useField(props);
 
     // 初期値表示

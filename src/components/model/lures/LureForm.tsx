@@ -16,6 +16,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import type {
+  FieldHookConfig,
   FieldProps
 } from 'formik';
 import {
@@ -64,7 +65,7 @@ export default function LureForm(props: DetailProps) {
   const axiosInstance = CreateAxiosInstance()
 
   // ルアー重さ
-  const InputWightNumber = (props: any) => {
+  const InputWightNumber = (props: FieldHookConfig<string> & { name: string; }) => {
     const [field, , helpers] = useField(props);
 
     // 初期値表示

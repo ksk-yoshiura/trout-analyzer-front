@@ -16,6 +16,7 @@ import {
   useToast
 } from "@chakra-ui/react";
 import type {
+  FieldHookConfig,
   FieldProps
 } from 'formik';
 import {
@@ -58,7 +59,7 @@ export default function RodForm(props: DetailProps) {
 
 
   // ロッド長さ
-  const InputLengthNumber = (props: any) => {
+  const InputLengthNumber = (props: FieldHookConfig<string> & { name: string; }) => {
     const [field, , helpers] = useField(props);
 
     // 初期値表示
