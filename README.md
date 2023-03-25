@@ -5,6 +5,8 @@
 正式名称をTranazaに決めました。
 このリポジトリにはSPAのフロントエンド（Next.js）が含まれています。  
 実際にアプリとして使用する場合、trout-analyzer-backを同時に起動させる必要があります。
+バックエンド  
+https://github.com/ksk-yoshiura/trout-analyzer-back
 
 ## 背景
 管理釣り場でルアーによるトラウト釣りに近年ハマり、ちょうど個人アプリを作りたいと持っていたところでしたので、自分の腕を向上させるアプリを作れないかと思い、本アプリの作製を開始しました。管理釣り場におけるトラウト釣りが他と大きく異なるところは魚のいる場所を探す必要がないという点です。つまり適切なルアーを選択し、いい感じに動かせる技術が釣果への大きなウェイトを占めています。したがって、選択したルアーおよびルアーと相性のいい道具（竿、リール、ライン）、天候、釣果（釣れたのか、反応がないのかなど）を記録できて、各項目の相関がグラフで表示できれば、次の釣行への対策が練りやすいのではと考えました。
@@ -18,10 +20,19 @@
 
 
 ## 使用技術
+- React 17.0.2  
 - Next.js 12.2.5
+- TypeScript 4.5.4  
 
 ## 起動方法
 - git cloneします。
+- .env.localファイルを作製し、下記を記載してください.
+```
+NEXTAUTH_URL='http://localhost:3000'
+NEXT_PUBLIC_BACK_URL='http://localhost:80'
+NEXTAUTH_SECRET=<シークレット>
+NEXT_PUBLIC_S3_DOMAIN='http://localhost:9090/trout-analyzer-upload'
+```
 - ` cd trout-analyzer-front `で移動してください。
 - `yarn run dev`で起動してください。
 
