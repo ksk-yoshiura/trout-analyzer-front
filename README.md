@@ -22,7 +22,6 @@
 
 ## 起動方法
 - git cloneします。
-- ルート配下に.envを設置して、.envにはDB、minio（S3）、AWS（minio用）を記載してください。
 - ` cd trout-analyzer-front `で移動してください。
 - `yarn run dev`で起動してください。
 
